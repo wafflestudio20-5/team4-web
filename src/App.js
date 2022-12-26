@@ -3,13 +3,15 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from './modules';
-import Home from './components/Home';
+import Header from './components/Header';
+import NavigationBar from './components/NavigationBar';
+import HomePage from './components/Home/index';
 import SessionProvider from './contexts/SessionProvider';
 
 function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<HomePage />} />
     </Routes>
   );
 }
@@ -21,6 +23,8 @@ export default function App() {
     <SessionProvider>
       <BrowserRouter>
         <Provider store={store}>
+          <Header />
+          <NavigationBar />
           <AppRoutes />
         </Provider>
       </BrowserRouter>

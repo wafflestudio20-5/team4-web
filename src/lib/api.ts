@@ -1,3 +1,8 @@
-export const api = () => {};
+const user = {
+  id: 1,
+  name: 'paul',
+};
 
-export default api;
+export const login = () => {
+  return user;
+};
