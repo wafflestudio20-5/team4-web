@@ -11,6 +11,12 @@ export interface User {
   socialKey?: string;
 }
 
+export interface ApiRegisterParams {
+  username: string;
+  password: string;
+  nickname: string;
+}
+
 export interface LoginInfo {
   user: User;
   accessToken: string;
