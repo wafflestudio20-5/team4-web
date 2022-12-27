@@ -10,7 +10,6 @@ export default function HomePage() {
 
   const handleCategorySideBar = () => {
     setopenCategorySideBar(!openCategorySideBar);
-    console.log(openCategorySideBar);
   };
 
   return (
