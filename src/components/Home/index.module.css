@@ -1,5 +1,5 @@
 .container {
   border: 1px solid;
-  width: 500px;
-  height: 200px;
+  width: calc(100vw - 20px);
+  height: 1000px;
 }
