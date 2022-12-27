@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import styles from './index.module.css';
 import CategorySideBar from './CategorySideBar';
 import ItemList from './ItemList';
