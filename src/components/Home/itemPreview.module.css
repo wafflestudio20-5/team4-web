@@ -1,0 +1,41 @@
+.itemPreview {
+    width: 200px;
+    height: 287px;
+    padding: 3px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+.previewImage{
+    width: 80%;
+    align-self: center;
+    margin-bottom: 10px;
+}
+
+.brand{
+    font-size: 15px;
+}
+
+.name{
+    padding: 3px 0px;
+    font-size: 12px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.price{
+}
+
+.oldPrcie{
+    font-size: 15px;
+    color: #b2b2b2;
+    text-decoration:line-through;
+    margin-right: 5px;
+}
+
+.newPrcie{
+    font-size: 15px;
+    font-weight: bold;
+}

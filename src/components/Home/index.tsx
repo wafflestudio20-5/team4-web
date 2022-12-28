@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import CategorySideBar from './CategorySideBar';
-import ItemList from './ItemList';
+import ItemList from './itemList';
 import styles from './index.module.css';
 
 export default function HomePage() {
@@ -18,7 +18,6 @@ export default function HomePage() {
           className={styles.openCategorySideBarButton}
           onClick={handleCategorySideBar}
         ></button>
-        <ItemList />
         <ItemList />
       </div>
     </div>
