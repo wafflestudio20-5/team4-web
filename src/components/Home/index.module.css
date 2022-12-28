@@ -1,6 +1,6 @@
 .container {
-  border: 1px solid;
-  width: calc(100vw - 20px);
+  border-top: 1px solid #b2b2b2;
+  width: 100vw;
   height: 2000px;
   display: flex;
   flex-direction: row;
@@ -8,20 +8,23 @@
 }
 
 .categorySideBar {
-  flex: 1;
-  border: 1px solid;
-  margin: 5px;
+  min-width: 200px;
+  border-right: 1px solid #b2b2b2;
 }
 
 .mainContent {
   flex: 7;
-  border: 1px solid;
-  margin: 5px;
 }
 
 .openCategorySideBarButton {
-  width: 20px;
-  height: 20px;
+  background-color: transparent;
+  border-top: none;
+  border-right: 1px solid #b2b2b2;
+  border-bottom: 1px solid #b2b2b2;
+  border-left: none;
+  padding: 5px;
+  width: 25px;
+  height: 25px;
   margin: 0px;
   position: absolute;
 }

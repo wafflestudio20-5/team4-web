@@ -29,11 +29,17 @@ export default function ItemList() {
 export function ItemListCategory({ categorys }: ItemListCategoryProps) {
   return (
     <div className={styles.itemListCategory}>
-      {categorys.map((category) => (
-        <div key={category}>
-          <button>{displayCategory(category)}</button>
-        </div>
-      ))}
+      <div className={styles.title}>실시간 랭킹</div>
+      <div className={styles.categorycontent}>
+        <div className={styles.subtitle}>상품</div>
+        {categorys.map((category) => (
+          <div key={category}>
+            <button className={styles.button}>
+              {displayCategory(category)}
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
