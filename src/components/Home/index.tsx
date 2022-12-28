@@ -1,8 +1,7 @@
-import React from 'react';
 import { useState } from 'react';
-import styles from './index.module.css';
 import CategorySideBar from './CategorySideBar';
 import ItemList from './ItemList';
+import styles from './index.module.css';
 
 export default function HomePage() {
   const [openCategorySideBar, setopenCategorySideBar] = useState(false);
