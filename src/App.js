@@ -1,11 +1,9 @@
-import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import rootReducer from './modules';
+import store from './store';
 import Header from './components/Header';
-import NavigationBar from './components/NavigationBar';
 import HomePage from './components/Home/index';
+import NavigationBar from './components/NavigationBar';
 import SessionProvider from './contexts/SessionProvider';
 
 function AppRoutes() {
@@ -16,18 +14,16 @@ function AppRoutes() {
   );
 }
 
-const store = createStore(rootReducer); // 스토어를 만듭니다.
-
 export default function App() {
   return (
-    <SessionProvider>
-      <BrowserRouter>
-        <Provider store={store}>
+    <Provider store={store}>
+      <SessionProvider>
+        <BrowserRouter>
           <Header />
           <NavigationBar />
           <AppRoutes />
-        </Provider>
-      </BrowserRouter>
-    </SessionProvider>
+        </BrowserRouter>
+      </SessionProvider>
+    </Provider>
   );
 }

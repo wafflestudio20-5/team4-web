@@ -17,9 +17,9 @@ export interface ApiRegisterParams {
   nickname: string;
 }
 
-export interface LoginInfo {
-  user: User;
-  accessToken: string;
+export interface Session {
+  user: User | null;
+  accessToken: string | null;
 }
 
 export enum Label {
