@@ -53,7 +53,15 @@
     height: 20px;
     margin: 5px 0px;
     border: none;
-    
+    background-color: transparent;
+  }
+
+  .buttonselected{
+    color: black;
+    font-weight: bold;
+    height: 20px;
+    margin: 5px 0px;
+    border: none;
     background-color: transparent;
   }
 
