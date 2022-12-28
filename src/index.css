@@ -1,8 +1,41 @@
+/* 사용 글꼴 전역 정의 */
+@font-face {
+  font-family: 'Apple SD Gothic Neo';
+  src: url('./resources/font/AppleSDGothicNeo/AppleSDGothicNeoM.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Apple SD Gothic Neo';
+  src: url('./resources/font/AppleSDGothicNeo/AppleSDGothicNeoB.ttf') format('truetype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'NotoSansKR';
+  src: url('./resources/font/NotoSansKR/NotoSansKR-Medium.otf') format('truetype');
+}
+
+@font-face {
+  font-family: 'NotoSansKR';
+  src: url('./resources/font/NotoSansKR/NotoSansKR-Bold.otf') format('truetype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'musinsa';
+  src: url('./resources/font/musinsa/musinsa-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'musinsa';
+  src: url('./resources/font/musinsa/musinsa-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+
+/*기본글꼴 Apple SD Gothic Neo, NotoSansKR, sans-serif 순으로 적용*/
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Apple SD Gothic Neo','NotoSansKR', sans-serif ;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
