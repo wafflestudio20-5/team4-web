@@ -4,7 +4,6 @@ import store from './store';
 import Header from './components/Header';
 import HomePage from './components/Home/index';
 import NavigationBar from './components/NavigationBar';
-import SessionProvider from './contexts/SessionProvider';
 
 function AppRoutes() {
   return (
@@ -17,13 +16,11 @@ function AppRoutes() {
 export default function App() {
   return (
     <Provider store={store}>
-      <SessionProvider>
-        <BrowserRouter>
-          <Header />
-          <NavigationBar />
-          <AppRoutes />
-        </BrowserRouter>
-      </SessionProvider>
+      <BrowserRouter>
+        <Header />
+        <NavigationBar />
+        <AppRoutes />
+      </BrowserRouter>
     </Provider>
   );
 }
