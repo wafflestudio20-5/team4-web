@@ -9,7 +9,7 @@
 
 .categorySideBar {
   min-width: 200px;
-  border-right: 1px solid #b2b2b2;
+  border-right: 1px solid hwb(0 70% 30%);
 }
 
 .mainContent {

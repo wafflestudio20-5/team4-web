@@ -9,7 +9,7 @@ interface ItemPreviewProps {
 export default function ItemPreview({ item, idx }: ItemPreviewProps) {
   return (
     <div className={styles.itemPreview}>
-      <b>{idx + 1}위</b>
+      <div className={styles.rank}>{idx + 1}위</div>
       <img className={styles.previewImage} src={item.image} alt="상품 이미지" />
       <div className={styles.brand}>{item.brand}</div>
       <div className={styles.name}>{item.name}</div>

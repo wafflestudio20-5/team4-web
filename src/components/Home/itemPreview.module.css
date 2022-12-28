@@ -1,38 +1,59 @@
 .itemPreview {
     width: 200px;
     height: 287px;
-    padding: 3px;
     display: flex;
     flex-direction: column;
     position: relative;
   }
+.itemPreview:hover{
+    cursor: pointer;
+    background-color: #e6e6e6;
+}
+
+.rank{
+    width: 15%;
+    height: 20px;
+    font-size: 12px;
+    font-family: "musinsa", sans-serif;;
+    text-align: center;
+    padding-top: 5px;
+    font-weight: bold;
+    background-color: white;
+}
+
 
 .previewImage{
-    width: 80%;
+    width: 70%;
     align-self: center;
     margin-bottom: 10px;
 }
 
 .brand{
-    font-size: 15px;
+    margin-left: 10px;
+    font-size: 13px;
+    font-weight: bolder;
 }
 
 .name{
+    margin-left: 10px;
     padding: 3px 0px;
-    font-size: 12px;
+    font-size: 11px;
+    font-weight: lighter;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
 .oldPrcie{
-    font-size: 15px;
+    margin-left: 10px;
+    font-size: 13px;
+    font-family: 'Apple SD Gothic Neo','NotoSansKR', sans-serif;
     color: #b2b2b2;
     text-decoration:line-through;
-    margin-right: 5px;
 }
 
 .newPrcie{
-    font-size: 15px;
-    font-weight: bold;
+    margin-left: 10px;
+    font-size: 13px;
+    font-weight: bolder;
 }
