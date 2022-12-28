@@ -1,7 +1,7 @@
 .container {
   border: 1px solid;
   width: calc(100vw - 20px);
-  height: 1000px;
+  height: 2000px;
   display: flex;
   flex-direction: row;
   position: relative;
@@ -26,30 +26,6 @@
   position: absolute;
 }
 
-.itemList {
-  border: 1px solid;
-  width: calc(100% - 10px);
-  height: 400px;
-  display: flex;
-  flex-direction: row;
-}
 
-.itemListCategory {
-  flex: 1;
-  border: 1px solid;
-  margin: 5px;
-}
 
-.itemListBox {
-  flex: 7;
-  border: 1px solid;
-  margin: 5px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20%, auto));
-  row-gap: 20px;
-  column-gap: 20px;
-}
 
-.itemPreview {
-  border: 1px solid;
-}

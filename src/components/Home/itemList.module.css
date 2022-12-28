@@ -1,0 +1,20 @@
+.itemList {
+    width: calc(100% - 10px);
+    height: 600px;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .itemListCategory {
+    flex: 1;
+    border: 1px solid;
+    margin: 5px;
+  }
+  
+  .itemListBox {
+    overflow: hidden;
+    flex: 7;
+    margin: 5px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }

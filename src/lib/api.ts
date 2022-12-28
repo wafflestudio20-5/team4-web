@@ -76,7 +76,7 @@ export function useApiData<T>(
 export const useApiItemListFetcher = (category: Category | null) => {
   const f = useCallback(
     (cancelToken: CancelToken) =>
-      axios.get<{ data: Item[] }>(url('/data'), { cancelToken }),
+      axios.get<Item[]>(url('/data'), { cancelToken }),
     []
   );
   return f;
