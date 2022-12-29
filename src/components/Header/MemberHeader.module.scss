@@ -35,7 +35,18 @@
     top: 50%;
     width: 1px;
   }
+  .member_nickname {
+    padding: 4px;
+    font-weight: 700;
+  }
   .member_link {
+    padding: 4px;
+  }
+  .member_logout_button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font: inherit;
     padding: 4px;
   }
 }
