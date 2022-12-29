@@ -1,18 +1,21 @@
 /* 사용 글꼴 전역 정의 */
 @font-face {
   font-family: 'Apple SD Gothic Neo';
-  src: url('./resources/font/AppleSDGothicNeo/AppleSDGothicNeoM.ttf') format('truetype');
+  src: url('./resources/font/AppleSDGothicNeo/AppleSDGothicNeoM.ttf')
+    format('truetype');
 }
 
 @font-face {
   font-family: 'Apple SD Gothic Neo';
-  src: url('./resources/font/AppleSDGothicNeo/AppleSDGothicNeoB.ttf') format('truetype');
+  src: url('./resources/font/AppleSDGothicNeo/AppleSDGothicNeoB.ttf')
+    format('truetype');
   font-weight: bold;
 }
 
 @font-face {
   font-family: 'NotoSansKR';
-  src: url('./resources/font/NotoSansKR/NotoSansKR-Medium.otf') format('truetype');
+  src: url('./resources/font/NotoSansKR/NotoSansKR-Medium.otf')
+    format('truetype');
 }
 
 @font-face {
@@ -32,10 +35,13 @@
   font-weight: bold;
 }
 
-/*기본글꼴 Apple SD Gothic Neo, NotoSansKR, sans-serif 순으로 적용*/
+/*기본글꼴 Apple SD Gothic Neo, NotoSansKR, sans-serif 순으로 적용 */
 body {
+  color: black;
+  height: 100%;
   margin: 0;
-  font-family: 'Apple SD Gothic Neo','NotoSansKR', sans-serif ;
+  font-family: 'Apple SD Gothic Neo', 'NotoSansKR', sans-serif;
+  font-size: 12px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
