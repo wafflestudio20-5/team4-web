@@ -127,6 +127,27 @@ export function displayCategory(category: Category) {
   }
 }
 
+export function displayCategoryinCamelCase(category: Category){
+  switch (category) {
+    case Category.top:
+      return 'Top';
+    case Category.outer:
+      return 'Outer';
+    case Category.pants:
+      return 'Pants';
+    case Category.skirt:
+      return 'Skirt';
+    case Category.bag:
+      return 'Bag';
+    case Category.shoes:
+      return 'Shoes';
+    case Category.headWear:
+      return 'Headwear';
+    default:
+      throw new Error('Unknown Category: ' + category);
+  }
+}
+
 export function displaySubCategory(subcategory: SubCategory) {
   switch (subcategory) {
     case SubCategory.sweater:
