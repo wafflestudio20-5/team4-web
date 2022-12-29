@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 import Header from './components/Header/';
+import SubHeader from './components/SubHeader/';
 import HomePage from './components/Home/';
 import NavigationBar from './components/NavigationBar';
 
@@ -9,6 +10,7 @@ function AppDefault() {
   return (
     <>
       <Header />
+      <SubHeader />
       <NavigationBar />
     </>
   );
@@ -19,6 +21,9 @@ function AppRoutes() {
     <Routes>
       <Route element={<AppDefault />}>
         <Route index element={<HomePage />} />
+      </Route>
+      <Route element={<Header />}>
+        <Route path="/mypage" element={<></>} />
       </Route>
       <Route path="/login" element={<></>} />
       <Route path="/register" element={<></>} />
