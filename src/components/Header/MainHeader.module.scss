@@ -16,15 +16,13 @@
 }
 
 .searchBar {
+  background-color: white;
+  border: 1px solid #373737;
+  display: flex;
   float: left;
+  justify-content: space-between;
   margin-left: 19px;
-  form {
-    background-color: white;
-    border: 1px solid #373737;
-    display: flex;
-    justify-content: space-between;
-    width: 258px;
-  }
+  width: 258px;
   input {
     border: none;
     color: #333;

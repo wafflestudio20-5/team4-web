@@ -11,7 +11,13 @@ function Header() {
     setQuery(e.target.value);
   };
 
-  const onSubmit = (e: React.MouseEvent<HTMLDivElement>) => {
+  const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') onSubmit(e);
+  };
+
+  const onSubmit = (
+    e: React.MouseEvent<HTMLDivElement> | React.KeyboardEvent<HTMLInputElement>
+  ) => {
     e.preventDefault();
     console.log(`search query: ${query}`);
     setQuery('');
@@ -19,7 +25,12 @@ function Header() {
 
   return (
     <div className={styles.header}>
-      <MainHeader query={query} onChange={onChange} onSubmit={onSubmit} />
+      <MainHeader
+        query={query}
+        onChange={onChange}
+        onKeyPress={onKeyPress}
+        onSubmit={onSubmit}
+      />
       <ChannelHeader />
       <MemberHeader />
     </div>

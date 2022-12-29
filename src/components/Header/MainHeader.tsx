@@ -2,10 +2,12 @@ import { Link } from 'react-router-dom';
 import styles from './MainHeader.module.scss';
 import logo from '../../resources/image/musinsa_logo.png';
 import search_button from '../../resources/image/search_icon.png';
+import React from 'react';
 
 interface MainHeaderProps {
   query: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   onSubmit: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
@@ -54,6 +56,7 @@ function GnbList() {
 export default function MainHeader({
   query,
   onChange,
+  onKeyPress,
   onSubmit,
 }: MainHeaderProps) {
   return (
@@ -62,18 +65,17 @@ export default function MainHeader({
         <img src={logo} alt="logo" />
       </Link>
       <div className={styles.searchBar}>
-        <form>
-          <input
-            type="text"
-            maxLength={30}
-            value={query}
-            placeholder="인기 상품 무료 체험단 모집!"
-            onChange={onChange}
-          />
-          <div className={styles.searchButton} onClick={onSubmit}>
-            <img src={search_button} alt="search_button" />
-          </div>
-        </form>
+        <input
+          type="text"
+          maxLength={30}
+          value={query}
+          placeholder="인기 상품 무료 체험단 모집!"
+          onChange={onChange}
+          onKeyPress={onKeyPress}
+        />
+        <div className={styles.searchButton} onClick={onSubmit}>
+          <img src={search_button} alt="search_button" />
+        </div>
       </div>
       <GnbList />
     </div>
