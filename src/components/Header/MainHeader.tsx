@@ -1,8 +1,8 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './MainHeader.module.scss';
 import logo from '../../resources/image/musinsa_logo.png';
 import search_button from '../../resources/image/search_icon.png';
-import React from 'react';
 
 interface MainHeaderProps {
   query: string;
