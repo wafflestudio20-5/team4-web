@@ -1,0 +1,54 @@
+.member {
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  height: 50px;
+  padding-left: 8px;
+  .member_login {
+    background-color: white;
+    border: 1px solid black;
+    box-sizing: border-box;
+    color: black;
+    cursor: pointer;
+    line-height: 26px;
+    margin: 0 3px 0 7px;
+    text-align: center;
+    text-decoration: none;
+    width: 150px;
+  }
+  .member_login:hover {
+    background-color: black;
+    color: white;
+  }
+  .member_block {
+    display: flex;
+    padding: 0 9px 0 8px;
+    position: relative;
+  }
+  .member_block:not(:last-of-type)::after {
+    background-color: #eee;
+    content: '';
+    height: 12px;
+    margin-top: -6px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 1px;
+  }
+  .member_link {
+    padding: 4px;
+  }
+}
+
+.badge {
+  background-color: #0078ff;
+  border-radius: 18px;
+  color: white;
+  font-family: Musinsa, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 11px;
+  height: 14px;
+  margin: 3px 4px 0 0;
+  min-width: 8px;
+  padding: 4px 5px 0 5px;
+  text-align: center;
+}
