@@ -1,15 +1,9 @@
 .container {
-  border-top: 1px solid #b2b2b2;
   width: 100vw;
   height: 2000px;
   display: flex;
   flex-direction: row;
   position: relative;
-}
-
-.categorySideBar {
-  min-width: 200px;
-  border-right: 1px solid hwb(0 70% 30%);
 }
 
 .mainContent {
@@ -19,8 +13,8 @@
 .openCategorySideBarButton {
   background-color: transparent;
   border-top: none;
-  border-right: 1px solid #b2b2b2;
-  border-bottom: 1px solid #b2b2b2;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
   border-left: none;
   padding: 5px;
   width: 25px;

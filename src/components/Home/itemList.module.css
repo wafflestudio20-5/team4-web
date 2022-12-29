@@ -5,7 +5,7 @@
     height: 600px;
     display: flex;
     flex-direction: row;
-    border-bottom: 1px solid #b2b2b2;
+    border-bottom: 1px solid #ddd;
   }
   
   .itemListCategory {
