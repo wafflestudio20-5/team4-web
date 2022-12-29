@@ -6,7 +6,6 @@ import { Session } from '../../lib/interface';
 import MainHeader from './MainHeader';
 import ChannelHeader from './ChannelHeader';
 import MemberHeader from './MemberHeader';
-import styles from './index.module.scss';
 
 function Header() {
   /* Feature: Search */
@@ -42,7 +41,7 @@ function Header() {
   };
 
   return (
-    <div className={styles.header}>
+    <>
       <MainHeader
         query={query}
         onChange={onChange}
@@ -51,7 +50,7 @@ function Header() {
       />
       <ChannelHeader />
       <MemberHeader user={user} onLogout={onLogout} />
-    </div>
+    </>
   );
 }
 
