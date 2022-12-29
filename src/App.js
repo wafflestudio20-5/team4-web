@@ -5,10 +5,23 @@ import Header from './components/Header';
 import HomePage from './components/Home/index';
 import NavigationBar from './components/NavigationBar';
 
+function AppDefault() {
+  return (
+    <>
+      <Header />
+      <NavigationBar />
+    </>
+  );
+}
+
 function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
+      <Route element={<AppDefault />}>
+        <Route index element={<HomePage />} />
+      </Route>
+      <Route path="/login" element={<></>} />
+      <Route path="/register" element={<></>} />
     </Routes>
   );
 }
@@ -17,8 +30,6 @@ export default function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <Header />
-        <NavigationBar />
         <AppRoutes />
       </BrowserRouter>
     </Provider>
