@@ -8,21 +8,36 @@
   .select{
     display: flex;
     flex-direction: row;
-    font-family: 'musinsa', sans-serif;
-    line-height: 40px;
+    font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    line-height: 38px;
     margin-bottom: 5px;
   }
 
   .button{
+    color: #b2b2b2;
     border: 0.5px solid #ddd;
     flex: 1;
-    font-family: 'musinsa', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #f3f3f3;
+  }
+
+  .buttonselected{
+    border-top: 0.5px solid #ddd;
+    border-right: 0.5px solid #ddd;
+    border-left: 0.5px solid #ddd;
+    flex: 1;
     font-size: 15px;
     font-weight: bold;
     text-align: center;
   }
 
   .button:hover{
+    cursor: pointer;
+  }
+
+  .buttonselected:hover{
     cursor: pointer;
   }
 
@@ -33,7 +48,7 @@
     display: block;
     line-height: 20px;
     padding: 10px 0 8px 2px;
-    background: url(/src/resources/asset/Add.svg) no-repeat;
+    background: url(/src/resources/asset/add.svg) no-repeat;
     background-size: 7%;
     background-position: center right 2px;
   }
@@ -47,4 +62,45 @@
     margin-left: 5px;
     color: #b2b2b2;
     font-size: 12px;
+  }
+
+  .selectedCategorys{
+    font-family: 'musinsa', sans-serif;
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .selectedcategoryshead{
+    font-family: 'musinsa', sans-serif;
+    font-size: 14px;
+    display: block;
+    line-height: 20px;
+    padding: 10px 0 8px 2px;
+    background: url(/src/resources/asset/remove.svg) no-repeat;
+    background-size: 7%;
+    background-position: center right 2px;
+  }
+  .selectedcategoryshead:hover{
+    cursor: pointer;
+  }
+
+  .subCategorylist{
+    margin-top: 5px;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    padding-left: 2px;
+  }
+  .subcategory{
+    color: #666;
+    font-size: 11px;
+    line-height: 20px;
+  }
+
+  .subcategory:hover{
+    color: black;
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: bold;
   }
