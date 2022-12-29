@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import CategorySideBar from './CategorySideBar';
-import ItemList from './itemList';
-import styles from './index.module.css';
-import OpenCateGoryButton from '../../resources/asset/menu.svg';
+import ItemList from './ItemList';
+import styles from './Index.module.css';
+import togglebutton from '../../resources/asset/menu.svg';
 
 export default function HomePage() {
   const [openCategorySideBar, setopenCategorySideBar] = useState(false);
 
-  const handleCategorySideBar = () => {
+  const toggleCategorySideBar = () => {
     setopenCategorySideBar(!openCategorySideBar);
   };
 
@@ -17,8 +17,8 @@ export default function HomePage() {
       <div className={styles.mainContent}>
         <img
           className={styles.openCategorySideBarButton}
-          onClick={handleCategorySideBar}
-          src={OpenCateGoryButton}
+          onClick={toggleCategorySideBar}
+          src={togglebutton}
           alt="카테고리더보기"
         ></img>
         <ItemList />

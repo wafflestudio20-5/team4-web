@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 import Header from './components/Header';
-import HomePage from './components/Home/index';
+import HomePage from './components/Home/Index';
 import NavigationBar from './components/NavigationBar';
 
 function AppDefault() {

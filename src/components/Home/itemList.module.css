@@ -9,7 +9,7 @@
   }
   
   .itemListCategory {
-    min-width: 150px;
+    min-width: 170px;
     padding: 5px;
     flex: 1;
     display: flex;
@@ -30,6 +30,7 @@
     padding-left: 5px;
     grid-area: 1 / 1 / 2 / 3;
     font-family: "musinsa", sans-serif;
+    font-size: 15px;
   }
 
   .categorycontent{
@@ -68,4 +69,10 @@
 
   .button:hover{
     cursor: pointer;
+    text-decoration: underline
+  }
+
+  .buttonselected:hover{
+    cursor: pointer;
+    text-decoration: underline
   }
