@@ -1,4 +1,4 @@
-import styles from './itemPreview.module.css';
+import styles from './ItemPreview.module.css';
 import { Item } from '../../lib/interface';
 
 interface ItemPreviewProps {
@@ -16,16 +16,16 @@ export default function ItemPreview({ item, idx }: ItemPreviewProps) {
       <div className={styles.price}>
         {item.newPrice ? (
           <>
-            <span className={styles.oldPrcie}>
+            <span className={styles.crossedOutPrice}>
               {item.oldPrice.toLocaleString()}원
             </span>
-            <span className={styles.newPrcie}>
+            <span className={styles.realPrice}>
               {item.newPrice?.toLocaleString()}원
             </span>
           </>
         ) : (
           <>
-            <span className={styles.newPrcie}>
+            <span className={styles.realPrice}>
               {item.oldPrice.toLocaleString()}원
             </span>
           </>

@@ -1,7 +1,7 @@
-import styles from './itemList.module.css';
+import styles from './ItemList.module.css';
 import { Item, Category, displayCategory } from '../../lib/interface';
 import { useApiData, useApiItemListFetcher } from '../../lib/api';
-import ItemPreview from './itemPreview';
+import ItemPreview from './ItemPreview';
 import { useState } from 'react';
 
 interface ItemPreviewListProps {
@@ -38,7 +38,7 @@ export default function ItemList() {
   );
 }
 
-export function ItemListCategory({
+function ItemListCategory({
   categorys,
   selectedCategory,
   setSelectedCategory,
@@ -78,7 +78,7 @@ export function ItemListCategory({
   );
 }
 
-export function ItemPreviewList({ items }: ItemPreviewListProps) {
+function ItemPreviewList({ items }: ItemPreviewListProps) {
   return (
     <>
       {items?.map((item, idx) => (
