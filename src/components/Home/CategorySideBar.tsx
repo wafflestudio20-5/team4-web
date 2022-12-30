@@ -28,6 +28,7 @@ export default function CategorySideBar() {
   const [titleCategory, setTitleCategory] = useState<string>('품목');
   const [selectedCategory, setSelectedCategory] =
     useState<CategoryIncludeBest | null>(null);
+
   return (
     <div className={styles.categorySideBar}>
       <div className={styles.select}>
@@ -95,6 +96,7 @@ export default function CategorySideBar() {
                 key={category}
                 category={category}
                 setSelectedCategory={setSelectedCategory}
+                subcategorys={subcategorys}
               ></CategoryBox>
             )
           )}
@@ -104,21 +106,25 @@ export default function CategorySideBar() {
   );
 }
 
-function CategoryBox({ category, setSelectedCategory }: CategoryBoxProps) {
+function CategoryBox({
+  category,
+  setSelectedCategory,
+  subcategorys,
+}: CategoryBoxProps) {
   return (
-    <div
-      className={styles.categorys}
-      onClick={() => {
-        setSelectedCategory(category);
-      }}
-    >
-      <>
+    <>
+      <div
+        className={styles.categorys}
+        onClick={() => {
+          setSelectedCategory(category);
+        }}
+      >
         <span>{displayCategory(category)}</span>
         <span className={styles.categorysEnglish}>
           {displayCategoryinCamelCase(category)}
         </span>
-      </>
-    </div>
+      </div>
+    </>
   );
 }
 

@@ -1,106 +1,120 @@
 .categorySideBar {
-    min-width: 250px;
-    border-right: 1px solid #ddd;
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-  }
-  .select{
-    display: flex;
-    flex-direction: row;
-    font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-    line-height: 38px;
-    margin-bottom: 5px;
+  min-width: 250px;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+.select {
+  display: flex;
+  flex-direction: row;
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  line-height: 38px;
+  margin-bottom: 5px;
+}
+
+.button {
+  color: #b2b2b2;
+  border: 0.5px solid #ddd;
+  flex: 1;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  background-color: #f3f3f3;
+}
+
+.buttonselected {
+  border-top: 0.5px solid #ddd;
+  border-right: 0.5px solid #ddd;
+  border-left: 0.5px solid #ddd;
+  flex: 1;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.buttonselected:hover {
+  cursor: pointer;
+}
+
+.categorys {
+  font-family: 'musinsa', sans-serif;
+  font-size: 14px;
+  border-bottom: 1px solid #ddd;
+  display: block;
+  line-height: 20px;
+  padding: 10px 0 8px 2px;
+  background: url(/src/resources/asset/add.svg) no-repeat;
+  background-size: 7%;
+  background-position: center right 2px;
+}
+
+.categorys:hover {
+  cursor: pointer;
+  background-color: #e6e6e6;
+}
+
+.categorysEnglish {
+  margin-left: 5px;
+  color: #b2b2b2;
+  font-size: 12px;
+}
+
+.selectedCategorys {
+  font-family: 'musinsa', sans-serif;
+  font-size: 14px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+}
+
+.selectedcategoryshead {
+  font-family: 'musinsa', sans-serif;
+  font-size: 14px;
+  display: block;
+  line-height: 20px;
+  padding: 10px 0 8px 2px;
+  background: url(/src/resources/asset/remove.svg) no-repeat;
+  background-size: 7%;
+  background-position: center right 2px;
+}
+.selectedcategoryshead:hover {
+  cursor: pointer;
+}
+
+.subCategorylist {
+  padding-left: 2px;
+  margin-top: 5px;
+  padding-bottom: 5px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.subcategory {
+  color: #666;
+  font-size: 11px;
+  overflow: hidden;
+  line-height: 20px;
+  animation: CategorySideBarSlide 0.5s 1;
+}
+
+.subcategory:hover {
+  color: black;
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+@keyframes CategorySideBarSlide {
+  0% {
+    line-height: 0px;
   }
 
-  .button{
-    color: #b2b2b2;
-    border: 0.5px solid #ddd;
-    flex: 1;
-    font-size: 15px;
-    font-weight: bold;
-    text-align: center;
-    background-color: #f3f3f3;
-  }
-
-  .buttonselected{
-    border-top: 0.5px solid #ddd;
-    border-right: 0.5px solid #ddd;
-    border-left: 0.5px solid #ddd;
-    flex: 1;
-    font-size: 15px;
-    font-weight: bold;
-    text-align: center;
-  }
-
-  .button:hover{
-    cursor: pointer;
-  }
-
-  .buttonselected:hover{
-    cursor: pointer;
-  }
-
-  .categorys{
-    font-family: 'musinsa', sans-serif;
-    font-size: 14px;
-    border-bottom: 1px solid #ddd;
-    display: block;
+  100% {
     line-height: 20px;
-    padding: 10px 0 8px 2px;
-    background: url(/src/resources/asset/add.svg) no-repeat;
-    background-size: 7%;
-    background-position: center right 2px;
   }
-
-  .categorys:hover{
-    cursor: pointer;
-    background-color: #e6e6e6;
-  }
-
-  .categorysEnglish{
-    margin-left: 5px;
-    color: #b2b2b2;
-    font-size: 12px;
-  }
-
-  .selectedCategorys{
-    font-family: 'musinsa', sans-serif;
-    font-size: 14px;
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .selectedcategoryshead{
-    font-family: 'musinsa', sans-serif;
-    font-size: 14px;
-    display: block;
-    line-height: 20px;
-    padding: 10px 0 8px 2px;
-    background: url(/src/resources/asset/remove.svg) no-repeat;
-    background-size: 7%;
-    background-position: center right 2px;
-  }
-  .selectedcategoryshead:hover{
-    cursor: pointer;
-  }
-
-  .subCategorylist{
-    margin-top: 5px;
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    padding-left: 2px;
-  }
-  .subcategory{
-    color: #666;
-    font-size: 11px;
-    line-height: 20px;
-  }
-
-  .subcategory:hover{
-    color: black;
-    cursor: pointer;
-    text-decoration: underline;
-    font-weight: bold;
-  }
+}

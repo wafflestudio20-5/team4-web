@@ -72,7 +72,7 @@ export interface Item {
   name: string;
   brand: string;
   image: string;
-  label?: string;
+  label?: Label;
   oldPrice: number;
   newPrice?: number;
   sale?: number;
@@ -127,7 +127,7 @@ export function displayCategory(category: Category) {
   }
 }
 
-export function displayCategoryinCamelCase(category: Category){
+export function displayCategoryinCamelCase(category: Category) {
   switch (category) {
     case Category.top:
       return 'Top';
