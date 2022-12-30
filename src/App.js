@@ -1,25 +1,18 @@
 import { BrowserRouter, Route, Routes, Outlet } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
-import Header from './components/Header';
-import HomePage from './components/Home/index';
-import NavigationBar from './components/NavigationBar';
-
-function AppDefault() {
-  return (
-    <>
-      <Header />
-      <NavigationBar />
-      <Outlet />
-    </>
-  );
-}
+import Header from './components/Header/';
+import SubHeader from './components/SubHeader/';
+import HomePage from './components/Home/';
 
 function AppRoutes() {
   return (
     <Routes>
-      <Route element={<AppDefault />}>
-        <Route index element={<HomePage />} />
+      <Route element={<Header />}>
+        <Route element={<SubHeader />}>
+          <Route index element={<HomePage />} />
+        </Route>
+        <Route path="/mypage" element={<></>} />
       </Route>
       <Route path="/login" element={<></>} />
       <Route path="/register" element={<></>} />
