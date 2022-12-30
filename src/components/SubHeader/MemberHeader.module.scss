@@ -4,6 +4,10 @@
   display: flex;
   height: 50px;
   padding-left: 8px;
+  a {
+    color: black;
+    text-decoration: none;
+  }
   .member_login {
     background-color: white;
     border: 1px solid black;
@@ -25,6 +29,10 @@
     padding: 0 9px 0 8px;
     position: relative;
   }
+  .member_block:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
   .member_block:not(:last-of-type)::after {
     background-color: #eee;
     content: '';
@@ -36,10 +44,15 @@
     width: 1px;
   }
   .member_nickname {
-    padding: 4px;
     font-weight: 700;
+    padding: 4px;
   }
   .member_link {
+    padding: 4px;
+  }
+  .member_special_link {
+    color: #048eff;
+    font-weight: 700;
     padding: 4px;
   }
   .member_logout_button {
