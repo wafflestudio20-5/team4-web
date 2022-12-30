@@ -12,6 +12,9 @@ function AppRoutes() {
       <Route element={<Header />}>
         <Route element={<SubHeader />}>
           <Route index element={<HomePage />} />
+          <Route path="/cart" element={<></>} />
+          <Route path="/coupon" element={<></>} />
+          <Route path="/customercenter" element={<></>} />
         </Route>
         <Route path="/mypage" element={<MyPage />} />
       </Route>

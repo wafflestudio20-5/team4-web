@@ -11,6 +11,10 @@ function MyPageRoutes() {
   return (
     <Routes>
       <Route index element={<div>content</div>} />
+      <Route path="/mypage/info" element={<div>/mypage/info</div>} />
+      <Route path="/mypage/money" element={<div>/mypage/money</div>} />
+      <Route path="/mypage/point" element={<div>/mypage/point</div>} />
+      <Route path="/mypage/review" element={<div>/mypage/review</div>} />
     </Routes>
   );
 }
