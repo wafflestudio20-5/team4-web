@@ -6,7 +6,7 @@ const initialState: Session = {
     /* Initialized for test purposes */
     id: 0,
     username: 'user_test',
-    nickname: 'LV.1 뉴비_8sd9c1cw',
+    nickname: '뉴비_8sd9c1cw',
     reviewCount: 10,
     registrationDate: '2017-07-21T19:50:28Z',
   },
