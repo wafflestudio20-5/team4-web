@@ -4,25 +4,14 @@ import store from './store';
 import Header from './components/Header/';
 import SubHeader from './components/SubHeader/';
 import HomePage from './components/Home/';
-import NavigationBar from './components/NavigationBar';
-
-function AppDefault() {
-  return (
-    <>
-      <Header />
-      <SubHeader />
-      <NavigationBar />
-    </>
-  );
-}
 
 function AppRoutes() {
   return (
     <Routes>
-      <Route element={<AppDefault />}>
-        <Route index element={<HomePage />} />
-      </Route>
       <Route element={<Header />}>
+        <Route element={<SubHeader />}>
+          <Route index element={<HomePage />} />
+        </Route>
         <Route path="/mypage" element={<></>} />
       </Route>
       <Route path="/login" element={<></>} />

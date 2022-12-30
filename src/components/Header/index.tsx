@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 import MainHeader from './MainHeader';
 
 function Header() {
@@ -21,12 +22,15 @@ function Header() {
   };
 
   return (
-    <MainHeader
-      query={query}
-      onChange={onChange}
-      onKeyPress={onKeyPress}
-      onSubmit={onSubmit}
-    />
+    <>
+      <MainHeader
+        query={query}
+        onChange={onChange}
+        onKeyPress={onKeyPress}
+        onSubmit={onSubmit}
+      />
+      <Outlet />
+    </>
   );
 }
 

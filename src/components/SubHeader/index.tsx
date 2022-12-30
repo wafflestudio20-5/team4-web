@@ -1,3 +1,4 @@
+import { Outlet } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { logout } from '../../store/sessionSlice';
@@ -22,6 +23,7 @@ function SubHeader() {
     <>
       <ChannelHeader />
       <MemberHeader user={user} onLogout={onLogout} />
+      <Outlet />
     </>
   );
 }
