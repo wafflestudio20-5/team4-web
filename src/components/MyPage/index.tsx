@@ -1,21 +1,19 @@
 import React, { useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { logout } from '../../store/sessionSlice';
 import { Session } from '../../lib/interface';
-import MyPageUserInfo from './MyPageUserInfo';
+import MyPageUserInfo, { MyPageUserInfoProps } from './MyPageUserInfo';
 import MyPageNavigation from './MyPageNavigation';
 
-function MyPageRoutes() {
+function MyPageLayout({ user, onLogout }: MyPageUserInfoProps) {
   return (
-    <Routes>
-      <Route index element={<div>content</div>} />
-      <Route path="/mypage/info" element={<div>/mypage/info</div>} />
-      <Route path="/mypage/money" element={<div>/mypage/money</div>} />
-      <Route path="/mypage/point" element={<div>/mypage/point</div>} />
-      <Route path="/mypage/review" element={<div>/mypage/review</div>} />
-    </Routes>
+    <>
+      <MyPageUserInfo user={user} onLogout={onLogout} />
+      <MyPageNavigation />
+      <Outlet />
+    </>
   );
 }
 
@@ -41,11 +39,15 @@ function MyPage() {
 
   if (user)
     return (
-      <>
-        <MyPageUserInfo user={user} onLogout={onLogout} />
-        <MyPageNavigation />
-        <MyPageRoutes />
-      </>
+      <Routes>
+        <Route element={<MyPageLayout user={user} onLogout={onLogout} />}>
+          <Route index element={<div>content</div>} />
+          <Route path="info" element={<div>/mypage/info</div>} />
+          <Route path="money" element={<div>/mypage/money</div>} />
+          <Route path="point" element={<div>/mypage/point</div>} />
+          <Route path="review" element={<div>/mypage/review</div>} />
+        </Route>
+      </Routes>
     );
 }
 

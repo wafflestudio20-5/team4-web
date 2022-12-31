@@ -7,7 +7,7 @@ import point from '../../resources/image/coin.png';
 import coupon from '../../resources/image/coupon.png';
 import review from '../../resources/image/write.png';
 
-interface MyPageUserInfoProps {
+export interface MyPageUserInfoProps {
   user: User;
   onLogout: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }

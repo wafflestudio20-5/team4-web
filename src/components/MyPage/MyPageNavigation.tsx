@@ -1,3 +1,3 @@
 export default function MyPageNavigation() {
-  return <div>Navigation</div>;
+  return <div>MyPageNavigation</div>;
 }
