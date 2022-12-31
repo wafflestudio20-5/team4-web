@@ -3,13 +3,16 @@ import {
   Category,
   SubCategory,
   displayCategory,
-  displayCategoryinCamelCase,
   displaySubCategory,
 } from '../../lib/interface';
 import { useState } from 'react';
 
 enum Best {
   best = 'best',
+}
+
+function capitalize(word: string) {
+  return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
 type CategoryIncludeBest = Category | Best;
@@ -176,9 +179,7 @@ function CategoryBox({
         }}
       >
         <span>{displayCategory(category)}</span>
-        <span className={styles.categorysEnglish}>
-          {displayCategoryinCamelCase(category)}
-        </span>
+        <span className={styles.categorysEnglish}>{capitalize(category)}</span>
       </div>
     </div>
   );
@@ -202,9 +203,7 @@ function CloseCategoryBox({
         }}
       >
         <span>{displayCategory(category)}</span>
-        <span className={styles.categorysEnglish}>
-          {displayCategoryinCamelCase(category)}
-        </span>
+        <span className={styles.categorysEnglish}>{capitalize(category)}</span>
       </div>
       <div className={styles.closedsubCategorylist}>
         {subcategorys?.map((subcategory) => (
@@ -235,9 +234,7 @@ function SelectedCategoryBox({
         }}
       >
         <span>{displayCategory(category)}</span>
-        <span className={styles.categorysEnglish}>
-          {displayCategoryinCamelCase(category)}
-        </span>
+        <span className={styles.categorysEnglish}>{capitalize(category)}</span>
       </div>
       <div className={styles.subCategorylist}>
         {subcategorys?.map((subcategory) => (
