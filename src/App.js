@@ -4,6 +4,8 @@ import store from './store';
 import Header from './components/Header/';
 import SubHeader from './components/SubHeader/';
 import HomePage from './components/Home/';
+import LoginPage from './components/loginPage';
+import SignupPage from './components/signupPage';
 
 function AppRoutes() {
   return (
@@ -14,8 +16,8 @@ function AppRoutes() {
         </Route>
         <Route path="/mypage" element={<></>} />
       </Route>
-      <Route path="/login" element={<></>} />
-      <Route path="/register" element={<></>} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/join" element={<SignupPage />} />
     </Routes>
   );
 }

@@ -2,6 +2,8 @@ import { useState } from 'react';
 import CategorySideBar from './CategorySideBar';
 import ItemList from './ItemList';
 import styles from './index.module.css';
+import Header from "../Header";
+import NavigationBar from "../NavigationBar";
 
 export default function HomePage() {
   const [openCategorySideBar, setopenCategorySideBar] = useState(false);
@@ -11,7 +13,11 @@ export default function HomePage() {
   };
 
   return (
+      <>
+      
+      <NavigationBar/>
     <div className={styles.container}>
+
       {openCategorySideBar && <CategorySideBar />}
       <div className={styles.mainContent}>
         <button
@@ -22,5 +28,6 @@ export default function HomePage() {
         <ItemList />
       </div>
     </div>
+      </>
   );
 }

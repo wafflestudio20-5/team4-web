@@ -1,0 +1,295 @@
+.background {
+  background: #f1f1f1 url(https://static.msscdn.net/ui/build/m/img/old/bg_join.gif?v=20221228155530) repeat-y 50% 0;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  overflow: auto;
+  .headerLogoArea {
+    height: 50px;
+    width: 100%;
+    margin-top: 62px;
+    text-align: center;
+    .headerLogo {
+      position: relative;
+      top: 50%;
+      transform: translate(0%, -50%);
+      width: 95px;
+      height: 16px;
+    }
+  }
+  .contentArea {
+    width: 345px;
+    height: 814.5px;
+    padding: 20px 15px 100px 15px;
+    margin: auto;
+    background-color: white;
+    .joinContainer {
+      height: 814.5px;
+      width: 345px;
+      margin: auto;
+      background-color: white;
+      .joinForm {
+        height: 662.5px;
+        width: 345px;
+        background-color: white;
+        .inputIdArea {
+          width: 345px;
+          height: 79px;
+          background-color: white;
+          .inputIdLabel {
+            height: 21px;
+            width: 48px;
+            margin-bottom: 8px;
+            display: inline-block;
+            line-height: 21px;
+            font-size: 14px;
+            font-family: '-apple-system',HelveticaNeue,Roboto,'Noto Sans KR',helvetica,Gulim,sans-serif;
+            .inputIdDot {
+              display: inline-block;
+              width: 4px;
+              height: 4px;
+              margin-top: 4px;
+              border-radius: 50%;
+              background-color: red;
+              vertical-align: top;
+              position: relative;
+              left: 3px;
+            }
+          }
+          .inputIdWrap {
+            width: 345px;
+            height: 50px;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            box-sizing: border-box;
+            background-color: white;
+            .inputId {
+              width: 100%;
+              height: 48px;
+              box-sizing: border-box;
+              padding: 0 12px;
+              border: 0px;
+            }
+
+          }
+          .inputPasswordArea {
+            margin-top: 8px;
+            width: 100%;
+            height: 95px;
+            background-color: white;
+            .inputPasswordLabel {
+              height: 21px;
+              margin-top: 16px;
+              margin-bottom: 8px;
+              display: inline-block;
+              line-height: 21px;
+              font-size: 14px;
+              font-family: '-apple-system',HelveticaNeue,Roboto,'Noto Sans KR',helvetica,Gulim,sans-serif;
+              .inputPasswordDot {
+                display: inline-block;
+                width: 4px;
+                height: 4px;
+                margin-top: 4px;
+                border-radius: 50%;
+                background-color: red;
+                vertical-align: top;
+                position: relative;
+                left: 3px;
+              }
+            }
+            .inputPasswordWrap {
+              width: 100%;
+              height: 50px;
+              box-sizing: border-box;
+              border: 1px solid #e5e5e5;
+              border-radius: 4px;
+              background-color: white;
+              .inputPassword {
+                box-sizing: border-box;
+                width: 100%;
+                height: 48px;
+                padding: 0 12px 0 12px;
+                border: 0px;
+
+              }
+            }
+          }
+          .inputRepeatArea {
+            width: 100%;
+            height: 50px;
+            margin-top: 8px;
+            background-color: white;
+            .inputRepeatWrap {
+              width: 100%;
+              height: 50px;
+              box-sizing: border-box;
+              border: 1px solid #e5e5e5;
+              border-radius: 4px;
+              .inputRepeat {
+                width: 100%;
+                height: 48px;
+                box-sizing: border-box;
+                border: 0px;
+                padding: 0 12px 0 12px;
+              }
+
+            }
+          }
+          .inputEmailArea {
+            height: 119.5px;
+            margin-top: 8px;
+            background-color: white;
+            width: 100%;
+            .inputEmailLabel {
+              height: 21px;
+              margin-top: 16px;
+              margin-bottom: 8px;
+              display: inline-block;
+              line-height: 21px;
+              font-size: 14px;
+              font-family: '-apple-system',HelveticaNeue,Roboto,'Noto Sans KR',helvetica,Gulim,sans-serif;
+              .inputEmailDot {
+                display: inline-block;
+                width: 4px;
+                height: 4px;
+                margin-top: 4px;
+                border-radius: 50%;
+                background-color: red;
+                vertical-align: top;
+                position: relative;
+                left: 3px;
+              }
+            }
+            .inputEmailWrap {
+              width: 100%;
+              height: 50px;
+              box-sizing: border-box;
+              border: 1px solid #e5e5e5;
+              border-radius: 4px;
+              .inputEmail {
+                width: 100%;
+                height: 48px;
+                box-sizing: border-box;
+                border: 0px;
+                padding: 0 12px 0 12px;
+              }
+            }
+            .inputEmailHelper {
+              width: 100%;
+              height: 16.5px;
+              margin-top: 8px;
+              font-family: '-apple-system',HelveticaNeue,Roboto,'Noto Sans KR',helvetica,Gulim,sans-serif;
+            }
+          }
+          .inputRecommendIdArea {
+            height: 95px;
+            margin-top: 8px;
+            background-color: white;
+            width: 100%;
+            .inputRecommendIdLabel {
+              height: 21px;
+              margin-top: 16px;
+              margin-bottom: 8px;
+              display: inline-block;
+              line-height: 21px;
+              font-size: 14px;
+              font-family: '-apple-system',HelveticaNeue,Roboto,'Noto Sans KR',helvetica,Gulim,sans-serif;
+            }
+            .inputRecommendIdWrap {
+              width: 100%;
+              height: 50px;
+              box-sizing: border-box;
+              border: 1px solid #e5e5e5;
+              border-radius: 4px;
+              .inputRecommendId {
+                width: 100%;
+                height: 48px;
+                box-sizing: border-box;
+                border: 0px;
+                padding: 0 12px 0 12px;
+              }
+            }
+          }
+          .agreementForm {
+            width: 100%;
+            height: 152px;
+            margin-top: 40px;
+            background-color: skyblue;
+            .checkboxAll {
+              height: 24px;
+              width: 100%;
+              margin-bottom: 4px;
+              display: inline-block;
+              background-color: gray;
+            }
+            .checkboxFirst {
+              height: 19px;
+              margin-top: 12px;
+              background-color: gray;
+            }
+            .checkboxSecond {
+              height: 19px;
+              margin-top: 12px;
+              background-color: gray;
+            }
+            .checkboxThird {
+              height: 19px;
+              margin-top: 12px;
+              background-color: gray;
+            }
+            .checkboxFourth {
+              height: 19px;
+              margin-top: 12px;
+              background-color: gray;
+            }
+          }
+          .signupButtonArea {
+            height: 50px;
+            margin-top: 40px;
+            background-color: white;
+            .signupButton {
+              display: block;
+              width: 100%;
+              box-sizing: border-box;
+              height: 50px;
+              padding: 14px 16px 15px;
+              border-color: #f3f3f3;
+              background-color: #f3f3f3;
+              color: #b3b3b3;
+              border: 1px;
+              border-radius: 4px;
+            }
+          }
+          .signupButtonHelper {
+            height: 42px;
+            margin-top: 20px;
+            padding-left: 10px;
+            background-color: white;
+            .signupButtonHelperText {
+              width: 335px;
+              height: 42px;
+              background-color: white;
+              font-size: 14px;
+              line-height: 21px;
+              font-family: '-apple-system',HelveticaNeue,Roboto,'Noto Sans KR',helvetica,Gulim,sans-serif;
+              text-align: left;
+              color: #777;
+            }
+            a:link {
+              color: #007aff;
+            }
+            a:visited {
+              color: #007aff;
+            }
+
+          }
+        }
+      }
+    }
+  }
+
+}
