@@ -1,0 +1,17 @@
+.wrapper {
+  border-top: 1px solid rgb(221, 221, 221);
+  clear: both !important;
+}
+
+.banner {
+  background-color: #000000;
+  color: #b2b2b2;
+  font-family: 'Musinsa', 'gulim', sans-serif;
+  font-size: 13px;
+  line-height: 36px;
+  padding-left: 19px;
+  span {
+    color: white;
+    padding-left: 3px;
+  }
+}

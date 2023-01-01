@@ -7,6 +7,7 @@ import { Session } from '../../lib/interface';
 import MyPageUserInfo, { MyPageUserInfoProps } from './MyPageUserInfo';
 import MyPageNavigation from './MyPageNavigation';
 import MyPageMain from './MyPageMain';
+import MyPageFooter from './MyPageFooter';
 
 function MyPageLayout({ user, onLogout }: MyPageUserInfoProps) {
   return (
@@ -14,6 +15,7 @@ function MyPageLayout({ user, onLogout }: MyPageUserInfoProps) {
       <MyPageUserInfo user={user} onLogout={onLogout} />
       <MyPageNavigation />
       <Outlet />
+      <MyPageFooter />
     </>
   );
 }
