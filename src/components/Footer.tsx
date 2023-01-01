@@ -1,6 +1,6 @@
-import styles from './MyPageFooter.module.scss';
+import styles from './Footer.module.scss';
 
-export default function MyPageFooter() {
+export default function Footer() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.banner}>
