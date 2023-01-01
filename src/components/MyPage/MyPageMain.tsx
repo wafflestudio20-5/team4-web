@@ -26,7 +26,7 @@ function OrderBlock() {
         </ul>
         <span className={styles.clickable}>전체</span>
       </header>
-      <div className={styles.grid}>
+      <div className={styles.grid_order}>
         <div className={styles.grid_header}>상품정보</div>
         <div className={styles.grid_header}>주문일자</div>
         <div className={styles.grid_header}>주문번호</div>
@@ -38,10 +38,45 @@ function OrderBlock() {
   );
 }
 
+function CartBlock() {
+  return (
+    <section id="cart">
+      <header className={styles.title}>
+        <h2>장바구니</h2>
+        <div className={styles.tabs}>
+          <div className={styles.tab}>
+            <span>택배배송 0</span>
+          </div>
+          <div className={styles.tab}>
+            <span>무탠픽업 0</span>
+          </div>
+        </div>
+        <span className={styles.clickable}>전체</span>
+      </header>
+      <div className={styles.grid_cart}>
+        <div className={styles.grid_header}>
+          <button className={styles.grid_button} />
+        </div>
+        <div className={styles.grid_header}>상품정보</div>
+        <div className={styles.grid_header}>상품금액</div>
+        <div className={styles.grid_header}>수량</div>
+        <div className={styles.grid_header}>주문금액</div>
+        <div className={styles.grid_header}>배송 형태/배송비</div>
+      </div>
+      <div className={styles.none}>장바구니에 담긴 상품이 없습니다.</div>
+      <div className={styles.button_group}>
+        <div className={styles.deselect_button}>선택삭제</div>
+        <div className={styles.buy_button}>결제하기</div>
+      </div>
+    </section>
+  );
+}
+
 export default function MyPageMain({ user }: MyPageMainProps) {
   return (
     <div className={styles.wrapper}>
       <OrderBlock />
+      <CartBlock />
     </div>
   );
 }
