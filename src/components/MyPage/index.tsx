@@ -6,6 +6,7 @@ import { logout } from '../../store/sessionSlice';
 import { Session } from '../../lib/interface';
 import MyPageUserInfo, { MyPageUserInfoProps } from './MyPageUserInfo';
 import MyPageNavigation from './MyPageNavigation';
+import MyPageMain from './MyPageMain';
 
 function MyPageLayout({ user, onLogout }: MyPageUserInfoProps) {
   return (
@@ -41,7 +42,7 @@ function MyPage() {
     return (
       <Routes>
         <Route element={<MyPageLayout user={user} onLogout={onLogout} />}>
-          <Route index element={<div>content</div>} />
+          <Route index element={<MyPageMain user={user} />} />
           <Route path="community" element={<div>/mypage/community</div>} />
           <Route path="info" element={<div>/mypage/info</div>} />
           <Route path="money" element={<div>/mypage/money</div>} />
