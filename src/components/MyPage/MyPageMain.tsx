@@ -79,6 +79,7 @@ function CouponBlock() {
         <h2>
           쿠폰 <span>0장</span>
         </h2>
+        <span className={styles.clickable}>전체</span>
       </header>
       <div className={styles.grid_coupon}>
         <div className={styles.grid_header}>쿠폰번호</div>
@@ -93,12 +94,91 @@ function CouponBlock() {
   );
 }
 
+function LikeBlock() {
+  return (
+    <section id="like">
+      <header className={styles.title}>
+        <h2>좋아요</h2>
+        <div className={styles.tabs}>
+          <div className={styles.tab}>
+            <span>상품</span>
+          </div>
+          <div className={styles.tab}>
+            <span>브랜드</span>
+          </div>
+        </div>
+        <span className={styles.clickable}>전체</span>
+      </header>
+      <div className={styles.none}>좋아요를 누른 상품이 없습니다.</div>
+    </section>
+  );
+}
+
+function GIBlock() {
+  return (
+    <section id="general_inquiry">
+      <header className={styles.title}>
+        <h2>상품문의</h2>
+        <span className={styles.clickable}>전체</span>
+      </header>
+      <div className={styles.grid_GI}>
+        <div className={styles.grid_header}>상품정보</div>
+        <div className={styles.grid_header}>내용</div>
+        <div className={styles.grid_header}>문의 유형</div>
+        <div className={styles.grid_header}>작성일</div>
+        <div className={styles.grid_header}>처리 상태</div>
+      </div>
+      <div className={styles.none}>등록된 상품문의가 없습니다.</div>
+    </section>
+  );
+}
+
+function PIBlock() {
+  return (
+    <section id="personal_inquiry">
+      <header className={styles.title}>
+        <h2>1:1문의</h2>
+        <span className={styles.clickable}>전체</span>
+      </header>
+      <div className={styles.grid_PI}>
+        <div className={styles.grid_header}>문의 유형</div>
+        <div className={styles.grid_header}>내용</div>
+        <div className={styles.grid_header}>주문번호</div>
+        <div className={styles.grid_header}>작성일</div>
+        <div className={styles.grid_header}>처리 상태</div>
+      </div>
+      <div className={styles.none}>등록된 1:1문의가 없습니다.</div>
+    </section>
+  );
+}
+
+function ReviewBlock() {
+  return (
+    <section id="review">
+      <header className={styles.title}>
+        <h2>구매후기</h2>
+        <span className={styles.clickable}>전체</span>
+      </header>
+      <div className={styles.grid_review}>
+        <div className={styles.grid_header}>상품정보</div>
+        <div className={styles.grid_header}>내용</div>
+        <div className={styles.grid_header}>후기 종류</div>
+      </div>
+      <div className={styles.none}>등록된 후기내역이 없습니다.</div>
+    </section>
+  );
+}
+
 export default function MyPageMain({ user }: MyPageMainProps) {
   return (
     <div className={styles.wrapper}>
       <OrderBlock />
       <CartBlock />
       <CouponBlock />
+      <LikeBlock />
+      <GIBlock />
+      <PIBlock />
+      <ReviewBlock />
     </div>
   );
 }
