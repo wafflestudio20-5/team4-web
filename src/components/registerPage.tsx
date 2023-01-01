@@ -1,5 +1,5 @@
-import styles from './signupPage.module.scss';
-export default function SignupPage() {
+import styles from './registerPage.module.scss';
+export default function RegisterPage() {
     return (
         <>
             <div className={styles.background}>

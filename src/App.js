@@ -5,7 +5,7 @@ import Header from './components/Header/';
 import SubHeader from './components/SubHeader/';
 import HomePage from './components/Home/';
 import LoginPage from './components/loginPage';
-import SignupPage from './components/signupPage';
+import RegisterPage from './components/registerPage';
 
 function AppRoutes() {
   return (
@@ -17,7 +17,7 @@ function AppRoutes() {
         <Route path="/mypage" element={<></>} />
       </Route>
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/join" element={<SignupPage />} />
+      <Route path="/register" element={<RegisterPage />} />
     </Routes>
   );
 }
