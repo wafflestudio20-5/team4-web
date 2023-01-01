@@ -72,11 +72,33 @@ function CartBlock() {
   );
 }
 
+function CouponBlock() {
+  return (
+    <section id="coupon">
+      <header className={styles.title}>
+        <h2>
+          쿠폰 <span>0장</span>
+        </h2>
+      </header>
+      <div className={styles.grid_coupon}>
+        <div className={styles.grid_header}>쿠폰번호</div>
+        <div className={styles.grid_header}>쿠폰명</div>
+        <div className={styles.grid_header}>할인금액</div>
+        <div className={styles.grid_header}>적용 범위</div>
+        <div className={styles.grid_header}>유효기간</div>
+        <div className={styles.grid_header} />
+      </div>
+      <div className={styles.none}>사용 가능한 쿠폰이 없습니다.</div>
+    </section>
+  );
+}
+
 export default function MyPageMain({ user }: MyPageMainProps) {
   return (
     <div className={styles.wrapper}>
       <OrderBlock />
       <CartBlock />
+      <CouponBlock />
     </div>
   );
 }
