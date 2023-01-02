@@ -1,3 +1,11 @@
+/*
+
+마이페이지 메인 화면은
+추가 기능 논의 및 디자이너 분과의 협의가 완료된 후에
+'개인 홈피' 스타일로 재구성할 예정입니다.
+
+*/
+
 import { User } from '../../lib/interface';
 import styles from './MyPageMain.module.scss';
 
@@ -72,48 +80,6 @@ function CartBlock() {
   );
 }
 
-function CouponBlock() {
-  return (
-    <section id="coupon">
-      <header className={styles.title}>
-        <h2>
-          쿠폰 <span>0장</span>
-        </h2>
-        <span className={styles.clickable}>전체</span>
-      </header>
-      <div className={styles.grid_coupon}>
-        <div className={styles.grid_header}>쿠폰번호</div>
-        <div className={styles.grid_header}>쿠폰명</div>
-        <div className={styles.grid_header}>할인금액</div>
-        <div className={styles.grid_header}>적용 범위</div>
-        <div className={styles.grid_header}>유효기간</div>
-        <div className={styles.grid_header} />
-      </div>
-      <div className={styles.none}>사용 가능한 쿠폰이 없습니다.</div>
-    </section>
-  );
-}
-
-function LikeBlock() {
-  return (
-    <section id="like">
-      <header className={styles.title}>
-        <h2>좋아요</h2>
-        <div className={styles.tabs}>
-          <div className={styles.tab}>
-            <span>상품</span>
-          </div>
-          <div className={styles.tab}>
-            <span>브랜드</span>
-          </div>
-        </div>
-        <span className={styles.clickable}>전체</span>
-      </header>
-      <div className={styles.none}>좋아요를 누른 상품이 없습니다.</div>
-    </section>
-  );
-}
-
 function GIBlock() {
   return (
     <section id="general_inquiry">
@@ -174,8 +140,6 @@ export default function MyPageMain({ user }: MyPageMainProps) {
     <div className={styles.wrapper}>
       <OrderBlock />
       <CartBlock />
-      <CouponBlock />
-      <LikeBlock />
       <GIBlock />
       <PIBlock />
       <ReviewBlock />

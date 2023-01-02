@@ -13,25 +13,24 @@ export default function MyPageNavigation() {
         <Link className={styles.nav} to="/mypage/review">
           구매후기
         </Link>
-        <span className={styles.nav}>래플 응모내역</span>
-        <span className={styles.nav}>상품문의</span>
-        <span className={styles.nav}>1:1문의</span>
+        <Link className={styles.nav} to="/mypage/item_inquiry">
+          상품문의
+        </Link>
+        <Link className={styles.nav} to="/mypage/personal_inquiry">
+          1:1문의
+        </Link>
         <Link className={styles.nav} to="/mypage/viewed_goods">
           최근 본 상품
         </Link>
-        <span className={styles.nav}>좋아요</span>
-        <span className={styles.nav}>마이 사이즈</span>
-        <span className={styles.nav}>무신사페이 관리</span>
-        <span className={styles.nav}>무신사 현대카드 보기</span>
-        <span className={styles.nav}>매장 결제 내역</span>
-        <span className={styles.nav}>회원 혜택</span>
       </div>
+      {/*
       <div className={styles.flex}>
         <h3>커뮤니티</h3>
         <Link className={styles.nav} to="/mypage/community">
           게시물/스크랩/댓글
         </Link>
       </div>
+      */}
     </div>
   );
 }

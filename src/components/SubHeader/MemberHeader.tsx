@@ -32,19 +32,24 @@ export default function MemberHeader({ user, onLogout }: MemberHeaderProps) {
       >
         <span className={styles.member_link}>바로접속 ON</span>
       </div>
+      {/*
       {user && (
         <div className={styles.member_block}>
           <span className={styles.member_link}>알림</span>
         </div>
       )}
+      */}
       <div className={styles.member_block}>
         <Link className={styles.member_link} to={user ? `/mypage` : `/login`}>
           마이페이지
         </Link>
       </div>
       <div className={styles.member_block}>
-        <span className={styles.member_link}>최근 본 상품</span>
+        <Link className={styles.member_link} to="/mypage/viewed_goods">
+          최근 본 상품
+        </Link>
       </div>
+      {/*
       <div
         className={styles.member_block}
         style={{
@@ -53,6 +58,7 @@ export default function MemberHeader({ user, onLogout }: MemberHeaderProps) {
       >
         <span className={styles.member_link}>좋아요</span>
       </div>
+      */}
       <div className={styles.member_block}>
         <Link className={styles.member_link} to="/cart">
           장바구니
@@ -60,13 +66,17 @@ export default function MemberHeader({ user, onLogout }: MemberHeaderProps) {
         <span className={styles.badge}>0</span>
       </div>
       <div className={styles.member_block}>
-        <span className={styles.member_link}>주문배송조회</span>
+        <Link className={styles.member_link} to="/mypage/order">
+          주문배송조회
+        </Link>
       </div>
+      {/*
       <div className={styles.member_block}>
         <Link className={styles.member_link} to="/customercenter">
           고객센터
         </Link>
       </div>
+      */}
       {user && (
         <div className={styles.member_block}>
           <button className={styles.member_logout_button} onClick={onLogout}>
@@ -74,6 +84,7 @@ export default function MemberHeader({ user, onLogout }: MemberHeaderProps) {
           </button>
         </div>
       )}
+      {/*
       <div
         className={styles.member_block}
         style={{
@@ -91,6 +102,7 @@ export default function MemberHeader({ user, onLogout }: MemberHeaderProps) {
           </Link>
         )}
       </div>
+      */}
     </div>
   );
 }
