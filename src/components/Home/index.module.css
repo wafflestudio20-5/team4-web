@@ -1,55 +1,27 @@
 .container {
-  border: 1px solid;
-  width: calc(100vw - 20px);
-  height: 1000px;
+  height: 2000px;
   display: flex;
   flex-direction: row;
   position: relative;
 }
 
-.categorySideBar {
-  flex: 1;
-  border: 1px solid;
-  margin: 5px;
-}
-
 .mainContent {
   flex: 7;
-  border: 1px solid;
-  margin: 5px;
 }
 
 .openCategorySideBarButton {
-  width: 20px;
-  height: 20px;
+  background-color: transparent;
+  border-top: none;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  border-left: none;
+  padding: 5px;
+  width: 25px;
+  height: 25px;
   margin: 0px;
   position: absolute;
 }
 
-.itemList {
-  border: 1px solid;
-  width: calc(100% - 10px);
-  height: 400px;
-  display: flex;
-  flex-direction: row;
-}
 
-.itemListCategory {
-  flex: 1;
-  border: 1px solid;
-  margin: 5px;
-}
 
-.itemListBox {
-  flex: 7;
-  border: 1px solid;
-  margin: 5px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20%, auto));
-  row-gap: 20px;
-  column-gap: 20px;
-}
 
-.itemPreview {
-  border: 1px solid;
-}
