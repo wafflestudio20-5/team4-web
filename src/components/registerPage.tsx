@@ -4,22 +4,30 @@ export default function RegisterPage() {
 
 
     const [inputId, setInputId] = useState<string>("");
+    const [firstInput, setFirstInput] = useState<boolean>(false);
 
     const IdCheckHook = () => {
 
-        if (inputId?.length === 0) {
-            return (<>
-                아이디는 필수정보 입니다.
-            </>);
-        }
-        else if (inputId?.length < 5 && inputId?.length > 0){
-            return (<>
-                아이디는 5자 이상이어야 합니다.</>);
+
+        if (firstInput === false) {
+            return (<></>);
         }
         else {
-            return (<>
-                사용 가능한 아이디입니다.</>);
+            if (inputId?.length === 0) {
+                return (<>
+                    아이디는 필수정보 입니다.
+                </>);
+            }
+            else if (inputId?.length < 5 && inputId?.length > 0){
+                return (<>
+                    아이디는 5자 이상이어야 합니다.</>);
+            }
+            else {
+                return (<>
+                    사용 가능한 아이디입니다.</>);
+            }
         }
+
     }
 
 
@@ -41,7 +49,9 @@ export default function RegisterPage() {
                                     </span>
                                 </label>
                                 <div className={styles.inputIdWrap}>
-                                    <input className={styles.inputId} placeholder="영문, 숫자 5-11자" type="text" maxLength={11} id="inputId" onChange={(e)=>{setInputId(e.target.value)}}></input>
+                                    <input className={styles.inputId} placeholder="영문, 숫자 5-11자" type="text" maxLength={11} id="inputId" onChange={(e)=>{
+                                        setFirstInput(true);
+                                        setInputId(e.target.value)}}></input>
                                     <IdCheckHook></IdCheckHook>
                                 </div>
                                 <div className={styles.inputPasswordArea}>
