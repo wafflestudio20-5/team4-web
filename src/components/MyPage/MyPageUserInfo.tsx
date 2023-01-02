@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { User } from '../../lib/interface';
 import styles from './MyPageUserInfo.module.scss';
-import money from '../../resources/image/saving.png';
+import point from '../../resources/image/saving.png';
 import review from '../../resources/image/write.png';
 
 export interface MyPageUserInfoProps {
@@ -45,8 +45,8 @@ export default function MyPageUserInfo({
             </span>
           </div>
           <div className={styles.bottom}>
-            <Link to="/mypage/money">
-              <img src={money} alt="적립금" />
+            <Link to="/mypage/point">
+              <img src={point} alt="적립금" />
               <span>적립금 {'>'}</span>
               <strong>4,333</strong>
             </Link>
