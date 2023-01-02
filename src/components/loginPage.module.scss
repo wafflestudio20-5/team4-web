@@ -17,7 +17,10 @@
   bottom: 0;
   left: 50%;
   transform: translate(-50%, 0%);
+  font-size: 14px;
   font-family: '-apple-system',HelveticaNeue,Roboto,'Noto Sans KR',helvetica,Gulim,sans-serif;
+  line-height: 1.5;
+  color: #000;
   .loginTextBox {
     width: 385px;
     height: 50px;
@@ -26,10 +29,10 @@
     margin: auto;
     margin-top: 65px;
     .loginTextBox_text {
-      position: fixed;
-      left: 50%;
-      transform: translate(-50%, 0);
-      font-size: 16px;
+      position: relative;
+      top: 50%;
+      transform: translate(0, -50%);
+      text-align: center;
     }
   }
   .content {

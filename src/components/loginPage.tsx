@@ -5,7 +5,7 @@ export default function LoginPage() {
 <div className={styles.middleWhiteBox}>
     <section className={styles.header}>
     <div className={styles.loginTextBox}>
-        <h2 className={styles.loginTextBox_text}>로그인</h2>
+        <div className={styles.loginTextBox_text}>로그인</div>
     </div>
     </section>
     <div className={styles.content}>
@@ -14,7 +14,7 @@ export default function LoginPage() {
                 <span>가입 회원</span>
             </div>
             <div className={styles.buySearchTab}>
-                <span>비회원 주문 조회</span>
+                <span>비회원 구매하기</span>
             </div>
         </div>
         <div className={styles.loginArea}>
