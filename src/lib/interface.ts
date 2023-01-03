@@ -76,15 +76,15 @@ export interface Item {
   name: string;
   brand: string;
   image: string;
-  label?: string;
+  label?: Label;
   oldPrice: number;
   newPrice?: number;
   sale?: number;
   sex?: string;
   rating?: number;
   options?: string[];
-  category: string;
-  subCategory: string;
+  category: Category;
+  subCategory: SubCategory;
 }
 
 /* Will be revised in Sprint 3 */

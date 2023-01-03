@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Session } from '../lib/interface';
+import { Session, Label, Category, SubCategory } from '../lib/interface';
 
 const initialState: Session = {
   user: {
@@ -23,9 +23,9 @@ const initialState: Session = {
           'https://image.msscdn.net/images/goods_img/20220722/2678023/2678023_1_125.jpg',
         oldPrice: 1944000,
         newPrice: 1090000,
-        label: 'boutique',
-        category: 'bag',
-        subCategory: 'crossBag',
+        label: Label.boutique,
+        category: Category.bag,
+        subCategory: SubCategory.crossBag,
       },
       {
         id: 1,
@@ -35,8 +35,8 @@ const initialState: Session = {
           'https://image.msscdn.net/images/goods_img/20221007/2848934/2848934_2_125.jpg',
         oldPrice: 750000,
         rating: 8,
-        category: 'outer',
-        subCategory: 'padding',
+        category: Category.outer,
+        subCategory: SubCategory.padding,
       },
     ],
     shoppingCart: [
@@ -49,9 +49,9 @@ const initialState: Session = {
         oldPrice: 750000,
         newPrice: 285000,
         rating: 9,
-        label: 'boutique',
-        category: 'outer',
-        subCategory: 'jacket',
+        label: Label.boutique,
+        category: Category.outer,
+        subCategory: SubCategory.jacket,
       },
       {
         id: 3,
@@ -61,9 +61,9 @@ const initialState: Session = {
           'https://image.msscdn.net/images/goods_img/20220722/2678023/2678023_1_125.jpg',
         oldPrice: 1944000,
         newPrice: 1090000,
-        label: 'boutique',
-        category: 'bag',
-        subCategory: 'crossBag',
+        label: Label.boutique,
+        category: Category.bag,
+        subCategory: SubCategory.crossBag,
       },
     ],
     recentlyViewed: [
@@ -76,9 +76,9 @@ const initialState: Session = {
         oldPrice: 750000,
         newPrice: 285000,
         rating: 9,
-        label: 'boutique',
-        category: 'outer',
-        subCategory: 'jacket',
+        label: Label.boutique,
+        category: Category.outer,
+        subCategory: SubCategory.jacket,
       },
       {
         id: 6,
@@ -88,9 +88,9 @@ const initialState: Session = {
           'https://image.msscdn.net/images/goods_img/20220722/2678023/2678023_1_125.jpg',
         oldPrice: 1944000,
         newPrice: 1090000,
-        label: 'boutique',
-        category: 'bag',
-        subCategory: 'crossBag',
+        label: Label.boutique,
+        category: Category.bag,
+        subCategory: SubCategory.crossBag,
       },
       {
         id: 7,
@@ -100,8 +100,8 @@ const initialState: Session = {
           'https://image.msscdn.net/images/goods_img/20221007/2848934/2848934_2_125.jpg',
         oldPrice: 750000,
         rating: 8,
-        category: 'outer',
-        subCategory: 'padding',
+        category: Category.outer,
+        subCategory: SubCategory.padding,
       },
       {
         id: 8,
@@ -112,9 +112,9 @@ const initialState: Session = {
         oldPrice: 750000,
         newPrice: 285000,
         rating: 9,
-        label: 'boutique',
-        category: 'outer',
-        subCategory: 'jacket',
+        label: Label.boutique,
+        category: Category.outer,
+        subCategory: SubCategory.jacket,
       },
     ],
   },

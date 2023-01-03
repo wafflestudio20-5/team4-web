@@ -2,7 +2,7 @@ import { Label, displayLabel } from '../../lib/interface';
 import styles from './ItemLabel.module.css';
 
 interface ItemLabelProps {
-  label: string;
+  label: Label;
 }
 
 export default function ItemLabel({ label }: ItemLabelProps) {
