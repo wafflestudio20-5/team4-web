@@ -5,10 +5,10 @@ const initialState: Session = {
   user: {
     /* Initialized for test purposes */
     id: 0,
-    username: 'user_test',
-    nickname: 'LV.1 뉴비_8sd9c1cw',
+    username: '홍길동',
+    nickname: '뉴비_8sd9c1cw',
     reviewCount: 10,
-    registrationDate: '2017-07-21T19:50:28Z',
+    registrationDate: '2020.12.30',
   },
   accessToken: null,
 };

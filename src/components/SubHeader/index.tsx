@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { logout } from '../../store/sessionSlice';
 import { Session } from '../../lib/interface';
-import ChannelHeader from './ChannelHeader';
 import MemberHeader from './MemberHeader';
 
 function SubHeader() {
@@ -21,7 +20,7 @@ function SubHeader() {
 
   return (
     <>
-      <ChannelHeader />
+      {/* <ChannelHeader /> */}
       <MemberHeader user={user} onLogout={onLogout} />
       <Outlet />
     </>

@@ -1,0 +1,115 @@
+.wrapper {
+  background-color: black;
+  color: white;
+  padding: 0 40px 44px 40px;
+  position: relative;
+}
+
+.title {
+  color: inherit;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Musinsa, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 24px;
+  line-height: 52px;
+  padding: 20px 0 24px;
+  text-decoration: none;
+}
+
+.nav {
+  padding-right: 40px;
+  position: absolute;
+  right: 0px;
+  top: 20px;
+  .nav_link {
+    color: inherit;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 22px;
+    margin-left: 32px;
+    padding: 4px 0px;
+  }
+  a {
+    text-decoration: none;
+  }
+  button {
+    background: none;
+    border: none;
+  }
+}
+
+.main {
+  overflow: hidden;
+  padding-left: 40px;
+  .image {
+    border-radius: 100%;
+    float: left;
+    height: 160px;
+    width: 160px;
+  }
+}
+
+.info {
+  float: left;
+  padding-left: 50px;
+}
+
+.name {
+  margin-bottom: 15px;
+  strong {
+    font-size: 58px;
+    line-height: 72px;
+  }
+  a {
+    color: rgb(145, 145, 145);
+    cursor: pointer;
+    margin: 32px 0 0 4px;
+    text-decoration: none;
+  }
+}
+
+.flex {
+  align-items: center;
+  display: flex;
+}
+
+.level {
+  font-family: Musinsa, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 24px;
+  line-height: 36px;
+}
+
+.date {
+  color: rgb(145, 145, 145);
+  font-size: 14px;
+  margin: 4px 0px 0px 8px;
+}
+
+.bottom {
+  display: flex;
+  padding-top: 40px;
+  a {
+    color: inherit;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+    text-decoration: none;
+    width: 180px;
+  }
+  img {
+    filter: invert(100%);
+    height: 38px;
+    width: 38px;
+  }
+  span {
+    font-size: 14px;
+    line-height: 21px;
+    margin: 8px 0px;
+  }
+  strong {
+    font-family: Musinsa, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    font-size: 30px;
+    line-height: 45px;
+  }
+}
