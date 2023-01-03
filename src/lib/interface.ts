@@ -9,6 +9,10 @@ export interface User {
   height?: number;
   weight?: number;
   socialKey?: string;
+  point?: number;
+  purchases?: Item[];
+  shoppingCart?: Item[];
+  recentlyViewed?: Item[];
 }
 
 export interface ApiRegisterParams {
@@ -72,15 +76,15 @@ export interface Item {
   name: string;
   brand: string;
   image: string;
-  label?: Label;
+  label?: string;
   oldPrice: number;
   newPrice?: number;
   sale?: number;
   sex?: string;
   rating?: number;
   options?: string[];
-  category: Category;
-  subCategory: SubCategory;
+  category: string;
+  subCategory: string;
 }
 
 /* Will be revised in Sprint 3 */
