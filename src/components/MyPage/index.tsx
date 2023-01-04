@@ -8,6 +8,7 @@ import MyPageUserInfo, { MyPageUserInfoProps } from './MyPageUserInfo';
 import MyPageNavigation from './MyPageNavigation';
 import MyPageMain from './MyPageMain';
 import MyPageOrder from './MyPageOrder';
+import MyPageViewed from './MyPageViewed';
 import Footer from '../Footer';
 
 function MyPageLayout({ user, onLogout }: MyPageUserInfoProps) {
@@ -58,10 +59,7 @@ function MyPage() {
             path="personal_inquiry"
             element={<div>/mypage/personal_inquiry</div>}
           />
-          <Route
-            path="viewed_goods"
-            element={<div>/mypage/viewed_goods</div>}
-          />
+          <Route path="viewed_goods" element={<MyPageViewed user={user} />} />
         </Route>
       </Routes>
     );

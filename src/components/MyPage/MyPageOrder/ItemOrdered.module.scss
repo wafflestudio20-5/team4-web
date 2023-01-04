@@ -1,0 +1,15 @@
+.grid_order {
+  display: grid;
+  grid-template-columns: 10fr 3fr 3fr 2fr 2fr;
+  width: 100%;
+}
+
+.grid_header {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+  font-size: 16px;
+  height: 52px;
+  justify-content: center;
+  line-height: 48px;
+  vertical-align: middle;
+}
