@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { User } from '../../lib/interface';
+import { User } from '../../../lib/interface';
 import styles from './MyPageUserInfo.module.scss';
 import point from '../../resources/image/saving.png';
 import review from '../../resources/image/write.png';

@@ -1,5 +1,4 @@
-import { User } from '../../lib/interface';
-// import styles from './MyPageMain.module.scss';
+import { User } from '../../../lib/interface';
 
 interface MyPageMainProps {
   user: User;
