@@ -9,6 +9,10 @@ export interface User {
   height?: number;
   weight?: number;
   socialKey?: string;
+  point?: number;
+  purchases?: Item[];
+  shoppingCart?: Item[];
+  recentlyViewed?: Item[];
 }
 
 export interface ApiRegisterParams {

@@ -8,12 +8,14 @@ interface ItemLabelProps {
 export default function ItemLabel({ label }: ItemLabelProps) {
   switch (label) {
     case Label.limited:
-      return <></>;
+      return <div></div>;
     case Label.boutique:
       return <div className={styles.botique}> {displayLabel(label)} </div>;
     case Label.preorder:
-      return <></>;
+      return <div></div>;
     case Label.exclusive:
-      return <></>;
+      return <div></div>;
+    default:
+      throw new Error('Unknown Label: ' + label);
   }
 }

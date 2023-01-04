@@ -6,7 +6,7 @@
 
 */
 
-import { User } from '../../lib/interface';
+import { User } from '../../../lib/interface';
 import styles from './MyPageMain.module.scss';
 
 interface MyPageMainProps {

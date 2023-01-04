@@ -7,6 +7,7 @@ import { Session } from '../../lib/interface';
 import MyPageUserInfo, { MyPageUserInfoProps } from './MyPageUserInfo';
 import MyPageNavigation from './MyPageNavigation';
 import MyPageMain from './MyPageMain';
+import MyPageOrder from './MyPageOrder';
 import Footer from '../Footer';
 
 function MyPageLayout({ user, onLogout }: MyPageUserInfoProps) {
@@ -47,7 +48,7 @@ function MyPage() {
           <Route index element={<MyPageMain user={user} />} />
           <Route path="info" element={<div>/mypage/info</div>} />
           <Route path="point" element={<div>/mypage/point</div>} />
-          <Route path="order" element={<div>/mypage/order</div>} />
+          <Route path="order" element={<MyPageOrder user={user} />} />
           <Route path="review" element={<div>/mypage/review</div>} />
           <Route
             path="item_inquiry"
