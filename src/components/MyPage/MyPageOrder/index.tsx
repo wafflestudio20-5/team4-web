@@ -7,7 +7,6 @@ interface MyPageMainProps {
 }
 
 export default function MyPageOrder({ user }: MyPageMainProps) {
-  console.log(user.purchases);
   return (
     <div className={styles.wrapper}>
       <section id="order">

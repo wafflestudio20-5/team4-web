@@ -8,39 +8,28 @@ interface ItemPreviewProps {
 
 export default function ItemOrdered({ item, idx }: ItemPreviewProps) {
   return (
-    // <div className={styles.itemPreview}>
-    //   <img className={styles.previewImage} src={item.image} alt="상품 이미지" />
-    //   <div className={styles.brand}>{item.brand}</div>
-    //   <div className={styles.name}>{item.name}</div>
-    //   <div className={styles.price}>
-    //     {item.newPrice ? (
-    //       <>
-    //         <em className={styles.realPrice}>
-    //           {item.newPrice?.toLocaleString()}원
-    //         </em>
-    //         <span className={styles.upto}>25%</span>
-    //         <del className={styles.crossedOutPrice}>
-    //           {item.oldPrice.toLocaleString()}원
-    //         </del>
-    //       </>
-    //     ) : (
-    //       <>
-    //         <span className={styles.realPrice}>
-    //           {item.oldPrice.toLocaleString()}원
-    //         </span>
-    //       </>
-    //     )}
-    //   </div>
-    // </div>
     <div className={styles.grid_order}>
       <div className={styles.grid_header}>
-        <img
-          className={styles.previewImage}
-          src={item.image}
-          alt="상품 이미지"
-        />
-        <div>{item.brand}</div>
-        <div>{item.name}</div>
+        <div className={styles.Item}>
+          <div className={styles.ImageDiv}>
+            <img
+              className={styles.previewImage}
+              src={item.image}
+              alt="상품 이미지"
+            />
+          </div>
+          <div className={styles.ItemInfo}>
+            <div className={styles.InfoLine}>
+              <span className={styles.brand}>{item.brand}</span>
+            </div>
+            <div className={styles.InfoLine}>
+              <span className={styles.name}>{item.name}</span>
+            </div>
+            <div className={styles.InfoLine}>
+              <span className={styles.size}>M</span>
+            </div>
+          </div>
+        </div>
       </div>
       <div className={styles.grid_header}>yyyy.mm.dd</div>
       <div className={styles.grid_header}>12345678</div>
@@ -50,7 +39,16 @@ export default function ItemOrdered({ item, idx }: ItemPreviewProps) {
           : item.oldPrice.toLocaleString()}
         원
       </div>
-      <div className={styles.grid_header}>주문 상태</div>
+      <div className={styles.grid_header}>
+        <div className={styles.orderState}>
+          <div className={styles.stateDiv}>입금확인</div>
+          <div className={styles.buttonDiv}>
+            <button>환불 요청</button>
+            <button>교환 요청</button>
+            <button>배송지 변경</button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
