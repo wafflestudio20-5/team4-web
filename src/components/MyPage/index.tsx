@@ -4,16 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { logout } from '../../store/sessionSlice';
 import { Session } from '../../lib/interface';
-import MyPageUserInfo, { MyPageUserInfoProps } from './MyPageUserInfo';
+import MyPageHeader, { MyPageHeaderProps } from './MyPageHeader/';
 import MyPageNavigation from './MyPageNavigation';
 import MyPageMain from './MyPageMain';
 import MyPageOrder from './MyPageOrder';
 import Footer from '../Footer';
 
-function MyPageLayout({ user, onLogout }: MyPageUserInfoProps) {
+function MyPageLayout({ user, onLogout }: MyPageHeaderProps) {
   return (
     <>
-      <MyPageUserInfo user={user} onLogout={onLogout} />
+      <MyPageHeader user={user} onLogout={onLogout} />
       <MyPageNavigation />
       <Outlet />
       <Footer />

@@ -1,19 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { User } from '../../../lib/interface';
-import styles from './MyPageUserInfo.module.scss';
+import styles from './MyPageHeader.module.scss';
 import point from '../../../resources/image/saving.png';
 import review from '../../../resources/image/write.png';
 
-export interface MyPageUserInfoProps {
+export interface MyPageHeaderProps {
   user: User;
   onLogout: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-export default function MyPageUserInfo({
-  user,
-  onLogout,
-}: MyPageUserInfoProps) {
+export default function MyPageHeader({ user, onLogout }: MyPageHeaderProps) {
   return (
     <div className={styles.wrapper}>
       <Link className={styles.title} to="/mypage">
