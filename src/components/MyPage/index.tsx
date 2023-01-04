@@ -7,6 +7,7 @@ import { Session } from '../../lib/interface';
 import MyPageHeader, { MyPageHeaderProps } from './MyPageHeader/';
 import MyPageNavigation from './MyPageNavigation';
 import MyPageMain from './MyPageMain';
+import MyPageInfo from './MyPageInfo';
 import MyPageOrder from './MyPageOrder';
 import Footer from '../Footer';
 
@@ -46,7 +47,7 @@ function MyPage() {
       <Routes>
         <Route element={<MyPageLayout user={user} onLogout={onLogout} />}>
           <Route index element={<MyPageMain user={user} />} />
-          <Route path="info" element={<div>/mypage/info</div>} />
+          <Route path="info" element={<MyPageInfo user={user} />} />
           <Route path="point" element={<div>/mypage/point</div>} />
           <Route path="order" element={<MyPageOrder user={user} />} />
           <Route path="review" element={<div>/mypage/review</div>} />
