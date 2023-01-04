@@ -9,6 +9,7 @@ import MyPageNavigation from './MyPageNavigation';
 import MyPageMain from './MyPageMain';
 import MyPageOrder from './MyPageOrder';
 import MyPageViewed from './MyPageViewed';
+
 import Footer from '../Footer';
 
 function MyPageLayout({ user, onLogout }: MyPageUserInfoProps) {
