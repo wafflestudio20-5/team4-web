@@ -2,7 +2,7 @@ import { useState } from 'react';
 import CategorySideBar from './CategorySideBar';
 import ItemList from './ItemList';
 import styles from './index.module.css';
-import togglebutton from '../../resources/asset/menu.svg';
+import togglebutton from '../../resources/image/menu.svg';
 
 export default function HomePage() {
   const [openCategorySideBar, setopenCategorySideBar] = useState(false);
