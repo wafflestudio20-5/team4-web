@@ -70,7 +70,11 @@ function BasicInfo({ user }: BasicInfoProps) {
   );
 }
 
-function AdditionalInfo() {
+interface AdditionalInfoProps {
+  user: User;
+}
+
+function AdditionalInfo({ user }: AdditionalInfoProps) {
   return (
     <section id="additional-info">
       <header className={styles.title}>
@@ -78,6 +82,28 @@ function AdditionalInfo() {
           추가 회원정보 <span>선택</span>
         </h1>
       </header>
+      <div className={styles.content}>
+        <div id="additional-sex" className={styles.info_grid}>
+          <div className={styles.grid_block}>성별</div>
+          <div className={styles.grid_block}>
+            <strong className={styles.grid_strong}>남자</strong>
+          </div>
+          <div className={styles.grid_block}></div>
+        </div>
+      </div>
+      <div className={styles.content}>
+        <div id="additional-body-size" className={styles.info_grid}>
+          <div className={styles.grid_block}>키/몸무게</div>
+          <div className={styles.grid_block}>
+            <strong className={styles.grid_strong}>
+              {user.height}cm / {user.weight}kg
+            </strong>
+          </div>
+          <div className={styles.grid_block}>
+            <button className={styles.grid_button}>마이 사이즈</button>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
@@ -110,7 +136,7 @@ export default function MyPageInfo({ user }: MyPageInfoProps) {
   return (
     <div className={styles.wrapper}>
       <BasicInfo user={user} />
-      <AdditionalInfo />
+      <AdditionalInfo user={user} />
       <div className={styles.split}>
         <SocialInfo />
         <DescriptionInfo />
