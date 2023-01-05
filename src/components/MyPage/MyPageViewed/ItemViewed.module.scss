@@ -13,6 +13,10 @@
   overflow: hidden;
 }
 
+.previewImage:hover {
+  cursor: pointer;
+}
+
 .brand {
   display: block;
   overflow: hidden;
@@ -20,6 +24,11 @@
   text-overflow: ellipsis;
   font-size: 12px;
   margin: 14px 0 6px 0;
+}
+
+.brand:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .name {
@@ -32,6 +41,11 @@
   word-break: keep-all;
   overflow: hidden;
   margin-bottom: 10px;
+}
+
+.name:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .crossedOutPrice {
