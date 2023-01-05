@@ -12,7 +12,7 @@ function BasicInfo({ user }: BasicInfoProps) {
         <h1>
           기본 회원정보 <span>필수</span>
         </h1>
-        <button>가려진정보 보기</button>
+        <button className={styles.reveal_button}>가려진정보 보기</button>
       </header>
       <div className={styles.content}>
         <div id="basic-image" className={styles.info_grid}>
@@ -138,7 +138,13 @@ function DescriptionInfo() {
     <section id="description-info">
       <header className={styles.title}>
         <h1>자기소개</h1>
+        <button className={styles.edit_button}>변경</button>
       </header>
+      <div className={styles.description_content}>
+        <div className={styles.description_none}>
+          등록된 자기소개가 없습니다.
+        </div>
+      </div>
     </section>
   );
 }
