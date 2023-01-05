@@ -81,3 +81,12 @@ export const useApiItemListFetcher = (category: Category | null) => {
   );
   return f;
 };
+
+export const useApiItemFetcher = (ID: number) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) =>
+      axios.get<Item>(url(`/data/${ID}`), { cancelToken }),
+    []
+  );
+  return f;
+};
