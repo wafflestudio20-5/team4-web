@@ -10,20 +10,25 @@ export default function RegisterPage() {
     const IdCheckHook = () => {
 
 
-        if (firstInputId === false) {
+        if (firstInputId === false)
+        {
             return (<></>);
         }
-        else {
-            if (inputId?.length === 0) {
+        else
+        {
+            if (inputId?.length === 0)
+            {
                 return (<>
                     아이디는 필수정보 입니다.
                 </>);
             }
-            else if (inputId?.length < 5 && inputId?.length > 0){
+            else if (inputId?.length < 5 && inputId?.length > 0)
+            {
                 return (<>
                     아이디는 5자 이상이어야 합니다.</>);
             }
-            else {
+            else
+            {
                 if (regex.test(inputId) === true)
                 {
                     return (<>
@@ -44,10 +49,11 @@ export default function RegisterPage() {
     const [inputPassword, setInputPassword] = useState<string>("");
     const [firstInputPassword, setFirstInputPassword] = useState<boolean>(false);
 
-    const regs = /[a-z|A-Z|0-9|\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]{4}/;
+
     const regEng = /[a-z|A-Z]/;
     const regNum = /[0-9]/;
     const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/;
+    const regRep = /(.)\1{3}/;
 
     const PasswordCheckHook = () => {
         if (firstInputPassword === false)
@@ -65,7 +71,7 @@ export default function RegisterPage() {
             }
             else
             {
-                if (regs.test(inputPassword) === true)
+                if (regRep.test(inputPassword) === true)
                 {
                     return (<>동일문자를 반복해서 4자 이상 사용할 수 없습니다.</>);
                 }
@@ -90,6 +96,33 @@ export default function RegisterPage() {
                 }
             }
         }
+    }
+
+    const [inputRePassword, setInputRePassword] = useState<string>("");
+    const [firstInputRePassword, setFirstInputRePassword] = useState<boolean>(false);
+
+    const RePasswordCheckHook = () => {
+        if (firstInputRePassword === false)
+        {
+            return(<></>);
+        }
+        else
+        {
+            if (inputRePassword.length === 0)
+            {
+                return(<>비밀번호 재확인은 필수정보입니다.</>);
+            }
+            else if (inputPassword === inputRePassword)
+            {
+                return (<></>);
+            }
+            else
+            {
+                return (<>비밀번호가 일치하지 않습니다.</>);
+            }
+
+        }
+
     }
 
 
@@ -127,13 +160,21 @@ export default function RegisterPage() {
                                         onChange={(e)=>{
                                             setFirstInputPassword(true);
                                             setInputPassword(e.target.value);
+                                            console.log(e.target.value);
                                         }}></input>
                                         <PasswordCheckHook></PasswordCheckHook>
                                     </div>
                                 </div>
                                 <div className={styles.inputRepeatArea}>
                                     <div className={styles.inputRepeatWrap}>
-                                        <input className={styles.inputRepeat} placeholder="비밀번호 재입력"></input>
+                                        <input className={styles.inputRepeat} placeholder="비밀번호 재입력" type="password"
+                                        onChange={
+                                            (e)=>{
+                                                setFirstInputRePassword(true);
+                                                setInputRePassword(e.target.value);
+                                            }
+                                        }></input>
+                                        <RePasswordCheckHook></RePasswordCheckHook>
 
                                     </div>
 
