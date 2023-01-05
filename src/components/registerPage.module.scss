@@ -139,12 +139,12 @@
 
             }
           }
-          .inputEmailArea {
+          .inputNickArea {
             height: 119.5px;
             margin-top: 8px;
             background-color: white;
             width: 100%;
-            .inputEmailLabel {
+            .inputNickLabel {
               height: 21px;
               margin-top: 16px;
               margin-bottom: 8px;
@@ -152,7 +152,7 @@
               line-height: 21px;
               font-size: 14px;
               font-family: '-apple-system',HelveticaNeue,Roboto,'Noto Sans KR',helvetica,Gulim,sans-serif;
-              .inputEmailDot {
+              .inputNickDot {
                 display: inline-block;
                 width: 4px;
                 height: 4px;
@@ -164,13 +164,13 @@
                 left: 3px;
               }
             }
-            .inputEmailWrap {
+            .inputNickWrap {
               width: 100%;
               height: 50px;
               box-sizing: border-box;
               border: 1px solid #e5e5e5;
               border-radius: 4px;
-              .inputEmail {
+              .inputNick {
                 width: 100%;
                 height: 48px;
                 box-sizing: border-box;
@@ -178,7 +178,7 @@
                 padding: 0 12px 0 12px;
               }
             }
-            .inputEmailHelper {
+            .inputNickHelper {
               width: 100%;
               height: 16.5px;
               margin-top: 8px;
@@ -224,27 +224,27 @@
               width: 100%;
               margin-bottom: 4px;
               display: inline-block;
-              background-color: gray;
+              background-color: white;
             }
             .checkboxFirst {
               height: 19px;
               margin-top: 12px;
-              background-color: gray;
+              background-color: white;
             }
             .checkboxSecond {
               height: 19px;
               margin-top: 12px;
-              background-color: gray;
+              background-color: white;
             }
             .checkboxThird {
               height: 19px;
               margin-top: 12px;
-              background-color: gray;
+              background-color: white;
             }
             .checkboxFourth {
               height: 19px;
               margin-top: 12px;
-              background-color: gray;
+              background-color: white;
             }
           }
           .signupButtonArea {
@@ -290,6 +290,15 @@
         }
       }
     }
+  }
+  .inDetail {
+    font-size: 13px;
+    line-height: 19px;
+    color: #6e6e6e;
+    text-decoration: underline;
+    cursor: pointer;
+    border: 0;
+    background: 0 0;
   }
 
 }

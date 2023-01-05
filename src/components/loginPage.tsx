@@ -1,5 +1,11 @@
 import styles from './loginPage.module.scss';
+import {useState} from 'react';
+
 export default function LoginPage() {
+
+
+
+
     return (<div className={styles.background}>
 
 <div className={styles.middleWhiteBox}>
@@ -23,7 +29,7 @@ export default function LoginPage() {
                     <input className={styles.idInput} placeholder="아이디"></input>
                 </div>
                 <div className={styles.passwordInputWrap}>
-                    <input className={styles.passwordInput} placeholder="비밀번호"></input>
+                    <input className={styles.passwordInput} placeholder="비밀번호" type="password"></input>
                 </div>
                 <button className={styles.loginButton}>
                     로그인
