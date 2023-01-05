@@ -71,7 +71,7 @@ export default function RegisterPage() {
                                     </span>
                                     </label>
                                     <div className={styles.inputPasswordWrap}>
-                                        <input className={styles.inputPassword} placeholder="숫자, 영문, 특수문자 조합 최소 8자" type="text" maxLength={30} id="inputPassword"></input>
+                                        <input className={styles.inputPassword} placeholder="숫자, 영문, 특수문자 조합 최소 8자" type="password" maxLength={30} id="inputPassword"></input>
                                     </div>
                                 </div>
                                 <div className={styles.inputRepeatArea}>
