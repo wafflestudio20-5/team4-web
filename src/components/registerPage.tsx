@@ -5,6 +5,7 @@ export default function RegisterPage() {
 
     const [inputId, setInputId] = useState<string>("");
     const [firstInput, setFirstInput] = useState<boolean>(false);
+    const regex = /^[a-z|0-9|\_]+$/;
 
     const IdCheckHook = () => {
 
@@ -23,8 +24,17 @@ export default function RegisterPage() {
                     아이디는 5자 이상이어야 합니다.</>);
             }
             else {
-                return (<>
-                    사용 가능한 아이디입니다.</>);
+                if (regex.test(inputId) === true)
+                {
+                    return (<>
+                        사용 가능한 아이디입니다.</>);
+                }
+                else
+                {
+                    return (<>
+                        아이디는 영문소문자, 숫자, 특수기호(_)만 사용 가능합니다.</>);
+                }
+
             }
         }
 
