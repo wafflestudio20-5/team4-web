@@ -4,13 +4,13 @@ export default function RegisterPage() {
 
 
     const [inputId, setInputId] = useState<string>("");
-    const [firstInput, setFirstInput] = useState<boolean>(false);
+    const [firstInputId, setFirstInputId] = useState<boolean>(false);
     const regex = /^[a-z|0-9|\_]+$/;
 
     const IdCheckHook = () => {
 
 
-        if (firstInput === false) {
+        if (firstInputId === false) {
             return (<></>);
         }
         else {
@@ -27,7 +27,8 @@ export default function RegisterPage() {
                 if (regex.test(inputId) === true)
                 {
                     return (<>
-                        사용 가능한 아이디입니다.</>);
+                        사용 가능한 아이디입니다.</>); //중복체크해야함
+
                 }
                 else
                 {
@@ -38,6 +39,57 @@ export default function RegisterPage() {
             }
         }
 
+    }
+
+    const [inputPassword, setInputPassword] = useState<string>("");
+    const [firstInputPassword, setFirstInputPassword] = useState<boolean>(false);
+
+    const regs = /[a-z|A-Z|0-9|\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]{4}/;
+    const regEng = /[a-z|A-Z]/;
+    const regNum = /[0-9]/;
+    const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/;
+
+    const PasswordCheckHook = () => {
+        if (firstInputPassword === false)
+        {
+            return (<></>);
+        }
+        else {
+            if (inputPassword?.length === 0)
+            {
+                return (<>비밀번호는 필수정보 입니다.</>);
+            }
+            else if (inputPassword?.length < 8)
+            {
+                return (<>8~30자 이내로 입력해 주십시오.</>);
+            }
+            else
+            {
+                if (regs.test(inputPassword) === true)
+                {
+                    return (<>동일문자를 반복해서 4자 이상 사용할 수 없습니다.</>);
+                }
+                else
+                {
+                    if (regEng.test(inputPassword) === true && regNum.test(inputPassword) === false && regExp.test(inputPassword) === false)
+                    {
+                        return (<>숫자, 영문 대소문자, 특수문자 중 두가지 이상으로 조합해 주십시오.</>);
+                    }
+                    else if (regEng.test(inputPassword) === false && regNum.test(inputPassword) === true && regExp.test(inputPassword) === true)
+                    {
+                        return (<>숫자, 영문 대소문자, 특수문자 중 두가지 이상으로 조합해 주십시오.</>);
+                    }
+                    else if (regEng.test(inputPassword) === false && regNum.test(inputPassword) === false && regExp.test(inputPassword) === true)
+                    {
+                        return (<>숫자, 영문 대소문자, 특수문자 중 두가지 이상으로 조합해 주십시오.</>);
+                    }
+                    else
+                    {
+                        return (<></>);
+                    }
+                }
+            }
+        }
     }
 
 
@@ -60,8 +112,8 @@ export default function RegisterPage() {
                                 </label>
                                 <div className={styles.inputIdWrap}>
                                     <input className={styles.inputId} placeholder="영문, 숫자 5-11자" type="text" maxLength={11} id="inputId" onChange={(e)=>{
-                                        setFirstInput(true);
-                                        setInputId(e.target.value)}}></input>
+                                        setFirstInputId(true);
+                                        setInputId(e.target.value);}}></input>
                                     <IdCheckHook></IdCheckHook>
                                 </div>
                                 <div className={styles.inputPasswordArea}>
@@ -71,7 +123,12 @@ export default function RegisterPage() {
                                     </span>
                                     </label>
                                     <div className={styles.inputPasswordWrap}>
-                                        <input className={styles.inputPassword} placeholder="숫자, 영문, 특수문자 조합 최소 8자" type="password" maxLength={30} id="inputPassword"></input>
+                                        <input className={styles.inputPassword} placeholder="숫자, 영문, 특수문자 조합 최소 8자" type="password" maxLength={30} id="inputPassword"
+                                        onChange={(e)=>{
+                                            setFirstInputPassword(true);
+                                            setInputPassword(e.target.value);
+                                        }}></input>
+                                        <PasswordCheckHook></PasswordCheckHook>
                                     </div>
                                 </div>
                                 <div className={styles.inputRepeatArea}>
