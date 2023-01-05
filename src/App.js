@@ -14,14 +14,12 @@ function AppRoutes() {
     <Routes>
       <Route element={<Header />}>
         <Route element={<SubHeader />}>
-          <Route element={<Footer />}>
-            <Route element={<CategorySideBar />}>
-              <Route index element={<HomePage />} />
-              <Route path="/cart" element={<></>} />
-              <Route path="/coupon" element={<></>} />
-              <Route path="/customercenter" element={<></>} />
-              <Route path="/goods/:id" element={<DetailPage />} />
-            </Route>
+          <Route element={<CategorySideBar />}>
+            <Route index element={<HomePage />} />
+            <Route path="/cart" element={<></>} />
+            <Route path="/coupon" element={<></>} />
+            <Route path="/customercenter" element={<></>} />
+            <Route path="/goods/:id" element={<DetailPage />} />
           </Route>
         </Route>
         <Route path="/mypage/*" element={<MyPage />} />

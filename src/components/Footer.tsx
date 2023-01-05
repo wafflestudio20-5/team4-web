@@ -4,7 +4,6 @@ import styles from './Footer.module.scss';
 export default function Footer() {
   return (
     <>
-      <Outlet />
       <div className={styles.wrapper}>
         <div className={styles.banner}>
           FASHION WEB MAGAZINE / LIFE STYLE SELECT SHOP
