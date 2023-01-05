@@ -104,3 +104,65 @@
   vertical-align: middle;
   font-weight: bold;
 }
+
+.social_content {
+  padding: 10px 0 59px;
+  ul {
+    margin: 0;
+    padding-left: 0;
+  }
+}
+
+.social_tab {
+  position: relative;
+  padding: 10px 0 10px 167px;
+  list-style: none;
+  font-size: 14px;
+  span {
+    position: absolute;
+    top: 14px;
+    left: 0;
+    line-height: 21px;
+  }
+  input {
+    position: absolute;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    clip: rect(0 0 0 0);
+  }
+}
+
+.label_checked {
+  min-width: 50px;
+  height: 30px;
+  padding: 6px 0;
+  float: left;
+  margin-right: -1px;
+  border: 1px solid #0078ff;
+  border-radius: 4px 0 0 4px;
+  font-size: 12px;
+  box-sizing: border-box;
+  color: white;
+  background: #0078ff;
+  text-align: center;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.label_unchecked {
+  min-width: 50px;
+  height: 30px;
+  padding: 6px 0;
+  float: left;
+  margin-right: -1px;
+  border: 1px solid #ebebeb;
+  border-radius: 0 4px 4px 0;
+  font-size: 12px;
+  box-sizing: border-box;
+  color: #a5a5a5;
+  text-align: center;
+  cursor: pointer;
+  z-index: 1;
+}

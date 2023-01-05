@@ -114,6 +114,21 @@ function SocialInfo() {
       <header className={styles.title}>
         <h1>소셜 로그인 연동</h1>
       </header>
+      <div className={styles.social_content}>
+        <ul>
+          <li className={styles.social_tab}>
+            <span>카카오 로그인 연동</span>
+            <input type="radio" id="onkakao" value="ON" />
+            <label htmlFor="onkakao" className={styles.label_checked}>
+              ON
+            </label>
+            <input type="radio" id="offkakao" value="OFF" />
+            <label htmlFor="offkakao" className={styles.label_unchecked}>
+              OFF
+            </label>
+          </li>
+        </ul>
+      </div>
     </section>
   );
 }
