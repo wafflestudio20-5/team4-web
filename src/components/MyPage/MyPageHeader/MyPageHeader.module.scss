@@ -88,9 +88,8 @@
 .bottom {
   display: flex;
   padding-top: 40px;
-  a {
+  .bottom_block {
     color: inherit;
-    cursor: pointer;
     display: flex;
     flex-direction: column;
     margin-right: 10px;

@@ -42,16 +42,16 @@ export default function MyPageHeader({ user, onLogout }: MyPageHeaderProps) {
             </span>
           </div>
           <div className={styles.bottom}>
-            <Link to="/mypage/point">
+            <div className={styles.bottom_block}>
               <img src={point} alt="적립금" />
-              <span>적립금 {'>'}</span>
+              <span>적립금</span>
               <strong>4,333</strong>
-            </Link>
-            <Link to="/mypage/review">
+            </div>
+            <div className={styles.bottom_block}>
               <img src={review} alt="후기작성" />
-              <span>후기작성 {'>'}</span>
+              <span>구매후기</span>
               <strong>0</strong>
-            </Link>
+            </div>
           </div>
         </div>
       </div>
