@@ -1,6 +1,5 @@
 import styles from './loginPage.module.scss';
 import {useState} from 'react';
-import {useNavigate} from "react-router-dom";
 import {apiLogin} from "../lib/api";
 
 export default function LoginPage() {

@@ -1,13 +1,20 @@
 import styles from './registerPage.module.scss';
 import {useState, useEffect} from 'react';
+import {apiRegister} from "../lib/api";
 export default function RegisterPage() {
+
+    const [idConfirm, setIdConfirm] = useState<boolean>(false);
+    const [passwordConfirm, setPasswordConfirm] = useState<boolean>(false);
+    const [rePasswordConfirm, setRePasswordConfirm] = useState<boolean>(false);
+    const [nicknameConfirm, setNicknameConfirm] = useState<boolean>(false);
+
 
 
     const [inputId, setInputId] = useState<string>("");
     const [firstInputId, setFirstInputId] = useState<boolean>(false);
     const regex = /^[a-z|0-9|\_]+$/;
 
-    const IdCheckHook = () => {
+    const IdCheck = () => {
 
 
         if (firstInputId === false)
@@ -31,6 +38,7 @@ export default function RegisterPage() {
             {
                 if (regex.test(inputId) === true)
                 {
+                    setIdConfirm(true);
                     return (<>
                         사용 가능한 아이디입니다.</>); //중복체크해야함
 
@@ -55,7 +63,7 @@ export default function RegisterPage() {
     const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/;
     const regRep = /(.)\1{3}/;
 
-    const PasswordCheckHook = () => {
+    const PasswordCheck = () => {
         if (firstInputPassword === false)
         {
             return (<></>);
@@ -91,6 +99,7 @@ export default function RegisterPage() {
                     }
                     else
                     {
+                        setPasswordConfirm(true);
                         return (<></>);
                     }
                 }
@@ -101,7 +110,7 @@ export default function RegisterPage() {
     const [inputRePassword, setInputRePassword] = useState<string>("");
     const [firstInputRePassword, setFirstInputRePassword] = useState<boolean>(false);
 
-    const RePasswordCheckHook = () => {
+    const RePasswordCheck = () => {
         if (firstInputRePassword === false)
         {
             return(<></>);
@@ -114,6 +123,7 @@ export default function RegisterPage() {
             }
             else if (inputPassword === inputRePassword)
             {
+                setRePasswordConfirm(true);
                 return (<></>);
             }
             else
@@ -123,6 +133,18 @@ export default function RegisterPage() {
 
         }
 
+    }
+    const [inputNickname, setInputNickname] = useState<string>("");
+    const NicknameCheck = () => {
+        if (inputNickname.length === 0)
+        {
+            return(<>닉네임은 필수정보입니다.</>);
+        }
+        else
+        {
+            setNicknameConfirm(true);
+            return(<></>);
+        }
     }
     const [allCheck, setAllCheck] = useState<boolean>(false);
     const [firstCheck, setFirstCheck] = useState<boolean>(false);
@@ -209,7 +231,7 @@ export default function RegisterPage() {
                                     <input className={styles.inputId} placeholder="영문, 숫자 5-11자" type="text" maxLength={11} id="inputId" onChange={(e)=>{
                                         setFirstInputId(true);
                                         setInputId(e.target.value);}}></input>
-                                    <IdCheckHook></IdCheckHook>
+                                    <IdCheck></IdCheck>
                                 </div>
                                 <div className={styles.inputPasswordArea}>
                                     <label className={styles.inputPasswordLabel} htmlFor="inputPassword">
@@ -224,7 +246,7 @@ export default function RegisterPage() {
                                             setInputPassword(e.target.value);
 
                                         }}></input>
-                                        <PasswordCheckHook></PasswordCheckHook>
+                                        <PasswordCheck></PasswordCheck>
                                     </div>
                                 </div>
                                 <div className={styles.inputRepeatArea}>
@@ -236,7 +258,7 @@ export default function RegisterPage() {
                                                 setInputRePassword(e.target.value);
                                             }
                                         }></input>
-                                        <RePasswordCheckHook></RePasswordCheckHook>
+                                        <RePasswordCheck></RePasswordCheck>
 
                                     </div>
 
@@ -247,11 +269,12 @@ export default function RegisterPage() {
                                         <span className={styles.inputNickDot}></span>
                                     </label>
                                     <div className={styles.inputNickWrap}>
-                                        <input className={styles.inputNick} id="inputNick"></input>
+                                        <input className={styles.inputNick} id="inputNick"
+                                        onChange={(e)=>{
+                                            setInputNickname(e.target.value);
+                                        }}></input>
                                     </div>
-                                    <p className={styles.inputNickHelper}>
-                                        닉네임은 필수정보입니다.
-                                    </p>
+                                    <NicknameCheck></NicknameCheck>
                                 </div>
                                 <div className={styles.inputRecommendIdArea}>
                                     <label className={styles.inputRecommendIdLabel}>

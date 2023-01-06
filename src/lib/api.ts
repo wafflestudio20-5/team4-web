@@ -24,8 +24,12 @@ const url = (path: string, param?: Record<string, string>) =>
   `http://localhost:4000${path}` +
   (param ? '?' + new URLSearchParams(param).toString() : '');
 
-export const apiRegister = (registerInfo: ApiRegisterParams, token: string) => {
-  return axios.post(url('/login'), null);
+export const apiRegister = (username: string, password: string, nickname: string) => {
+  return axios.post<ApiRegisterParams>(url('/api/auth/register'), {
+    username: username,
+    password: password,
+    nickname: nickname,
+  });
 };
 
 export const apiLogin = (username: string, password: string) => {
