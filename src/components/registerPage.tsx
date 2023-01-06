@@ -3,11 +3,6 @@ import {useState, useEffect} from 'react';
 import {apiRegister} from "../lib/api";
 export default function RegisterPage() {
 
-    const [idConfirm, setIdConfirm] = useState<boolean>(false);
-    const [passwordConfirm, setPasswordConfirm] = useState<boolean>(false);
-    const [rePasswordConfirm, setRePasswordConfirm] = useState<boolean>(false);
-    const [nicknameConfirm, setNicknameConfirm] = useState<boolean>(false);
-
 
 
     const [inputId, setInputId] = useState<string>("");
