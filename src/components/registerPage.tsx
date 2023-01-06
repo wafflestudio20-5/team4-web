@@ -213,15 +213,15 @@ export default function RegisterPage() {
                     {
                         if (regEng.test(inputPassword) === true && regNum.test(inputPassword) === false && regExp.test(inputPassword) === false)
                         {
-                            console.log("");
+                            setRegisterButtonActivate(false);
                         }
                         else if (regEng.test(inputPassword) === false && regNum.test(inputPassword) === true && regExp.test(inputPassword) === true)
                         {
-                            console.log("");
+                            setRegisterButtonActivate(false);
                         }
                         else if (regEng.test(inputPassword) === false && regNum.test(inputPassword) === false && regExp.test(inputPassword) === true)
                         {
-                            console.log("");
+                            setRegisterButtonActivate(false);
                         }
                         else
                         {
@@ -231,16 +231,45 @@ export default function RegisterPage() {
                                 {
                                     if (firstCheck === true && secondCheck === true && thirdCheck === true)
                                     {
-                                        console.log("done");
+                                        
                                         setRegisterButtonActivate(true);
                                     }
+                                    else
+                                    {
+                                        setRegisterButtonActivate(false);
+                                    }
                                 }
+                                else
+                                {
+                                    setRegisterButtonActivate(false);
+                                }
+
+                            }
+                            else
+                            {
+                                setRegisterButtonActivate(false);
                             }
                         }
                     }
+                    else
+                    {
+                        setRegisterButtonActivate(false);
+                    }
+                }
+                else
+                {
+                    setRegisterButtonActivate(false);
                 }
             }
+            else
+            {
+                setRegisterButtonActivate(false);
+            }
 
+        }
+        else
+        {
+            setRegisterButtonActivate(false);
         }
 
     }, [inputId, inputPassword, inputRePassword, inputNickname, firstCheck, secondCheck, thirdCheck])
@@ -362,7 +391,7 @@ export default function RegisterPage() {
                                         </button>
                                     </div>
                                     <div className={styles.signupButtonArea}>
-                                        <button className={styles.signupButton}>
+                                        <button className={registerButtonActivate ? styles.signupButtonT : styles.signupButtonF}>
                                             본인인증하고 가입하기
                                         </button>
                                     </div>

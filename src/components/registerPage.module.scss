@@ -246,7 +246,7 @@
             height: 50px;
             margin-top: 40px;
             background-color: white;
-            .signupButton {
+            .signupButtonF{
               display: block;
               width: 100%;
               box-sizing: border-box;
@@ -255,6 +255,18 @@
               border-color: #f3f3f3;
               background-color: #f3f3f3;
               color: #b3b3b3;
+              border: 1px;
+              border-radius: 4px;
+            }
+            .signupButtonT{
+              display: block;
+              width: 100%;
+              box-sizing: border-box;
+              height: 50px;
+              padding: 14px 16px 15px;
+              border-color: #0078ff;
+              background-color: #0078ff;
+              color: #fff;
               border: 1px;
               border-radius: 4px;
             }
