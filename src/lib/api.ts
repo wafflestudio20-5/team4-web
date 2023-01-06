@@ -30,12 +30,12 @@ export const apiRegister = (registerInfo: ApiRegisterParams, token: string) => {
 
 export const apiLogin = (username: string, password: string) => {
   return axios
-      .get<ApiLoginParams>(url('/login'),
-      {data: {
+      .post<ApiLoginParams>(url('/api/auth/login'),
+          {
           username: username,
           password: password,
         }
-      })
+      )
 };
 
 export const apiLogout = (token: string) => {
