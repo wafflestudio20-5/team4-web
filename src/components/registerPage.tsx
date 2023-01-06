@@ -163,7 +163,7 @@ export default function RegisterPage() {
             setThirdCheck(false);
             setFourthCheck(false);
         }
-    };
+    }
 
     const firstBtnEvent =()=>{
         if(firstCheck === false) {
@@ -171,7 +171,7 @@ export default function RegisterPage() {
         }else {
             setFirstCheck(false)
         }
-    };
+    }
 
     const secondBtnEvent =()=>{
         if(secondCheck === false) {
@@ -179,7 +179,7 @@ export default function RegisterPage() {
         }else {
             setSecondCheck(false)
         }
-    };
+    }
 
     const thirdBtnEvent =()=>{
         if(thirdCheck === false) {
@@ -187,7 +187,7 @@ export default function RegisterPage() {
         }else {
             setThirdCheck(false)
         }
-    };
+    }
 
     const fourthBtnEvent =()=>{
         if(fourthCheck === false) {
@@ -195,7 +195,7 @@ export default function RegisterPage() {
         }else {
             setFourthCheck(false)
         }
-    };
+    }
 
     useEffect(()=>{
         if(firstCheck === true && secondCheck === true && thirdCheck === true && fourthCheck === true)
@@ -205,6 +205,51 @@ export default function RegisterPage() {
             setAllCheck(false)
         }
     }, [firstCheck, secondCheck, thirdCheck, fourthCheck])
+
+    const [registerButtonActivate, setRegisterButtonActivate] = useState<boolean>(false);
+    useEffect(()=>{
+        if (inputId.length >= 5)
+        {
+            if (regex.test(inputId) === true)
+            {
+                if (inputPassword.length >= 8)
+                {
+                    if (regRep.test(inputPassword) === false)
+                    {
+                        if (regEng.test(inputPassword) === true && regNum.test(inputPassword) === false && regExp.test(inputPassword) === false)
+                        {
+                            console.log("");
+                        }
+                        else if (regEng.test(inputPassword) === false && regNum.test(inputPassword) === true && regExp.test(inputPassword) === true)
+                        {
+                            console.log("");
+                        }
+                        else if (regEng.test(inputPassword) === false && regNum.test(inputPassword) === false && regExp.test(inputPassword) === true)
+                        {
+                            console.log("");
+                        }
+                        else
+                        {
+                            if (inputPassword === inputRePassword)
+                            {
+                                if (inputNickname.length > 0)
+                                {
+                                    if (firstCheck === true && secondCheck === true && thirdCheck === true)
+                                    {
+                                        console.log("done");
+                                        setRegisterButtonActivate(true);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+    }, [inputId, inputPassword, inputRePassword, inputNickname, firstCheck, secondCheck, thirdCheck])
+
 
 
     return (
