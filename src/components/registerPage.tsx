@@ -38,7 +38,7 @@ export default function RegisterPage() {
             {
                 if (regex.test(inputId) === true)
                 {
-                    setIdConfirm(true);
+
                     return (<>
                         사용 가능한 아이디입니다.</>); //중복체크해야함
 
@@ -99,7 +99,6 @@ export default function RegisterPage() {
                     }
                     else
                     {
-                        setPasswordConfirm(true);
                         return (<></>);
                     }
                 }
@@ -123,7 +122,6 @@ export default function RegisterPage() {
             }
             else if (inputPassword === inputRePassword)
             {
-                setRePasswordConfirm(true);
                 return (<></>);
             }
             else
@@ -142,7 +140,6 @@ export default function RegisterPage() {
         }
         else
         {
-            setNicknameConfirm(true);
             return(<></>);
         }
     }
