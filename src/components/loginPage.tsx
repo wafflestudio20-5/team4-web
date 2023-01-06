@@ -1,13 +1,12 @@
 import styles from './loginPage.module.scss';
 import {useState} from 'react';
+import {useNavigate} from "react-router-dom";
 import {apiLogin} from "../lib/api";
 
 export default function LoginPage() {
 
     const [inputId, setInputId] = useState<string>("");
     const [inputPassword, setInputPassword] = useState<string>("");
-
-
 
 
 
@@ -57,7 +56,9 @@ export default function LoginPage() {
                     </span>
                 </div>
                 <div className={styles.loginSocialArea}>
-                    <div className={styles.loginKakao}>
+                    <div className={styles.loginKakao} onClick={()=>{
+                        window.open("http://localhost:8080/oauth2/authorization/kakao");
+                    }}>
                         <svg className={styles.kakaoLogo}>
                             <path fillRule="evenodd" clipRule="evenodd" d="M15 7C10.029 7 6 10.129 6 13.989C6 16.389 7.559 18.505 9.932 19.764L8.933 23.431C8.845 23.754 9.213 24.013 9.497 23.826L13.874 20.921C14.243 20.958 14.618 20.978 15 20.978C19.971 20.978 24 17.849 24 13.989C24 10.129 19.971 7 15 7Z" fill="black"></path>
                         </svg>
