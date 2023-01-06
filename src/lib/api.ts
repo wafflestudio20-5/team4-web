@@ -18,7 +18,7 @@ Edited By: Lee Sukchan
 
 import axios, { AxiosResponse, CancelToken } from 'axios';
 import { useCallback, useEffect, useState } from 'react';
-import { ApiRegisterParams, Category, Item, Session } from './interface';
+import {ApiLoginParams, ApiRegisterParams, Category, Item, Session} from './interface';
 
 const url = (path: string, param?: Record<string, string>) =>
   `http://localhost:4000${path}` +
@@ -29,7 +29,13 @@ export const apiRegister = (registerInfo: ApiRegisterParams, token: string) => {
 };
 
 export const apiLogin = (username: string, password: string) => {
-  return axios.get<Session>(url('/login'));
+  return axios
+      .get<ApiLoginParams>(url('/login'),
+      {data: {
+          username: username,
+          password: password,
+        }
+      })
 };
 
 export const apiLogout = (token: string) => {

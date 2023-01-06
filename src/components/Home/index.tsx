@@ -4,8 +4,10 @@ import ItemList from './ItemList';
 import styles from './index.module.css';
 import Header from "../Header";
 import NavigationBar from "../NavigationBar";
+import axios from 'axios';
 
 export default function HomePage() {
+  axios.defaults.withCredentials = true;
   const [openCategorySideBar, setopenCategorySideBar] = useState(false);
 
   const handleCategorySideBar = () => {
