@@ -4,7 +4,7 @@ import store from './store';
 import Header from './components/Header/';
 import SubHeader from './components/SubHeader/';
 import HomePage from './components/Home/';
-import LoginPage from './components/Login/loginPage';
+import LoginPage from './components/Login/';
 import RegisterPagePage from './components/Register/index';
 
 function AppRoutes() {
