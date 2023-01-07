@@ -274,6 +274,19 @@ export default function RegisterPage() {
 
     }, [inputId, inputPassword, inputRePassword, inputNickname, firstCheck, secondCheck, thirdCheck])
 
+    const registerButtonFunction = () => {
+        if (registerButtonActivate === true)
+        {
+            apiRegister(inputId, inputPassword, inputNickname)
+                .then((r) => {
+                    console.log(r);
+                })
+                .catch((error)=>{
+                    console.log(error);
+                });
+        }
+    }
+
 
 
     return (
@@ -393,7 +406,8 @@ export default function RegisterPage() {
                                         </button></span>
                                     </div>
                                     <div className={styles.signupButtonArea}>
-                                        <button className={registerButtonActivate ? styles.signupButtonT : styles.signupButtonF}>
+                                        <button className={registerButtonActivate ? styles.signupButtonT : styles.signupButtonF}
+                                        onClick={registerButtonFunction}>
                                             본인인증하고 가입하기
                                         </button>
                                     </div>
