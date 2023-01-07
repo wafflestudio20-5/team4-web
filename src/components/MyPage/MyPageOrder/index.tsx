@@ -2,11 +2,11 @@ import { User } from '../../../lib/interface';
 import ItemOrdered from './ItemOrdered';
 import styles from './MyPageOrder.module.scss';
 
-interface MyPageMainProps {
+interface MyPageOrderProps {
   user: User;
 }
 
-export default function MyPageOrder({ user }: MyPageMainProps) {
+export default function MyPageOrder({ user }: MyPageOrderProps) {
   return (
     <div className={styles.wrapper}>
       <section id="order">
@@ -35,11 +35,9 @@ export default function MyPageOrder({ user }: MyPageMainProps) {
           <div className={styles.grid_header}>주문 상태</div>
         </div>
         {user.purchases ? (
-          user.purchases.map((item, idx) => (
-            <ItemOrdered item={item} idx={idx} />
-          ))
+          user.purchases.map((item) => <ItemOrdered item={item} />)
         ) : (
-          <div className={styles.none}>dd</div>
+          <div className={styles.none}>주문 목록이 없습니다.</div>
         )}
       </section>
     </div>

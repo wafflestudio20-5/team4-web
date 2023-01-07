@@ -2,12 +2,11 @@ import styles from './ItemViewed.module.scss';
 import { Item } from '../../../lib/interface';
 import { useNavigate } from 'react-router-dom';
 
-interface ItemPreviewProps {
+interface ItemViewedProps {
   item: Item;
-  idx: number;
 }
 
-export default function ItemViewed({ item, idx }: ItemPreviewProps) {
+export default function ItemViewed({ item }: ItemViewedProps) {
   const navigate = useNavigate();
 
   return (

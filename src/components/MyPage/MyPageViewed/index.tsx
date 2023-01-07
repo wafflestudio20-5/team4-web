@@ -2,11 +2,11 @@ import { User } from '../../../lib/interface';
 import styles from './MyPageViewed.module.scss';
 import ItemViewed from './ItemViewed';
 
-interface MyPageMainProps {
+interface MyPageViewedProps {
   user: User;
 }
 
-export default function MyPageViewed({ user }: MyPageMainProps) {
+export default function MyPageViewed({ user }: MyPageViewedProps) {
   return (
     <div className={styles.wrapper}>
       <section id="order">
@@ -15,9 +15,7 @@ export default function MyPageViewed({ user }: MyPageMainProps) {
         </header>
         <ul className={styles.myRecent}>
           {user.recentlyViewed ? (
-            user.recentlyViewed?.map((item, idx) => (
-              <ItemViewed item={item} idx={idx} />
-            ))
+            user.recentlyViewed?.map((item) => <ItemViewed item={item} />)
           ) : (
             <div className={styles.none}>최근 구매내역이 없습니다.</div>
           )}
