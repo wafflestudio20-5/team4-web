@@ -4,8 +4,8 @@ import store from './store';
 import Header from './components/Header/';
 import SubHeader from './components/SubHeader/';
 import HomePage from './components/Home/';
-import LoginPage from './components/loginPage';
-import RegisterPage from './components/registerPage';
+import LoginPage from './components/Login/loginPage';
+import RegisterPage from './components/Register/registerPage';
 
 function AppRoutes() {
   return (

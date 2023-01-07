@@ -1,6 +1,6 @@
 import styles from './registerPage.module.scss';
 import {useState, useEffect} from 'react';
-import {apiRegister} from "../lib/api";
+import {apiRegister} from "../../lib/api";
 export default function RegisterPage() {
 
 
