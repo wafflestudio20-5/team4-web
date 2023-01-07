@@ -28,6 +28,7 @@ export default function ItemViewed({ item }: ItemViewedProps) {
       >
         {item.name}
       </div>
+
       <div className={styles.price}>
         {item.newPrice ? (
           <>

@@ -6,6 +6,7 @@ interface ItemOrderedProps {
 }
 
 export default function ItemOrdered({ item }: ItemOrderedProps) {
+
   return (
     <div className={styles.grid_order}>
       <div className={styles.grid_header}>
