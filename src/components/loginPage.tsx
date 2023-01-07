@@ -7,6 +7,8 @@ export default function LoginPage() {
 
     const [inputId, setInputId] = useState<string>("");
     const [inputPassword, setInputPassword] = useState<string>("");
+    const navigate = useNavigate();
+
 
 
 
@@ -77,7 +79,11 @@ export default function LoginPage() {
                     <span className={styles.loginBottomText}>
                         가입만 해도 즉시 15% 할인
                     </span>
-                    <span className={styles.loginBottomButton}>
+                    <span className={styles.loginBottomButton} onClick={
+                        ()=>{
+                            navigate("/register");
+                        }
+                    }>
                         회원가입
                     </span>
                 </div>
