@@ -231,7 +231,7 @@ export default function RegisterPage() {
                                 {
                                     if (firstCheck === true && secondCheck === true && thirdCheck === true)
                                     {
-                                        
+
                                         setRegisterButtonActivate(true);
                                     }
                                     else
@@ -352,43 +352,45 @@ export default function RegisterPage() {
                                 </div>
                                 <div className={styles.agreementForm}>
                                     <div className={styles.checkboxAll}>
-                                        <input type="checkbox" id="checkboxAll" checked={allCheck} onChange={allBtnEvent}></input>
-                                        <label htmlFor="checkboxAll">
+                                        <input type="checkbox" id="checkboxAll" checked={allCheck} onChange={allBtnEvent} className={styles.allCheckButton}></input>
+                                        <label htmlFor="checkboxAll" className={styles.allCheckText}>
                                             약관 전체 동의하기
                                         </label>
                                     </div>
-                                    <div className={styles.checkboxFirst}>
-                                        <input type="checkbox" id="checkboxFirst" checked={firstCheck} onChange={firstBtnEvent}></input>
+                                    <div className={styles.checkbox}>
+                                        <input type="checkbox" id="checkboxFirst" checked={firstCheck} onChange={firstBtnEvent} className={styles.oneCheckButton}></input>
+                                        <span className={styles.oneCheckText}>
                                         <label htmlFor="checkboxFirst">
-                                            [필수] 개인정보 수집 및 이용 동의
+                                            [필수]개인정보 수집 및 이용 동의
                                         </label>
                                         <button className={styles.inDetail}>
                                             자세히
                                         </button>
+                                        </span>
                                     </div>
-                                    <div className={styles.checkboxSecond}>
-                                        <input type="checkbox" id="checkboxSecond" checked={secondCheck} onChange={secondBtnEvent}></input>
-                                        <label htmlFor="checkboxSecond">
-                                            [필수] 무신사, 무신사 스토어 이용 약관
+                                    <div className={styles.checkbox}>
+                                        <input type="checkbox" id="checkboxSecond" checked={secondCheck} onChange={secondBtnEvent} className={styles.oneCheckButton}></input>
+                                        <span className={styles.oneCheckText}><label htmlFor="checkboxSecond">
+                                            [필수]무신사, 무신사 스토어 이용 약관
                                         </label>
                                         <button className={styles.inDetail}>
                                             자세히
-                                        </button>
+                                        </button></span>
                                     </div>
-                                    <div className={styles.checkboxThird}>
-                                        <input type="checkbox" id="checkboxThird" checked={thirdCheck} onChange={thirdBtnEvent}></input>
-                                        <label htmlFor="checkboxThird">
-                                            [필수] 만 14세 미만 가입 제한
-                                        </label>
+                                    <div className={styles.checkbox}>
+                                        <input type="checkbox" id="checkboxThird" checked={thirdCheck} onChange={thirdBtnEvent} className={styles.oneCheckButton}></input>
+                                        <span className={styles.oneCheckText}><label htmlFor="checkboxThird">
+                                            [필수]만 14세 미만 가입 제한
+                                        </label></span>
                                     </div>
-                                    <div className={styles.checkboxFourth}>
-                                        <input type="checkbox" id="checkboxFourth" checked={fourthCheck} onChange={fourthBtnEvent}></input>
-                                        <label htmlFor="checkboxFourth">
-                                            [선택] 마케팅 활용 및 광고성 정보 수신 동의
+                                    <div className={styles.checkbox}>
+                                        <input type="checkbox" id="checkboxFourth" checked={fourthCheck} onChange={fourthBtnEvent} className={styles.oneCheckButton}></input>
+                                        <span className={styles.oneCheckText}><label htmlFor="checkboxFourth">
+                                            [선택]마케팅 활용 및 광고성 정보 수신 동의
                                         </label>
                                         <button className={styles.inDetail}>
                                             자세히
-                                        </button>
+                                        </button></span>
                                     </div>
                                     <div className={styles.signupButtonArea}>
                                         <button className={registerButtonActivate ? styles.signupButtonT : styles.signupButtonF}>

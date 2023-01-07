@@ -213,33 +213,49 @@
             width: 100%;
             height: 152px;
             margin-top: 40px;
-            background-color: skyblue;
+            background-color: white;
             .checkboxAll {
               height: 24px;
               width: 100%;
               margin-bottom: 4px;
               display: inline-block;
               background-color: white;
+              font-size: 14px;
+              font-family: Gulim;
+              font-weight: bold;
+
+
+              .allCheckButton {
+                width: 20px;
+                height: 20px;
+                border: 1px solid #999;
+                background-color: #F1F1F1;
+                cursor: pointer;
+              }
+              .allCheckText {
+                vertical-align: 40%;
+              }
             }
-            .checkboxFirst {
+            .checkbox {
               height: 19px;
               margin-top: 12px;
               background-color: white;
-            }
-            .checkboxSecond {
-              height: 19px;
-              margin-top: 12px;
-              background-color: white;
-            }
-            .checkboxThird {
-              height: 19px;
-              margin-top: 12px;
-              background-color: white;
-            }
-            .checkboxFourth {
-              height: 19px;
-              margin-top: 12px;
-              background-color: white;
+              font-size: 13px;
+              line-height: 19px;
+              color: #6e6e6e;
+              font-family: Gulim;
+              .oneCheckButton {
+                width: 17px;
+                height: 17px;
+                border: 1px solid #999;
+                background-color: #F1F1F1;
+                cursor: pointer;
+                position: relative;
+                bottom: 3px;
+              }
+              .oneCheckText {
+                vertical-align: 40%;
+              }
             }
           }
           .signupButtonArea {
@@ -306,6 +322,7 @@
     cursor: pointer;
     border: 0;
     background: 0 0;
+    font-family: Gulim;
   }
 
 }
