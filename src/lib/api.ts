@@ -18,13 +18,17 @@ Edited By: Lee Sukchan
 
 import axios, { AxiosResponse, CancelToken } from 'axios';
 import { useCallback, useEffect, useState } from 'react';
-import {ApiLoginParams, ApiRegisterParams, Category, Item, Session} from './interface';
+import { ApiLoginParams, ApiRegisterParams, Category, Item } from './interface';
 
 const url = (path: string, param?: Record<string, string>) =>
   `http://localhost:4000${path}` +
   (param ? '?' + new URLSearchParams(param).toString() : '');
 
-export const apiRegister = (username: string, password: string, nickname: string) => {
+export const apiRegister = (
+  username: string,
+  password: string,
+  nickname: string
+) => {
   return axios.post<ApiRegisterParams>(url('/api/auth/register'), {
     username: username,
     password: password,
@@ -33,13 +37,10 @@ export const apiRegister = (username: string, password: string, nickname: string
 };
 
 export const apiLogin = (username: string, password: string) => {
-  return axios
-      .post<ApiLoginParams>(url('/api/auth/login'),
-          {
-          username: username,
-          password: password,
-        }
-      )
+  return axios.post<ApiLoginParams>(url('/api/auth/login'), {
+    username: username,
+    password: password,
+  });
 };
 
 export const apiLogout = (token: string) => {

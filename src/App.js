@@ -5,6 +5,8 @@ import Header from './components/Header/';
 import SubHeader from './components/SubHeader/';
 import HomePage from './components/Home/';
 import MyPage from './components/MyPage/';
+import LoginPage from './components/Login/';
+import RegisterPage from './components/Register';
 
 function AppRoutes() {
   return (
@@ -18,8 +20,8 @@ function AppRoutes() {
         </Route>
         <Route path="/mypage/*" element={<MyPage />} />
       </Route>
-      <Route path="/login" element={<></>} />
-      <Route path="/register" element={<></>} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
     </Routes>
   );
 }
