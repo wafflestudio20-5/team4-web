@@ -18,7 +18,7 @@ interface RegisterPageProps {
     setFirstInputPassword: (x: boolean) => void;
     PasswordCheck: () => {message: string};
     setFirstInputRePassword: (x: boolean) => void;
-    RePasswordCheck: () => JSX.Element;
+    RePasswordCheck: () => {message: string};
     NicknameCheck: () => JSX.Element;
     allCheck: boolean;
     allBtnEvent: () => void;
@@ -90,7 +90,7 @@ export default function RegisterPage({setFirstInputId, IdCheck,
                                                 onChange(e);
                                             }
                                         }></input>
-                                        <RePasswordCheck></RePasswordCheck>
+                                        {RePasswordCheck().message}
 
                                     </div>
 

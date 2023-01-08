@@ -107,21 +107,21 @@ function RegisterPagePage() {
     const RePasswordCheck = () => {
         if (firstInputRePassword === false)
         {
-            return(<></>);
+            return {message: ""};
         }
         else
         {
             if (input.repassword.length === 0)
             {
-                return(<>비밀번호 재확인은 필수정보입니다.</>);
+                return {message: "비밀번호 재확인은 필수정보입니다."};
             }
             else if (input.password === input.repassword)
             {
-                return (<></>);
+                return {message: ""};
             }
             else
             {
-                return (<>비밀번호가 일치하지 않습니다.</>);
+                return {message: "비밀번호가 일치하지 않습니다."};
             }
 
         }
