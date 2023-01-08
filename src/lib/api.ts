@@ -18,46 +18,41 @@ Edited By: Lee Sukchan
 
 import axios, { AxiosResponse, CancelToken } from 'axios';
 import { useCallback, useEffect, useState } from 'react';
-import { ApiLoginParams, ApiRegisterParams, Category, Item } from './interface';
+import { Category, Item } from './interface';
 
-const url = (path: string, param?: Record<string, string>) =>
-  `http://localhost:4000${path}` +
-  (param ? '?' + new URLSearchParams(param).toString() : '');
+axios.defaults.baseURL = 'http://localhost:4000';
+axios.defaults.withCredentials = true;
+
+const auth = (token: string) => ({ Authorization: `Bearer ${token}` });
 
 export const apiRegister = (
   username: string,
   password: string,
   nickname: string
-) => {
-  return axios.post<ApiRegisterParams>(url('/api/auth/register'), {
-    username: username,
-    password: password,
-    nickname: nickname,
+) =>
+  axios.post('/api/auth/register', {
+    username,
+    password,
+    nickname,
   });
-};
 
-export const apiLogin = (username: string, password: string) => {
-  return axios.post<ApiLoginParams>(url('/api/auth/login'), {
-    username: username,
-    password: password,
+export const apiLogin = (username: string, password: string) =>
+  axios.post<{ accessToken: string }>('/api/auth/login', {
+    username,
+    password,
   });
-};
 
-export const apiLogout = (token: string) => {
-  return axios.post(url('/login'), null);
-};
+export const apiLogout = (token: string) =>
+  axios.post('/api/auth/logout', null, { headers: auth(token) });
 
-export const apiRefresh = () => {
-  return axios.get<{ accessToken: string }>(url('/login/accessToken'));
-};
+export const apiRefresh = () =>
+  axios.post<{ accessToken: string }>('/api/auth/refresh');
 
-export const apiCheckUsername = () => {
-  return axios.get<{ duplicate: boolean }>(url('/check'));
-};
+export const apiCheckUsername = (username: string) =>
+  axios.post<{ isUnique: boolean }>('/api/auth/username', { username });
 
-export const apiCheckNickname = () => {
-  return axios.get<{ duplicate: boolean }>(url('/check'));
-};
+export const apiCheckNickname = (nickname: string) =>
+  axios.post<{ isUnique: boolean }>('/api/auth/nickname', { nickname });
 
 export function useApiData<T>(
   fetch: ((cancel: CancelToken) => Promise<AxiosResponse<T>>) | null
@@ -84,11 +79,23 @@ export function useApiData<T>(
   return { data, loading, error };
 }
 
+export const useApiItemFetcher = (id: number | null) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) =>
+      axios.get<Item>(`/api/item/${id}`, { cancelToken }),
+    [id]
+  );
+  return id === null ? null : f;
+};
+
 export const useApiItemListFetcher = (category: Category | null) => {
   const f = useCallback(
     (cancelToken: CancelToken) =>
-      axios.get<Item[]>(url('/data'), { cancelToken }),
-    []
+      axios.get<Item[]>('/api/items', {
+        params: { category: category ? category : undefined },
+        cancelToken,
+      }),
+    [category]
   );
   return f;
 };
