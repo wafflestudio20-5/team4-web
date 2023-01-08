@@ -3,36 +3,7 @@
   "login": {
     "accessToken": "Login Success. This is an access token."
   },
-  "logout": [
-    {
-      "apiId": "auth",
-      "id": 1
-    },
-    {
-      "apiId": "auth",
-      "id": 2
-    },
-    {
-      "apiId": "auth",
-      "id": 3
-    },
-    {
-      "apiId": "auth",
-      "id": 4
-    },
-    {
-      "apiId": "auth",
-      "id": 5
-    },
-    {
-      "apiId": "auth",
-      "id": 6
-    },
-    {
-      "apiId": "auth",
-      "id": 7
-    }
-  ],
+  "logout": {},
   "refresh": {
     "accessToken": "Refresh Success. This is an access token."
   },

@@ -6,7 +6,7 @@ A mock-up json-server can be opened locally by typing
 "json-server ./data.json --port 4000" on terminal.
 
 See if the server is successfully opened in the following link:
-"https:/localhost:4000/data"
+"https:/localhost:4000/items"
 
 If this doesn't work, (re)install json-server by typing
 "npm install -g json-server" on terminal.
@@ -40,7 +40,12 @@ export const apiLogin = (data: LoginParams) =>
   axios.get<{ accessToken: string }>('/login');
 
 export const apiLogout = (token: string) =>
+  /*
+  json-server 사용을 위해 GET 메소드로 임시 교체
+
   axios.post('/api/auth/logout', null, { headers: auth(token) });
+  */
+  axios.get('/logout');
 
 export const apiRefresh = () =>
   /*
