@@ -1,4 +1,8 @@
+import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState, AppDispatch } from './store';
+import { postRefresh } from './store/slices/session';
 import Header from './components/Header/';
 import SubHeader from './components/SubHeader/';
 import HomePage from './components/Home/';
@@ -6,7 +10,7 @@ import MyPage from './components/MyPage/';
 import LoginPage from './components/Login/';
 import RegisterPage from './components/Register';
 
-export default function App() {
+function AppRoutes() {
   return (
     <Routes>
       <Route element={<Header />}>
@@ -22,4 +26,13 @@ export default function App() {
       <Route path="/register" element={<RegisterPage />} />
     </Routes>
   );
+}
+
+export default function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(postRefresh());
+  });
+
+  return <AppRoutes />;
 }

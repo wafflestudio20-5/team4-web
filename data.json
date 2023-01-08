@@ -1,19 +1,64 @@
 {
-  "/api/auth/register": [],
-  "/api/auth/login": {
+  "register": [],
+  "login": {
     "accessToken": "Login Success. This is an access token."
   },
-  "/api/auth/logout": [],
-  "/api/auth/refresh": {
+  "logout": [
+    {
+      "apiId": "auth",
+      "id": 1
+    },
+    {
+      "apiId": "auth",
+      "id": 2
+    },
+    {
+      "apiId": "auth",
+      "id": 3
+    },
+    {
+      "apiId": "auth",
+      "id": 4
+    },
+    {
+      "apiId": "auth",
+      "id": 5
+    },
+    {
+      "apiId": "auth",
+      "id": 6
+    },
+    {
+      "apiId": "auth",
+      "id": 7
+    }
+  ],
+  "refresh": {
     "accessToken": "Refresh Success. This is an access token."
   },
-  "/api/auth/username": {
+  "username": {
     "isUnique": true
   },
-  "/api/auth/nickname": {
+  "nickname": {
     "isUnique": true
   },
-  "/api/items": {
+  "me": {
+    "user": {
+      "id": 0,
+      "image": "https://image.msscdn.net/mfile_s01/_simbols/_basic/u.png",
+      "point": 50000,
+      "username": "admin",
+      "nickname": "user_admin",
+      "reviewCount": 0,
+      "description": "테스트를 위한 가상 어드민 유저입니다.",
+      "registrationDate": "2023-01-08T11:58:20.551705",
+      "sex": "male",
+      "height": 170,
+      "weight": 70,
+      "socialKey": "kakao"
+    }
+  },
+  "items": {
     "items": [
       {
         "id": 0,

@@ -11,48 +11,53 @@ See if the server is successfully opened in the following link:
 If this doesn't work, (re)install json-server by typing
 "npm install -g json-server" on terminal.
 
-Last edited: 2022/12/27 17:34
-Edited By: Lee Sukchan
+*** All url paths should later be revised. ***
+
+Last edited: 2023/01/08 22:36
+Edited by: Lee Sukchan
 
 */
 
 import axios, { AxiosResponse, CancelToken } from 'axios';
 import { useCallback, useEffect, useState } from 'react';
-import { Category, Item } from './interface';
+import { User, Item, Category } from './interface';
+import { RegisterParams, LoginParams } from './params';
 
 axios.defaults.baseURL = 'http://localhost:4000';
 axios.defaults.withCredentials = true;
 
 const auth = (token: string) => ({ Authorization: `Bearer ${token}` });
 
-export const apiRegister = (
-  username: string,
-  password: string,
-  nickname: string
-) =>
-  axios.post('/api/auth/register', {
-    username,
-    password,
-    nickname,
-  });
+export const apiRegister = (data: RegisterParams) =>
+  axios.post('/register', data);
 
-export const apiLogin = (username: string, password: string) =>
-  axios.post<{ accessToken: string }>('/api/auth/login', {
-    username,
-    password,
-  });
+export const apiLogin = (data: LoginParams) =>
+  /*
+  json-server 사용을 위해 GET 메소드로 임시 교체
+  
+  axios.post<{ accessToken: string }>('/api/auth/login', data); 
+  */
+  axios.get<{ accessToken: string }>('/login');
 
 export const apiLogout = (token: string) =>
   axios.post('/api/auth/logout', null, { headers: auth(token) });
 
 export const apiRefresh = () =>
+  /*
+  json-server 사용을 위해 GET 메소드로 임시 교체
+  
   axios.post<{ accessToken: string }>('/api/auth/refresh');
+  */
+  axios.get<{ accessToken: string }>('/refresh');
 
 export const apiCheckUsername = (username: string) =>
-  axios.post<{ isUnique: boolean }>('/api/auth/username', { username });
+  axios.post<{ isUnique: boolean }>('/username', { username });
 
 export const apiCheckNickname = (nickname: string) =>
-  axios.post<{ isUnique: boolean }>('/api/auth/nickname', { nickname });
+  axios.post<{ isUnique: boolean }>('/nickname', { nickname });
+
+export const apiGetMyInfo = (token: string) =>
+  axios.get<{ user: User }>('/me', { headers: auth(token) });
 
 export function useApiData<T>(
   fetch: ((cancel: CancelToken) => Promise<AxiosResponse<T>>) | null
@@ -91,7 +96,7 @@ export const useApiItemFetcher = (id: number | null) => {
 export const useApiItemListFetcher = (category: Category | null) => {
   const f = useCallback(
     (cancelToken: CancelToken) =>
-      axios.get<{ items: Item[] }>('/api/items', {
+      axios.get<{ items: Item[] }>('/items', {
         params: { category: category ? category : undefined },
         cancelToken,
       }),

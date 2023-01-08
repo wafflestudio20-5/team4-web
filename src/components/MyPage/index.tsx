@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { Route, Routes, Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { logout } from '../../store/sessionSlice';
+import { RootState, AppDispatch } from '../../store';
+import { postLogout } from '../../store/slices/session';
 import { Session } from '../../lib/interface';
 import MyPageUserInfo, { MyPageUserInfoProps } from './MyPageUserInfo';
 import MyPageNavigation from './MyPageNavigation';
@@ -24,16 +24,16 @@ function MyPageLayout({ user, onLogout }: MyPageUserInfoProps) {
 function MyPage() {
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const session: Session = useSelector((state: RootState) => {
     return state.session;
   });
 
-  const { user } = session;
+  const { user, accessToken } = session;
 
-  const onLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const onLogout = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    dispatch(logout(null));
+    if (accessToken) await dispatch(postLogout(accessToken));
   };
 
   /* Redirection to HomePage */

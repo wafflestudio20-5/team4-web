@@ -1,10 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ApiLoginParams } from '../../lib/interface';
+import { LoginParams } from '../../lib/params';
 import styles from './LoginPageLayout.module.scss';
 
 interface LoginFormProps {
-  input: ApiLoginParams;
+  input: LoginParams;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onLogin: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
@@ -107,7 +107,7 @@ function LoginBottom() {
 }
 
 interface LoginPageLayoutProps {
-  input: ApiLoginParams;
+  input: LoginParams;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onLogin: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onSocialLogin: () => void;
