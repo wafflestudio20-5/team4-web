@@ -1,8 +1,8 @@
-import styles from './ItemList.module.css';
-import { Item, Category, displayCategory } from '../../lib/interface';
-import { useApiData, useApiItemListFetcher } from '../../lib/api';
-import ItemPreview from './ItemPreview';
 import { useState } from 'react';
+import { useApiData, useApiItemListFetcher } from '../../lib/api';
+import { Item, Category, displayCategory } from '../../lib/interface';
+import ItemPreview from './ItemPreview';
+import styles from './ItemList.module.css';
 
 interface ItemPreviewListProps {
   items: Item[] | null;

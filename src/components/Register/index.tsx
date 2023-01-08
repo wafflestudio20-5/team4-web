@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import RegisterPage from './registerPage';
+import { useEffect, useState } from 'react';
 import { apiRegister } from '../../lib/api';
+import RegisterPage from './registerPage';
 
 function RegisterPagePage() {
   const [inputId, setInputId] = useState<string>('');

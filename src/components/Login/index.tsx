@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootState, AppDispatch } from '../../store';
 import { postLogin } from '../../store/slices/session';
-import { Session } from '../../lib/interface';
 import { LoginParams } from '../../lib/params';
+import { Session } from '../../lib/interface';
 import LoginPageLayout from './LoginPageLayout';
 
 export default function LoginPage() {

@@ -1,11 +1,11 @@
-import styles from './CategorySideBar.module.css';
+import { useState } from 'react';
 import {
   Category,
   SubCategory,
   displayCategory,
   displaySubCategory,
 } from '../../lib/interface';
-import { useState } from 'react';
+import styles from './CategorySideBar.module.css';
 
 enum Best {
   best = 'best',
