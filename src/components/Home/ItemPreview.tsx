@@ -1,7 +1,7 @@
 import styles from './ItemPreview.module.css';
 import { Item } from '../../lib/interface';
 import ItemLabel from './ItemLabel';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface ItemPreviewProps {
   item: Item;

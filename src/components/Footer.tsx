@@ -1,4 +1,3 @@
-import { Outlet } from 'react-router-dom';
 import styles from './Footer.module.scss';
 
 export default function Footer() {

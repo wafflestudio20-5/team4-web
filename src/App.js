@@ -7,7 +7,6 @@ import HomePage from './components/Home/';
 import MyPage from './components/MyPage/';
 import DetailPage from './components/DetailPage';
 import CategorySideBar from './components/CategorySideBar';
-import Footer from './components/Footer';
 
 function AppRoutes() {
   return (
