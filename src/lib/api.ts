@@ -82,7 +82,7 @@ export function useApiData<T>(
 export const useApiItemFetcher = (id: number | null) => {
   const f = useCallback(
     (cancelToken: CancelToken) =>
-      axios.get<Item>(`/api/item/${id}`, { cancelToken }),
+      axios.get<{ item: Item }>(`/api/item/${id}`, { cancelToken }),
     [id]
   );
   return id === null ? null : f;
@@ -91,7 +91,7 @@ export const useApiItemFetcher = (id: number | null) => {
 export const useApiItemListFetcher = (category: Category | null) => {
   const f = useCallback(
     (cancelToken: CancelToken) =>
-      axios.get<Item[]>('/api/items', {
+      axios.get<{ items: Item[] }>('/api/items', {
         params: { category: category ? category : undefined },
         cancelToken,
       }),

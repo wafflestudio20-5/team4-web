@@ -26,12 +26,12 @@ export interface Item {
   image: string;
   rating: number;
   oldPrice: number;
-  category: Category;
-  subCategory: SubCategory;
   sale?: number;
-  label?: Label;
   options?: string[];
   newPrice?: number;
+  label?: Label;
+  category: Category;
+  subCategory: SubCategory;
 }
 
 export interface Purchase {
