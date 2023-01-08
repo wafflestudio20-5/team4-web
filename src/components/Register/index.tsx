@@ -61,40 +61,40 @@ function RegisterPagePage() {
     const PasswordCheck = () => {
         if (firstInputPassword === false)
         {
-            return (<></>);
+            return {message: ""};
         }
         else {
             if (input.password?.length === 0)
             {
-                return (<>비밀번호는 필수정보 입니다.</>);
+                return {message: "비밀번호는 필수정보 입니다."};
             }
             else if (input.password?.length < 8)
             {
-                return (<>8~30자 이내로 입력해 주십시오.</>);
+                return {message: "8~30자 이내로 입력해 주십시오."};
             }
             else
             {
                 if (regRep.test(input.password) === true)
                 {
-                    return (<>동일문자를 반복해서 4자 이상 사용할 수 없습니다.</>);
+                    return {message: "동일문자를 반복해서 4자 이상 사용할 수 없습니다."};
                 }
                 else
                 {
                     if (regEng.test(input.password) === true && regNum.test(input.password) === false && regExp.test(input.password) === false)
                     {
-                        return (<>숫자, 영문 대소문자, 특수문자 중 두가지 이상으로 조합해 주십시오.</>);
+                        return {message: "숫자, 영문 대소문자, 특수문자 중 두가지 이상으로 조합해 주십시오."};
                     }
                     else if (regEng.test(input.password) === false && regNum.test(input.password) === true && regExp.test(input.password) === true)
                     {
-                        return (<>숫자, 영문 대소문자, 특수문자 중 두가지 이상으로 조합해 주십시오.</>);
+                        return {message: "숫자, 영문 대소문자, 특수문자 중 두가지 이상으로 조합해 주십시오."};
                     }
                     else if (regEng.test(input.password) === false && regNum.test(input.password) === false && regExp.test(input.password) === true)
                     {
-                        return (<>숫자, 영문 대소문자, 특수문자 중 두가지 이상으로 조합해 주십시오.</>);
+                        return {message: "숫자, 영문 대소문자, 특수문자 중 두가지 이상으로 조합해 주십시오."};
                     }
                     else
                     {
-                        return (<></>);
+                        return {message: ""};
                     }
                 }
             }

@@ -16,7 +16,7 @@ interface RegisterPageProps {
     thirdCheck: boolean;
     fourthCheck: boolean;
     setFirstInputPassword: (x: boolean) => void;
-    PasswordCheck: () => JSX.Element;
+    PasswordCheck: () => {message: string};
     setFirstInputRePassword: (x: boolean) => void;
     RePasswordCheck: () => JSX.Element;
     NicknameCheck: () => JSX.Element;
@@ -78,7 +78,7 @@ export default function RegisterPage({setFirstInputId, IdCheck,
                                             onChange(e);
 
                                         }}></input>
-                                        <PasswordCheck></PasswordCheck>
+                                        {PasswordCheck().message}
                                     </div>
                                 </div>
                                 <div className={styles.inputRepeatArea}>
