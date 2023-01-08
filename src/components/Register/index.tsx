@@ -5,7 +5,20 @@ import {apiRegister} from "../../lib/api";
 function RegisterPagePage() {
 
 
-    const [inputId, setInputId] = useState<string>("");
+
+    const [input, setInput] = useState({
+        id: "",
+        password: "",
+        repassword: "",
+        nickname: "",
+    })
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setInput({
+            ...input,
+            [name]: value,
+        });
+    };
     const [firstInputId, setFirstInputId] = useState<boolean>(false);
     const regex: RegExp = /^[a-z|0-9|\_]+$/;
     const IdCheck = () => {
@@ -15,20 +28,20 @@ function RegisterPagePage() {
         }
         else
         {
-            if (inputId?.length === 0)
+            if (input.id?.length === 0)
             {
                 return (<>
                     아이디는 필수정보 입니다.
                 </>);
             }
-            else if (inputId?.length < 5 && inputId?.length > 0)
+            else if (input.id?.length < 5 && input.id?.length > 0)
             {
                 return (<>
                     아이디는 5자 이상이어야 합니다.</>);
             }
             else
             {
-                if (regex.test(inputId) === true)
+                if (regex.test(input.id) === true)
                 {
                     return (<>
                         사용 가능한 아이디입니다.</>); //중복체크해야함
@@ -41,7 +54,7 @@ function RegisterPagePage() {
             }
         }
     }
-    const [inputPassword, setInputPassword] = useState<string>("");
+
     const [firstInputPassword, setFirstInputPassword] = useState<boolean>(false);
 
 
@@ -56,31 +69,31 @@ function RegisterPagePage() {
             return (<></>);
         }
         else {
-            if (inputPassword?.length === 0)
+            if (input.password?.length === 0)
             {
                 return (<>비밀번호는 필수정보 입니다.</>);
             }
-            else if (inputPassword?.length < 8)
+            else if (input.password?.length < 8)
             {
                 return (<>8~30자 이내로 입력해 주십시오.</>);
             }
             else
             {
-                if (regRep.test(inputPassword) === true)
+                if (regRep.test(input.password) === true)
                 {
                     return (<>동일문자를 반복해서 4자 이상 사용할 수 없습니다.</>);
                 }
                 else
                 {
-                    if (regEng.test(inputPassword) === true && regNum.test(inputPassword) === false && regExp.test(inputPassword) === false)
+                    if (regEng.test(input.password) === true && regNum.test(input.password) === false && regExp.test(input.password) === false)
                     {
                         return (<>숫자, 영문 대소문자, 특수문자 중 두가지 이상으로 조합해 주십시오.</>);
                     }
-                    else if (regEng.test(inputPassword) === false && regNum.test(inputPassword) === true && regExp.test(inputPassword) === true)
+                    else if (regEng.test(input.password) === false && regNum.test(input.password) === true && regExp.test(input.password) === true)
                     {
                         return (<>숫자, 영문 대소문자, 특수문자 중 두가지 이상으로 조합해 주십시오.</>);
                     }
-                    else if (regEng.test(inputPassword) === false && regNum.test(inputPassword) === false && regExp.test(inputPassword) === true)
+                    else if (regEng.test(input.password) === false && regNum.test(input.password) === false && regExp.test(input.password) === true)
                     {
                         return (<>숫자, 영문 대소문자, 특수문자 중 두가지 이상으로 조합해 주십시오.</>);
                     }
@@ -93,7 +106,7 @@ function RegisterPagePage() {
         }
     }
 
-    const [inputRePassword, setInputRePassword] = useState<string>("");
+
     const [firstInputRePassword, setFirstInputRePassword] = useState<boolean>(false);
 
     const RePasswordCheck = () => {
@@ -103,11 +116,11 @@ function RegisterPagePage() {
         }
         else
         {
-            if (inputRePassword.length === 0)
+            if (input.repassword.length === 0)
             {
                 return(<>비밀번호 재확인은 필수정보입니다.</>);
             }
-            else if (inputPassword === inputRePassword)
+            else if (input.password === input.repassword)
             {
                 return (<></>);
             }
@@ -119,9 +132,9 @@ function RegisterPagePage() {
         }
 
     }
-    const [inputNickname, setInputNickname] = useState<string>("");
+
     const NicknameCheck = () => {
-        if (inputNickname.length === 0)
+        if (input.nickname.length === 0)
         {
             return(<>닉네임은 필수정보입니다.</>);
         }
@@ -187,7 +200,7 @@ function RegisterPagePage() {
     const registerButtonFunction = () => {
         if (registerButtonActivate === true)
         {
-            apiRegister(inputId, inputPassword, inputNickname)
+            apiRegister(input.id, input.password, input.nickname)
                 .then((r) => {
                     console.log(r);
                 })
@@ -207,31 +220,31 @@ function RegisterPagePage() {
 
 
     useEffect(()=>{
-        if (inputId.length >= 5)
+        if (input.id.length >= 5)
         {
-            if (regex.test(inputId) === true)
+            if (regex.test(input.id) === true)
             {
-                if (inputPassword.length >= 8)
+                if (input.password.length >= 8)
                 {
-                    if (regRep.test(inputPassword) === false)
+                    if (regRep.test(input.password) === false)
                     {
-                        if (regEng.test(inputPassword) === true && regNum.test(inputPassword) === false && regExp.test(inputPassword) === false)
+                        if (regEng.test(input.password) === true && regNum.test(input.password) === false && regExp.test(input.password) === false)
                         {
                             setRegisterButtonActivate(false);
                         }
-                        else if (regEng.test(inputPassword) === false && regNum.test(inputPassword) === true && regExp.test(inputPassword) === true)
+                        else if (regEng.test(input.password) === false && regNum.test(input.password) === true && regExp.test(input.password) === true)
                         {
                             setRegisterButtonActivate(false);
                         }
-                        else if (regEng.test(inputPassword) === false && regNum.test(inputPassword) === false && regExp.test(inputPassword) === true)
+                        else if (regEng.test(input.password) === false && regNum.test(input.password) === false && regExp.test(input.password) === true)
                         {
                             setRegisterButtonActivate(false);
                         }
                         else
                         {
-                            if (inputPassword === inputRePassword)
+                            if (input.password === input.repassword)
                             {
-                                if (inputNickname.length > 0)
+                                if (input.nickname.length > 0)
                                 {
                                     if (firstCheck === true && secondCheck === true && thirdCheck === true)
                                     {
@@ -276,13 +289,12 @@ function RegisterPagePage() {
             setRegisterButtonActivate(false);
         }
 
-    }, [inputId, inputPassword, inputRePassword, inputNickname, firstCheck, secondCheck, thirdCheck])
+    }, [input, firstCheck, secondCheck, thirdCheck])
 
 
     return (
         <>
             <RegisterPage
-                setInputId={setInputId}
                 setFirstInputId={setFirstInputId}
                 IdCheck={IdCheck}
                 firstCheck={firstCheck}
@@ -290,12 +302,9 @@ function RegisterPagePage() {
                 thirdCheck={thirdCheck}
                 fourthCheck={fourthCheck}
                 setFirstInputPassword={setFirstInputPassword}
-                setInputPassword={setInputPassword}
                 PasswordCheck={PasswordCheck}
                 setFirstInputRePassword={setFirstInputRePassword}
-                setInputRePassword={setInputRePassword}
                 RePasswordCheck={RePasswordCheck}
-                setInputNickname={setInputNickname}
                 NicknameCheck={NicknameCheck}
                 allCheck={allCheck}
                 allBtnEvent={allBtnEvent}
@@ -305,6 +314,8 @@ function RegisterPagePage() {
                 fourthBtnEvent={fourthBtnEvent}
                 registerButtonActivate={registerButtonActivate}
                 registerButtonFunction={registerButtonFunction}
+                input={input}
+                onChange={onChange}
 
             />
         </>

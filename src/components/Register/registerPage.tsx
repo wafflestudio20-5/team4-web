@@ -1,8 +1,14 @@
 import styles from './registerPage.module.scss';
+import React from "react";
 
+interface inputParams {
+    id: string;
+    password: string;
+    repassword: string;
+    nickname: string;
+}
 
 interface RegisterPageProps {
-    setInputId: (x: string) => void;
     setFirstInputId: (x: boolean) => void;
     IdCheck: () => JSX.Element;
     firstCheck: boolean;
@@ -10,12 +16,9 @@ interface RegisterPageProps {
     thirdCheck: boolean;
     fourthCheck: boolean;
     setFirstInputPassword: (x: boolean) => void;
-    setInputPassword: (x: string) => void;
     PasswordCheck: () => JSX.Element;
     setFirstInputRePassword: (x: boolean) => void;
-    setInputRePassword: (x: string) => void;
     RePasswordCheck: () => JSX.Element;
-    setInputNickname: (x: string) => void;
     NicknameCheck: () => JSX.Element;
     allCheck: boolean;
     allBtnEvent: () => void;
@@ -25,17 +28,20 @@ interface RegisterPageProps {
     fourthBtnEvent: () => void;
     registerButtonActivate: boolean;
     registerButtonFunction: () => void;
+    input: inputParams;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 
 
 }
-export default function RegisterPage({setInputId, setFirstInputId, IdCheck,
+export default function RegisterPage({setFirstInputId, IdCheck,
                                      firstCheck, secondCheck, thirdCheck, fourthCheck,
-                                     setFirstInputPassword, setInputPassword,
-                                     PasswordCheck, setFirstInputRePassword, setInputRePassword, RePasswordCheck,
-                                         setInputNickname, NicknameCheck, allCheck, allBtnEvent,
+                                     setFirstInputPassword,
+                                     PasswordCheck, setFirstInputRePassword, RePasswordCheck,
+                                         NicknameCheck, allCheck, allBtnEvent,
                                          firstBtnEvent, secondBtnEvent, thirdBtnEvent, fourthBtnEvent,
-                                         registerButtonActivate, registerButtonFunction}:RegisterPageProps,
+                                         registerButtonActivate, registerButtonFunction, input, onChange}:RegisterPageProps,
                                      ) {
+    const {id, password, repassword, nickname} = input;
     return (
         <>
             <div className={styles.background}>
@@ -54,9 +60,9 @@ export default function RegisterPage({setInputId, setFirstInputId, IdCheck,
                                     </span>
                                 </label>
                                 <div className={styles.inputIdWrap}>
-                                    <input className={styles.inputId} placeholder="영문, 숫자 5-11자" type="text" maxLength={11} id="inputId" onChange={(e)=>{
+                                    <input className={styles.inputId} name="id" value={id} placeholder="영문, 숫자 5-11자" type="text" maxLength={11} id="inputId" onChange={(e)=>{
                                         setFirstInputId(true);
-                                        setInputId(e.target.value);}}></input>
+                                        onChange(e);}}></input>
                                     <IdCheck></IdCheck>
                                 </div>
                                 <div className={styles.inputPasswordArea}>
@@ -66,10 +72,10 @@ export default function RegisterPage({setInputId, setFirstInputId, IdCheck,
                                     </span>
                                     </label>
                                     <div className={styles.inputPasswordWrap}>
-                                        <input className={styles.inputPassword} placeholder="숫자, 영문, 특수문자 조합 최소 8자" type="password" maxLength={30} id="inputPassword"
+                                        <input className={styles.inputPassword} name="password" value={password} placeholder="숫자, 영문, 특수문자 조합 최소 8자" type="password" maxLength={30} id="inputPassword"
                                         onChange={(e)=>{
                                             setFirstInputPassword(true);
-                                            setInputPassword(e.target.value);
+                                            onChange(e);
 
                                         }}></input>
                                         <PasswordCheck></PasswordCheck>
@@ -77,11 +83,11 @@ export default function RegisterPage({setInputId, setFirstInputId, IdCheck,
                                 </div>
                                 <div className={styles.inputRepeatArea}>
                                     <div className={styles.inputRepeatWrap}>
-                                        <input className={styles.inputRepeat} placeholder="비밀번호 재입력" type="password"
+                                        <input className={styles.inputRepeat} name="repassword" value={repassword} placeholder="비밀번호 재입력" type="password"
                                         onChange={
                                             (e)=>{
                                                 setFirstInputRePassword(true);
-                                                setInputRePassword(e.target.value);
+                                                onChange(e);
                                             }
                                         }></input>
                                         <RePasswordCheck></RePasswordCheck>
@@ -95,9 +101,9 @@ export default function RegisterPage({setInputId, setFirstInputId, IdCheck,
                                         <span className={styles.inputNickDot}></span>
                                     </label>
                                     <div className={styles.inputNickWrap}>
-                                        <input className={styles.inputNick} id="inputNick"
+                                        <input className={styles.inputNick} id="inputNick" name="nickname" value={nickname}
                                         onChange={(e)=>{
-                                            setInputNickname(e.target.value);
+                                            onChange(e);
                                         }}></input>
                                     </div>
                                     <NicknameCheck></NicknameCheck>
