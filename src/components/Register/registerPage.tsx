@@ -11,16 +11,11 @@ interface inputParams {
 interface RegisterPageProps {
     setFirstInputId: (x: boolean) => void;
     IdCheck: () => {message: string};
-    firstCheck: boolean;
-    secondCheck: boolean;
-    thirdCheck: boolean;
-    fourthCheck: boolean;
     setFirstInputPassword: (x: boolean) => void;
     PasswordCheck: () => {message: string};
     setFirstInputRePassword: (x: boolean) => void;
     RePasswordCheck: () => {message: string};
     NicknameCheck: () => {message: string};
-    allCheck: boolean;
     allBtnEvent: () => void;
     firstBtnEvent: () => void;
     secondBtnEvent: () => void;
@@ -30,16 +25,16 @@ interface RegisterPageProps {
     registerButtonFunction: () => void;
     input: inputParams;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    check: {all: boolean, first: boolean, second: boolean, third: boolean, fourth: boolean};
 
 
 }
 export default function RegisterPage({setFirstInputId, IdCheck,
-                                     firstCheck, secondCheck, thirdCheck, fourthCheck,
                                      setFirstInputPassword,
                                      PasswordCheck, setFirstInputRePassword, RePasswordCheck,
-                                         NicknameCheck, allCheck, allBtnEvent,
+                                         NicknameCheck, allBtnEvent,
                                          firstBtnEvent, secondBtnEvent, thirdBtnEvent, fourthBtnEvent,
-                                         registerButtonActivate, registerButtonFunction, input, onChange}:RegisterPageProps,
+                                         registerButtonActivate, registerButtonFunction, input, onChange, check}:RegisterPageProps,
                                      ) {
     const {id, password, repassword, nickname} = input;
     return (
@@ -118,13 +113,13 @@ export default function RegisterPage({setFirstInputId, IdCheck,
                                 </div>
                                 <div className={styles.agreementForm}>
                                     <div className={styles.checkboxAll}>
-                                        <input type="checkbox" id="checkboxAll" checked={allCheck} onChange={allBtnEvent} className={styles.allCheckButton}></input>
+                                        <input type="checkbox" id="checkboxAll" checked={check.all} onChange={allBtnEvent} className={styles.allCheckButton}></input>
                                         <label htmlFor="checkboxAll" className={styles.allCheckText}>
                                             약관 전체 동의하기
                                         </label>
                                     </div>
                                     <div className={styles.checkbox}>
-                                        <input type="checkbox" id="checkboxFirst" checked={firstCheck} onChange={firstBtnEvent} className={styles.oneCheckButton}></input>
+                                        <input type="checkbox" id="checkboxFirst" checked={check.first} onChange={firstBtnEvent} className={styles.oneCheckButton}></input>
                                         <span className={styles.oneCheckText}>
                                         <label htmlFor="checkboxFirst">
                                             [필수]개인정보 수집 및 이용 동의
@@ -135,7 +130,7 @@ export default function RegisterPage({setFirstInputId, IdCheck,
                                         </span>
                                     </div>
                                     <div className={styles.checkbox}>
-                                        <input type="checkbox" id="checkboxSecond" checked={secondCheck} onChange={secondBtnEvent} className={styles.oneCheckButton}></input>
+                                        <input type="checkbox" id="checkboxSecond" checked={check.second} onChange={secondBtnEvent} className={styles.oneCheckButton}></input>
                                         <span className={styles.oneCheckText}><label htmlFor="checkboxSecond">
                                             [필수]무신사, 무신사 스토어 이용 약관
                                         </label>
@@ -144,13 +139,13 @@ export default function RegisterPage({setFirstInputId, IdCheck,
                                         </button></span>
                                     </div>
                                     <div className={styles.checkbox}>
-                                        <input type="checkbox" id="checkboxThird" checked={thirdCheck} onChange={thirdBtnEvent} className={styles.oneCheckButton}></input>
+                                        <input type="checkbox" id="checkboxThird" checked={check.third} onChange={thirdBtnEvent} className={styles.oneCheckButton}></input>
                                         <span className={styles.oneCheckText}><label htmlFor="checkboxThird">
                                             [필수]만 14세 미만 가입 제한
                                         </label></span>
                                     </div>
                                     <div className={styles.checkbox}>
-                                        <input type="checkbox" id="checkboxFourth" checked={fourthCheck} onChange={fourthBtnEvent} className={styles.oneCheckButton}></input>
+                                        <input type="checkbox" id="checkboxFourth" checked={check.fourth} onChange={fourthBtnEvent} className={styles.oneCheckButton}></input>
                                         <span className={styles.oneCheckText}><label htmlFor="checkboxFourth">
                                             [선택]마케팅 활용 및 광고성 정보 수신 동의
                                         </label>

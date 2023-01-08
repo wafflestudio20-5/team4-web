@@ -138,57 +138,62 @@ function RegisterPagePage() {
             return {message: ""};
         }
     }
-    const [allCheck, setAllCheck] = useState<boolean>(false);
-    const [firstCheck, setFirstCheck] = useState<boolean>(false);
-    const [secondCheck, setSecondCheck] = useState<boolean>(false);
-    const [thirdCheck, setThirdCheck] = useState<boolean>(false);
-    const [fourthCheck, setFourthCheck] = useState<boolean>(false);
+
+    const [check, setCheck] = useState({
+       all: false,
+       first: false,
+       second: false,
+       third: false,
+       fourth: false,
+    });
 
     const allBtnEvent =()=>{
-        if(allCheck === false) {
-            setAllCheck(true);
-            setFirstCheck(true);
-            setSecondCheck(true);
-            setThirdCheck(true);
-            setFourthCheck(true);
+        if(check.all === false) {
+            setCheck({all: true,
+            first: true,
+            second: true,
+            third: true,
+            fourth: true,});
         }else {
-            setAllCheck(false);
-            setFirstCheck(false);
-            setSecondCheck(false);
-            setThirdCheck(false);
-            setFourthCheck(false);
+            setCheck({
+                all: false,
+                first: false,
+                second: false,
+                third: false,
+                fourth: false,
+            })
         }
     }
 
     const firstBtnEvent =()=>{
-        if(firstCheck === false) {
-            setFirstCheck(true)
+        if(check.first === false) {
+            setCheck({...check, first: true});
         }else {
-            setFirstCheck(false)
+            setCheck({...check, first: false});
         }
     }
 
     const secondBtnEvent =()=>{
-        if(secondCheck === false) {
-            setSecondCheck(true)
+        if(check.second === false) {
+            setCheck({...check, second: true});
         }else {
-            setSecondCheck(false)
+            setCheck({...check, second: false});
         }
     }
 
     const thirdBtnEvent =()=>{
-        if(thirdCheck === false) {
-            setThirdCheck(true)
+        if(check.third === false) {
+            setCheck({...check, third: true});
         }else {
-            setThirdCheck(false)
+            setCheck({...check, third: false});
         }
     }
 
     const fourthBtnEvent =()=>{
-        if(fourthCheck === false) {
-            setFourthCheck(true)
+        if(check.fourth === false) {
+            setCheck({...check, fourth: true});
         }else {
-            setFourthCheck(false)
+            setCheck({...check, fourth: false});
         }
     }
     const [registerButtonActivate, setRegisterButtonActivate] = useState<boolean>(false);
@@ -205,13 +210,13 @@ function RegisterPagePage() {
         }
     }
     useEffect(()=>{
-        if(firstCheck === true && secondCheck === true && thirdCheck === true && fourthCheck === true)
+        if(check.first === true && check.second === true && check.third === true && check.fourth === true)
         {
-            setAllCheck(true)
+            setCheck({...check, all: true});
         } else {
-            setAllCheck(false)
+            setCheck({...check, all: false});
         }
-    }, [firstCheck, secondCheck, thirdCheck, fourthCheck])
+    }, [check.first, check.second, check.third, check.fourth])
 
 
     useEffect(()=>{
@@ -241,7 +246,7 @@ function RegisterPagePage() {
                             {
                                 if (input.nickname.length > 0)
                                 {
-                                    if (firstCheck === true && secondCheck === true && thirdCheck === true)
+                                    if (check.first === true && check.second === true && check.third === true)
                                     {
 
                                         setRegisterButtonActivate(true);
@@ -284,7 +289,7 @@ function RegisterPagePage() {
             setRegisterButtonActivate(false);
         }
 
-    }, [input, firstCheck, secondCheck, thirdCheck])
+    }, [input, check.first, check.second, check.third])
 
 
     return (
@@ -292,16 +297,11 @@ function RegisterPagePage() {
             <RegisterPage
                 setFirstInputId={setFirstInputId}
                 IdCheck={IdCheck}
-                firstCheck={firstCheck}
-                secondCheck={secondCheck}
-                thirdCheck={thirdCheck}
-                fourthCheck={fourthCheck}
                 setFirstInputPassword={setFirstInputPassword}
                 PasswordCheck={PasswordCheck}
                 setFirstInputRePassword={setFirstInputRePassword}
                 RePasswordCheck={RePasswordCheck}
                 NicknameCheck={NicknameCheck}
-                allCheck={allCheck}
                 allBtnEvent={allBtnEvent}
                 firstBtnEvent={firstBtnEvent}
                 secondBtnEvent={secondBtnEvent}
@@ -311,6 +311,7 @@ function RegisterPagePage() {
                 registerButtonFunction={registerButtonFunction}
                 input={input}
                 onChange={onChange}
+                check={check}
 
             />
         </>
