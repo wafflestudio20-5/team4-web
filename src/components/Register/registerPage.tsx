@@ -10,7 +10,7 @@ interface inputParams {
 
 interface RegisterPageProps {
     setFirstInputId: (x: boolean) => void;
-    IdCheck: () => JSX.Element;
+    IdCheck: () => {message: string};
     firstCheck: boolean;
     secondCheck: boolean;
     thirdCheck: boolean;
@@ -63,7 +63,7 @@ export default function RegisterPage({setFirstInputId, IdCheck,
                                     <input className={styles.inputId} name="id" value={id} placeholder="영문, 숫자 5-11자" type="text" maxLength={11} id="inputId" onChange={(e)=>{
                                         setFirstInputId(true);
                                         onChange(e);}}></input>
-                                    <IdCheck></IdCheck>
+                                    {IdCheck().message}
                                 </div>
                                 <div className={styles.inputPasswordArea}>
                                     <label className={styles.inputPasswordLabel} htmlFor="inputPassword">

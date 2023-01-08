@@ -24,32 +24,27 @@ function RegisterPagePage() {
     const IdCheck = () => {
         if (firstInputId === false)
         {
-            return (<></>);
+            return {message: ""};
         }
         else
         {
             if (input.id?.length === 0)
             {
-                return (<>
-                    아이디는 필수정보 입니다.
-                </>);
+                return {message: "아이디는 필수정보 입니다."};
             }
             else if (input.id?.length < 5 && input.id?.length > 0)
             {
-                return (<>
-                    아이디는 5자 이상이어야 합니다.</>);
+                return {message: "아이디는 5자 이상이어야 합니다."};
             }
             else
             {
                 if (regex.test(input.id) === true)
                 {
-                    return (<>
-                        사용 가능한 아이디입니다.</>); //중복체크해야함
+                    return {message: "사용 가능한 아이디입니다."}; //중복체크해야함
                 }
                 else
                 {
-                    return (<>
-                        아이디는 영문소문자, 숫자, 특수기호(_)만 사용 가능합니다.</>);
+                    return {message: "아이디는 영문소문자, 숫자, 특수기호(_)만 사용 가능합니다."};
                 }
             }
         }
