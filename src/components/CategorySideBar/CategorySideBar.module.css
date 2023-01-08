@@ -1,3 +1,10 @@
+.container {
+  height: 2000px;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
 .categorySideBar {
   min-width: 250px;
   border-right: 1px solid #ddd;
@@ -5,6 +12,36 @@
   flex-direction: column;
   padding: 10px;
 }
+
+.openCategorySideBarButton {
+  background-color: transparent;
+  border-top: none;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  border-left: none;
+  padding: 5px;
+  width: 25px;
+  height: 25px;
+  margin: 0px;
+  position: absolute;
+  z-index: 99;
+}
+
+.closeCategorySideBarButton {
+  background-color: transparent;
+  border-top: none;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  border-left: none;
+  padding: 5px;
+  width: 25px;
+  height: 25px;
+  margin: 0px;
+  position: absolute;
+  left: 270px;
+  z-index: 99;
+}
+
 .select {
   display: flex;
   flex-direction: row;

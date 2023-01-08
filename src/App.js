@@ -5,16 +5,21 @@ import Header from './components/Header/';
 import SubHeader from './components/SubHeader/';
 import HomePage from './components/Home/';
 import MyPage from './components/MyPage/';
+import DetailPage from './components/DetailPage';
+import CategorySideBar from './components/CategorySideBar';
 
 function AppRoutes() {
   return (
     <Routes>
       <Route element={<Header />}>
         <Route element={<SubHeader />}>
-          <Route index element={<HomePage />} />
-          <Route path="/cart" element={<></>} />
-          <Route path="/coupon" element={<></>} />
-          <Route path="/customercenter" element={<></>} />
+          <Route element={<CategorySideBar />}>
+            <Route index element={<HomePage />} />
+            <Route path="/cart" element={<></>} />
+            <Route path="/coupon" element={<></>} />
+            <Route path="/customercenter" element={<></>} />
+            <Route path="/goods/:id" element={<DetailPage />} />
+          </Route>
         </Route>
         <Route path="/mypage/*" element={<MyPage />} />
       </Route>

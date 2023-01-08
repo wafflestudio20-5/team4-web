@@ -1,12 +1,12 @@
 import styles from './ItemOrdered.module.scss';
 import { Item } from '../../../lib/interface';
 
-interface ItemPreviewProps {
+interface ItemOrderedProps {
   item: Item;
-  idx: number;
 }
 
-export default function ItemOrdered({ item, idx }: ItemPreviewProps) {
+export default function ItemOrdered({ item }: ItemOrderedProps) {
+
   return (
     <div className={styles.grid_order}>
       <div className={styles.grid_header}>
