@@ -7,6 +7,7 @@ interface MyPageOrderProps {
 }
 
 export default function MyPageOrder({ user }: MyPageOrderProps) {
+
   return (
     <div className={styles.wrapper}>
       <section id="order">
@@ -38,6 +39,7 @@ export default function MyPageOrder({ user }: MyPageOrderProps) {
           user.purchases.map((item) => <ItemOrdered item={item} />)
         ) : (
           <div className={styles.none}>주문 목록이 없습니다.</div>
+
         )}
       </section>
     </div>

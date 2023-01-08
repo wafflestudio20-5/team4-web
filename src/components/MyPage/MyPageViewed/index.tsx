@@ -7,6 +7,7 @@ interface MyPageViewedProps {
 }
 
 export default function MyPageViewed({ user }: MyPageViewedProps) {
+
   return (
     <div className={styles.wrapper}>
       <section id="order">
