@@ -19,7 +19,7 @@ interface RegisterPageProps {
     PasswordCheck: () => {message: string};
     setFirstInputRePassword: (x: boolean) => void;
     RePasswordCheck: () => {message: string};
-    NicknameCheck: () => JSX.Element;
+    NicknameCheck: () => {message: string};
     allCheck: boolean;
     allBtnEvent: () => void;
     firstBtnEvent: () => void;
@@ -106,7 +106,7 @@ export default function RegisterPage({setFirstInputId, IdCheck,
                                             onChange(e);
                                         }}></input>
                                     </div>
-                                    <NicknameCheck></NicknameCheck>
+                                    {NicknameCheck().message}
                                 </div>
                                 <div className={styles.inputRecommendIdArea}>
                                     <label className={styles.inputRecommendIdLabel}>

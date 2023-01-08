@@ -131,11 +131,11 @@ function RegisterPagePage() {
     const NicknameCheck = () => {
         if (input.nickname.length === 0)
         {
-            return(<>닉네임은 필수정보입니다.</>);
+            return {message: "닉네임은 필수정보입니다."};
         }
         else
         {
-            return(<></>);
+            return {message: ""};
         }
     }
     const [allCheck, setAllCheck] = useState<boolean>(false);
