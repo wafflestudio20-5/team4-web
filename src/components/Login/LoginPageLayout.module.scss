@@ -1,0 +1,281 @@
+.background {
+  background-color: #f1f1f1;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.middleWhiteBox {
+  background-color: white;
+  width: 460px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  font-size: 14px;
+  font-family: '-apple-system', HelveticaNeue, Roboto, 'Noto Sans KR', helvetica,
+    Gulim, sans-serif;
+  line-height: 1.5;
+  color: #000;
+}
+
+.content {
+  position: static;
+  width: 375px;
+  margin: auto;
+  height: 655px;
+  background-color: white;
+  padding-bottom: 100px;
+}
+
+.loginTextBox {
+  width: 385px;
+  height: 50px;
+  background-color: white;
+  position: static;
+  margin: auto;
+  margin-top: 65px;
+  .loginTextBox_text {
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
+    text-align: center;
+  }
+}
+
+.commonTabUnderline {
+  width: 375px;
+  background-color: white;
+  height: 45px;
+  .loginTab {
+    width: 187.5px;
+    height: 45px;
+    background-color: white;
+    text-align: center;
+    border-bottom: 2px solid black;
+    span {
+      position: relative;
+      top: 10px;
+      font-size: 20px;
+    }
+  }
+  .buySearchTab {
+    position: relative;
+    left: 187.5px;
+    bottom: 47px;
+    width: 187.5px;
+    height: 45px;
+    background-color: white;
+    text-align: center;
+    border-bottom: 2px solid #b3b3b4;
+    span {
+      position: relative;
+      top: 10px;
+      font-size: 20px;
+      color: #b3b3b4;
+    }
+  }
+}
+
+.loginArea {
+  position: relative;
+  top: 22px;
+  background-color: white;
+  width: 375px;
+  height: 341px;
+  .loginForm {
+    width: 345px;
+    height: 219px;
+    background-color: white;
+    margin: auto;
+  }
+}
+
+.idInputWrap {
+  margin: auto;
+  background-color: white;
+  width: 345px;
+  height: 50px;
+  border: 1px solid #e5e5e5;
+  box-sizing: border-box;
+  border-radius: 4px;
+  .idInput {
+    position: relative;
+    left: 2px;
+    box-sizing: border-box;
+    height: 48px;
+    width: 330px;
+    padding: 0 12px;
+    border: 0px;
+  }
+  input:focus {
+    outline: none;
+  }
+}
+
+.passwordInputWrap {
+  position: relative;
+  top: 10px;
+  margin: auto;
+  background-color: white;
+  width: 345px;
+  height: 50px;
+  border: 1px solid #e5e5e5;
+  box-sizing: border-box;
+  border-radius: 4px;
+  .passwordInput {
+    position: relative;
+    left: 2px;
+    box-sizing: border-box;
+    height: 48px;
+    width: 330px;
+    padding: 0 12px;
+    border: 0px;
+  }
+  input:focus {
+    outline: none;
+  }
+}
+
+.loginButton {
+  position: relative;
+  top: 30px;
+  width: 345px;
+  height: 50px;
+  background-color: black;
+  color: white;
+  border-radius: 4px;
+  font-family: '-apple-system', HelveticaNeue, Roboto, 'Noto Sans KR', helvetica,
+    Gulim, sans-serif;
+}
+
+.loginUtility {
+  width: 345px;
+  height: 21px;
+  padding: 16px 0 4px;
+  background-color: #ffffff;
+  position: relative;
+  top: 30px;
+  display: flex;
+}
+
+.loginCheckbox {
+  height: 21px;
+  background-color: white;
+  input[type='checkbox'] {
+    position: relative;
+    right: 4px;
+    bottom: 3px;
+    width: 21px;
+    height: 21px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    appearance: none;
+    transition: background 0.2s;
+  }
+  input[type='checkbox']:checked {
+    background: gray;
+    border: 1px solid black;
+  }
+  .labelCheckBox {
+    position: relative;
+    bottom: 12px;
+  }
+}
+
+.findDiv {
+  position: relative;
+  left: 60px;
+  .findId {
+    border-left: 0px;
+    border-top: 0px;
+    border-bottom: 0px;
+    border-right: 0.5px solid gray;
+    background-color: #ffffff;
+    color: gray;
+    font-family: '-apple-system', HelveticaNeue, Roboto, 'Noto Sans KR',
+      helvetica, Gulim, sans-serif;
+  }
+  .findPassword {
+    border-left: 0.5px solid gray;
+    border-top: 0px;
+    border-right: 0px;
+    border-bottom: 0px;
+    background-color: #ffffff;
+    color: gray;
+    font-family: '-apple-system', HelveticaNeue, Roboto, 'Noto Sans KR',
+      helvetica, Gulim, sans-serif;
+  }
+}
+
+.loginSocialArea {
+  width: 345px;
+  height: 102px;
+  margin-top: 20px;
+  background-color: white;
+  .loginKakao {
+    width: 311px;
+    height: 22px;
+    border-radius: 4px;
+    padding: 11px 16px 10px 16px;
+    border: 1px solid #fee500;
+    background-color: #fee500;
+    position: relative;
+    top: 10px;
+    z-index: 4;
+    text-align: center;
+
+    .kakaoLogo {
+      width: 30px;
+      height: 30px;
+      position: relative;
+      bottom: 3px;
+    }
+    .kakaoText {
+      position: relative;
+      bottom: 15px;
+    }
+  }
+  .loginApple {
+    width: 311px;
+    height: 22px;
+    padding: 11px 16px 10px 16px;
+    position: relative;
+    top: 22px;
+    border: 1px solid #bfbfbf;
+    background-color: white;
+    border-radius: 4px;
+    text-align: center;
+    .appleLogo {
+      width: 30px;
+      height: 30px;
+      position: relative;
+      bottom: 3px;
+    }
+    .appleText {
+      position: relative;
+      bottom: 15px;
+    }
+  }
+}
+
+.loginBottom {
+  width: 345px;
+  height: 29px;
+  position: relative;
+  top: 50px;
+  color: #0078ff;
+  text-align: center;
+  .loginBottomButton {
+    padding: 3px 8px 3px 8px;
+    border: 1px solid #0078ff;
+    border-radius: 4px;
+  }
+}

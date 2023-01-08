@@ -21,6 +21,11 @@ export interface ApiRegisterParams {
   nickname: string;
 }
 
+export interface ApiLoginParams {
+  username: string;
+  password: string;
+}
+
 export interface Session {
   user: User | null;
   accessToken: string | null;
