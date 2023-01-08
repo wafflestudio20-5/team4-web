@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState, AppDispatch } from './store';
+import { useDispatch } from 'react-redux';
 import { postRefresh } from './store/slices/session';
 import Header from './components/Header/';
 import SubHeader from './components/SubHeader/';
