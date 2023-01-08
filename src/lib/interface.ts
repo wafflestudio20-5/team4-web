@@ -9,6 +9,10 @@ export interface User {
   height?: number;
   weight?: number;
   socialKey?: string;
+  point?: number;
+  purchases?: Item[];
+  shoppingCart?: Item[];
+  recentlyViewed?: Item[];
 }
 
 export interface ApiRegisterParams {
@@ -72,7 +76,7 @@ export interface Item {
   name: string;
   brand: string;
   image: string;
-  label?: string;
+  label?: Label;
   oldPrice: number;
   newPrice?: number;
   sale?: number;

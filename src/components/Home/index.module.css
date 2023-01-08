@@ -1,0 +1,27 @@
+.container {
+  height: 2000px;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.mainContent {
+  flex: 7;
+}
+
+.openCategorySideBarButton {
+  background-color: transparent;
+  border-top: none;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  border-left: none;
+  padding: 5px;
+  width: 25px;
+  height: 25px;
+  margin: 0px;
+  position: absolute;
+}
+
+
+
+

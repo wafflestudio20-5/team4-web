@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default function NavigationBar() {
-  return <div>navigation</div>;
+  return <div></div>;
 }
