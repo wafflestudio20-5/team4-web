@@ -2,19 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { User } from '../../../lib/interface';
 import { formatDate } from '../../../lib/formatters/dateFormatter';
-import styles from './MyPageUserInfo.module.scss';
+import styles from './MyPageHeader.module.scss';
 import point from '../../../resources/image/saving.png';
 import review from '../../../resources/image/write.png';
 
-export interface MyPageUserInfoProps {
+export interface MyPageHeaderProps {
   user: User;
   onLogout: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-export default function MyPageUserInfo({
-  user,
-  onLogout,
-}: MyPageUserInfoProps) {
+export default function MyPageHeader({ user, onLogout }: MyPageHeaderProps) {
   return (
     <div className={styles.wrapper}>
       <Link className={styles.title} to="/mypage">
@@ -29,7 +26,7 @@ export default function MyPageUserInfo({
         </button>
       </div>
       <div className={styles.main}>
-        <img className={styles.image} src={user.image} alt="이미지 로딩 실패" />
+        <img className={styles.image} src={user.image} alt="이미지 없음" />
         <div className={styles.info}>
           <div className={styles.name}>
             <strong>{user.nickname}</strong>
@@ -42,16 +39,16 @@ export default function MyPageUserInfo({
             </span>
           </div>
           <div className={styles.bottom}>
-            <Link to="/mypage/point">
+            <div className={styles.bottom_block}>
               <img src={point} alt="적립금" />
               <span>적립금</span>
               <strong>{user.point}</strong>
-            </Link>
-            <Link to="/mypage/review">
+            </div>
+            <div className={styles.bottom_block}>
               <img src={review} alt="후기작성" />
               <span>구매후기</span>
               <strong>{user.reviewCount}</strong>
-            </Link>
+            </div>
           </div>
         </div>
       </div>

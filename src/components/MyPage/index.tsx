@@ -4,16 +4,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../store';
 import { postLogout } from '../../store/slices/session';
 import { Session } from '../../lib/interface';
-import MyPageUserInfo, { MyPageUserInfoProps } from './MyPageUserInfo';
+import MyPageHeader, { MyPageHeaderProps } from './MyPageHeader/';
 import MyPageNavigation from './MyPageNavigation';
 import MyPageMain from './MyPageMain';
+import MyPageInfo from './MyPageInfo';
 import MyPageOrder from './MyPageOrder';
+import MyPageViewed from './MyPageViewed';
+
 import Footer from '../Footer';
 
-function MyPageLayout({ user, onLogout }: MyPageUserInfoProps) {
+function MyPageLayout({ user, onLogout }: MyPageHeaderProps) {
   return (
     <>
-      <MyPageUserInfo user={user} onLogout={onLogout} />
+      <MyPageHeader user={user} onLogout={onLogout} />
       <MyPageNavigation />
       <Outlet />
       <Footer />
@@ -46,7 +49,7 @@ function MyPage() {
       <Routes>
         <Route element={<MyPageLayout user={user} onLogout={onLogout} />}>
           <Route index element={<MyPageMain user={user} />} />
-          <Route path="info" element={<div>/mypage/info</div>} />
+          <Route path="info" element={<MyPageInfo user={user} />} />
           <Route path="order" element={<MyPageOrder user={user} />} />
           <Route path="review" element={<div>/mypage/review</div>} />
           <Route
@@ -57,10 +60,7 @@ function MyPage() {
             path="personal_inquiry"
             element={<div>/mypage/personal_inquiry</div>}
           />
-          <Route
-            path="viewed_goods"
-            element={<div>/mypage/viewed_goods</div>}
-          />
+          <Route path="viewed_goods" element={<MyPageViewed user={user} />} />
         </Route>
       </Routes>
     );

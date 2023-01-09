@@ -1,5 +1,6 @@
-import { Item } from '../../lib/interface';
+import { useNavigate } from 'react-router-dom';
 import ItemLabel from './ItemLabel';
+import { Item } from '../../lib/interface';
 import styles from './ItemPreview.module.css';
 
 interface ItemPreviewProps {
@@ -8,8 +9,16 @@ interface ItemPreviewProps {
 }
 
 export default function ItemPreview({ item, idx }: ItemPreviewProps) {
+  const navigate = useNavigate();
+  // 추후 최근 본 상품에 추가 등 로직 복잡해질 수 있어서 Link말고 navigate로 구현
+
   return (
-    <div className={styles.itemPreview}>
+    <div
+      className={styles.itemPreview}
+      onClick={() => {
+        navigate(`/goods/${item.id}`);
+      }}
+    >
       {item?.label ? <ItemLabel label={item?.label}></ItemLabel> : null}
       <div className={styles.rank}>{idx + 1}위</div>
       <img className={styles.previewImage} src={item.image} alt="상품 이미지" />
