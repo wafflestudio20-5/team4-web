@@ -47,7 +47,6 @@ function MyPage() {
         <Route element={<MyPageLayout user={user} onLogout={onLogout} />}>
           <Route index element={<MyPageMain user={user} />} />
           <Route path="info" element={<div>/mypage/info</div>} />
-          <Route path="point" element={<div>/mypage/point</div>} />
           <Route path="order" element={<MyPageOrder user={user} />} />
           <Route path="review" element={<div>/mypage/review</div>} />
           <Route
