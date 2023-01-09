@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { User } from '../../../lib/interface';
+import { formatDate } from '../../../lib/formatters/dateFormatter';
 import styles from './MyPageHeader.module.scss';
 import point from '../../../resources/image/saving.png';
 import review from '../../../resources/image/write.png';
@@ -25,11 +26,7 @@ export default function MyPageHeader({ user, onLogout }: MyPageHeaderProps) {
         </button>
       </div>
       <div className={styles.main}>
-        <img
-          className={styles.image}
-          src="https://image.msscdn.net/mfile_s01/_simbols/_basic/s.png"
-          alt="이미지 없음"
-        />
+        <img className={styles.image} src={user.image} alt="이미지 없음" />
         <div className={styles.info}>
           <div className={styles.name}>
             <strong>{user.nickname}</strong>
@@ -38,19 +35,19 @@ export default function MyPageHeader({ user, onLogout }: MyPageHeaderProps) {
           <div className={styles.flex}>
             <div className={styles.level}>LV.1 멤버</div>
             <span className={styles.date}>
-              가입일 : {user.registrationDate}
+              가입일 : {formatDate(user.registrationDate)}
             </span>
           </div>
           <div className={styles.bottom}>
             <div className={styles.bottom_block}>
               <img src={point} alt="적립금" />
               <span>적립금</span>
-              <strong>4,333</strong>
+              <strong>{user.point}</strong>
             </div>
             <div className={styles.bottom_block}>
               <img src={review} alt="후기작성" />
               <span>구매후기</span>
-              <strong>0</strong>
+              <strong>{user.reviewCount}</strong>
             </div>
           </div>
         </div>

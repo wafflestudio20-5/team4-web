@@ -1,29 +1,66 @@
 export interface User {
   id: number;
+  image: string;
+  point: number;
   username: string;
   nickname: string;
-  image?: string;
   reviewCount: number;
+  description: string;
   registrationDate: string;
   sex?: string;
   height?: number;
   weight?: number;
   socialKey?: string;
-  point?: number;
-  purchases?: Item[];
-  shoppingCart?: Item[];
-  recentlyViewed?: Item[];
-}
-
-export interface ApiRegisterParams {
-  username: string;
-  password: string;
-  nickname: string;
 }
 
 export interface Session {
   user: User | null;
   accessToken: string | null;
+}
+
+export interface Item {
+  id: number;
+  sex: string;
+  name: string;
+  brand: string;
+  image: string;
+  rating: number;
+  oldPrice: number;
+  sale?: number;
+  options?: string[];
+  newPrice?: number;
+  label?: Label;
+  category: Category;
+  subCategory: SubCategory;
+}
+
+export interface Purchase {
+  id: number;
+  user: User;
+  item: Item;
+  date: string;
+  payment: number;
+  quantity: number;
+  option?: string;
+}
+
+export interface Review {
+  id: number;
+  user: User;
+  text: string;
+  date: string;
+  size: string;
+  color: string;
+  rating: number;
+  purchase: Purchase;
+  comments: Comment[];
+}
+
+export interface Comment {
+  id: number;
+  user: User;
+  text: string;
+  date: string;
 }
 
 export enum Label {
@@ -69,30 +106,6 @@ export enum SubCategory {
   cap = 'cap',
   hat = 'hat',
   beanie = 'beanie',
-}
-
-export interface Item {
-  id: number;
-  name: string;
-  brand: string;
-  image: string;
-  label?: Label;
-  oldPrice: number;
-  newPrice?: number;
-  sale?: number;
-  sex?: string;
-  rating?: number;
-  options?: string[];
-  category: Category;
-  subCategory: SubCategory;
-}
-
-/* Will be revised in Sprint 3 */
-export interface Review {
-  id: number;
-  user: User;
-  item: Item;
-  rating: number;
 }
 
 export function displayLabel(label: Label) {
