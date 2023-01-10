@@ -2,8 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { RootState, AppDispatch } from '../../store';
 import { postLogout } from '../../store/slices/session';
-import { Session } from '../../lib/interface';
 import MemberHeader from './MemberHeader';
+import { Session } from '../../lib/interface';
 
 function SubHeader() {
   const dispatch = useDispatch<AppDispatch>();

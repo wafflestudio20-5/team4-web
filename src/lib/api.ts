@@ -1,68 +1,32 @@
-/* 
-
-Api.ts will be revised after server distribution.
-
-A mock-up json-server can be opened locally by typing
-"json-server ./data.json --port 4000" on terminal.
-
-See if the server is successfully opened in the following link:
-"https:/localhost:4000/items"
-
-If this doesn't work, (re)install json-server by typing
-"npm install -g json-server" on terminal.
-
-*** All url paths should later be revised. ***
-
-Last edited: 2023/01/08 22:36
-Edited by: Lee Sukchan
-
-*/
-
-import axios, { AxiosResponse, CancelToken } from 'axios';
 import { useCallback, useEffect, useState } from 'react';
-import { User, Item, Category } from './interface';
-import { RegisterParams, LoginParams } from './params';
+import axios, { AxiosResponse, CancelToken } from 'axios';
+import { User, Item } from './interface';
+import { RegisterDto, LoginDto, GetItemsDto } from './dto';
 
-axios.defaults.baseURL = 'http://localhost:4000';
 axios.defaults.withCredentials = true;
 
 const auth = (token: string) => ({ Authorization: `Bearer ${token}` });
 
-export const apiRegister = (data: RegisterParams) =>
-  axios.post('/register', data);
+export const apiRegister = (body: RegisterDto) =>
+  axios.post('/api/auth/register', body);
 
-export const apiLogin = (data: LoginParams) =>
-  /*
-  json-server 사용을 위해 GET 메소드로 임시 교체
-  
-  axios.post<{ accessToken: string }>('/api/auth/login', data); 
-  */
-  axios.get<{ accessToken: string }>('/login');
+export const apiLogin = (body: LoginDto) =>
+  axios.post<{ accessToken: string }>('/api/auth/login', body);
 
 export const apiLogout = (token: string) =>
-  /*
-  json-server 사용을 위해 GET 메소드로 임시 교체
-
   axios.post('/api/auth/logout', null, { headers: auth(token) });
-  */
-  axios.get('/logout');
 
 export const apiRefresh = () =>
-  /*
-  json-server 사용을 위해 GET 메소드로 임시 교체
-  
   axios.post<{ accessToken: string }>('/api/auth/refresh');
-  */
-  axios.get<{ accessToken: string }>('/refresh');
 
 export const apiCheckUsername = (username: string) =>
-  axios.post<{ isUnique: boolean }>('/username', { username });
+  axios.post<{ isUnique: boolean }>('/api/auth/username', { username });
 
 export const apiCheckNickname = (nickname: string) =>
-  axios.post<{ isUnique: boolean }>('/nickname', { nickname });
+  axios.post<{ isUnique: boolean }>('/api/auth/nickname', { nickname });
 
 export const apiGetMyInfo = (token: string) =>
-  axios.get<{ user: User }>('/me', { headers: auth(token) });
+  axios.get<{ user: User }>('/api/user/me', { headers: auth(token) });
 
 export function useApiData<T>(
   fetch: ((cancel: CancelToken) => Promise<AxiosResponse<T>>) | null
@@ -98,14 +62,19 @@ export const useApiItemFetcher = (id: number | null) => {
   return id === null ? null : f;
 };
 
-export const useApiItemListFetcher = (category: Category | null) => {
+export const useApiItemListFetcher = (params: GetItemsDto) => {
   const f = useCallback(
-    (cancelToken: CancelToken) =>
-      axios.get<{ items: Item[] }>('/items', {
-        params: { category: category ? category : undefined },
+    (cancelToken: CancelToken) => {
+      // 백엔드에서 API 수정 사항 반영 전이므로 newParams 정의
+      const newParams = {
+        category: params.category ? params.category : null,
+      };
+      return axios.get<{ items: Item[] }>('/api/items', {
+        params: newParams,
         cancelToken,
-      }),
-    [category]
+      });
+    },
+    [params]
   );
   return f;
 };
