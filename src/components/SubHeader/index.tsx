@@ -1,27 +1,26 @@
-import { Outlet } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { logout } from '../../store/sessionSlice';
+import { Outlet } from 'react-router-dom';
+import { RootState, AppDispatch } from '../../store';
+import { postLogout } from '../../store/slices/session';
 import { Session } from '../../lib/interface';
-import ChannelHeader from './ChannelHeader';
 import MemberHeader from './MemberHeader';
 
 function SubHeader() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const session: Session = useSelector((state: RootState) => {
     return state.session;
   });
 
-  const { user } = session;
+  const { user, accessToken } = session;
 
-  const onLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const onLogout = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    dispatch(logout(null));
+    if (accessToken) await dispatch(postLogout(accessToken));
   };
 
   return (
     <>
-      <ChannelHeader />
+      {/* <ChannelHeader /> */}
       <MemberHeader user={user} onLogout={onLogout} />
       <Outlet />
     </>

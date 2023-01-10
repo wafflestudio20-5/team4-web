@@ -11,6 +11,7 @@ interface MainHeaderProps {
   onSubmit: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
+/*
 function GnbList() {
   return (
     <div className={styles.gnb}>
@@ -52,6 +53,7 @@ function GnbList() {
     </div>
   );
 }
+*/
 
 export default function MainHeader({
   query,
@@ -77,7 +79,7 @@ export default function MainHeader({
           <img src={search_button} alt="search_button" />
         </div>
       </div>
-      <GnbList />
+      {/* <GnbList /> */}
     </div>
   );
 }

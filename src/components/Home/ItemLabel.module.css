@@ -1,0 +1,15 @@
+.botique {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #0000ff;
+  min-width: 42px;
+  line-height: 15px;
+  padding: 4px 4px;
+  font-family: 'Musinsa', sans-serif;
+  font-size: 12px;
+  color: #ffffff;
+  vertical-align: middle;
+  text-align: center;
+  z-index: 10;
+}

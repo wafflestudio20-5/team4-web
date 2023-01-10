@@ -6,57 +6,63 @@ A mock-up json-server can be opened locally by typing
 "json-server ./data.json --port 4000" on terminal.
 
 See if the server is successfully opened in the following link:
-"https:/localhost:4000/data"
+"https:/localhost:4000/items"
 
 If this doesn't work, (re)install json-server by typing
 "npm install -g json-server" on terminal.
 
-Last edited: 2022/12/27 17:34
-Edited By: Lee Sukchan
+*** All url paths should later be revised. ***
+
+Last edited: 2023/01/08 22:36
+Edited by: Lee Sukchan
 
 */
 
 import axios, { AxiosResponse, CancelToken } from 'axios';
 import { useCallback, useEffect, useState } from 'react';
-import {ApiLoginParams, ApiRegisterParams, Category, Item, Session} from './interface';
+import { User, Item, Category } from './interface';
+import { RegisterParams, LoginParams } from './params';
 
-const url = (path: string, param?: Record<string, string>) =>
-  `http://localhost:4000${path}` +
-  (param ? '?' + new URLSearchParams(param).toString() : '');
+axios.defaults.baseURL = 'http://localhost:4000';
+axios.defaults.withCredentials = true;
 
-export const apiRegister = (username: string, password: string, nickname: string) => {
-  return axios.post<ApiRegisterParams>(url('/api/auth/register'), {
-    username: username,
-    password: password,
-    nickname: nickname,
-  });
-};
+const auth = (token: string) => ({ Authorization: `Bearer ${token}` });
 
-export const apiLogin = (username: string, password: string) => {
-  return axios
-      .post<ApiLoginParams>(url('/api/auth/login'),
-          {
-          username: username,
-          password: password,
-        }
-      )
-};
+export const apiRegister = (data: RegisterParams) =>
+  axios.post('/register', data);
 
-export const apiLogout = (token: string) => {
-  return axios.post(url('/login'), null);
-};
+export const apiLogin = (data: LoginParams) =>
+  /*
+  json-server 사용을 위해 GET 메소드로 임시 교체
+  
+  axios.post<{ accessToken: string }>('/api/auth/login', data); 
+  */
+  axios.get<{ accessToken: string }>('/login');
 
-export const apiRefresh = () => {
-  return axios.get<{ accessToken: string }>(url('/login/accessToken'));
-};
+export const apiLogout = (token: string) =>
+  /*
+  json-server 사용을 위해 GET 메소드로 임시 교체
 
-export const apiCheckUsername = () => {
-  return axios.get<{ duplicate: boolean }>(url('/check'));
-};
+  axios.post('/api/auth/logout', null, { headers: auth(token) });
+  */
+  axios.get('/logout');
 
-export const apiCheckNickname = () => {
-  return axios.get<{ duplicate: boolean }>(url('/check'));
-};
+export const apiRefresh = () =>
+  /*
+  json-server 사용을 위해 GET 메소드로 임시 교체
+  
+  axios.post<{ accessToken: string }>('/api/auth/refresh');
+  */
+  axios.get<{ accessToken: string }>('/refresh');
+
+export const apiCheckUsername = (username: string) =>
+  axios.post<{ isUnique: boolean }>('/username', { username });
+
+export const apiCheckNickname = (nickname: string) =>
+  axios.post<{ isUnique: boolean }>('/nickname', { nickname });
+
+export const apiGetMyInfo = (token: string) =>
+  axios.get<{ user: User }>('/me', { headers: auth(token) });
 
 export function useApiData<T>(
   fetch: ((cancel: CancelToken) => Promise<AxiosResponse<T>>) | null
@@ -83,11 +89,23 @@ export function useApiData<T>(
   return { data, loading, error };
 }
 
+export const useApiItemFetcher = (id: number | null) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) =>
+      axios.get<{ item: Item }>(`/api/item/${id}`, { cancelToken }),
+    [id]
+  );
+  return id === null ? null : f;
+};
+
 export const useApiItemListFetcher = (category: Category | null) => {
   const f = useCallback(
     (cancelToken: CancelToken) =>
-      axios.get<{ data: Item[] }>(url('/data'), { cancelToken }),
-    []
+      axios.get<{ items: Item[] }>('/items', {
+        params: { category: category ? category : undefined },
+        cancelToken,
+      }),
+    [category]
   );
   return f;
 };

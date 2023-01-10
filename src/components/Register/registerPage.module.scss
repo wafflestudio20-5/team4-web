@@ -1,5 +1,7 @@
 .background {
-  background: #f1f1f1 url(https://static.msscdn.net/ui/build/m/img/old/bg_join.gif?v=20221228155530) repeat-y 50% 0;
+  background: #f1f1f1
+    url(https://static.msscdn.net/ui/build/m/img/old/bg_join.gif?v=20221228155530)
+    repeat-y 50% 0;
   width: 100%;
   position: fixed;
   top: 0;
@@ -44,7 +46,8 @@
             display: inline-block;
             line-height: 21px;
             font-size: 14px;
-            font-family: '-apple-system',HelveticaNeue,Roboto,'Noto Sans KR',helvetica,Gulim,sans-serif;
+            font-family: '-apple-system', HelveticaNeue, Roboto, 'Noto Sans KR',
+              helvetica, Gulim, sans-serif;
             .inputIdDot {
               display: inline-block;
               width: 4px;
@@ -71,7 +74,6 @@
               padding: 0 12px;
               border: 0px;
             }
-
           }
         }
         .inputPasswordArea {
@@ -86,7 +88,8 @@
             display: inline-block;
             line-height: 21px;
             font-size: 14px;
-            font-family: '-apple-system',HelveticaNeue,Roboto,'Noto Sans KR',helvetica,Gulim,sans-serif;
+            font-family: '-apple-system', HelveticaNeue, Roboto, 'Noto Sans KR',
+              helvetica, Gulim, sans-serif;
             .inputPasswordDot {
               display: inline-block;
               width: 4px;
@@ -112,7 +115,6 @@
               height: 48px;
               padding: 0 12px 0 12px;
               border: 0px;
-
             }
             .inputPasswordMessage {
               width: 100%;
@@ -140,7 +142,6 @@
               border: 0px;
               padding: 0 12px 0 12px;
             }
-
           }
         }
         .inputNickArea {
@@ -155,7 +156,8 @@
             display: inline-block;
             line-height: 21px;
             font-size: 14px;
-            font-family: '-apple-system',HelveticaNeue,Roboto,'Noto Sans KR',helvetica,Gulim,sans-serif;
+            font-family: '-apple-system', HelveticaNeue, Roboto, 'Noto Sans KR',
+              helvetica, Gulim, sans-serif;
             .inputNickDot {
               display: inline-block;
               width: 4px;
@@ -182,7 +184,6 @@
               padding: 0 12px 0 12px;
             }
           }
-
         }
         .inputRecommendIdArea {
           height: 95px;
@@ -196,7 +197,8 @@
             display: inline-block;
             line-height: 21px;
             font-size: 14px;
-            font-family: '-apple-system',HelveticaNeue,Roboto,'Noto Sans KR',helvetica,Gulim,sans-serif;
+            font-family: '-apple-system', HelveticaNeue, Roboto, 'Noto Sans KR',
+              helvetica, Gulim, sans-serif;
           }
           .inputRecommendIdWrap {
             width: 100%;
@@ -227,12 +229,11 @@
             font-family: Gulim;
             font-weight: bold;
 
-
             .allCheckButton {
               width: 20px;
               height: 20px;
               border: 1px solid #999;
-              background-color: #F1F1F1;
+              background-color: #f1f1f1;
               cursor: pointer;
             }
             .allCheckText {
@@ -251,7 +252,7 @@
               width: 17px;
               height: 17px;
               border: 1px solid #999;
-              background-color: #F1F1F1;
+              background-color: #f1f1f1;
               cursor: pointer;
               position: relative;
               bottom: 3px;
@@ -265,7 +266,7 @@
           height: 50px;
           margin-top: 40px;
           background-color: white;
-          .signupButtonF{
+          .signupButtonF {
             display: block;
             width: 100%;
             box-sizing: border-box;
@@ -277,7 +278,7 @@
             border: 1px;
             border-radius: 4px;
           }
-          .signupButtonT{
+          .signupButtonT {
             display: block;
             width: 100%;
             box-sizing: border-box;
@@ -301,7 +302,8 @@
             background-color: white;
             font-size: 14px;
             line-height: 21px;
-            font-family: '-apple-system',HelveticaNeue,Roboto,'Noto Sans KR',helvetica,Gulim,sans-serif;
+            font-family: '-apple-system', HelveticaNeue, Roboto, 'Noto Sans KR',
+              helvetica, Gulim, sans-serif;
             text-align: left;
             color: #777;
           }
@@ -311,7 +313,6 @@
           a:visited {
             color: #007aff;
           }
-
         }
       }
     }
@@ -326,5 +327,4 @@
     background: 0 0;
     font-family: Gulim;
   }
-
 }
