@@ -26,7 +26,7 @@ interface RegisterPageProps {
     input: inputParams;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     check: {all: boolean, first: boolean, second: boolean, third: boolean, fourth: boolean};
-
+    firstInputPassword: boolean;
 
 }
 export default function RegisterPage({setFirstInputId, IdCheck,
@@ -34,7 +34,8 @@ export default function RegisterPage({setFirstInputId, IdCheck,
                                      PasswordCheck, setFirstInputRePassword, RePasswordCheck,
                                          NicknameCheck, allBtnEvent,
                                          firstBtnEvent, secondBtnEvent, thirdBtnEvent, fourthBtnEvent,
-                                         registerButtonActivate, registerButtonFunction, input, onChange, check}:RegisterPageProps,
+                                         registerButtonActivate, registerButtonFunction, input, onChange, check,
+                                     firstInputPassword}:RegisterPageProps,
                                      ) {
     const {id, password, repassword, nickname} = input;
     return (
@@ -60,67 +61,68 @@ export default function RegisterPage({setFirstInputId, IdCheck,
                                         onChange(e);}}></input>
                                     {IdCheck().message}
                                 </div>
-                                <div className={styles.inputPasswordArea}>
-                                    <label className={styles.inputPasswordLabel} htmlFor="inputPassword">
-                                        비밀번호
-                                        <span className={styles.inputPasswordDot}>
+                            </div>
+                            <div className={styles.inputPasswordArea}>
+                                <label className={styles.inputPasswordLabel} htmlFor="inputPassword">
+                                    비밀번호
+                                    <span className={styles.inputPasswordDot}>
                                     </span>
-                                    </label>
-                                    <div className={styles.inputPasswordWrap}>
-                                        <input className={styles.inputPassword} name="password" value={password} placeholder="숫자, 영문, 특수문자 조합 최소 8자" type="password" maxLength={30} id="inputPassword"
-                                        onChange={(e)=>{
-                                            setFirstInputPassword(true);
-                                            onChange(e);
+                                </label>
+                                <div className={styles.inputPasswordWrap}>
+                                    <input className={styles.inputPassword} name="password" value={password} placeholder="숫자, 영문, 특수문자 조합 최소 8자" type="password" maxLength={30} id="inputPassword"
+                                           onChange={(e)=>{
+                                               setFirstInputPassword(true);
+                                               onChange(e);
 
-                                        }}></input>
-                                        {PasswordCheck().message}
-                                    </div>
+                                           }}></input>
                                 </div>
-                                <div className={styles.inputRepeatArea}>
-                                    <div className={styles.inputRepeatWrap}>
-                                        <input className={styles.inputRepeat} name="repassword" value={repassword} placeholder="비밀번호 재입력" type="password"
-                                        onChange={
-                                            (e)=>{
-                                                setFirstInputRePassword(true);
-                                                onChange(e);
-                                            }
-                                        }></input>
-                                        {RePasswordCheck().message}
-
-                                    </div>
+                            </div>
+                            {firstInputPassword ? <div className={styles.inputPasswordMessage}>{PasswordCheck().message}</div> : null}
+                            <div className={styles.inputRepeatArea}>
+                                <div className={styles.inputRepeatWrap}>
+                                    <input className={styles.inputRepeat} name="repassword" value={repassword} placeholder="비밀번호 재입력" type="password"
+                                           onChange={
+                                               (e)=>{
+                                                   setFirstInputRePassword(true);
+                                                   onChange(e);
+                                               }
+                                           }></input>
+                                    {RePasswordCheck().message}
 
                                 </div>
-                                <div className={styles.inputNickArea}>
-                                    <label className={styles.inputNickLabel} htmlFor="inputNick">
-                                        닉네임
-                                        <span className={styles.inputNickDot}></span>
-                                    </label>
-                                    <div className={styles.inputNickWrap}>
-                                        <input className={styles.inputNick} id="inputNick" name="nickname" value={nickname}
-                                        onChange={(e)=>{
-                                            onChange(e);
-                                        }}></input>
-                                    </div>
-                                    {NicknameCheck().message}
+
+                            </div>
+                            <div className={styles.inputNickArea}>
+                                <label className={styles.inputNickLabel} htmlFor="inputNick">
+                                    닉네임
+                                    <span className={styles.inputNickDot}></span>
+                                </label>
+                                <div className={styles.inputNickWrap}>
+                                    <input className={styles.inputNick} id="inputNick" name="nickname" value={nickname}
+                                           onChange={(e)=>{
+                                               onChange(e);
+                                           }}></input>
                                 </div>
-                                <div className={styles.inputRecommendIdArea}>
-                                    <label className={styles.inputRecommendIdLabel}>
-                                        친구 초대 추천인 아이디
-                                    </label>
-                                    <div className={styles.inputRecommendIdWrap}>
-                                        <input className={styles.inputRecommendId}></input>
-                                    </div>
+                                {NicknameCheck().message}
+                            </div>
+                            <div className={styles.inputRecommendIdArea}>
+                                <label className={styles.inputRecommendIdLabel}>
+                                    친구 초대 추천인 아이디
+                                </label>
+                                <div className={styles.inputRecommendIdWrap}>
+                                    <input className={styles.inputRecommendId}></input>
                                 </div>
-                                <div className={styles.agreementForm}>
-                                    <div className={styles.checkboxAll}>
-                                        <input type="checkbox" id="checkboxAll" checked={check.all} onChange={allBtnEvent} className={styles.allCheckButton}></input>
-                                        <label htmlFor="checkboxAll" className={styles.allCheckText}>
-                                            약관 전체 동의하기
-                                        </label>
-                                    </div>
-                                    <div className={styles.checkbox}>
-                                        <input type="checkbox" id="checkboxFirst" checked={check.first} onChange={firstBtnEvent} className={styles.oneCheckButton}></input>
-                                        <span className={styles.oneCheckText}>
+                            </div>
+                            <div className={styles.agreementForm}>
+                                <div className={styles.checkboxAll}>
+                                    <input type="checkbox" id="checkboxAll" checked={check.all} onChange={allBtnEvent} className={styles.allCheckButton}></input>
+                                    <label htmlFor="checkboxAll" className={styles.allCheckText}>
+                                        약관 전체 동의하기
+                                    </label>
+                                </div>
+                                <div className={styles.checkbox}>
+                                    <input type="checkbox" id="checkboxFirst" checked={check.first} onChange={firstBtnEvent} className={styles.oneCheckButton}></input>
+                                    <span className={styles.oneCheckText}>
                                         <label htmlFor="checkboxFirst">
                                             [필수]개인정보 수집 및 이용 동의
                                         </label>
@@ -128,49 +130,48 @@ export default function RegisterPage({setFirstInputId, IdCheck,
                                             자세히
                                         </button>
                                         </span>
-                                    </div>
-                                    <div className={styles.checkbox}>
-                                        <input type="checkbox" id="checkboxSecond" checked={check.second} onChange={secondBtnEvent} className={styles.oneCheckButton}></input>
-                                        <span className={styles.oneCheckText}><label htmlFor="checkboxSecond">
+                                </div>
+                                <div className={styles.checkbox}>
+                                    <input type="checkbox" id="checkboxSecond" checked={check.second} onChange={secondBtnEvent} className={styles.oneCheckButton}></input>
+                                    <span className={styles.oneCheckText}><label htmlFor="checkboxSecond">
                                             [필수]무신사, 무신사 스토어 이용 약관
                                         </label>
                                         <button className={styles.inDetail}>
                                             자세히
                                         </button></span>
-                                    </div>
-                                    <div className={styles.checkbox}>
-                                        <input type="checkbox" id="checkboxThird" checked={check.third} onChange={thirdBtnEvent} className={styles.oneCheckButton}></input>
-                                        <span className={styles.oneCheckText}><label htmlFor="checkboxThird">
+                                </div>
+                                <div className={styles.checkbox}>
+                                    <input type="checkbox" id="checkboxThird" checked={check.third} onChange={thirdBtnEvent} className={styles.oneCheckButton}></input>
+                                    <span className={styles.oneCheckText}><label htmlFor="checkboxThird">
                                             [필수]만 14세 미만 가입 제한
                                         </label></span>
-                                    </div>
-                                    <div className={styles.checkbox}>
-                                        <input type="checkbox" id="checkboxFourth" checked={check.fourth} onChange={fourthBtnEvent} className={styles.oneCheckButton}></input>
-                                        <span className={styles.oneCheckText}><label htmlFor="checkboxFourth">
+                                </div>
+                                <div className={styles.checkbox}>
+                                    <input type="checkbox" id="checkboxFourth" checked={check.fourth} onChange={fourthBtnEvent} className={styles.oneCheckButton}></input>
+                                    <span className={styles.oneCheckText}><label htmlFor="checkboxFourth">
                                             [선택]마케팅 활용 및 광고성 정보 수신 동의
                                         </label>
                                         <button className={styles.inDetail}>
                                             자세히
                                         </button></span>
-                                    </div>
-                                    <div className={styles.signupButtonArea}>
-                                        <button className={registerButtonActivate ? styles.signupButtonT : styles.signupButtonF}
-                                        onClick={registerButtonFunction}>
-                                            본인인증하고 가입하기
-                                        </button>
-                                    </div>
-                                    <ul className={styles.signupButtonHelper}>
-                                        <li className={styles.signupButtonHelperText}>
-                                            본인인증이 어려운 경우(만 14세 미만 포함),&nbsp;
-                                            <a href="/login">비회원으로 구매</a>
-                                            할 수 있습니다.
-                                        </li>
-                                    </ul>
-
                                 </div>
-
+                                <div className={styles.signupButtonArea}>
+                                    <button className={registerButtonActivate ? styles.signupButtonT : styles.signupButtonF}
+                                            onClick={registerButtonFunction}>
+                                        본인인증하고 가입하기
+                                    </button>
+                                </div>
+                                <ul className={styles.signupButtonHelper}>
+                                    <li className={styles.signupButtonHelperText}>
+                                        본인인증이 어려운 경우(만 14세 미만 포함),&nbsp;
+                                        <a href="/login">비회원으로 구매</a>
+                                        할 수 있습니다.
+                                    </li>
+                                </ul>
 
                             </div>
+
+
 
                         </div>
 

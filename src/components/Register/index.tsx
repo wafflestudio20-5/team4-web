@@ -312,6 +312,7 @@ function RegisterPagePage() {
                 input={input}
                 onChange={onChange}
                 check={check}
+                firstInputPassword={firstInputPassword}
 
             />
         </>
