@@ -14,12 +14,17 @@ interface ItemListCategoryProps {
   setSelectedCategory: React.Dispatch<React.SetStateAction<Category | null>>;
 }
 
+const ITEMS_FETCH_AMOUNT = 16;
+
 export default function ItemList() {
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(
     null
   );
   const { data: itemsData } = useApiData(
-    useApiItemListFetcher(selectedCategory)
+    useApiItemListFetcher({
+      count: ITEMS_FETCH_AMOUNT,
+      category: selectedCategory ?? undefined,
+    })
   );
   const items = itemsData?.items ?? null;
   const categorys = Object.values(Category);

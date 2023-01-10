@@ -3,15 +3,14 @@ import { Route, Routes, Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../store';
 import { postLogout } from '../../store/slices/session';
-import { Session } from '../../lib/interface';
 import MyPageHeader, { MyPageHeaderProps } from './MyPageHeader/';
 import MyPageNavigation from './MyPageNavigation';
 import MyPageMain from './MyPageMain';
 import MyPageInfo from './MyPageInfo';
 import MyPageOrder from './MyPageOrder';
 import MyPageViewed from './MyPageViewed';
-
 import Footer from '../Footer';
+import { Session } from '../../lib/interface';
 
 function MyPageLayout({ user, onLogout }: MyPageHeaderProps) {
   return (

@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { apiLogin, apiLogout, apiRefresh, apiGetMyInfo } from '../../lib/api';
-import { LoginParams } from '../../lib/params';
+import { LoginDto } from '../../lib/dto';
 import { Session } from '../../lib/interface';
 
 const initialState: Session = {
@@ -9,7 +9,7 @@ const initialState: Session = {
   accessToken: null,
 };
 
-export const postLogin = createAsyncThunk<Session, LoginParams>(
+export const postLogin = createAsyncThunk<Session, LoginDto>(
   'session/login',
   async (body, { rejectWithValue }) => {
     try {
@@ -21,7 +21,7 @@ export const postLogin = createAsyncThunk<Session, LoginParams>(
       };
     } catch (error) {
       const axiosError = error as AxiosError;
-      return rejectWithValue(axiosError.response);
+      return rejectWithValue(axiosError.response?.data);
     }
   }
 );
