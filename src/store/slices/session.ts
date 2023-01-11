@@ -11,9 +11,9 @@ const initialState: Session = {
 
 export const postLogin = createAsyncThunk<Session, LoginDto>(
   'session/login',
-  async (body, { rejectWithValue }) => {
+  async ({ username, password }, { rejectWithValue }) => {
     try {
-      const loginResponse = await apiLogin(body);
+      const loginResponse = await apiLogin(username, password);
       const myInfoResponse = await apiGetMyInfo(loginResponse.data.accessToken);
       return {
         user: myInfoResponse.data.user,
