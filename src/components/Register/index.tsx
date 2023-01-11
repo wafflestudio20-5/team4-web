@@ -88,6 +88,7 @@ function RegisterPage() {
                 '숫자, 영문 대소문자, 특수문자 중 두가지 이상으로 조합해 주십시오.',
             };
           } else {
+            setFirstInputPassword(false);
             return { message: '' };
           }
         }
