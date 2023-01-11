@@ -290,6 +290,19 @@
             border: 1px;
             border-radius: 4px;
           }
+          .signupButtonT:hover {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            height: 50px;
+            padding: 14px 16px 15px;
+            border-color: #0078ff;
+            background-color: #0078ff;
+            color: #fff;
+            border: 1px;
+            border-radius: 4px;
+            cursor: pointer;
+          }
         }
         .signupButtonHelper {
           height: 42px;
