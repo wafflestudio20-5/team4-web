@@ -23,7 +23,7 @@ export interface Item {
   sex: string;
   name: string;
   brand: string;
-  image: string;
+  images: string[];
   rating: number;
   oldPrice: number;
   sale?: number;
@@ -38,7 +38,7 @@ export interface Purchase {
   id: number;
   user: User;
   item: Item;
-  date: string;
+  createdDate: string;
   payment: number;
   quantity: number;
   option?: string;
@@ -47,20 +47,41 @@ export interface Purchase {
 export interface Review {
   id: number;
   user: User;
-  text: string;
-  date: string;
+  content: string;
+  createdAt: string;
   size: string;
   color: string;
   rating: number;
   purchase: Purchase;
   comments: Comment[];
+  images: string[];
 }
 
 export interface Comment {
   id: number;
   user: User;
-  text: string;
-  date: string;
+  content: string;
+  createdAt: string;
+}
+
+export interface Inquiry {
+  id: number;
+  user: User;
+  isAnswered: boolean;
+  type: InquiryType;
+  options: string[];
+  title: string;
+  content: string;
+  images: string[];
+  isSecret: boolean;
+  createdAt: string;
+}
+
+export enum InquiryType {
+  size = 'size',
+  delivery = 'delivery',
+  restock = 'restock',
+  detail = 'detail',
 }
 
 export enum Label {

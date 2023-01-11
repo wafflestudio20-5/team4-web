@@ -21,7 +21,11 @@ export default function ItemPreview({ item, idx }: ItemPreviewProps) {
     >
       {item?.label ? <ItemLabel label={item?.label}></ItemLabel> : null}
       <div className={styles.rank}>{idx + 1}위</div>
-      <img className={styles.previewImage} src={item.image} alt="상품 이미지" />
+      <img
+        className={styles.previewImage}
+        src={item.images[0]}
+        alt="상품 이미지"
+      />
       <div className={styles.brand}>{item.brand}</div>
       <div className={styles.name}>{item.name}</div>
       <div className={styles.price}>

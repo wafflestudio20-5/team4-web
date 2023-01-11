@@ -13,7 +13,7 @@ export default function ItemViewed({ item }: ItemViewedProps) {
     <div className={styles.itemPreview}>
       <img
         className={styles.previewImage}
-        src={item.image}
+        src={item.images[0]}
         alt="상품 이미지"
         onClick={() => {
           navigate(`/goods/${item.id}`);
