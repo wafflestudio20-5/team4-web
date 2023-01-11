@@ -48,7 +48,7 @@ export interface Review {
   id: number;
   user: User;
   content: string;
-  createdAt: string;
+  createdDateTime: string;
   size: string;
   color: string;
   rating: number;
@@ -61,7 +61,7 @@ export interface Comment {
   id: number;
   user: User;
   content: string;
-  createdAt: string;
+  createdDateTime: string;
 }
 
 export interface Inquiry {
@@ -74,7 +74,7 @@ export interface Inquiry {
   content: string;
   images: string[];
   isSecret: boolean;
-  createdAt: string;
+  createdDateTime: string;
 }
 
 export enum InquiryType {
