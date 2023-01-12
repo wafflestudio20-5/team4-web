@@ -1,0 +1,146 @@
+.wrap {
+  flex: 7;
+}
+
+.nav_sub {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: top;
+  background: transparent;
+}
+
+.pagenation {
+  height: 25px;
+  line-height: 12px;
+  padding: 15px 18px 0 50px;
+  padding-top: 15px;
+  padding-right: 18px;
+  padding-bottom: 0px;
+  padding-left: 50px;
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  border-bottom: 1px solid #ddd;
+
+  a {
+    text-decoration: none;
+  }
+
+  .iconEntity {
+    padding: 0 5px;
+  }
+}
+
+.rightContents {
+  clear: both;
+  position: relative;
+  padding: 3px 20px;
+  border-bottom: 1px solid #ddd;
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  .titlePage {
+    font-size: 24px;
+    height: 17px;
+    line-height: 17px;
+    font-weight: normal;
+    display: inline-block;
+  }
+  .pagesorting {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    a {
+      text-decoration: none;
+    }
+
+    span {
+      font-size: 14px;
+      color: #b3b3b3;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    .iconEntity {
+      padding: 0 5px;
+    }
+
+    .currentPage {
+      color: #000;
+    }
+  }
+
+  .arrowRight {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    font-size: 14px !important;
+    vertical-align: middle;
+    overflow: hidden;
+  }
+}
+
+.orderDelivery {
+  padding: 15px 20px 20px 20px;
+  font-family: 'AppleSDGothicNeo', 'Apple SD Gothic Neo',
+    'Apple SD 산돌고딕 Neo', sans-serif !important;
+  font-size: 14px;
+  line-height: 1.5;
+
+  .orderTitle {
+    font-family: 'musinsa', 'AppleSDGothicNeo', 'Apple SD Gothic Neo',
+      'Apple SD 산돌고딕 Neo', sans-serif !important;
+    font-size: 18px;
+    margin-bottom: 12px;
+    font-weight: normal;
+  }
+
+  .orderList {
+    border: 1px solid #e5e5e5;
+
+    .orderItemDelivery {
+      display: flex;
+      align-items: center;
+      height: 46px;
+      .orderItemLabel {
+        display: inline-flex;
+        width: 140px;
+        padding: 0 10px;
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .orderItemArea {
+        display: flex;
+        align-items: center;
+        .orderTextAccent {
+          color: #0078ff;
+        }
+        .orderButton {
+          margin-left: 16px;
+          display: inline-block;
+          padding: 6px 10px;
+          border: 1px solid #e5e5e5;
+          font-size: 12px;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
+
+.orderProductInfo {
+  position: relative;
+  padding: 15px 20px 20px 20px;
+  .orderTitle {
+    font-family: 'musinsa', 'AppleSDGothicNeo', 'Apple SD Gothic Neo',
+      'Apple SD 산돌고딕 Neo', sans-serif !important;
+    font-size: 18px;
+    margin-bottom: 12px;
+    font-weight: normal;
+  }
+  .tableBasicOrder {
+    clear: both;
+    width: 100%;
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    text-align: center;
+    background: #fff;
+  }
+}

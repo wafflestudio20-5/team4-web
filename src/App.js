@@ -10,6 +10,7 @@ import DetailPage from './components/DetailPage';
 import MyPage from './components/MyPage/';
 import LoginPage from './components/Login/';
 import RegisterPage from './components/Register';
+import PurchasePage from './components/PurchasePage';
 
 function AppRoutes() {
   return (
@@ -22,6 +23,7 @@ function AppRoutes() {
             <Route path="/coupon" element={<></>} />
             <Route path="/customercenter" element={<></>} />
             <Route path="/goods/:id" element={<DetailPage />} />
+            <Route path="/purchase" element={<PurchasePage />} />
           </Route>
         </Route>
         <Route path="/mypage/*" element={<MyPage />} />
