@@ -183,11 +183,7 @@ function RegisterPage() {
     useState<boolean>(false);
   const registerButtonFunction = () => {
     if (registerButtonActivate === true) {
-      apiRegister({
-        username: input.id,
-        password: input.password,
-        nickname: input.nickname,
-      })
+      apiRegister(input.id, input.password, input.nickname)
         .then((r) => {
           console.log(r);
         })

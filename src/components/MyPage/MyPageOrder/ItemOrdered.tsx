@@ -6,7 +6,6 @@ interface ItemOrderedProps {
 }
 
 export default function ItemOrdered({ item }: ItemOrderedProps) {
-
   return (
     <div className={styles.grid_order}>
       <div className={styles.grid_header}>
@@ -14,7 +13,7 @@ export default function ItemOrdered({ item }: ItemOrderedProps) {
           <div className={styles.ImageDiv}>
             <img
               className={styles.previewImage}
-              src={item.image}
+              src={item.images[0]}
               alt="상품 이미지"
             />
           </div>
