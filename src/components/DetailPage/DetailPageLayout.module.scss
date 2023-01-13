@@ -1,0 +1,20 @@
+.wrapper {
+  margin-top: 36px;
+  width: 100%;
+  padding: 25px 30px 20px 30px;
+  border-bottom: 1px solid #ddd;
+}
+
+.category {
+  padding-top: 5px;
+  padding-bottom: 10px;
+  span {
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    color: #b2b2b2;
+    a {
+      text-decoration: underline;
+      color: inherit;
+      cursor: pointer;
+    }
+  }
+}
