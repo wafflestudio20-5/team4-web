@@ -1,0 +1,119 @@
+.orderProductInfo {
+  position: relative;
+  padding: 15px 20px 20px 20px;
+  .orderTitle {
+    font-family: 'musinsa', 'AppleSDGothicNeo', 'Apple SD Gothic Neo',
+      'Apple SD 산돌고딕 Neo', sans-serif !important;
+    font-size: 18px;
+    margin-bottom: 12px;
+    font-weight: normal;
+  }
+  .tableBasicOrder {
+    clear: both;
+    width: 100%;
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-collapse: collapse;
+    th {
+      border: 1px solid #e5e5e5;
+    }
+    .Item {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+
+      .ImageDiv {
+        flex: 1;
+        display: flex;
+        padding: 3px 0px;
+        .previewImage {
+          width: 62px;
+          margin: auto;
+          display: block;
+        }
+      }
+      .ItemInfo {
+        position: relative;
+        margin: 0px 10px;
+        float: left;
+        flex: 4;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        div {
+          padding-bottom: 8px;
+          text-align: left;
+          .brand {
+            font-size: 14px;
+          }
+          .name {
+            margin-left: 5px;
+            font-weight: normal;
+            font-size: 14px;
+          }
+        }
+        .InfoLine {
+          height: 20px;
+          line-height: 20px;
+          width: 90%;
+          background-color: #f3f3f3;
+          border: 1px solid #ddd;
+          display: flex;
+          .option {
+            padding-top: 4px;
+            padding-left: 5px;
+          }
+        }
+      }
+    }
+
+    .th1 {
+      height: 40px;
+    }
+
+    td {
+      border: 1px solid #e5e5e5;
+    }
+    em {
+      display: inline-block;
+      font-style: normal;
+    }
+    del {
+      display: block;
+      clear: both;
+      font-size: 11px;
+      line-height: 16px;
+      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      color: #999;
+      font-weight: normal;
+    }
+  }
+
+  .announcement {
+    div {
+      display: table-cell;
+      box-sizing: border-box;
+    }
+    ul {
+      list-style: none;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      padding-inline-start: 0px;
+    }
+    li {
+      width: 100%;
+      list-style: none;
+      color: #b2b2b2;
+      line-height: 24px;
+      span {
+        color: #000;
+        text-decoration: underline;
+        font-weight: bold;
+      }
+    }
+  }
+}
