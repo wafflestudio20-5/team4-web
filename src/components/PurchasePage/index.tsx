@@ -3,6 +3,7 @@ import OrderProductInfo from './OrderProductInfo';
 import PurchasePageHeader from './PurchasePageHeader';
 import OrderDelivery from './OrderDelivery';
 import { Category, Label, Purchase, SubCategory } from '../../lib/interface';
+import OrderPurchase from './OrderPurchase';
 
 export default function PurchasePage() {
   // shoppingcart & DetailPage 에서 uselocation을 통해 {Item, option, quantity}[] 받아오기
@@ -72,6 +73,7 @@ export default function PurchasePage() {
       <form className={styles.f1}>
         <OrderDelivery />
         <OrderProductInfo purchaseList={purchaseList} />
+        <OrderPurchase />
       </form>
     </div>
   );
