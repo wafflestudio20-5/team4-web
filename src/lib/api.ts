@@ -76,13 +76,18 @@ export const useApiItemListFetcher = (
 ) => {
   const f = useCallback(
     (cancelToken: CancelToken) => {
-      // 백엔드에서 API 수정 사항 반영 전이므로 별도로 params 정의
-      const params = {
-        category: category,
-        nextItemId: null,
-      };
+      // // 백엔드에서 API 수정 사항 반영 전이므로 별도로 params 정의
+      // const params = {
+      //   category: category,
+      //   nextItemId: null,
+      // };
       return axios.get<{ items: Item[] }>('/api/items', {
-        params,
+        params: {
+          category: category,
+          subCategory: subCategory,
+          count: count,
+          index: index,
+        },
         cancelToken,
       });
     },
