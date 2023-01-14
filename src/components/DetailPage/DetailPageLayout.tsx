@@ -38,6 +38,23 @@ function DetailPageHeader({
   );
 }
 
+interface DetailPageBodyProps {
+  images: string[];
+}
+
+function DetailPageBody({ images }: DetailPageBodyProps) {
+  return (
+    <div className={styles.body}>
+      <div className={styles.body_left}>
+        <div className={styles.image}>
+          <img src={images[0]} alt="상품 이미지를 가져오는 데 실패했습니다." />
+        </div>
+      </div>
+      <div className={styles.body_right}></div>
+    </div>
+  );
+}
+
 interface DetailPageLayoutProps {
   item: Item;
 }
@@ -50,6 +67,7 @@ export default function DetailPageLayout({ item }: DetailPageLayoutProps) {
         category={item.category}
         subCategory={item.subCategory}
       />
+      <DetailPageBody images={item.images} />
     </div>
   );
 }
