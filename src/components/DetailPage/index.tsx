@@ -1,15 +1,30 @@
-import { useApiItemFetcher, useApiData } from '../../lib/api';
-import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { AxiosError } from 'axios';
+import { toast } from 'react-toastify';
+import DetailPageLayout from './DetailPageLayout';
+import { useApiData, useApiItemFetcher } from '../../lib/api';
 
 export default function DetailPage() {
-  const param: number = Number(useParams().id);
-  const item = useApiData(useApiItemFetcher(param)).data?.item;
+  const { id } = useParams<{ id: string }>();
+  const parsedId = id ? parseInt(id) : null;
 
-  return (
-    <>
-      <div>{item?.id}</div>
-      <div>{item?.name}</div>
-      <div>{item?.brand}</div>
-    </>
-  );
+  const { data, error } = useApiData(useApiItemFetcher(parsedId));
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (error) {
+      const payload = error.payload as AxiosError;
+      console.log(payload);
+      if (payload.response?.status === 404) {
+        toast('해당하는 상품을 찾을 수 없습니다.');
+        navigate('/');
+      }
+    }
+  }, [error, navigate]);
+
+  if (data) {
+    return <DetailPageLayout item={data.item} />;
+  }
 }
