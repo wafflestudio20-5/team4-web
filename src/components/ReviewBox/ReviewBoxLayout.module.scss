@@ -28,7 +28,105 @@
   }
   .reviewContent {
     width: 958px;
-    height: 40px;
+    min-height: 40px;
     background-color: yellow;
   }
+  .reviewCommentCount {
+    width: 905px;
+    height: 18px;
+    padding-left: 53px;
+    margin-bottom: 20px;
+    background-color: gray;
+  }
+  .reviewCommentList {
+    width: 890px;
+    height: auto;
+    padding-left: 53px;
+    padding-bottom: 15px;
+    padding-right: 15px;
+    background-color: orange;
+    .reviewCommentInput {
+      width: 778px;
+      height: 34px;
+      padding-top: 10px;
+      padding-right: 95px;
+      padding-bottom: 10px;
+      padding-left: 15px;
+      border: 1px solid black;
+      position: relative;
+      .reviewCommentFakeInputBox {
+        width: 776px;
+        height: 32px;
+        border: 1px solid black;
+      }
+      .reviewCommentFakeSubmitButton {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 1px solid black;
+        position: absolute;
+        right: 15px;
+        top: 10px;
+        font-size: 12px;
+        font-family: "Apple SD Gothic Neo";
+        font-weight: bold;
+        line-height: 12px;
+        text-align: center;
+      }
+    }
+    .reviewMore {
+      width: 856px;
+      height: 38px;
+      border: 1px solid black;
+      margin-top: 15px;
+      margin-right: 15px;
+      margin-bottom: 15px;
+      margin-left: 15px;
+      .reviewMoreText {
+        display: block;
+        width: 856px;
+        height: 38px;
+        text-align: center;
+        position: relative;
+        top: 10px;
+        color: black;
+      }
+    }
+  }
+}
+.reviewBoxComment {
+  width: 858px;
+  height: auto;
+  padding: 15px;
+  border-top: 1px solid black;
+  background-color: lightblue;
+  .commentProfilePic {
+    width: 77px;
+    height: 77px;
+    border: 1px solid black;
+    border-radius: 50%;
+    float: left;
+  }
+  .commentContentBox {
+    width: 418px;
+    min-height: 50px;
+    margin-left: 90px;
+    margin-right: 350px;
+    background-color: darkseagreen;
+  }
+  .commentProfileDataArea {
+    width: 768px;
+    margin-left: 90px;
+    vertical-align: top;
+    .commentProfileData {
+      width: 768px;
+      padding-top: 15px;
+      padding-bottom: 14px;
+      font-size: 12px;
+      font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+
+    }
+  }
+
 }
