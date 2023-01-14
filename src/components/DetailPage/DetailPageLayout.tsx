@@ -7,7 +7,10 @@ import {
   displaySubCategory,
   displaySex,
 } from '../../lib/interface';
-import { formatRating } from '../../lib/formatters/ratingFormatter';
+import {
+  formatRating,
+  getBarWidth,
+} from '../../lib/formatters/ratingFormatter';
 import styles from './DetailPageLayout.module.scss';
 
 interface DetailPageHeaderProps {
@@ -40,13 +43,13 @@ function DetailPageHeader({
   );
 }
 
-interface DetailPageBodyLeftProps {
+interface ImageInfoProps {
   images: string[];
 }
 
-function DetailPageBodyLeft({ images }: DetailPageBodyLeftProps) {
+function ImageInfo({ images }: ImageInfoProps) {
   return (
-    <div className={styles.body_left}>
+    <>
       <div className={styles.image_main}>
         <img src={images[0]} alt="상품 이미지를 가져오는 데 실패했습니다." />
       </div>
@@ -57,45 +60,53 @@ function DetailPageBodyLeft({ images }: DetailPageBodyLeftProps) {
           </li>
         ))}
       </ul>
-    </div>
+    </>
   );
 }
 
-interface DetailPageBodyRightProps {
-  item: Item;
+interface ProductInfoProps {
+  brand: string;
+  sex: string;
+  rating: number;
 }
 
-function DetailPageBodyRight({ item }: DetailPageBodyRightProps) {
+function ProductInfo({ brand, sex, rating }: ProductInfoProps) {
   return (
-    <div className={styles.body_right}>
-      <div id="product_info" className={styles.info_box}>
-        <div className={styles.info_header}>
-          Product Info <span>제품정보</span>
-        </div>
-        <ul className={styles.info_body}>
-          <li>
-            <span className={styles.info_title}>브랜드</span>
-            <span className={styles.info_content}>{item.brand}</span>
-          </li>
-          <li>
-            <span className={styles.info_title}>성별</span>
-            <span className={styles.info_content}>{displaySex(item.sex)}</span>
-          </li>
-          <li>
-            {/* 구현할지 말지 고민 필요 */}
-            <span className={styles.info_title}>{'조회수(1개월)'}</span>
-            <span className={styles.info_content}>{'8.1만 회 이상'}</span>
-          </li>
-          <li>
-            <span className={styles.info_title}>구매 후기</span>
-            <span className={styles.info_content}>
-              {formatRating(item.rating)}
-            </span>
-          </li>
-        </ul>
+    <div className={styles.info_box}>
+      <div className={styles.info_header}>
+        Product Info <span>제품정보</span>
       </div>
-      <div id="delivery_info" className={styles.info_box}></div>
-      <div id="price_info" className={styles.info_box}></div>
+      <ul className={styles.info_body}>
+        <li>
+          <span className={styles.info_title}>브랜드</span>
+          <span className={styles.info_content}>{brand}</span>
+        </li>
+        <li>
+          <span className={styles.info_title}>성별</span>
+          <span className={styles.info_content}>{displaySex(sex)}</span>
+        </li>
+        <li>
+          {/* 구현할지 말지 고민 필요 */}
+          <span className={styles.info_title}>{'조회수(1개월)'}</span>
+          <span className={styles.info_content}>{'8.1만 회 이상'}</span>
+        </li>
+        <li>
+          <span className={styles.info_title}>구매 후기</span>
+          <span className={styles.info_content}>
+            <span className={styles.star_background}>
+              <span
+                className={styles.star_bar}
+                style={{
+                  width: `${getBarWidth(rating)}%`,
+                }}
+              />
+            </span>
+            <span className={styles.rating}>{formatRating(rating)}</span>
+            <span className={styles.slash}>/</span>
+            <span className={styles.review_link}>후기 550개 보기</span>
+          </span>
+        </li>
+      </ul>
     </div>
   );
 }
@@ -113,8 +124,12 @@ export default function DetailPageLayout({ item }: DetailPageLayoutProps) {
         subCategory={item.subCategory}
       />
       <div className={styles.body}>
-        <DetailPageBodyLeft images={item.images} />
-        <DetailPageBodyRight item={item} />
+        <div className={styles.body_left}>
+          <ImageInfo images={item.images} />
+        </div>
+        <div className={styles.body_right}>
+          <ProductInfo brand={item.brand} sex={item.sex} rating={item.rating} />
+        </div>
       </div>
     </div>
   );

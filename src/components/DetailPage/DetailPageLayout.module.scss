@@ -115,3 +115,40 @@
     font-weight: bold;
   }
 }
+
+.star_background {
+  display: inline-block;
+  width: 60px;
+  height: 12px;
+  background: url('../../resources/image/stars.png') no-repeat;
+  overflow: hidden;
+  vertical-align: middle;
+  .star_bar {
+    display: block;
+    height: 100%;
+    background: url('../../resources/image/stars.png') no-repeat 0 -120px;
+  }
+}
+
+.rating {
+  display: inline-block;
+  padding-left: 5px;
+  font-size: 12px;
+  font-weight: normal;
+  color: #aaa;
+}
+
+.slash {
+  display: inline-block;
+  padding: 0 3px;
+  font-size: 12px;
+  font-weight: normal;
+  color: #eee;
+}
+
+.review_link {
+  display: inline-block;
+  font-size: 12px;
+  color: #0078ff;
+  cursor: pointer;
+}
