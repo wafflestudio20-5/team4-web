@@ -1,12 +1,15 @@
 import { Link } from 'react-router-dom';
 import {
   Item,
+  Label,
   Category,
   SubCategory,
+  displaySex,
+  displayLabel,
   displayCategory,
   displaySubCategory,
-  displaySex,
 } from '../../lib/interface';
+import { getLabelDescription } from '../../lib/formatters/labelFormatter';
 import {
   formatRating,
   getBarWidth,
@@ -29,13 +32,9 @@ function DetailPageHeader({
       <div className={styles.category}>
         <span>
           {/* 백엔드 수정 이후에 고칠 예정 */}
-          <Link to="/">
-            {displayCategory(category.toLowerCase() as Category)}
-          </Link>
+          <Link to="/">{displayCategory(category)}</Link>
           {' > '}
-          <Link to="/">
-            {displaySubCategory(subCategory.toLowerCase() as SubCategory)}
-          </Link>
+          <Link to="/">{displaySubCategory(subCategory)}</Link>
         </span>
       </div>
       <div className={styles.name}>{name}</div>
@@ -62,6 +61,34 @@ function ImageInfo({ images }: ImageInfoProps) {
       </ul>
     </>
   );
+}
+
+interface LabelInfoProps {
+  label: Label | undefined;
+}
+
+function LabelInfo({ label }: LabelInfoProps) {
+  if (label && Object.keys(Label).includes(label))
+    return (
+      <div className={styles.info_box} style={{ paddingBottom: '18px' }}>
+        <div className={styles.info_header}>
+          {label.charAt(0).toUpperCase() + label.slice(1) + ' '}
+          <span>{displayLabel(label)}</span>
+        </div>
+        {label === Label.boutique && (
+          <ul className={styles.info_body}>
+            <li>
+              <span className={styles.info_title}>상품 구분</span>
+              <span className={styles.info_content}>부티크 상품</span>
+            </li>
+          </ul>
+        )}
+        <span className={styles.label_description}>
+          {getLabelDescription(label)}
+        </span>
+      </div>
+    );
+  else return null;
 }
 
 interface ProductInfoProps {
@@ -128,6 +155,7 @@ export default function DetailPageLayout({ item }: DetailPageLayoutProps) {
           <ImageInfo images={item.images} />
         </div>
         <div className={styles.body_right}>
+          <LabelInfo label={item.label} />
           <ProductInfo brand={item.brand} sex={item.sex} rating={item.rating} />
         </div>
       </div>
