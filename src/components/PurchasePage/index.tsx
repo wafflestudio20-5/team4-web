@@ -62,7 +62,7 @@ export default function PurchasePage() {
         category: Category.outer,
         subCategory: SubCategory.jacket,
       },
-      option: 'XL',
+      option: 'L',
       quantity: 2,
     },
   ];
