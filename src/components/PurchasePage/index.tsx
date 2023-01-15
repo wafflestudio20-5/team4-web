@@ -67,13 +67,36 @@ export default function PurchasePage() {
     },
   ];
 
+  const sumPrice = (purchaseList: Purchase[]): number => {
+    let sum = 0;
+    purchaseList.map((purchase) => {
+      sum += purchase.item.oldPrice;
+    });
+
+    return sum;
+  };
+
+  const sumSale = (purchaseList: Purchase[]): number => {
+    let sale = 0;
+    purchaseList.map((purchase) => {
+      purchase.item.newPrice
+        ? (sale += purchase.item.newPrice - purchase.item.oldPrice)
+        : (sale = sale);
+    });
+
+    return sale;
+  };
+
   return (
     <div className={styles.wrap}>
       <PurchasePageHeader />
       <form className={styles.f1}>
         <OrderDelivery />
         <OrderProductInfo purchaseList={purchaseList} />
-        <OrderPurchase />
+        <OrderPurchase
+          sumPrice={sumPrice(purchaseList)}
+          sumSale={sumSale(purchaseList)}
+        />
       </form>
     </div>
   );
