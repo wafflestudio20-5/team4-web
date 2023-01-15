@@ -138,6 +138,57 @@ function ProductInfo({ brand, sex, rating }: ProductInfoProps) {
   );
 }
 
+interface PriceInfoProps {
+  oldPrice: number;
+  newPrice: number | undefined;
+  sale: number | undefined;
+}
+
+function PriceInfo({ oldPrice, newPrice, sale }: PriceInfoProps) {
+  const point = newPrice
+    ? Math.floor(newPrice * 0.1)
+    : Math.floor(oldPrice * 0.1);
+  return (
+    <div className={styles.info_box}>
+      <div className={styles.info_header}>
+        Price Info <span>가격정보</span>
+      </div>
+      <ul className={styles.info_body}>
+        <li>
+          <span className={styles.info_title}>무신사 판매가</span>
+          <div className={styles.info_price}>
+            <span className={styles.old_price}>
+              {oldPrice.toLocaleString() + '원'}
+            </span>
+          </div>
+        </li>
+        {newPrice && sale && (
+          <li>
+            <span className={styles.info_title}>무신사 회원가</span>
+            <div className={styles.info_price}>
+              <span className={styles.new_price}>
+                {newPrice.toLocaleString() + '원'}
+              </span>
+              <span className={styles.sale}>
+                <span>{sale + '% 이상 할인'}</span>
+              </span>
+            </div>
+          </li>
+        )}
+        <li>
+          <span className={styles.info_title}>무신사 적립금</span>
+          <span className={styles.info_content}>
+            {point.toLocaleString() + '원'}
+          </span>
+        </li>
+      </ul>
+      <div className={styles.textbox_red}>
+        {' 전 상품 무료배송 (가구 등 일부 상품 제외) '}
+      </div>
+    </div>
+  );
+}
+
 interface DetailPageLayoutProps {
   item: Item;
 }
@@ -157,6 +208,11 @@ export default function DetailPageLayout({ item }: DetailPageLayoutProps) {
         <div className={styles.body_right}>
           <LabelInfo label={item.label} />
           <ProductInfo brand={item.brand} sex={item.sex} rating={item.rating} />
+          <PriceInfo
+            oldPrice={item.oldPrice}
+            newPrice={item.newPrice}
+            sale={item.sale}
+          />
         </div>
       </div>
     </div>
