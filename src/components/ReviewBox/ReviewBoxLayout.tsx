@@ -1,4 +1,5 @@
 import styles from "./ReviewBoxLayout.module.scss"
+import StarRate from "./StarRate";
 function ReviewBoxComment() {
 
     return <>
@@ -54,7 +55,9 @@ export default function ReviewBoxLayout() {
 
                 </div>
             </div>
-            <div className={styles.reviewRatingWrap}></div>
+            <div className={styles.reviewRatingWrap}>
+                <StarRate rating_score={6} review_id={3} />
+            </div>
 
             <div className={styles.reviewContent}>
                 <div className={styles.reviewContentText}>
