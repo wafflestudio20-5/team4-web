@@ -15,6 +15,7 @@ import {
   getBarWidth,
 } from '../../lib/formatters/ratingFormatter';
 import styles from './DetailPageLayout.module.scss';
+import close from '../../resources/image/close.png';
 
 interface DetailPageHeaderProps {
   name: string;
@@ -189,6 +190,68 @@ function PriceInfo({ oldPrice, newPrice, sale }: PriceInfoProps) {
   );
 }
 
+interface PurchaseAreaProps {
+  price: number;
+  options: string[] | undefined;
+}
+
+function PurchaseArea({ price, options }: PurchaseAreaProps) {
+  return (
+    <div className={styles.purchase_box}>
+      {options && (
+        <div className={styles.dropdown_wrapper}>
+          <div className={styles.dropdown}>
+            <select>
+              <option value="selected" selected>
+                옵션 선택
+              </option>
+              {options.map((option) => (
+                <option value={option}>{option}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+      )}
+      {
+        /* option 선택했을 때 */ options && (
+          <div className={styles.selected_wrapper}>
+            <ul>
+              {options.map((option, idx) => (
+                <li key={idx} className={styles.selected_bar}>
+                  <div className={styles.selected_option}>
+                    <span>{option}</span>
+                  </div>
+                  <div className={styles.selected_amount}>
+                    <button>-</button>
+                    <input type="text" value="1" />
+                    <button>+</button>
+                  </div>
+                  <div className={styles.selected_price}>
+                    <span>{price.toLocaleString() + '원'}</span>
+                    <button />
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+      {
+        /* 선택된 게 하나라도 있을 때 */ options && (
+          <div className={styles.total_wrapper}>
+            <span>총 상품 금액</span>
+            <span>{(price * options.length).toLocaleString() + '원'}</span>
+          </div>
+        )
+      }
+      <div className={styles.button_wrapper}>
+        <button className={styles.purchase_button}>바로구매</button>
+        <button className={styles.cart_button} />
+      </div>
+    </div>
+  );
+}
+
 interface DetailPageLayoutProps {
   item: Item;
 }
@@ -212,6 +275,10 @@ export default function DetailPageLayout({ item }: DetailPageLayoutProps) {
             oldPrice={item.oldPrice}
             newPrice={item.newPrice}
             sale={item.sale}
+          />
+          <PurchaseArea
+            price={item.newPrice ? item.newPrice : item.oldPrice}
+            options={item.options}
           />
         </div>
       </div>
