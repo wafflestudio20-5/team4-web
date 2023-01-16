@@ -104,10 +104,13 @@ export const useApiGetPurchaseListFetcher = (token: string | null) => {
 export const useApiGetCartListFetcher = (token: string | null) => {
   const f = useCallback(
     (cancelToken: CancelToken) => {
-      return axios.get<{ cartItems: Purchase[] }>('/api/user/me/shoppingcart', {
-        headers: token ? auth(token) : undefined,
-        cancelToken,
-      });
+      return axios.get<{ cartItems: Purchase[] }>(
+        '/api/user/me/shopping-cart',
+        {
+          headers: token ? auth(token) : undefined,
+          cancelToken,
+        }
+      );
     },
     [token]
   );
