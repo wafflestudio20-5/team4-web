@@ -8,7 +8,7 @@ export default function MyPageOrder({
   accessToken: string | null;
 }) {
   const { data: purchasesData } = useApiData(
-    useApiGetPurchaseListFetcher(5, accessToken)
+    useApiGetPurchaseListFetcher(accessToken)
   );
 
   const purchases = purchasesData?.purchaseitems ?? null;
