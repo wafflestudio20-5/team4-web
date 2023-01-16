@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import axios, { AxiosResponse, CancelToken } from 'axios';
 import { User, Item, Category, SubCategory, Purchase } from './interface';
-
+import { PurchasePostDto } from './dto';
 axios.defaults.withCredentials = true;
 
 const auth = (token: string) => ({ Authorization: `Bearer ${token}` });
@@ -100,6 +100,16 @@ export const useApiGetPurchaseListFetcher = (token: string | null) => {
   );
   return f;
 };
+
+export const apiPostPurchaseListFetcher = (
+  purchaseitems: PurchasePostDto[],
+  token: string | null
+) =>
+  axios.post<{}>(
+    '/api/user/me/purchases',
+    { purchaseitems },
+    { headers: token ? auth(token) : undefined }
+  );
 
 export const useApiGetCartListFetcher = (token: string | null) => {
   const f = useCallback(

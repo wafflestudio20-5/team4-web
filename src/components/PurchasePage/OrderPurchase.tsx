@@ -1,18 +1,49 @@
 import { useState } from 'react';
+import { Purchase } from '../../lib/interface';
+import { apiPostPurchaseListFetcher } from '../../lib/api';
+import { Session } from '../../lib/interface';
+import { RootState } from '../../store';
+import { useSelector } from 'react-redux';
 import styles from './OrderPurchase.module.scss';
 
 export default function OrderPurchase({
   sumPrice,
   sumSale,
+  purchaseList,
 }: {
   sumPrice: number;
   sumSale: number;
+  purchaseList: Purchase[];
 }) {
   const [price, setPrice] = useState({
     postPoint: 0,
     userPoint: 0,
     finalprice: 1000000,
   });
+
+  const session: Session = useSelector((state: RootState) => {
+    return state.session;
+  });
+
+  const { accessToken } = session;
+
+  const purchaseitems: {
+    id: number;
+    option: string | undefined;
+    payment: number;
+    quantity: number;
+  }[] = purchaseList.map((purchase) => {
+    return {
+      id: purchase?.item.id,
+      option: purchase?.option,
+      payment: purchase.item?.newPrice
+        ? purchase.item.newPrice * purchase.quantity
+        : purchase.item.oldPrice * purchase.quantity,
+      quantity: purchase?.quantity,
+    };
+  });
+
+  console.log(purchaseitems);
 
   return (
     <>
@@ -57,7 +88,12 @@ export default function OrderPurchase({
           </div>
         </div>
         <div className={styles.buttonDiv}>
-          <button className={styles.purchaseButton}>
+          <button
+            className={styles.purchaseButton}
+            onClick={() => {
+              apiPostPurchaseListFetcher(purchaseitems, accessToken);
+            }}
+          >
             {price.finalprice.toLocaleString()} 원 결제하기
           </button>
         </div>

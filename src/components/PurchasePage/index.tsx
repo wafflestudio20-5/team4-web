@@ -37,6 +37,7 @@ export default function PurchasePage() {
         <OrderDelivery />
         <OrderProductInfo purchaseList={purchaseList} />
         <OrderPurchase
+          purchaseList={purchaseList}
           sumPrice={sumPrice(purchaseList)}
           sumSale={sumSale(purchaseList)}
         />
