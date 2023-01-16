@@ -1,0 +1,41 @@
+.wrap {
+  flex: 7;
+}
+
+.buttonDiv {
+  display: flex;
+  justify-content: center;
+  .purchaseButton {
+    margin-top: 50px;
+    float: none;
+    display: inline-block;
+    width: auto;
+    min-width: 210px;
+    height: 60px;
+    padding: 0 40px;
+    border: none;
+    background-color: #000;
+    font-size: 20px;
+    line-height: 60px;
+    color: #fff;
+    vertical-align: middle;
+    text-align: center;
+    font-family: 'Musinsa';
+  }
+
+  .purchaseButton:hover {
+    cursor: pointer;
+    background-color: #0078ff;
+    animation: ButtonColor 0.3s 1;
+  }
+}
+
+@keyframes ButtonColor {
+  0% {
+    background-color: #000;
+  }
+
+  100% {
+    background-color: #0078ff;
+  }
+}
