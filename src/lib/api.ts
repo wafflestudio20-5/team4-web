@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import axios, { AxiosResponse, CancelToken } from 'axios';
-import { User, Item, Category, SubCategory } from './interface';
+import { User, Item, Category, SubCategory, Purchase } from './interface';
 
 axios.defaults.withCredentials = true;
 
@@ -81,6 +81,69 @@ export const useApiItemListFetcher = (
       });
     },
     [category, subCategory, index, count]
+  );
+  return f;
+};
+
+export const useApiGetPurchaseListFetcher = (
+  daterange: number,
+  token: string | null
+) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      return axios.get<{ purchaseitems: Purchase[] }>(
+        '/api/user/me/shopping-cart',
+        {
+          headers: token ? auth(token) : undefined,
+          params: { daterange },
+          cancelToken,
+        }
+      );
+    },
+    [daterange, token]
+  );
+  return f;
+};
+
+export const useApiGetCartListFetcher = (token: string | null) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      return axios.get<{ cartItems: Purchase[] }>(
+        '/api/user/me/shopping-cart',
+        { headers: token ? auth(token) : undefined, cancelToken }
+      );
+    },
+    [token]
+  );
+  return f;
+};
+
+export const useApiPutCartList = (
+  id: number,
+  quantity: number,
+  token: string
+) =>
+  axios.put<{}>(
+    'api/user/me/shopping-cart',
+    { id, quantity },
+    { headers: auth(token) }
+  );
+
+export const useApiDeleteCartList = (ids: number[], token: string) =>
+  axios.delete<{}>('/api/user/me/shopping-cart', {
+    params: ids,
+    headers: auth(token),
+  });
+
+export const useApiGetViewedListFetcher = (token: string | null) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      return axios.get<{ recentItems: Purchase[] }>(
+        '/api/user/me/recently-viewed',
+        { headers: token ? auth(token) : undefined, cancelToken }
+      );
+    },
+    [token]
   );
   return f;
 };

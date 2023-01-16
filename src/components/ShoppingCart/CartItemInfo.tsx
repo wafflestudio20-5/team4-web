@@ -4,7 +4,7 @@ import deletebutton from '../../resources/image/delete.svg';
 import substractbutton from '../../resources/image/remove.svg';
 import addbutton from '../../resources/image/add.svg';
 interface CartItemInfoProps {
-  cartList: Purchase[];
+  cartList: Purchase[] | null;
 }
 
 export default function CartItemInfo({ cartList }: CartItemInfoProps) {
@@ -15,7 +15,7 @@ export default function CartItemInfo({ cartList }: CartItemInfoProps) {
         <table className={styles.tableBasicOrder}>
           <thead>
             <tr>
-              <th>전체 {cartList.length}개</th>
+              <th>전체 {cartList?.length}개</th>
               <th className={styles.th1}>상품 정보</th>
               <th className={styles.th4}>상품 원가</th>
               <th className={styles.th6}>회원 할인</th>
@@ -25,7 +25,7 @@ export default function CartItemInfo({ cartList }: CartItemInfoProps) {
             </tr>
           </thead>
           <tbody>
-            {cartList.map((purchase, idx) => (
+            {cartList?.map((purchase, idx) => (
               <PurchaseItem purchase={purchase} idx={idx} />
             ))}
           </tbody>

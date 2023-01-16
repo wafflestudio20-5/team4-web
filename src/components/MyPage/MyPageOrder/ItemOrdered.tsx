@@ -1,11 +1,11 @@
 import styles from './ItemOrdered.module.scss';
-import { Item } from '../../../lib/interface';
+import { Purchase } from '../../../lib/interface';
 
 interface ItemOrderedProps {
-  item: Item;
+  purchase: Purchase;
 }
 
-export default function ItemOrdered({ item }: ItemOrderedProps) {
+export default function ItemOrdered({ purchase }: ItemOrderedProps) {
   return (
     <div className={styles.grid_order}>
       <div className={styles.grid_header}>
@@ -13,16 +13,16 @@ export default function ItemOrdered({ item }: ItemOrderedProps) {
           <div className={styles.ImageDiv}>
             <img
               className={styles.previewImage}
-              src={item.images[0]}
+              src={purchase.item.images[0]}
               alt="상품 이미지"
             />
           </div>
           <div className={styles.ItemInfo}>
             <div className={styles.InfoLine}>
-              <span className={styles.brand}>{item.brand}</span>
+              <span className={styles.brand}>{purchase.item.brand}</span>
             </div>
             <div className={styles.InfoLine}>
-              <span className={styles.name}>{item.name}</span>
+              <span className={styles.name}>{purchase.item.name}</span>
             </div>
             <div className={styles.InfoLine}>
               <span className={styles.size}>M</span>
@@ -33,9 +33,9 @@ export default function ItemOrdered({ item }: ItemOrderedProps) {
       <div className={styles.grid_header}>yyyy.mm.dd</div>
       <div className={styles.grid_header}>12345678</div>
       <div className={styles.grid_header}>
-        {item.newPrice
-          ? item.newPrice.toLocaleString()
-          : item.oldPrice.toLocaleString()}
+        {purchase.item.newPrice
+          ? purchase.item.newPrice.toLocaleString()
+          : purchase.item.oldPrice.toLocaleString()}
         원
       </div>
       <div className={styles.grid_header}>
