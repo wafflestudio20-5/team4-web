@@ -91,6 +91,7 @@
       color: #999;
       font-weight: normal;
     }
+
     .Button {
       padding: 1px;
       margin: -5px 5px;
@@ -98,6 +99,20 @@
       height: 16px;
       border: 1px solid #e5e5e5;
       border-radius: 30%;
+    }
+
+    .Button:hover {
+      cursor: pointer;
+    }
+
+    .ButtonGray {
+      padding: 1px;
+      margin: -5px 5px;
+      width: 16px;
+      height: 16px;
+      border: 1px solid #e5e5e5;
+      border-radius: 30%;
+      background-color: rgb(201, 201, 201);
     }
 
     .deleteButton {

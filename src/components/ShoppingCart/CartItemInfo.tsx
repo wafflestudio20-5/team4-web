@@ -99,16 +99,24 @@ function PurchaseItem({ purchase, idx }: { purchase: Purchase; idx: number }) {
         )}
       </th>
       <th className={styles.count}>
-        <img
-          className={styles.Button}
-          src={substractbutton}
-          alt="장바구니에서 삭제하기"
-        ></img>
+        {purchase.quantity === 1 ? (
+          <img
+            className={styles.ButtonGray}
+            src={substractbutton}
+            alt="비활성화된 상품개수 줄이기"
+          ></img>
+        ) : (
+          <img
+            className={styles.Button}
+            src={substractbutton}
+            alt="활성화된 상품개수 줄이기"
+          ></img>
+        )}
         {purchase.quantity} 개
         <img
           className={styles.Button}
           src={addbutton}
-          alt="장바구니에서 삭제하기"
+          alt="상품개수 늘리기"
         ></img>
       </th>
       <th>
