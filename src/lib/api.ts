@@ -1,52 +1,37 @@
-/* 
-
-Api.ts will be revised after server distribution.
-
-A mock-up json-server can be opened locally by typing
-"json-server ./data.json --port 4000" on terminal.
-
-See if the server is successfully opened in the following link:
-"https:/localhost:4000/data"
-
-If this doesn't work, (re)install json-server by typing
-"npm install -g json-server" on terminal.
-
-Last edited: 2022/12/27 17:34
-Edited By: Lee Sukchan
-
-*/
-
-import axios, { AxiosResponse, CancelToken } from 'axios';
 import { useCallback, useEffect, useState } from 'react';
-import { ApiRegisterParams, Category, Item, Session } from './interface';
+import axios, { AxiosResponse, CancelToken } from 'axios';
+import { User, Item, Category, SubCategory, Purchase } from './interface';
+import { PurchasePostDto } from './dto';
+axios.defaults.withCredentials = true;
 
-const url = (path: string, param?: Record<string, string>) =>
-  `http://localhost:4000${path}` +
-  (param ? '?' + new URLSearchParams(param).toString() : '');
+const auth = (token: string) => ({ Authorization: `Bearer ${token}` });
 
-export const apiRegister = (registerInfo: ApiRegisterParams, token: string) => {
-  return axios.post(url('/login'), null);
-};
+export const apiRegister = (
+  username: string,
+  password: string,
+  nickname: string
+) => axios.post('/api/auth/register', { username, password, nickname });
 
-export const apiLogin = (username: string, password: string) => {
-  return axios.get<Session>(url('/login'));
-};
+export const apiLogin = (username: string, password: string) =>
+  axios.post<{ accessToken: string }>('/api/auth/login', {
+    username,
+    password,
+  });
 
-export const apiLogout = (token: string) => {
-  return axios.post(url('/login'), null);
-};
+export const apiLogout = (token: string) =>
+  axios.post('/api/auth/logout', null, { headers: auth(token) });
 
-export const apiRefresh = () => {
-  return axios.get<{ accessToken: string }>(url('/login/accessToken'));
-};
+export const apiRefresh = () =>
+  axios.post<{ accessToken: string }>('/api/auth/refresh');
 
-export const apiCheckUsername = () => {
-  return axios.get<{ duplicate: boolean }>(url('/check'));
-};
+export const apiCheckUsername = (username: string) =>
+  axios.post<{ isUnique: boolean }>('/api/auth/username', { username });
 
-export const apiCheckNickname = () => {
-  return axios.get<{ duplicate: boolean }>(url('/check'));
-};
+export const apiCheckNickname = (nickname: string) =>
+  axios.post<{ isUnique: boolean }>('/api/auth/nickname', { nickname });
+
+export const apiGetMyInfo = (token: string) =>
+  axios.get<{ user: User }>('/api/user/me', { headers: auth(token) });
 
 export function useApiData<T>(
   fetch: ((cancel: CancelToken) => Promise<AxiosResponse<T>>) | null
@@ -73,20 +58,110 @@ export function useApiData<T>(
   return { data, loading, error };
 }
 
-export const useApiItemListFetcher = (category: Category | null) => {
+export const useApiItemFetcher = (id: number | null) => {
   const f = useCallback(
     (cancelToken: CancelToken) =>
-      axios.get<Item[]>(url('/data'), { cancelToken }),
-    []
+      axios.get<{ item: Item }>(`/api/item/${id}`, { cancelToken }),
+    [id]
+  );
+  return id === null ? null : f;
+};
+
+export const useApiItemListFetcher = (
+  category: Category | null,
+  subCategory?: SubCategory,
+  count?: number,
+  index?: number
+) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      return axios.get<{ items: Item[] }>('/api/items', {
+        params: { category, subCategory, count, index },
+        cancelToken,
+      });
+    },
+    [category, subCategory, index, count]
   );
   return f;
 };
 
-export const useApiItemFetcher = (ID: number) => {
+export const useApiGetPurchaseListFetcher = (token: string | null) => {
   const f = useCallback(
-    (cancelToken: CancelToken) =>
-      axios.get<Item>(url(`/data/${ID}`), { cancelToken }),
-    [ID]
+    (cancelToken: CancelToken) => {
+      return axios.get<{ purchaseItems: Purchase[] }>(
+        '/api/user/me/purchases',
+        {
+          headers: token ? auth(token) : undefined,
+          cancelToken,
+        }
+      );
+    },
+    [token]
   );
   return f;
+};
+
+export const apiPostPurchaseList = (
+  purchaseitems: PurchasePostDto[],
+  token: string | null
+) =>
+  axios.post<{}>(
+    '/api/user/me/purchases',
+    { purchaseitems },
+    { headers: token ? auth(token) : undefined }
+  );
+
+export const useApiGetCartListFetcher = (token: string | null) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      return axios.get<{ cartItems: Purchase[] }>(
+        '/api/user/me/shopping-cart',
+        {
+          headers: token ? auth(token) : undefined,
+          cancelToken,
+        }
+      );
+    },
+    [token]
+  );
+  return f;
+};
+
+export const apiPutCart = (
+  id: number,
+  option: string | undefined,
+  quantity: number,
+  token: string | null
+) =>
+  axios.put<{}>(
+    'api/user/me/shopping-cart',
+    { id, option, quantity },
+    { headers: token ? auth(token) : undefined }
+  );
+
+export const apiDeleteCartList = (ids: number[], token: string) =>
+  axios.delete<{}>('/api/user/me/shopping-cart', {
+    params: ids,
+    headers: token ? auth(token) : undefined,
+  });
+
+export const useApiGetViewedListFetcher = (token: string | null) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      return axios.get<{ recentItems: Purchase[] }>(
+        '/api/user/me/recently-viewed',
+        { headers: token ? auth(token) : undefined, cancelToken }
+      );
+    },
+    [token]
+  );
+  return f;
+};
+
+export const apiPostViewedGoods = (itemId: number, token: string) => {
+  axios.post<{}>(
+    '/api/user/me/recently-viewed',
+    { itemId },
+    { headers: token ? auth(token) : undefined }
+  );
 };

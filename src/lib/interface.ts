@@ -1,29 +1,86 @@
 export interface User {
   id: number;
+  image: string;
   username: string;
   nickname: string;
-  image?: string;
   reviewCount: number;
+  description: string;
   registrationDate: string;
   sex?: string;
   height?: number;
   weight?: number;
   socialKey?: string;
-  point?: number;
-  purchases?: Item[];
-  shoppingCart?: Item[];
-  recentlyViewed?: Item[];
-}
-
-export interface ApiRegisterParams {
-  username: string;
-  password: string;
-  nickname: string;
 }
 
 export interface Session {
   user: User | null;
   accessToken: string | null;
+}
+
+export interface Item {
+  id: number;
+  sex: string;
+  name: string;
+  brand: string;
+  images: string[];
+  rating: number;
+  oldPrice: number;
+  sale?: number;
+  options?: string[];
+  newPrice?: number;
+  label?: Label;
+  category: Category;
+  subCategory: SubCategory;
+  reviewCount: number;
+}
+
+export interface Purchase {
+  id: number;
+  item: Item;
+  createdDate?: string;
+  payment?: number;
+  quantity: number;
+  option?: string;
+}
+
+export interface Review {
+  id: number;
+  user: User;
+  content: string;
+  createdDateTime: string;
+  size: string;
+  color: string;
+  rating: number;
+  purchase: Purchase;
+  comments: Comment[];
+  images: string[];
+}
+
+export interface Comment {
+  id: number;
+  user: User;
+  content: string;
+  createdDateTime: string;
+}
+
+export interface Inquiry {
+  id: number;
+  user: User;
+  isAnswered: boolean;
+  type: InquiryType;
+  options: string[];
+  title: string;
+  content: string;
+  images: string[];
+  isSecret: boolean;
+  createdDateTime: string;
+}
+
+export enum InquiryType {
+  size = 'size',
+  delivery = 'delivery',
+  restock = 'restock',
+  detail = 'detail',
 }
 
 export enum Label {
@@ -71,29 +128,11 @@ export enum SubCategory {
   beanie = 'beanie',
 }
 
-export interface Item {
-  id: number;
-  name: string;
-  brand: string;
-  image: string;
-  label?: Label;
-  oldPrice: number;
-  newPrice?: number;
-  sale?: number;
-  sex?: string;
-  rating?: number;
-  options?: string[];
-  category: Category;
-  subCategory: SubCategory;
+export enum Best {
+  best = 'best',
 }
 
-/* Will be revised in Sprint 3 */
-export interface Review {
-  id: number;
-  user: User;
-  item: Item;
-  rating: number;
-}
+export type CategoryIncludeBest = Category | Best;
 
 export function displayLabel(label: Label) {
   switch (label) {
@@ -112,6 +151,29 @@ export function displayLabel(label: Label) {
 
 export function displayCategory(category: Category) {
   switch (category) {
+    case Category.top:
+      return '상의';
+    case Category.outer:
+      return '아우터';
+    case Category.pants:
+      return '바지';
+    case Category.skirt:
+      return '스커트';
+    case Category.bag:
+      return '가방';
+    case Category.shoes:
+      return '신발';
+    case Category.headWear:
+      return '모자';
+    default:
+      throw new Error('Unknown Category: ' + category);
+  }
+}
+
+export function displayCategoryIncludeBest(category: CategoryIncludeBest) {
+  switch (category) {
+    case Best.best:
+      return '인기';
     case Category.top:
       return '상의';
     case Category.outer:
@@ -185,5 +247,70 @@ export function displaySubCategory(subcategory: SubCategory) {
       return '비니';
     default:
       throw new Error('Unknown SubCategory: ' + subcategory);
+  }
+}
+export function SubCategoryInCategory(category: CategoryIncludeBest) {
+  switch (category) {
+    case Best.best:
+      return [
+        SubCategory.coat,
+        SubCategory.backpack,
+        SubCategory.shirt,
+        SubCategory.slacks,
+      ];
+
+    case Category.top:
+      return [
+        SubCategory.sweater,
+        SubCategory.hoodie,
+        SubCategory.sweatShirt,
+        SubCategory.shirt,
+      ];
+    case Category.outer:
+      return [
+        SubCategory.coat,
+        SubCategory.jacket,
+        SubCategory.padding,
+        SubCategory.cardigan,
+      ];
+    case Category.pants:
+      return [
+        SubCategory.denim,
+        SubCategory.slacks,
+        SubCategory.jogger,
+        SubCategory.leggings,
+      ];
+    case Category.skirt:
+      return [
+        SubCategory.miniSkirt,
+        SubCategory.mediSkirt,
+        SubCategory.longSkirt,
+      ];
+    case Category.bag:
+      return [SubCategory.backpack, SubCategory.crossBag, SubCategory.echoBag];
+    case Category.shoes:
+      return [
+        SubCategory.goodoo,
+        SubCategory.sandal,
+        SubCategory.slipper,
+        SubCategory.sneakers,
+      ];
+    case Category.headWear:
+      return [SubCategory.cap, SubCategory.hat, SubCategory.beanie];
+    default:
+      throw new Error('Unknown Category: ' + category);
+  }
+}
+
+export function displaySex(sex: string) {
+  switch (sex) {
+    case 'male':
+      return '남';
+    case 'female':
+      return '여';
+    case 'both':
+      return '남 , 여';
+    default:
+      throw new Error('Unknown sex: ' + sex);
   }
 }

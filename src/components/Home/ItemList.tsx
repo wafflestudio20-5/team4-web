@@ -1,8 +1,8 @@
-import styles from './ItemList.module.css';
-import { Item, Category, displayCategory } from '../../lib/interface';
-import { useApiData, useApiItemListFetcher } from '../../lib/api';
-import ItemPreview from './ItemPreview';
 import { useState } from 'react';
+import { useApiData, useApiItemListFetcher } from '../../lib/api';
+import { Item, Category, displayCategory } from '../../lib/interface';
+import ItemPreview from './ItemPreview';
+import styles from './ItemList.module.scss';
 
 interface ItemPreviewListProps {
   items: Item[] | null;
@@ -19,9 +19,9 @@ export default function ItemList() {
     null
   );
   const { data: itemsData } = useApiData(
-    useApiItemListFetcher(selectedCategory)
+    useApiItemListFetcher(selectedCategory, undefined, 10, 0)
   );
-  const items = itemsData ?? null;
+  const items = itemsData?.items ?? null;
   const categorys = Object.values(Category);
 
   return (
@@ -31,8 +31,10 @@ export default function ItemList() {
         categorys={categorys}
         setSelectedCategory={setSelectedCategory}
       ></ItemListCategory>
-      <div className={styles.itemListBox}>
-        <ItemPreviewList items={items}></ItemPreviewList>
+      <ItemPreviewList items={items}></ItemPreviewList>
+      {/* <ItemListPagenation /> */}
+      <div className={styles.moreView}>
+        <button>더 보러가기 {' >'}</button>
       </div>
     </div>
   );
@@ -45,9 +47,10 @@ function ItemListCategory({
 }: ItemListCategoryProps) {
   return (
     <div className={styles.itemListCategory}>
-      <div className={styles.title}>실시간 랭킹</div>
+      <div className={styles.title}>
+        <div>실시간 랭킹</div>
+      </div>
       <div className={styles.categorycontent}>
-        <div className={styles.subtitle}>상품</div>
         <div>
           <button
             key={null}
@@ -80,10 +83,20 @@ function ItemListCategory({
 
 function ItemPreviewList({ items }: ItemPreviewListProps) {
   return (
-    <>
-      {items?.map((item, idx) => (
-        <ItemPreview key={item.id} item={item} idx={idx}></ItemPreview>
+    <div className={styles.itemListBox}>
+      {items?.map((item) => (
+        <ItemPreview key={item.id} item={item}></ItemPreview>
       ))}
-    </>
+    </div>
+  );
+}
+
+function ItemListPagenation() {
+  return (
+    <div className={styles.pagenation}>
+      <span>
+        {'<'}0 0 0 0{'>'}
+      </span>
+    </div>
   );
 }
