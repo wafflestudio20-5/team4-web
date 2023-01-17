@@ -231,7 +231,14 @@ function PurchaseArea({
               <span>{options ? `${option}` : 'FREE'}</span>
             </div>
             <div className={styles.selected_amount}>
-              <button onClick={onDecrement}>-</button>
+              <button
+                onClick={onDecrement}
+                style={{
+                  color: quantity === 1 ? '#ccc' : '#000',
+                }}
+              >
+                -
+              </button>
               <input type="text" value={quantity} />
               <button onClick={onIncrement}>+</button>
             </div>
@@ -269,7 +276,7 @@ export default function DetailPageLayout({
   input,
   displayIdx,
   setDisplay,
-  onChange
+  onChange,
   onIncrement,
   onDecrement,
 }: DetailPageLayoutProps) {

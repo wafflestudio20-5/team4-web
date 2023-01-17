@@ -42,6 +42,10 @@ export default function DetailPage() {
   };
 
   const onDecrement = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (input.quantity === 1) {
+      toast('더 이상 줄일 수 없습니다.');
+      return;
+    }
     setInput({
       ...input,
       quantity: input.quantity - 1,
