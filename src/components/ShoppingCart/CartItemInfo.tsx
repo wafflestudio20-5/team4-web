@@ -92,13 +92,13 @@ function PurchaseItem({
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       if (Number(inputs) !== purchase.quantity) {
-        apiPutCartList(purchase.item.id, Number(inputs), accessToken);
+        apiPutCartList(purchase.id, Number(inputs), accessToken);
       }
     }
   };
   const blurEvent = (e: FocusEvent<HTMLInputElement>) => {
     if (Number(e.target.value) !== purchase.quantity) {
-      apiPutCartList(purchase.item.id, Number(e.target.value), accessToken);
+      apiPutCartList(purchase.id, Number(e.target.value), accessToken);
     }
   };
 
@@ -158,11 +158,7 @@ function PurchaseItem({
             src={substractbutton}
             alt="활성화된 상품개수 줄이기"
             onClick={() => {
-              apiPutCartList(
-                purchase.item.id,
-                purchase.quantity - 1,
-                accessToken
-              );
+              apiPutCartList(purchase.id, purchase.quantity - 1, accessToken);
             }}
           ></img>
         )}
@@ -179,11 +175,7 @@ function PurchaseItem({
           src={addbutton}
           alt="상품개수 늘리기"
           onClick={() => {
-            apiPutCartList(
-              purchase.item.id,
-              purchase.quantity + 1,
-              accessToken
-            );
+            apiPutCartList(purchase.id, purchase.quantity + 1, accessToken);
           }}
         ></img>
       </th>
