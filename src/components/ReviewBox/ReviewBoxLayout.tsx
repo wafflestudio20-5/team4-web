@@ -1,6 +1,7 @@
 import styles from "./ReviewBoxLayout.module.scss"
 
 import StarRate from "./StarRate";
+import React from "react";
 interface User {
     nickname: string;
     image: string;
@@ -31,6 +32,8 @@ interface ReviewBoxLayoutParams {
     images: string[];
     commentCount: number;
     comments: Comment[];
+    moreCommentBool: boolean;
+    onClick: (e: React.MouseEvent<HTMLInputElement>) => void;
 }
 interface ReviewBoxCommentParams {
     commentProfilePic: string;
@@ -38,9 +41,7 @@ interface ReviewBoxCommentParams {
     commentName: string;
     commentDate: string;
 }
-const CommentMap = () => {
 
-}
 
 function ReviewBoxComment({commentProfilePic, commentContent, commentName, commentDate}: ReviewBoxCommentParams) {
 
@@ -67,7 +68,32 @@ function ReviewBoxComment({commentProfilePic, commentContent, commentName, comme
 
 export default function ReviewBoxLayout({username, profileImageUrl, reviewDate, sex, height, weight, goodsImageUrl,
                                         goodsName, goodsOption, reviewStar, reviewId, reviewContent, size, color,
-                                        images, commentCount, comments}: ReviewBoxLayoutParams) {
+                                        images, commentCount, comments, moreCommentBool, onClick}: ReviewBoxLayoutParams) {
+
+    const Comment = () => {
+        if (commentCount <= 2)
+        {
+            return(<>{comments.map(comment => (<ReviewBoxComment commentProfilePic={comment.user.image} commentContent={comment.content}
+                                                        commentDate={comment.createdDateTime} commentName={comment.user.nickname}></ReviewBoxComment>))}</>);
+        }
+        else
+        {
+            if (moreCommentBool === false)
+            {
+                return(<><ReviewBoxComment commentProfilePic={comments[0].user.image} commentContent={comments[0].content}
+                                           commentDate={comments[0].createdDateTime} commentName={comments[0].user.nickname}></ReviewBoxComment>
+                    <ReviewBoxComment commentProfilePic={comments[1].user.image} commentContent={comments[1].content}
+                                      commentDate={comments[1].createdDateTime} commentName={comments[1].user.nickname}></ReviewBoxComment></>);
+            }
+            else
+            {
+                return(<>{comments.map(comment => (<ReviewBoxComment commentProfilePic={comment.user.image} commentContent={comment.content}
+                                                                     commentDate={comment.createdDateTime} commentName={comment.user.nickname}></ReviewBoxComment>))}</>);
+            }
+
+        }
+
+    }
     return <div>
         <div className={styles.reviewBox}>
             <div className={styles.reviewProfile}>
@@ -133,16 +159,15 @@ export default function ReviewBoxLayout({username, profileImageUrl, reviewDate, 
                     <div className={styles.reviewCommentFakeInputBox}></div>
                     <span className={styles.reviewCommentFakeSubmitButton}>댓글작성</span>
                 </div>
-                {comments.map(comment => (<ReviewBoxComment commentProfilePic={comment.user.image} commentContent={comment.content}
-                                                            commentDate={comment.createdDateTime} commentName={comment.user.nickname}></ReviewBoxComment>))}
+                <Comment></Comment>
                 {/*review2개 넘으면 댓글 더보기 버튼*/}
-                <div className={styles.reviewMoreWrap}>
+                {moreCommentBool ? null: <div className={styles.reviewMoreWrap}>
                     <div className={styles.reviewMore}>
-                        <a href={"/login"} className={styles.reviewMoreText}>
+                        <div className={styles.reviewMoreText} onClick={onClick}>
                             댓글 더보기
-                        </a>
+                        </div>
                     </div>
-                </div>
+                </div>}
             </div>
         </div>
     </div>;

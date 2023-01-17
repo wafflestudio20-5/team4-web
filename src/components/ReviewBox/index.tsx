@@ -1,4 +1,5 @@
 import ReviewBoxLayout from "./ReviewBoxLayout";
+import {useState} from 'react';
 interface User {
     nickname: string;
     image: string;
@@ -75,6 +76,11 @@ export default function ReviewBox({data}: DataType) {
             return '어두워요';
         }
     }
+    const [moreCommentBool, setMoreCommentBool] = useState<boolean>(false);
+    const onClick = () => {
+        setMoreCommentBool(true);
+    }
+
 
 
 
@@ -82,5 +88,5 @@ export default function ReviewBox({data}: DataType) {
     username={data.user.nickname} profileImageUrl={data.user.image} reviewDate={data.createdDateTime} sex={sexText()
     } height={data.user.height} weight={data.user.weight} goodsImageUrl={data.purchase.item.images[0]} goodsName={data.purchase.item.name} goodsOption={data.purchase.option}
     reviewStar={data.rating} reviewId={data.id} reviewContent={data.content} size={sizeText()} color={colorText()} images={data.images}
-    commentCount={data.comments.length} comments={data.comments}></ReviewBoxLayout>);
+    commentCount={data.comments.length} comments={data.comments} moreCommentBool={moreCommentBool} onClick={onClick}></ReviewBoxLayout>);
 }

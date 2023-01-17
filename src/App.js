@@ -59,6 +59,15 @@ function AppRoutes() {
                     weight: 90
                   },
                   content: "너무 예뻐요!!!!!!! 너무 멋있어요asjfkmasldvakslf!!!!",
+                  createdDateTime: "2023.01.13 15:16"},
+                {user: {
+                    nickname: "LV 5 으아악",
+                    image: "https://image.msscdn.net/mfile_s01/_simbols/dnjsgyqlffk.jpg",
+                    sex: "male",
+                    height: 180,
+                    weight: 90
+                  },
+                  content: "너무 예뻐요!!!!!!! 너무 멋있어요asjfkmasldvakslf!!!!",
                   createdDateTime: "2023.01.13 15:16"}],
               images: ['https://image.msscdn.net/data/estimate/2263769_0/gallery_61e281aebc6e3.jpg.view', 'https://image.msscdn.net/data/estimate/2226767_0/gallery_61e57805556ae.jpg.view']
             }}/>} />
