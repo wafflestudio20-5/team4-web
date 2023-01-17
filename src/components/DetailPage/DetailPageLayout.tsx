@@ -15,31 +15,22 @@ import {
   getBarWidth,
 } from '../../lib/formatters/ratingFormatter';
 import styles from './DetailPageLayout.module.scss';
-import close from '../../resources/image/close.png';
 
 interface DetailPageHeaderProps {
-  name: string;
   category: Category;
   subCategory: SubCategory;
 }
 
-function DetailPageHeader({
-  name,
-  category,
-  subCategory,
-}: DetailPageHeaderProps) {
+function DetailPageHeader({ category, subCategory }: DetailPageHeaderProps) {
   return (
-    <>
-      <div className={styles.category}>
-        <span>
-          {/* 백엔드 수정 이후에 고칠 예정 */}
-          <Link to="/">{displayCategory(category)}</Link>
-          {' > '}
-          <Link to="/">{displaySubCategory(subCategory)}</Link>
-        </span>
-      </div>
-      <div className={styles.name}>{name}</div>
-    </>
+    <div className={styles.category}>
+      <span>
+        {/* 이후에 고칠 예정 */}
+        <Link to="/">{displayCategory(category)}</Link>
+        {' > '}
+        <Link to="/">{displaySubCategory(subCategory)}</Link>
+      </span>
+    </div>
   );
 }
 
@@ -260,26 +251,32 @@ export default function DetailPageLayout({ item }: DetailPageLayoutProps) {
   return (
     <div className={styles.wrapper}>
       <DetailPageHeader
-        name={item.name}
         category={item.category}
         subCategory={item.subCategory}
       />
       <div className={styles.body}>
-        <div className={styles.body_left}>
-          <ImageInfo images={item.images} />
-        </div>
-        <div className={styles.body_right}>
-          <LabelInfo label={item.label} />
-          <ProductInfo brand={item.brand} sex={item.sex} rating={item.rating} />
-          <PriceInfo
-            oldPrice={item.oldPrice}
-            newPrice={item.newPrice}
-            sale={item.sale}
-          />
-          <PurchaseArea
-            price={item.newPrice ? item.newPrice : item.oldPrice}
-            options={item.options}
-          />
+        <div className={styles.name}>{item.name}</div>
+        <div className={styles.body_grid}>
+          <div className={styles.body_left}>
+            <ImageInfo images={item.images} />
+          </div>
+          <div className={styles.body_right}>
+            <LabelInfo label={item.label} />
+            <ProductInfo
+              brand={item.brand}
+              sex={item.sex}
+              rating={item.rating}
+            />
+            <PriceInfo
+              oldPrice={item.oldPrice}
+              newPrice={item.newPrice}
+              sale={item.sale}
+            />
+            <PurchaseArea
+              price={item.newPrice ? item.newPrice : item.oldPrice}
+              options={item.options}
+            />
+          </div>
         </div>
       </div>
     </div>

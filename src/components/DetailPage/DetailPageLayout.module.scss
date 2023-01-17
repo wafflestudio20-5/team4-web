@@ -1,36 +1,42 @@
 .wrapper {
-  margin-top: 36px;
   width: 100%;
-  padding: 25px 30px 20px 30px;
   border-bottom: 1px solid #ddd;
 }
 
 .category {
-  padding-top: 5px;
-  padding-bottom: 10px;
+  margin-left: 36px;
+  height: 25px;
+  padding: 5px 10px;
+  border-bottom: 1px solid #dddddd;
   span {
     font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
-    color: #b2b2b2;
+    line-height: 24px;
     a {
-      text-decoration: underline;
+      text-decoration: none;
       color: inherit;
       cursor: pointer;
+    }
+    a:hover {
+      text-decoration: underline;
     }
   }
 }
 
 .name {
   font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   line-height: 26px;
   margin-bottom: 24px;
 }
 
 .body {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 36px;
+  padding: 25px 30px 20px 30px;
+  .body_grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 36px;
+  }
 }
 
 .body_left {
