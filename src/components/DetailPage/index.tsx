@@ -4,6 +4,7 @@ import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 import DetailPageLayout from './DetailPageLayout';
 import { useApiData, useApiItemFetcher } from '../../lib/api';
+import { Purchase } from '../../lib/interface';
 
 export interface PurchaseDraft {
   option?: string;
@@ -27,10 +28,18 @@ export default function DetailPage() {
     setDisplayIdx(idx);
   };
 
-  const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const onChangeOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setInput({
       option: e.target.value,
       quantity: 1,
+    });
+  };
+
+  const onChangeQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const parsedValue = parseFloat(e.target.value);
+    setInput({
+      ...input,
+      quantity: Number.isNaN(parsedValue) ? 1 : parsedValue,
     });
   };
 
@@ -52,6 +61,27 @@ export default function DetailPage() {
     });
   };
 
+  const onPurchase = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (parsedId && data) {
+      if (data.item.options && !input.option) {
+        toast('옵션을 선택해 주세요.');
+        return;
+      }
+      const purchase: Purchase[] = [
+        {
+          id: parsedId,
+          item: data.item,
+          quantity: input.quantity,
+          option: input.option,
+        },
+      ];
+      navigate('/purchase', {
+        state: { items: purchase },
+      });
+    }
+  };
+
   useEffect(() => {
     if (error) {
       const payload = error.payload as AxiosError;
@@ -70,9 +100,11 @@ export default function DetailPage() {
         input={input}
         displayIdx={displayIdx}
         setDisplay={setDisplay}
-        onChange={onChange}
+        onChangeOption={onChangeOption}
+        onChangeQuantity={onChangeQuantity}
         onIncrement={onIncrement}
         onDecrement={onDecrement}
+        onPurchase={onPurchase}
       />
     );
   }

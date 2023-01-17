@@ -193,18 +193,22 @@ interface PurchaseAreaProps {
   price: number;
   input: PurchaseDraft;
   options: string[] | undefined;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChangeOption: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChangeQuantity: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onIncrement: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onDecrement: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onPurchase: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 function PurchaseArea({
   price,
   input,
   options,
-  onChange,
+  onChangeOption,
+  onChangeQuantity,
   onIncrement,
   onDecrement,
+  onPurchase,
 }: PurchaseAreaProps) {
   const { option, quantity } = input;
 
@@ -213,7 +217,7 @@ function PurchaseArea({
       {options && (
         <div className={styles.dropdown_wrapper}>
           <div className={styles.dropdown}>
-            <select onChange={onChange}>
+            <select onChange={onChangeOption}>
               <option defaultValue={undefined}>옵션 선택</option>
               {options.map((option, idx) => (
                 <option key={idx} value={option}>
@@ -239,7 +243,7 @@ function PurchaseArea({
               >
                 -
               </button>
-              <input type="text" value={quantity} />
+              <input type="text" value={quantity} onChange={onChangeQuantity} />
               <button onClick={onIncrement}>+</button>
             </div>
             <div className={styles.selected_price}>
@@ -254,7 +258,9 @@ function PurchaseArea({
         <span>{(price * quantity).toLocaleString() + '원'}</span>
       </div>
       <div className={styles.button_wrapper}>
-        <button className={styles.purchase_button}>바로구매</button>
+        <button onClick={onPurchase} className={styles.purchase_button}>
+          바로구매
+        </button>
         <button className={styles.cart_button} />
       </div>
     </div>
@@ -266,9 +272,11 @@ interface DetailPageLayoutProps {
   input: PurchaseDraft;
   displayIdx: number;
   setDisplay: (idx: number) => void;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChangeOption: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChangeQuantity: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onIncrement: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onDecrement: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onPurchase: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function DetailPageLayout({
@@ -276,9 +284,11 @@ export default function DetailPageLayout({
   input,
   displayIdx,
   setDisplay,
-  onChange,
+  onChangeOption,
+  onChangeQuantity,
   onIncrement,
   onDecrement,
+  onPurchase,
 }: DetailPageLayoutProps) {
   return (
     <div className={styles.wrapper}>
@@ -313,9 +323,11 @@ export default function DetailPageLayout({
               price={item.newPrice ? item.newPrice : item.oldPrice}
               input={input}
               options={item.options}
-              onChange={onChange}
+              onChangeOption={onChangeOption}
+              onChangeQuantity={onChangeQuantity}
               onIncrement={onIncrement}
               onDecrement={onDecrement}
+              onPurchase={onPurchase}
             />
           </div>
         </div>
