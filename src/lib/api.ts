@@ -157,3 +157,11 @@ export const useApiGetViewedListFetcher = (token: string | null) => {
   );
   return f;
 };
+
+export const apiPostViewedGoods = (itemId: number, token: string) => {
+  axios.post<{}>(
+    '/api/user/me/recently-viewed',
+    { itemId },
+    { headers: token ? auth(token) : undefined }
+  );
+};

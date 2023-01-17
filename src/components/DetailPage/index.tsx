@@ -5,7 +5,12 @@ import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 import { RootState } from '../../store';
 import DetailPageLayout from './DetailPageLayout';
-import { useApiData, useApiItemFetcher, apiPutCart } from '../../lib/api';
+import {
+  useApiData,
+  useApiItemFetcher,
+  apiPutCart,
+  apiPostViewedGoods,
+} from '../../lib/api';
 import { Purchase } from '../../lib/interface';
 
 export interface PurchaseDraft {
@@ -106,6 +111,10 @@ export default function DetailPage() {
       }
     }
   };
+
+  useEffect(() => {
+    if (parsedId && accessToken) apiPostViewedGoods(parsedId, accessToken);
+  }, [parsedId, accessToken]);
 
   useEffect(() => {
     if (error) {
