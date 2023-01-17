@@ -1,58 +1,93 @@
 .itemPreview {
-  width: 200px;
-  height: 287px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
+  width: 250px;
+  flex: 0 0 auto;
 }
 .itemPreview:hover {
   cursor: pointer;
-  background-color: #e6e6e6;
 }
 
-.rank {
-  width: 15%;
-  height: 20px;
-  font-size: 12px;
-  font-family: 'musinsa', sans-serif;
-  text-align: center;
-  padding-top: 5px;
-  font-weight: bold;
-  background-color: white;
+.CGoods {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-bottom: 30px;
 }
 
+.image {
+  border: 1px solid #e5e5e5;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  padding-top: 115%;
+}
 .previewImage {
-  width: 70%;
-  align-self: center;
-  margin-bottom: 10px;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: auto;
+  transform: translateY(-50%);
+  mix-blend-mode: multiply;
+}
+
+.info {
+  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 12px;
 }
 
 .brand {
-  margin-left: 10px;
-  font-size: 13px;
-  font-weight: bolder;
-}
-
-.name {
-  margin-left: 10px;
-  padding: 3px 20px 3px 0px;
-  font-size: 11px;
-  font-weight: lighter;
   overflow: hidden;
+  margin-bottom: 4px;
+  font-size: 14px;
+  line-height: 19px;
+  color: #000;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.crossedOutPrice {
-  margin-left: 10px;
+.name {
+  display: -webkit-box;
+  overflow: hidden;
+  height: 20px;
+  margin-bottom: 12px;
   font-size: 13px;
-  font-family: 'Apple SD Gothic Neo', 'NotoSansKR', sans-serif;
-  color: #b2b2b2;
-  text-decoration: line-through;
+  line-height: 20px;
+  color: #aaa;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.price {
+  display: flex;
+  position: relative;
+  font-size: 14px;
+  line-height: 100%;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .realPrice {
-  margin-left: 10px;
-  font-size: 13px;
-  font-weight: bolder;
+  margin-right: 8px;
+  font-size: 14px;
+  line-height: 100%;
+  font-weight: bold;
+}
+
+.crossedOutPrice {
+  font-size: 14px;
+  color: #aaa;
+  flex: 0 0 auto;
+  line-height: 100%;
+}
+
+.sale {
+  font-size: 14px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: red;
+  line-height: 100%;
 }

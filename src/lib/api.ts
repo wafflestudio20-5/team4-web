@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import axios, { AxiosResponse, CancelToken } from 'axios';
-import { User, Item, Category, SubCategory } from './interface';
-
+import { User, Item, Category, SubCategory, Purchase } from './interface';
+import { PurchasePostDto } from './dto';
 axios.defaults.withCredentials = true;
 
 const auth = (token: string) => ({ Authorization: `Bearer ${token}` });
@@ -81,6 +81,78 @@ export const useApiItemListFetcher = (
       });
     },
     [category, subCategory, index, count]
+  );
+  return f;
+};
+
+export const useApiGetPurchaseListFetcher = (token: string | null) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      return axios.get<{ purchaseItems: Purchase[] }>(
+        '/api/user/me/purchases',
+        {
+          headers: token ? auth(token) : undefined,
+          cancelToken,
+        }
+      );
+    },
+    [token]
+  );
+  return f;
+};
+
+export const apiPostPurchaseList = (
+  purchaseitems: PurchasePostDto[],
+  token: string | null
+) =>
+  axios.post<{}>(
+    '/api/user/me/purchases',
+    { purchaseitems },
+    { headers: token ? auth(token) : undefined }
+  );
+
+export const useApiGetCartListFetcher = (token: string | null) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      return axios.get<{ cartItems: Purchase[] }>(
+        '/api/user/me/shopping-cart',
+        {
+          headers: token ? auth(token) : undefined,
+          cancelToken,
+        }
+      );
+    },
+    [token]
+  );
+  return f;
+};
+
+export const apiPutCartList = (
+  id: number,
+  quantity: number,
+  token: string | null
+) =>
+  axios.put<{}>(
+    'api/user/me/shopping-cart',
+    { id, quantity },
+    { headers: token ? auth(token) : undefined }
+  );
+
+export const apiDeleteCartList = (ids: number[], token: string) =>
+  axios.delete<{}>('/api/user/me/shopping-cart', {
+    params: ids,
+    headers: token ? auth(token) : undefined,
+  });
+
+export const useApiGetViewedListFetcher = (token: string | null) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      return axios.get<{ recentItems: Purchase[] }>(
+        '/api/user/me/recently-viewed',
+        { headers: token ? auth(token) : undefined, cancelToken }
+      );
+    },
+    [token]
   );
   return f;
 };
