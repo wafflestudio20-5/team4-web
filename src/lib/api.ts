@@ -127,14 +127,15 @@ export const useApiGetCartListFetcher = (token: string | null) => {
   return f;
 };
 
-export const apiPutCartList = (
+export const apiPutCart = (
   id: number,
+  option: string | undefined,
   quantity: number,
   token: string | null
 ) =>
   axios.put<{}>(
     'api/user/me/shopping-cart',
-    { id, quantity },
+    { id, option, quantity },
     { headers: token ? auth(token) : undefined }
   );
 

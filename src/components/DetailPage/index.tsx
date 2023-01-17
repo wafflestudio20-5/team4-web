@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
+import { RootState } from '../../store';
 import DetailPageLayout from './DetailPageLayout';
-import { useApiData, useApiItemFetcher } from '../../lib/api';
+import { useApiData, useApiItemFetcher, apiPutCart } from '../../lib/api';
 import { Purchase } from '../../lib/interface';
 
 export interface PurchaseDraft {
@@ -15,6 +17,10 @@ export default function DetailPage() {
   const [displayIdx, setDisplayIdx] = useState<number>(0);
   const [input, setInput] = useState<PurchaseDraft>({
     quantity: 1,
+  });
+
+  const accessToken = useSelector((state: RootState) => {
+    return state.session.accessToken;
   });
 
   const { id } = useParams<{ id: string }>();
@@ -82,6 +88,25 @@ export default function DetailPage() {
     }
   };
 
+  const onAddToCart = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (parsedId && data) {
+      const { option, quantity } = input;
+      try {
+        await apiPutCart(parsedId, option, quantity, accessToken);
+        setInput({
+          option: undefined,
+          quantity: 1,
+        });
+      } catch (error) {
+        const e = error as AxiosError;
+        if (e.response?.status === 409) {
+          toast('이미 장바구니에 있는 상품입니다.');
+        }
+      }
+    }
+  };
+
   useEffect(() => {
     if (error) {
       const payload = error.payload as AxiosError;
@@ -105,6 +130,7 @@ export default function DetailPage() {
         onIncrement={onIncrement}
         onDecrement={onDecrement}
         onPurchase={onPurchase}
+        onAddToCart={onAddToCart}
       />
     );
   }

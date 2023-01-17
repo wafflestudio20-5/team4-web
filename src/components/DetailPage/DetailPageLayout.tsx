@@ -198,6 +198,7 @@ interface PurchaseAreaProps {
   onIncrement: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onDecrement: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onPurchase: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onAddToCart: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 function PurchaseArea({
@@ -209,6 +210,7 @@ function PurchaseArea({
   onIncrement,
   onDecrement,
   onPurchase,
+  onAddToCart,
 }: PurchaseAreaProps) {
   const { option, quantity } = input;
 
@@ -261,7 +263,7 @@ function PurchaseArea({
         <button onClick={onPurchase} className={styles.purchase_button}>
           바로구매
         </button>
-        <button className={styles.cart_button} />
+        <button onClick={onAddToCart} className={styles.cart_button} />
       </div>
     </div>
   );
@@ -277,6 +279,7 @@ interface DetailPageLayoutProps {
   onIncrement: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onDecrement: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onPurchase: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onAddToCart: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function DetailPageLayout({
@@ -289,6 +292,7 @@ export default function DetailPageLayout({
   onIncrement,
   onDecrement,
   onPurchase,
+  onAddToCart,
 }: DetailPageLayoutProps) {
   return (
     <div className={styles.wrapper}>
@@ -328,6 +332,7 @@ export default function DetailPageLayout({
               onIncrement={onIncrement}
               onDecrement={onDecrement}
               onPurchase={onPurchase}
+              onAddToCart={onAddToCart}
             />
           </div>
         </div>
