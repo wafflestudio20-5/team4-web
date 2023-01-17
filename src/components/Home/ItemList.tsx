@@ -32,7 +32,7 @@ export default function ItemList() {
         setSelectedCategory={setSelectedCategory}
       ></ItemListCategory>
       <ItemPreviewList items={items}></ItemPreviewList>
-      <ItemListPagenation />
+      {/* <ItemListPagenation /> */}
       <div className={styles.moreView}>
         <button>더 보러가기 {' >'}</button>
       </div>
