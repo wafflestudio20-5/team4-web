@@ -221,3 +221,16 @@ export function displaySubCategory(subcategory: SubCategory) {
       throw new Error('Unknown SubCategory: ' + subcategory);
   }
 }
+
+export function displaySex(sex: string) {
+  switch (sex) {
+    case 'male':
+      return '남';
+    case 'female':
+      return '여';
+    case 'both':
+      return '남 , 여';
+    default:
+      throw new Error('Unknown sex: ' + sex);
+  }
+}
