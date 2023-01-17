@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { PurchaseDraft } from '.';
 import {
   Item,
   Label,
@@ -15,6 +16,7 @@ import {
   getBarWidth,
 } from '../../lib/formatters/ratingFormatter';
 import styles from './DetailPageLayout.module.scss';
+import React from 'react';
 
 interface DetailPageHeaderProps {
   category: Category;
@@ -189,58 +191,61 @@ function PriceInfo({ oldPrice, newPrice, sale }: PriceInfoProps) {
 
 interface PurchaseAreaProps {
   price: number;
+  input: PurchaseDraft;
   options: string[] | undefined;
+  changeOption: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  increment: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  decrement: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-function PurchaseArea({ price, options }: PurchaseAreaProps) {
+function PurchaseArea({
+  price,
+  input,
+  options,
+  changeOption,
+  increment,
+  decrement,
+}: PurchaseAreaProps) {
+  const { option, quantity } = input;
+
   return (
     <div className={styles.purchase_box}>
       {options && (
         <div className={styles.dropdown_wrapper}>
           <div className={styles.dropdown}>
-            <select>
-              <option value="selected" selected>
-                옵션 선택
-              </option>
-              {options.map((option) => (
-                <option value={option}>{option}</option>
+            <select onChange={changeOption}>
+              <option defaultValue={undefined}>옵션 선택</option>
+              {options.map((option, idx) => (
+                <option key={idx} value={option}>
+                  {option}
+                </option>
               ))}
             </select>
           </div>
         </div>
       )}
-      {
-        /* option 선택했을 때 */ options && (
-          <div className={styles.selected_wrapper}>
-            <ul>
-              {options.map((option, idx) => (
-                <li key={idx} className={styles.selected_bar}>
-                  <div className={styles.selected_option}>
-                    <span>{option}</span>
-                  </div>
-                  <div className={styles.selected_amount}>
-                    <button>-</button>
-                    <input type="text" value="1" />
-                    <button>+</button>
-                  </div>
-                  <div className={styles.selected_price}>
-                    <span>{price.toLocaleString() + '원'}</span>
-                    <button />
-                  </div>
-                </li>
-              ))}
-            </ul>
+      {(!options || option) && (
+        <div className={styles.selected_wrapper}>
+          <div className={styles.selected_bar}>
+            <div className={styles.selected_option}>
+              <span>{options ? `${option}` : 'FREE'}</span>
+            </div>
+            <div className={styles.selected_amount}>
+              <button onClick={decrement}>-</button>
+              <input type="text" value={quantity} />
+              <button onClick={increment}>+</button>
+            </div>
+            <div className={styles.selected_price}>
+              <span>{(price * quantity).toLocaleString() + '원'}</span>
+              <button />
+            </div>
           </div>
-        )
-      }
-      {
-        /* 선택된 게 하나라도 있을 때 */ options && (
-          <div className={styles.total_wrapper}>
-            <span>총 상품 금액</span>
-            <span>{(price * options.length).toLocaleString() + '원'}</span>
-          </div>
-        )
-      }
+        </div>
+      )}
+      <div className={styles.total_wrapper}>
+        <span>총 상품 금액</span>
+        <span>{(price * quantity).toLocaleString() + '원'}</span>
+      </div>
       <div className={styles.button_wrapper}>
         <button className={styles.purchase_button}>바로구매</button>
         <button className={styles.cart_button} />
@@ -251,14 +256,22 @@ function PurchaseArea({ price, options }: PurchaseAreaProps) {
 
 interface DetailPageLayoutProps {
   item: Item;
+  input: PurchaseDraft;
   displayIdx: number;
   changeDisplay: (idx: number) => void;
+  changeOption: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  increment: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  decrement: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function DetailPageLayout({
   item,
+  input,
   displayIdx,
   changeDisplay,
+  changeOption,
+  increment,
+  decrement,
 }: DetailPageLayoutProps) {
   return (
     <div className={styles.wrapper}>
@@ -291,7 +304,11 @@ export default function DetailPageLayout({
             />
             <PurchaseArea
               price={item.newPrice ? item.newPrice : item.oldPrice}
+              input={input}
               options={item.options}
+              changeOption={changeOption}
+              increment={increment}
+              decrement={decrement}
             />
           </div>
         </div>

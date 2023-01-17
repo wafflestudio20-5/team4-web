@@ -1,16 +1,20 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 import DetailPageLayout from './DetailPageLayout';
 import { useApiData, useApiItemFetcher } from '../../lib/api';
 
+export interface PurchaseDraft {
+  option?: string;
+  quantity: number;
+}
+
 export default function DetailPage() {
   const [displayIdx, setDisplayIdx] = useState<number>(0);
-
-  const changeDisplay = (idx: number) => {
-    setDisplayIdx(idx);
-  };
+  const [input, setInput] = useState<PurchaseDraft>({
+    quantity: 1,
+  });
 
   const { id } = useParams<{ id: string }>();
   const parsedId = id ? parseInt(id) : null;
@@ -18,6 +22,31 @@ export default function DetailPage() {
   const { data, error } = useApiData(useApiItemFetcher(parsedId));
 
   const navigate = useNavigate();
+
+  const changeDisplay = (idx: number) => {
+    setDisplayIdx(idx);
+  };
+
+  const changeOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setInput({
+      option: e.target.value,
+      quantity: 1,
+    });
+  };
+
+  const increment = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setInput({
+      ...input,
+      quantity: input.quantity + 1,
+    });
+  };
+
+  const decrement = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setInput({
+      ...input,
+      quantity: input.quantity - 1,
+    });
+  };
 
   useEffect(() => {
     if (error) {
@@ -34,8 +63,12 @@ export default function DetailPage() {
     return (
       <DetailPageLayout
         item={data.item}
+        input={input}
         displayIdx={displayIdx}
         changeDisplay={changeDisplay}
+        changeOption={changeOption}
+        increment={increment}
+        decrement={decrement}
       />
     );
   }
