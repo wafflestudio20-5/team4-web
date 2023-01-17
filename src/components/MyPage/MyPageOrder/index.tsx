@@ -1,12 +1,20 @@
-import { User } from '../../../lib/interface';
 import ItemOrdered from './ItemOrdered';
 import styles from './MyPageOrder.module.scss';
+import { useApiGetPurchaseListFetcher, useApiData } from '../../../lib/api';
 
-interface MyPageOrderProps {
-  user: User;
-}
+export default function MyPageOrder({
+  accessToken,
+}: {
+  accessToken: string | null;
+}) {
+  const { data: purchasesData } = useApiData(
+    useApiGetPurchaseListFetcher(accessToken)
+  );
 
-export default function MyPageOrder({ user }: MyPageOrderProps) {
+  const purchases = purchasesData?.purchaseItems ?? null;
+
+  console.log(purchases);
+
   return (
     <div className={styles.wrapper}>
       <section id="order">
@@ -34,14 +42,12 @@ export default function MyPageOrder({ user }: MyPageOrderProps) {
           <div className={styles.grid_header}>주문금액(수량)</div>
           <div className={styles.grid_header}>주문 상태</div>
         </div>
-        {/* Issue: user field (purchases)
-        {user.purchases ? (
-          user.purchases.map((item) => <ItemOrdered item={item} />)
+
+        {purchases && purchases?.length !== 0 ? (
+          purchases.map((item) => <ItemOrdered purchase={item} />)
         ) : (
           <div className={styles.none}>주문 목록이 없습니다.</div>
-
         )}
-        */}
       </section>
     </div>
   );
