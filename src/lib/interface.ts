@@ -1,7 +1,6 @@
 export interface User {
   id: number;
   image: string;
-  point: number;
   username: string;
   nickname: string;
   reviewCount: number;

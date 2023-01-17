@@ -152,9 +152,6 @@ interface PriceInfoProps {
 }
 
 function PriceInfo({ oldPrice, newPrice, sale }: PriceInfoProps) {
-  const point = newPrice
-    ? Math.floor(newPrice * 0.1)
-    : Math.floor(oldPrice * 0.1);
   return (
     <div className={styles.info_box}>
       <div className={styles.info_header}>
@@ -182,12 +179,6 @@ function PriceInfo({ oldPrice, newPrice, sale }: PriceInfoProps) {
             </div>
           </li>
         )}
-        <li>
-          <span className={styles.info_title}>무신사 적립금</span>
-          <span className={styles.info_content}>
-            {point.toLocaleString() + '원'}
-          </span>
-        </li>
       </ul>
       <div className={styles.textbox_red}>
         {' 전 상품 무료배송 (가구 등 일부 상품 제외) '}
