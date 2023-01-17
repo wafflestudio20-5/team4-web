@@ -40,8 +40,16 @@ export default function DetailPage() {
   };
 
   const onChangeOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    if (e.target.value === '옵션 선택') return;
     setInput({
       option: e.target.value,
+      quantity: 1,
+    });
+  };
+
+  const onClearOption = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setInput({
+      option: undefined,
       quantity: 1,
     });
   };
@@ -135,6 +143,7 @@ export default function DetailPage() {
         displayIdx={displayIdx}
         setDisplay={setDisplay}
         onChangeOption={onChangeOption}
+        onClearOption={onClearOption}
         onChangeQuantity={onChangeQuantity}
         onIncrement={onIncrement}
         onDecrement={onDecrement}
