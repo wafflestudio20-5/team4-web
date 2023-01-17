@@ -98,9 +98,10 @@ interface ProductInfoProps {
   brand: string;
   sex: string;
   rating: number;
+  reviewCount: number;
 }
 
-function ProductInfo({ brand, sex, rating }: ProductInfoProps) {
+function ProductInfo({ brand, sex, rating, reviewCount }: ProductInfoProps) {
   return (
     <div className={styles.info_box}>
       <div className={styles.info_header}>
@@ -116,24 +117,27 @@ function ProductInfo({ brand, sex, rating }: ProductInfoProps) {
           <span className={styles.info_content}>{displaySex(sex)}</span>
         </li>
         <li>
-          {/* 구현할지 말지 고민 필요 */}
-          <span className={styles.info_title}>{'조회수(1개월)'}</span>
-          <span className={styles.info_content}>{'8.1만 회 이상'}</span>
-        </li>
-        <li>
           <span className={styles.info_title}>구매 후기</span>
           <span className={styles.info_content}>
-            <span className={styles.star_background}>
-              <span
-                className={styles.star_bar}
-                style={{
-                  width: `${getBarWidth(rating)}%`,
-                }}
-              />
-            </span>
-            <span className={styles.rating}>{formatRating(rating)}</span>
-            <span className={styles.slash}>/</span>
-            <span className={styles.review_link}>후기 550개 보기</span>
+            {reviewCount > 0 ? (
+              <>
+                <span className={styles.star_background}>
+                  <span
+                    className={styles.star_bar}
+                    style={{
+                      width: `${getBarWidth(rating)}%`,
+                    }}
+                  />
+                </span>
+                <span className={styles.rating}>{formatRating(rating)}</span>
+                <span className={styles.slash}>/</span>
+                <span className={styles.review_link}>후기 550개 보기</span>
+              </>
+            ) : (
+              <span className={styles.review_none}>
+                후기가 아직 없는 상품입니다.
+              </span>
+            )}
           </span>
         </li>
       </ul>
@@ -287,6 +291,7 @@ export default function DetailPageLayout({
               brand={item.brand}
               sex={item.sex}
               rating={item.rating}
+              reviewCount={item.reviewCount}
             />
             <PriceInfo
               oldPrice={item.oldPrice}

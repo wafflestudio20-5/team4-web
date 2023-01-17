@@ -32,6 +32,7 @@ export interface Item {
   label?: Label;
   category: Category;
   subCategory: SubCategory;
+  reviewCount: number;
 }
 
 export interface Purchase {
