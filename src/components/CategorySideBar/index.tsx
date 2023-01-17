@@ -17,6 +17,7 @@ export default function CategorySideBar() {
 
   const toggleCategorySideBar = () => {
     setopenCategorySideBar(!openCategorySideBar);
+    setSelectedCategory({ ...selectedCategory, before: null });
   };
 
   return (

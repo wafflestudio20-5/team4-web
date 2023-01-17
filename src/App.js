@@ -18,8 +18,8 @@ function AppRoutes() {
     <Routes>
       <Route element={<Header />}>
         <Route element={<SubHeader />}>
+          <Route index element={<HomePage />} />
           <Route element={<CategorySideBar />}>
-            <Route index element={<HomePage />} />
             <Route path="/cart" element={<ShoppingCart />} />
             <Route path="/coupon" element={<></>} />
             <Route path="/customercenter" element={<></>} />

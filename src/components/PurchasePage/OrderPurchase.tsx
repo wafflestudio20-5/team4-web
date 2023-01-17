@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Purchase } from '../../lib/interface';
 import { apiPostPurchaseList } from '../../lib/api';
 import { Session } from '../../lib/interface';
@@ -15,11 +14,7 @@ export default function OrderPurchase({
   sumSale: number;
   purchaseList: Purchase[];
 }) {
-  const [price, setPrice] = useState({
-    postPoint: 0,
-    userPoint: 0,
-    finalprice: 1000000,
-  });
+  const finalprice = sumPrice + sumSale;
 
   const session: Session = useSelector((state: RootState) => {
     return state.session;
@@ -43,26 +38,24 @@ export default function OrderPurchase({
     };
   });
 
-  console.log(purchaseitems);
-
   return (
     <>
       <div className={styles.orderPurchase}>
         <h3 className={styles.ordertitle}>결제 정보</h3>
         <div className={styles.ordertable}>
           <div className={styles.orderline}>
-            <div className={styles.lineleft}>상품 금액</div>
+            <div className={styles.lineleft}>총 상품 금액</div>
             <div className={styles.lineright}>
               {sumPrice.toLocaleString()} 원
             </div>
           </div>
           <div className={styles.orderline}>
-            <div className={styles.lineleft}>상품 할인</div>
+            <div className={styles.lineleft}>회원 할인 합계</div>
             <div className={styles.lineright}>
               <span>{sumSale.toLocaleString()} 원</span>
             </div>
           </div>
-          <div className={styles.orderline}>
+          {/* <div className={styles.orderline}>
             <div className={styles.lineleft}>포인트 선할인</div>
             <div className={styles.lineright}>
               <button></button>
@@ -79,11 +72,11 @@ export default function OrderPurchase({
             <div className={styles.lineright}>
               {sumSale.toLocaleString()} 원
             </div>
-          </div>
+          </div> */}
           <div className={styles.orderlinelast}>
             <div className={styles.lineleft}>최종 결제 금액</div>
             <div className={styles.lineright}>
-              {price.finalprice.toLocaleString()} 원
+              {finalprice.toLocaleString()} 원
             </div>
           </div>
         </div>
@@ -94,7 +87,7 @@ export default function OrderPurchase({
               apiPostPurchaseList(purchaseitems, accessToken);
             }}
           >
-            {price.finalprice.toLocaleString()} 원 결제하기
+            {finalprice.toLocaleString()} 원 결제하기
           </button>
         </div>
       </div>

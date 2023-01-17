@@ -157,9 +157,34 @@
   }
 
   .announcement {
-    div {
+    display: flex;
+    .ulDiv {
+      flex: 8;
       display: table-cell;
       box-sizing: border-box;
+    }
+    .buttonDiv {
+      flex: 2;
+      padding: 10px 0px 0px 5px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end;
+      button {
+        display: inline-block;
+        width: 70px;
+        height: 33px;
+        margin-left: 6px;
+        line-height: 33px;
+        border: 1px solid #d8d8d8;
+        background-color: #fff;
+        box-sizing: border-box;
+        text-align: center;
+        font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+        font-size: 12px;
+      }
+      button:hover {
+        cursor: pointer;
+      }
     }
     ul {
       list-style: none;

@@ -1,12 +1,11 @@
 .container {
-  height: 2000px;
   display: flex;
   flex-direction: row;
   position: relative;
 }
 
 .categorySideBar {
-  min-width: 250px;
+  min-width: 200px;
   border-right: 1px solid #ddd;
   display: flex;
   flex-direction: column;
@@ -38,7 +37,7 @@
   height: 25px;
   margin: 0px;
   position: absolute;
-  left: 270px;
+  left: 220px;
   z-index: 99;
 }
 

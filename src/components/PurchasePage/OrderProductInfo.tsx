@@ -16,16 +16,17 @@ export default function OrderProductInfo({
           <thead>
             <tr>
               <th className={styles.th1}>상품 정보</th>
-              <th className={styles.th2}>수량</th>
-              <th className={styles.th3}>적립금</th>
-              <th className={styles.th4}>상품 할인</th>
-              <th className={styles.th5}>배송비</th>
+              <th className={styles.th2}>상품 원가</th>
+              <th className={styles.th3}>회원 할인</th>
+              <th className={styles.th4}>개당 판매가</th>
+              <th className={styles.th5}>수량</th>
+              {/* <th className={styles.th5}>배송비</th> */}
               <th className={styles.th6}>주문금액</th>
             </tr>
           </thead>
           <tbody>
             {purchaseList.map((purchase) => (
-              <PurchaseItem purchase={purchase} />
+              <PurchaseItem key={purchase.item.id} purchase={purchase} />
             ))}
           </tbody>
         </table>
@@ -58,7 +59,7 @@ export default function OrderProductInfo({
 
 function PurchaseItem({ purchase }: { purchase: Purchase }) {
   return (
-    <tr key={purchase.item.id}>
+    <tr>
       <th>
         <div className={styles.Item}>
           <div className={styles.ImageDiv}>
@@ -79,12 +80,7 @@ function PurchaseItem({ purchase }: { purchase: Purchase }) {
           </div>
         </div>
       </th>
-      <th>{purchase.quantity} 개</th>
-      <th>
-        {purchase.item.newPrice
-          ? `${Math.ceil(purchase.item.newPrice / 20).toLocaleString()}원`
-          : `${Math.ceil(purchase.item.oldPrice / 20).toLocaleString()}원`}
-      </th>
+      <th>{purchase.item.oldPrice?.toLocaleString()} 원</th>
       <th>
         {purchase.item.newPrice
           ? `${(
@@ -92,7 +88,6 @@ function PurchaseItem({ purchase }: { purchase: Purchase }) {
             ).toLocaleString()}원`
           : -0}
       </th>
-      <th>무료</th>
       <th>
         {purchase.item.newPrice ? (
           <>
@@ -101,6 +96,19 @@ function PurchaseItem({ purchase }: { purchase: Purchase }) {
           </>
         ) : (
           <em>{purchase.item.oldPrice.toLocaleString()}원</em>
+        )}
+      </th>
+      <th>{purchase.quantity} 개</th>
+      {/* <th>무료</th> */}
+      <th>
+        {purchase.item.newPrice ? (
+          <em>
+            {(purchase.item.newPrice * purchase.quantity).toLocaleString()}원
+          </em>
+        ) : (
+          <em>
+            {(purchase.item.oldPrice * purchase.quantity).toLocaleString()}원
+          </em>
         )}
       </th>
     </tr>

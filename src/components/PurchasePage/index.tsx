@@ -41,7 +41,7 @@ export default function PurchasePage() {
   return (
     <div className={styles.wrap}>
       <PurchasePageHeader />
-      <form className={styles.f1}>
+      <div className={styles.f1}>
         <OrderDelivery />
         <OrderProductInfo purchaseList={purchaseList} />
         <OrderPurchase
@@ -49,7 +49,7 @@ export default function PurchasePage() {
           sumPrice={sumPrice(purchaseList)}
           sumSale={sumSale(purchaseList)}
         />
-      </form>
+      </div>
     </div>
   );
 }

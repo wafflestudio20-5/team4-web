@@ -24,8 +24,8 @@ export default function CartItemInfo({
             <tr>
               <th>전체 {cartList?.length}개</th>
               <th className={styles.th1}>상품 정보</th>
-              <th className={styles.th4}>상품 원가</th>
-              <th className={styles.th6}>회원 할인</th>
+              {/* <th className={styles.th4}>상품 원가</th>
+              <th className={styles.th6}>회원 할인</th> */}
               <th className={styles.th6}>개당 판매가</th>
               <th className={styles.th2}>수량</th>
               <th className={styles.th2}></th>
@@ -47,8 +47,9 @@ export default function CartItemInfo({
             )}
           </tbody>
         </table>
+
         <div className={styles.announcement}>
-          <div>
+          <div className={styles.ulDiv}>
             <ul>
               <li>
                 · 무신사 스토어는 기본적으로 대한민국 내 제주도 및 도서 산간
@@ -64,6 +65,10 @@ export default function CartItemInfo({
                 한번에 주문 가능한 상품수는 10개로 제한됩니다.
               </li>
             </ul>
+          </div>
+          <div className={styles.buttonDiv}>
+            <button>전체 삭제</button>
+            <button>선택 삭제</button>
           </div>
         </div>
       </div>
@@ -87,14 +92,13 @@ function PurchaseItem({
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       if (Number(inputs) !== purchase.quantity) {
-        apiPutCartList(purchase.id, Number(inputs), accessToken);
+        apiPutCartList(purchase.item.id, Number(inputs), accessToken);
       }
     }
   };
-
   const blurEvent = (e: FocusEvent<HTMLInputElement>) => {
     if (Number(e.target.value) !== purchase.quantity) {
-      apiPutCartList(purchase.id, Number(e.target.value), accessToken);
+      apiPutCartList(purchase.item.id, Number(e.target.value), accessToken);
     }
   };
 
@@ -121,7 +125,7 @@ function PurchaseItem({
           </div>
         </div>
       </th>
-      <th>
+      {/* <th>
         <span>{purchase.item.oldPrice?.toLocaleString()}원</span>
       </th>
       <th>
@@ -130,7 +134,7 @@ function PurchaseItem({
               purchase.item.newPrice - purchase.item.oldPrice
             ).toLocaleString()}원`
           : -0}
-      </th>
+      </th> */}
       <th>
         {purchase.item.newPrice ? (
           <>
@@ -154,7 +158,11 @@ function PurchaseItem({
             src={substractbutton}
             alt="활성화된 상품개수 줄이기"
             onClick={() => {
-              apiPutCartList(purchase.id, purchase.quantity - 1, accessToken);
+              apiPutCartList(
+                purchase.item.id,
+                purchase.quantity - 1,
+                accessToken
+              );
             }}
           ></img>
         )}
@@ -171,7 +179,11 @@ function PurchaseItem({
           src={addbutton}
           alt="상품개수 늘리기"
           onClick={() => {
-            apiPutCartList(purchase.id, purchase.quantity + 1, accessToken);
+            apiPutCartList(
+              purchase.item.id,
+              purchase.quantity + 1,
+              accessToken
+            );
           }}
         ></img>
       </th>
