@@ -36,17 +36,28 @@ function DetailPageHeader({ category, subCategory }: DetailPageHeaderProps) {
 
 interface ImageInfoProps {
   images: string[];
+  displayIdx: number;
+  changeDisplay: (idx: number) => void;
 }
 
-function ImageInfo({ images }: ImageInfoProps) {
+function ImageInfo({ images, displayIdx, changeDisplay }: ImageInfoProps) {
   return (
     <>
       <div className={styles.image_main}>
-        <img src={images[0]} alt="상품 이미지를 가져오는 데 실패했습니다." />
+        <img
+          src={images[displayIdx]}
+          alt="상품 이미지를 가져오는 데 실패했습니다."
+        />
       </div>
       <ul className={styles.image_list}>
         {images.map((image, idx) => (
-          <li key={idx}>
+          <li
+            key={idx}
+            className={`${styles.image_element} ${
+              idx === displayIdx && styles.image_element_on
+            }`}
+            onMouseOver={() => changeDisplay(idx)}
+          >
             <img src={image} alt="이미지 로딩 중" />
           </li>
         ))}
@@ -245,9 +256,15 @@ function PurchaseArea({ price, options }: PurchaseAreaProps) {
 
 interface DetailPageLayoutProps {
   item: Item;
+  displayIdx: number;
+  changeDisplay: (idx: number) => void;
 }
 
-export default function DetailPageLayout({ item }: DetailPageLayoutProps) {
+export default function DetailPageLayout({
+  item,
+  displayIdx,
+  changeDisplay,
+}: DetailPageLayoutProps) {
   return (
     <div className={styles.wrapper}>
       <DetailPageHeader
@@ -258,7 +275,11 @@ export default function DetailPageLayout({ item }: DetailPageLayoutProps) {
         <div className={styles.name}>{item.name}</div>
         <div className={styles.body_grid}>
           <div className={styles.body_left}>
-            <ImageInfo images={item.images} />
+            <ImageInfo
+              images={item.images}
+              displayIdx={displayIdx}
+              changeDisplay={changeDisplay}
+            />
           </div>
           <div className={styles.body_right}>
             <LabelInfo label={item.label} />

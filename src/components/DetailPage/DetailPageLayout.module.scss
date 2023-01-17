@@ -63,15 +63,17 @@
   margin-bottom: 15px;
   padding: 16px 14px 0 19px;
   list-style: none;
-  li {
+  .image_element {
     cursor: pointer;
     float: left;
     width: 60px;
     height: 72px;
     margin: 0 5px 5px 0;
-    border: 1px solid black;
     text-align: center;
     overflow: hidden;
+  }
+  .image_element_on {
+    border: 1px solid black;
   }
 }
 

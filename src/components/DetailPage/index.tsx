@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
@@ -6,6 +6,12 @@ import DetailPageLayout from './DetailPageLayout';
 import { useApiData, useApiItemFetcher } from '../../lib/api';
 
 export default function DetailPage() {
+  const [displayIdx, setDisplayIdx] = useState<number>(0);
+
+  const changeDisplay = (idx: number) => {
+    setDisplayIdx(idx);
+  };
+
   const { id } = useParams<{ id: string }>();
   const parsedId = id ? parseInt(id) : null;
 
@@ -25,6 +31,12 @@ export default function DetailPage() {
   }, [error, navigate]);
 
   if (data) {
-    return <DetailPageLayout item={data.item} />;
+    return (
+      <DetailPageLayout
+        item={data.item}
+        displayIdx={displayIdx}
+        changeDisplay={changeDisplay}
+      />
+    );
   }
 }
