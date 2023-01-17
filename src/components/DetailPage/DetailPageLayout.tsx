@@ -29,13 +29,9 @@ function DetailPageHeader({
       <div className={styles.category}>
         <span>
           {/* 백엔드 수정 이후에 고칠 예정 */}
-          <Link to="/">
-            {displayCategory(category.toLowerCase() as Category)}
-          </Link>
+          <Link to="/">{displayCategory(category)}</Link>
           {' > '}
-          <Link to="/">
-            {displaySubCategory(subCategory.toLowerCase() as SubCategory)}
-          </Link>
+          <Link to="/">{displaySubCategory(subCategory)}</Link>
         </span>
       </div>
       <div className={styles.name}>{name}</div>
