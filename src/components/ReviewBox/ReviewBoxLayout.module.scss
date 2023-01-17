@@ -17,6 +17,7 @@
       margin-top: 2px;
       background-color: white;
       float: left;
+      border-radius: 50%;
     }
     .reviewProfileTextWrap {
       width: 890px;
@@ -180,6 +181,7 @@
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
+            margin-right: 5px;
             img {
               overflow: clip;
               text-align: left;
@@ -188,7 +190,6 @@
               line-height: 0;
               display: none;
             }
-
           }
         }
       }
@@ -296,8 +297,8 @@
     border-radius: 50%;
     float: left;
     position: relative;
+    overflow: clip;
     img {
-      overflow: clip;
       position: absolute;
       left: 38.5px;
       top: 38.5px;

@@ -1,20 +1,62 @@
 import styles from "./ReviewBoxLayout.module.scss"
+
 import StarRate from "./StarRate";
-function ReviewBoxComment() {
+interface User {
+    nickname: string;
+    image: string;
+    sex?: string;
+    height: number;
+    weight: number;
+}
+interface Comment {
+    user: User;
+    content: string;
+    createdDateTime: string;
+}
+interface ReviewBoxLayoutParams {
+    username: string;
+    profileImageUrl: string;
+    reviewDate: string;
+    sex: string;
+    height: number;
+    weight: number;
+    goodsImageUrl: string;
+    goodsName: string;
+    goodsOption: string;
+    reviewStar: number;
+    reviewId: number;
+    reviewContent: string;
+    size: string;
+    color: string;
+    images: string[];
+    commentCount: number;
+    comments: Comment[];
+}
+interface ReviewBoxCommentParams {
+    commentProfilePic: string;
+    commentContent: string;
+    commentName: string;
+    commentDate: string;
+}
+const CommentMap = () => {
+
+}
+
+function ReviewBoxComment({commentProfilePic, commentContent, commentName, commentDate}: ReviewBoxCommentParams) {
 
     return <>
         <div className={styles.reviewBoxComment}>
             <div className={styles.commentProfilePic}>
-                <img src="https://image.msscdn.net/mfile_s01/_simbols/_basic/e.png" alt="_basic/e.png"/>
+                <img src={commentProfilePic} alt="_basic/e.png"/>
             </div>
             <div className={styles.commentContentBox}>
-                안녕하세요 진짜 멋있어요!!!!
+                {commentContent}
             </div>
             <div className={styles.commentProfileDataArea}>
                 <div className={styles.commentProfileData}>
                     <span className={styles.commentProfileClass}><b>회원</b></span>
-                    <span className={styles.commentProfileName}>LV 3 이재운72</span>
-                    <span className={styles.commentProfileDate}>2023.01.13 17:16</span>
+                    <span className={styles.commentProfileName}>{commentName}</span>
+                    <span className={styles.commentProfileDate}>{commentDate}</span>
                     <span className={styles.commentProfileEdit}>수정</span>
                     <span className={styles.commentProfileDelete}>삭제</span>
                 </div>
@@ -23,83 +65,76 @@ function ReviewBoxComment() {
     </>;
 }
 
-export default function ReviewBoxLayout() {
+export default function ReviewBoxLayout({username, profileImageUrl, reviewDate, sex, height, weight, goodsImageUrl,
+                                        goodsName, goodsOption, reviewStar, reviewId, reviewContent, size, color,
+                                        images, commentCount, comments}: ReviewBoxLayoutParams) {
     return <div>
         <div className={styles.reviewBox}>
             <div className={styles.reviewProfile}>
-                <a href={"/login"}>
-                    <img src={'https://image.msscdn.net/mfile_s01/_simbols/_basic/c.png'} className={styles.reviewProfilePic}/>
-                </a>
+                <img src={profileImageUrl} className={styles.reviewProfilePic}/>
                 <div className={styles.reviewProfileTextWrap}>
                     <div className={styles.reviewProfileText}>
-                        <p className={styles.reviewProfileName}>LV 4 야채호빵님</p>
-                        <p className={styles.reviewProfileDate}>2022.03.12</p>
+                        <p className={styles.reviewProfileName}>{username}님</p>
+                        <p className={styles.reviewProfileDate}>{reviewDate}</p>
                     </div>
                     <div className={styles.reviewProfileInfo}>
-                        <p className={styles.reviewProfileBodyInfo}>남성, 173cm, 65kg</p>
+                        <p className={styles.reviewProfileBodyInfo}>{sex}, {height}cm, {weight}kg</p>
                     </div>
                 </div>
             </div>
             <div className={styles.reviewGoodsInformation}>
                 <div className={styles.reviewGoodsThumbnail}>
-                    <a href={"/login"}>
-                        <img src={'https://image.msscdn.net/images/goods_img/20211111/2226766/2226766_3_100.jpg'}
-                             className={styles.reviewGoodsPic}/>
-                    </a>
+                    <img src={goodsImageUrl}
+                         className={styles.reviewGoodsPic}/>
                 </div>
                 <div className={styles.reviewGoodsItem}>
-                    <a href={"/login"} className={styles.reviewGoodsName}>
-                        오버사이즈 집업 카라 터틀넥 니트 [BLACK]
-                    </a>
-                    <p className={styles.reviewGoodsOption}>-L 구매</p>
+                    <span className={styles.reviewGoodsName}>
+                        {goodsName}
+                    </span>
+                    <p className={styles.reviewGoodsOption}>-{goodsOption} 구매</p>
 
                 </div>
             </div>
             <div className={styles.reviewRatingWrap}>
-                <StarRate rating_score={6} review_id={3} />
+                <StarRate rating_score={reviewStar} review_id={reviewId} />
             </div>
 
             <div className={styles.reviewContent}>
                 <div className={styles.reviewContentText}>
-                    라지사이즈가 제 신체스펙에 핏이 좋은 것 같고
-                    <br/>
-                    지금 이 날씨에 입기 정말 좋은 것 같습니다
+                    {reviewContent}
                 </div>
                 <div className={styles.reviewContentEvaluation}>
                     <ul className={styles.reviewEvaluationList}>
                         <li className={styles.reviewEvaluationItem}>
                             사이즈&nbsp;
-                            <span>보통이에요</span>
+                            <span>{size}</span>
                         </li>
                         <li className={styles.reviewEvaluationItem}>
                             색감&nbsp;
-                            <span>선명해요</span>
+                            <span>{color}</span>
                         </li>
                     </ul>
                 </div>
                 <div className={styles.reviewContentImage}>
                     <div className={styles.reviewContentImageWrap}>
                         <ul className={styles.reviewContentImageList}>
-                            <li className={styles.reviewContentImageItem} data-img-index="0" style={{backgroundImage:'url(https://image.msscdn.net/data/estimate/2226766_0/gallery_622ca31ca3099.jpg.list)'}}>
-                                <img src="//image.msscdn.net/data/estimate/2226766_0/gallery_622ca31ca3099.jpg.view" alt="드로우핏(DRAW FIT) 오버사이즈 집업 카라 터틀넥 니트 [BLACK] 후기">
-                                </img>
-                            </li>
+                            {images.map(image=>(<li className={styles.reviewContentImageItem} style={{backgroundImage:`url(${image})`}}> </li>))}
+
                         </ul>
                     </div>
                 </div>
             </div>
             <div className={styles.reviewCommentCount}>
                 댓글&nbsp;
-                <span>6개</span>
+                <span>{commentCount}개</span>
             </div>
             <div className={styles.reviewCommentList}>
                 <div className={styles.reviewCommentInput}>
                     <div className={styles.reviewCommentFakeInputBox}></div>
                     <span className={styles.reviewCommentFakeSubmitButton}>댓글작성</span>
                 </div>
-                <ReviewBoxComment></ReviewBoxComment>
-                <ReviewBoxComment></ReviewBoxComment>
-                {/*mapping들어갈 곳*/}
+                {comments.map(comment => (<ReviewBoxComment commentProfilePic={comment.user.image} commentContent={comment.content}
+                                                            commentDate={comment.createdDateTime} commentName={comment.user.nickname}></ReviewBoxComment>))}
                 {/*review2개 넘으면 댓글 더보기 버튼*/}
                 <div className={styles.reviewMoreWrap}>
                     <div className={styles.reviewMore}>
