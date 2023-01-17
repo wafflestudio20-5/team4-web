@@ -9,6 +9,7 @@ import MyPageMain from './MyPageMain';
 import MyPageInfo from './MyPageInfo';
 import MyPageOrder from './MyPageOrder';
 import MyPageViewed from './MyPageViewed';
+import MyPageReviews from './MyPageWriteReviews';
 import Footer from '../Footer';
 import { Session } from '../../lib/interface';
 
@@ -50,7 +51,7 @@ function MyPage() {
           <Route index element={<MyPageMain user={user} />} />
           <Route path="info" element={<MyPageInfo user={user} />} />
           <Route path="order" element={<MyPageOrder user={user} />} />
-          <Route path="review" element={<div>/mypage/review</div>} />
+          <Route path="review" element={<MyPageReviews />} />
           <Route
             path="item_inquiry"
             element={<div>/mypage/item_inquiry</div>}

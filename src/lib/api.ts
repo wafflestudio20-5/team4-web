@@ -6,6 +6,7 @@ axios.defaults.withCredentials = true;
 
 const auth = (token: string) => ({ Authorization: `Bearer ${token}` });
 
+
 export const apiRegister = (
   username: string,
   password: string,
