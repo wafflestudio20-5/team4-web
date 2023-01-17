@@ -23,25 +23,25 @@ export default function DetailPage() {
 
   const navigate = useNavigate();
 
-  const changeDisplay = (idx: number) => {
+  const setDisplay = (idx: number) => {
     setDisplayIdx(idx);
   };
 
-  const changeOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setInput({
       option: e.target.value,
       quantity: 1,
     });
   };
 
-  const increment = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const onIncrement = (e: React.MouseEvent<HTMLButtonElement>) => {
     setInput({
       ...input,
       quantity: input.quantity + 1,
     });
   };
 
-  const decrement = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const onDecrement = (e: React.MouseEvent<HTMLButtonElement>) => {
     setInput({
       ...input,
       quantity: input.quantity - 1,
@@ -65,10 +65,10 @@ export default function DetailPage() {
         item={data.item}
         input={input}
         displayIdx={displayIdx}
-        changeDisplay={changeDisplay}
-        changeOption={changeOption}
-        increment={increment}
-        decrement={decrement}
+        setDisplay={setDisplay}
+        onChange={onChange}
+        onIncrement={onIncrement}
+        onDecrement={onDecrement}
       />
     );
   }

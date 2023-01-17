@@ -39,10 +39,10 @@ function DetailPageHeader({ category, subCategory }: DetailPageHeaderProps) {
 interface ImageInfoProps {
   images: string[];
   displayIdx: number;
-  changeDisplay: (idx: number) => void;
+  setDisplay: (idx: number) => void;
 }
 
-function ImageInfo({ images, displayIdx, changeDisplay }: ImageInfoProps) {
+function ImageInfo({ images, displayIdx, setDisplay }: ImageInfoProps) {
   return (
     <>
       <div className={styles.image_main}>
@@ -58,7 +58,7 @@ function ImageInfo({ images, displayIdx, changeDisplay }: ImageInfoProps) {
             className={`${styles.image_element} ${
               idx === displayIdx && styles.image_element_on
             }`}
-            onMouseOver={() => changeDisplay(idx)}
+            onMouseOver={() => setDisplay(idx)}
           >
             <img src={image} alt="이미지 로딩 중" />
           </li>
@@ -193,18 +193,18 @@ interface PurchaseAreaProps {
   price: number;
   input: PurchaseDraft;
   options: string[] | undefined;
-  changeOption: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  increment: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  decrement: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onIncrement: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onDecrement: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 function PurchaseArea({
   price,
   input,
   options,
-  changeOption,
-  increment,
-  decrement,
+  onChange,
+  onIncrement,
+  onDecrement,
 }: PurchaseAreaProps) {
   const { option, quantity } = input;
 
@@ -213,7 +213,7 @@ function PurchaseArea({
       {options && (
         <div className={styles.dropdown_wrapper}>
           <div className={styles.dropdown}>
-            <select onChange={changeOption}>
+            <select onChange={onChange}>
               <option defaultValue={undefined}>옵션 선택</option>
               {options.map((option, idx) => (
                 <option key={idx} value={option}>
@@ -231,9 +231,9 @@ function PurchaseArea({
               <span>{options ? `${option}` : 'FREE'}</span>
             </div>
             <div className={styles.selected_amount}>
-              <button onClick={decrement}>-</button>
+              <button onClick={onDecrement}>-</button>
               <input type="text" value={quantity} />
-              <button onClick={increment}>+</button>
+              <button onClick={onIncrement}>+</button>
             </div>
             <div className={styles.selected_price}>
               <span>{(price * quantity).toLocaleString() + '원'}</span>
@@ -258,20 +258,20 @@ interface DetailPageLayoutProps {
   item: Item;
   input: PurchaseDraft;
   displayIdx: number;
-  changeDisplay: (idx: number) => void;
-  changeOption: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  increment: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  decrement: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  setDisplay: (idx: number) => void;
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onIncrement: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onDecrement: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function DetailPageLayout({
   item,
   input,
   displayIdx,
-  changeDisplay,
-  changeOption,
-  increment,
-  decrement,
+  setDisplay,
+  onChange
+  onIncrement,
+  onDecrement,
 }: DetailPageLayoutProps) {
   return (
     <div className={styles.wrapper}>
@@ -286,7 +286,7 @@ export default function DetailPageLayout({
             <ImageInfo
               images={item.images}
               displayIdx={displayIdx}
-              changeDisplay={changeDisplay}
+              setDisplay={setDisplay}
             />
           </div>
           <div className={styles.body_right}>
@@ -306,9 +306,9 @@ export default function DetailPageLayout({
               price={item.newPrice ? item.newPrice : item.oldPrice}
               input={input}
               options={item.options}
-              changeOption={changeOption}
-              increment={increment}
-              decrement={decrement}
+              onChange={onChange}
+              onIncrement={onIncrement}
+              onDecrement={onDecrement}
             />
           </div>
         </div>
