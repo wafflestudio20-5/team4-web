@@ -35,7 +35,7 @@ export interface Item {
 }
 
 export interface Purchase {
-  id?: number;
+  id: number;
   item: Item;
   createdDate?: string;
   payment?: number;

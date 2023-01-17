@@ -88,7 +88,7 @@ export const useApiItemListFetcher = (
 export const useApiGetPurchaseListFetcher = (token: string | null) => {
   const f = useCallback(
     (cancelToken: CancelToken) => {
-      return axios.get<{ purchaseitems: Purchase[] }>(
+      return axios.get<{ purchaseItems: Purchase[] }>(
         '/api/user/me/purchases',
         {
           headers: token ? auth(token) : undefined,
@@ -101,7 +101,7 @@ export const useApiGetPurchaseListFetcher = (token: string | null) => {
   return f;
 };
 
-export const apiPostPurchaseListFetcher = (
+export const apiPostPurchaseList = (
   purchaseitems: PurchasePostDto[],
   token: string | null
 ) =>
@@ -127,21 +127,21 @@ export const useApiGetCartListFetcher = (token: string | null) => {
   return f;
 };
 
-export const useApiPutCartList = (
+export const apiPutCartList = (
   id: number,
   quantity: number,
-  token: string
+  token: string | null
 ) =>
   axios.put<{}>(
     'api/user/me/shopping-cart',
     { id, quantity },
-    { headers: auth(token) }
+    { headers: token ? auth(token) : undefined }
   );
 
-export const useApiDeleteCartList = (ids: number[], token: string) =>
+export const apiDeleteCartList = (ids: number[], token: string) =>
   axios.delete<{}>('/api/user/me/shopping-cart', {
     params: ids,
-    headers: auth(token),
+    headers: token ? auth(token) : undefined,
   });
 
 export const useApiGetViewedListFetcher = (token: string | null) => {

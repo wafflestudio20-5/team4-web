@@ -18,14 +18,15 @@ export default function MyPageViewed({
         <header className={styles.title}>
           <h2>최근 본 상품</h2>
         </header>
-        Issue: user field (recentlyViewed)
-        <ul className={styles.myRecent}>
-          {recentlyViewed ? (
-            recentlyViewed?.map((item) => <ItemViewed purchase={item} />)
-          ) : (
-            <div className={styles.none}>최근 구매내역이 없습니다.</div>
-          )}
-        </ul>
+        {recentlyViewed && recentlyViewed.length !== 0 ? (
+          <ul className={styles.myRecent}>
+            {recentlyViewed?.map((item) => (
+              <ItemViewed purchase={item} />
+            ))}
+          </ul>
+        ) : (
+          <div className={styles.none}>최근 본 상품이 없습니다.</div>
+        )}
       </section>
     </div>
   );

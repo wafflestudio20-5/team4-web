@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Purchase } from '../../lib/interface';
-import { apiPostPurchaseListFetcher } from '../../lib/api';
+import { apiPostPurchaseList } from '../../lib/api';
 import { Session } from '../../lib/interface';
 import { RootState } from '../../store';
 import { useSelector } from 'react-redux';
@@ -91,7 +91,7 @@ export default function OrderPurchase({
           <button
             className={styles.purchaseButton}
             onClick={() => {
-              apiPostPurchaseListFetcher(purchaseitems, accessToken);
+              apiPostPurchaseList(purchaseitems, accessToken);
             }}
           >
             {price.finalprice.toLocaleString()} 원 결제하기

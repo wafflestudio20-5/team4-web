@@ -4,10 +4,12 @@ import PurchasePageHeader from './PurchasePageHeader';
 import OrderDelivery from './OrderDelivery';
 import { Purchase } from '../../lib/interface';
 import OrderPurchase from './OrderPurchase';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function PurchasePage() {
   const location = useLocation();
+  const navigate = useNavigate();
   const purchaseList = location.state.items;
 
   const sumPrice = (purchaseList: Purchase[]): number => {
@@ -29,6 +31,12 @@ export default function PurchasePage() {
     });
     return sale;
   };
+
+  useEffect(() => {
+    if (!purchaseList || purchaseList?.length === 0) {
+      navigate(-1);
+    }
+  }, [purchaseList, navigate]);
 
   return (
     <div className={styles.wrap}>

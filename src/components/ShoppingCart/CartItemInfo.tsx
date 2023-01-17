@@ -1,13 +1,20 @@
+import { KeyboardEvent, useState, FocusEvent } from 'react';
 import styles from './CartItemInfo.module.scss';
 import { Purchase } from '../../lib/interface';
 import deletebutton from '../../resources/image/delete.svg';
 import substractbutton from '../../resources/image/remove.svg';
 import addbutton from '../../resources/image/add.svg';
+import { apiPutCartList } from '../../lib/api';
+
 interface CartItemInfoProps {
   cartList: Purchase[] | null;
+  accessToken: string | null;
 }
 
-export default function CartItemInfo({ cartList }: CartItemInfoProps) {
+export default function CartItemInfo({
+  cartList,
+  accessToken,
+}: CartItemInfoProps) {
   return (
     <>
       <div className={styles.orderProductInfo}>
@@ -25,9 +32,19 @@ export default function CartItemInfo({ cartList }: CartItemInfoProps) {
             </tr>
           </thead>
           <tbody>
-            {cartList?.map((purchase, idx) => (
-              <PurchaseItem purchase={purchase} idx={idx} />
-            ))}
+            {cartList && cartList.length !== 0 ? (
+              cartList?.map((purchase, idx) => (
+                <PurchaseItem
+                  purchase={purchase}
+                  idx={idx}
+                  accessToken={accessToken}
+                />
+              ))
+            ) : (
+              <td colSpan={7} className={styles.noitems}>
+                장바구니에 담긴 상품이 없습니다.
+              </td>
+            )}
           </tbody>
         </table>
         <div className={styles.announcement}>
@@ -54,7 +71,33 @@ export default function CartItemInfo({ cartList }: CartItemInfoProps) {
   );
 }
 
-function PurchaseItem({ purchase, idx }: { purchase: Purchase; idx: number }) {
+function PurchaseItem({
+  purchase,
+  idx,
+  accessToken,
+}: {
+  purchase: Purchase;
+  idx: number;
+  accessToken: string | null;
+}) {
+  const [inputs, setInputs] = useState(purchase.quantity.toString());
+  const handleInputs = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputs(e.target.value);
+  };
+  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      if (Number(inputs) !== purchase.quantity) {
+        apiPutCartList(purchase.id, Number(inputs), accessToken);
+      }
+    }
+  };
+
+  const blurEvent = (e: FocusEvent<HTMLInputElement>) => {
+    if (Number(e.target.value) !== purchase.quantity) {
+      apiPutCartList(purchase.id, Number(e.target.value), accessToken);
+    }
+  };
+
   return (
     <tr key={purchase.item.id}>
       <th>{idx + 1}</th>
@@ -110,13 +153,26 @@ function PurchaseItem({ purchase, idx }: { purchase: Purchase; idx: number }) {
             className={styles.Button}
             src={substractbutton}
             alt="활성화된 상품개수 줄이기"
+            onClick={() => {
+              apiPutCartList(purchase.id, purchase.quantity - 1, accessToken);
+            }}
           ></img>
         )}
-        {purchase.quantity} 개
+        <input
+          className={styles.input}
+          type="text"
+          value={inputs}
+          onChange={handleInputs}
+          onKeyDown={handleKeyPress}
+          onBlur={blurEvent}
+        ></input>
         <img
           className={styles.Button}
           src={addbutton}
           alt="상품개수 늘리기"
+          onClick={() => {
+            apiPutCartList(purchase.id, purchase.quantity + 1, accessToken);
+          }}
         ></img>
       </th>
       <th>

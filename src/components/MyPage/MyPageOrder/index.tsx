@@ -11,7 +11,7 @@ export default function MyPageOrder({
     useApiGetPurchaseListFetcher(accessToken)
   );
 
-  const purchases = purchasesData?.purchaseitems ?? null;
+  const purchases = purchasesData?.purchaseItems ?? null;
 
   console.log(purchases);
 
@@ -43,7 +43,7 @@ export default function MyPageOrder({
           <div className={styles.grid_header}>주문 상태</div>
         </div>
 
-        {purchases ? (
+        {purchases && purchases?.length !== 0 ? (
           purchases.map((item) => <ItemOrdered purchase={item} />)
         ) : (
           <div className={styles.none}>주문 목록이 없습니다.</div>

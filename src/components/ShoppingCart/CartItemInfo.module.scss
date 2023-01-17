@@ -16,6 +16,11 @@
     background: #fff;
     border: 1px solid #e5e5e5;
     border-collapse: collapse;
+
+    .noitems {
+      height: 150px;
+      color: #999;
+    }
     tr {
       border: 1px solid #e5e5e5;
     }
@@ -99,11 +104,10 @@
 
     .Button {
       padding: 1px;
-      margin: -5px 5px;
+      margin: -6px 1px;
       width: 16px;
       height: 16px;
       border: 1px solid #e5e5e5;
-      border-radius: 30%;
     }
 
     .Button:hover {
@@ -112,11 +116,11 @@
 
     .ButtonGray {
       padding: 1px;
-      margin: -5px 5px;
+      margin: -6px 1px;
       width: 16px;
       height: 16px;
       border: 1px solid #e5e5e5;
-      border-radius: 30%;
+
       background-color: rgb(201, 201, 201);
     }
 
@@ -138,6 +142,17 @@
       height: 20px;
       width: 20px;
       background: url(../../resources/image/add.svg) no-repeat;
+    }
+    .input {
+      border: 1px solid #e5e5e5;
+      width: 30px;
+      height: 16px;
+      text-align: center;
+      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      font-size: 12px;
+    }
+    .input:focus {
+      border: 1px solid;
     }
   }
 
