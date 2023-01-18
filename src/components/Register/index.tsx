@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import RegisterPageLayout from './registerPage';
 import { apiRegister } from '../../lib/api';
-import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Session } from '../../lib/interface';
+import { RootState } from '../../store';
 
 function RegisterPage() {
+  const session: Session = useSelector((state: RootState) => {
+    return state.session;
+  });
+
   const [input, setInput] = useState({
     id: '',
     password: '',
@@ -188,8 +194,7 @@ function RegisterPage() {
     if (registerButtonActivate === true) {
       apiRegister(input.id, input.password, input.nickname)
         .then((r) => {
-          toast('회원가입 되었습니다');
-          navigate('/login', { state: { fromRegister: true } });
+          navigate('/login');
         })
         .catch((error) => {
           console.log(error);
@@ -264,6 +269,12 @@ function RegisterPage() {
       setRegisterButtonActivate(false);
     }
   }, [input, check.first, check.second, check.third]);
+
+  useEffect(() => {
+    if (session.user) {
+      navigate(-1);
+    }
+  }, []);
 
   return (
     <>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { RootState, AppDispatch } from '../../store';
 import { postLogin } from '../../store/slices/session';
 import LoginPageLayout from './LoginPageLayout';
@@ -19,7 +19,6 @@ export default function LoginPage() {
   });
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -43,7 +42,6 @@ export default function LoginPage() {
           password,
         })
       ).unwrap();
-      toast('로그인 되었습니다.');
     } catch (error) {
       toast(`${error}`);
     }
@@ -54,8 +52,9 @@ export default function LoginPage() {
   };
 
   useEffect(() => {
-    if (session.user && location.state?.fromRegister) navigate('/');
-    else if (session.user && !location.state?.fromRegister) navigate(-1);
+    if (session.user) {
+      navigate(-1);
+    }
   });
 
   return (

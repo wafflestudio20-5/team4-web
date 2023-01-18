@@ -38,7 +38,6 @@ function MyPage() {
     if (accessToken) await dispatch(postLogout(accessToken));
   };
 
-  /* Redirection to HomePage */
   useEffect(() => {
     if (!user) navigate('/login');
   }, [user, navigate]);
