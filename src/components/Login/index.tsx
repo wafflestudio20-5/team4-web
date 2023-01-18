@@ -54,7 +54,7 @@ export default function LoginPage() {
   };
 
   useEffect(() => {
-    if (session.user && location.state?.fromRegister) navigate(-3);
+    if (session.user && location.state?.fromRegister) navigate('/');
     else if (session.user && !location.state?.fromRegister) navigate(-1);
   });
 
