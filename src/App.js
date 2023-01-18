@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { postRefresh } from './store/slices/session';
 import Header from './components/Header/';
-import SubHeader from './components/SubHeader/';
 import CategorySideBar from './components/CategorySideBar';
 import HomePage from './components/Home/';
 import DetailPage from './components/DetailPage';
@@ -18,15 +17,13 @@ function AppRoutes() {
   return (
     <Routes>
       <Route element={<Header />}>
-        <Route element={<SubHeader />}>
+        <Route element={<CategorySideBar />}>
           <Route index element={<HomePage />} />
-          <Route element={<CategorySideBar />}>
-            <Route path="/cart" element={<ShoppingCart />} />
-            <Route path="/coupon" element={<></>} />
-            <Route path="/customercenter" element={<></>} />
-            <Route path="/goods/:id" element={<DetailPage />} />
-            <Route path="/purchase" element={<PurchasePage />} />
-          </Route>
+          <Route path="/cart" element={<ShoppingCart />} />
+          <Route path="/coupon" element={<></>} />
+          <Route path="/customercenter" element={<></>} />
+          <Route path="/goods/:id" element={<DetailPage />} />
+          <Route path="/purchase" element={<PurchasePage />} />
         </Route>
         <Route path="/mypage/*" element={<MyPage />} />
       </Route>
