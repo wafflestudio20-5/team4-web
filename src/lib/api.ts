@@ -139,6 +139,17 @@ export const apiPutCart = (
     { headers: token ? auth(token) : undefined }
   );
 
+export const apiPatchCart = (
+  id: number,
+  quantity: number,
+  token: string | null
+) =>
+  axios.patch<{}>(
+    'api/user/me/shopping-cart',
+    { id, quantity },
+    { headers: token ? auth(token) : undefined }
+  );
+
 export const apiDeleteCartList = (ids: number[], token: string) =>
   axios.delete<{}>('/api/user/me/shopping-cart', {
     params: ids,
