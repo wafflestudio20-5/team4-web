@@ -1,8 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useApiData, useApiItemListFetcher } from '../../lib/api';
-import { Item, Category, displayCategory } from '../../lib/interface';
+import {
+  Item,
+  Category,
+  SubCategory,
+  displayCategory,
+  stringtoEnum,
+} from '../../lib/interface';
 import ItemPreview from './ItemPreview';
 import styles from './ItemList.module.scss';
+import { useParams } from 'react-router-dom';
 
 interface ItemPreviewListProps {
   items: Item[] | null;
@@ -15,14 +22,33 @@ interface ItemListCategoryProps {
 }
 
 export default function ItemList() {
-  const [selectedCategory, setSelectedCategory] = useState<Category | null>(
-    null
-  );
+  const [paramCategory, setparamCategory] = useState<{
+    category: Category | null;
+    subCategory: SubCategory | undefined;
+  }>({ category: null, subCategory: undefined });
+
+  const param = useParams();
+  const paramEnum = stringtoEnum(param.category);
+
+  // useEffect(() => {
+  //   if (param.category && param.category in Category) {
+  //     console.log('서브카테고리');
+  //   } else if (param.category && param.category in SubCategory) {
+  //     console.log('서브카테고리');
+  //   } else {
+  //     console.log('전체');
+  //   }
+  // }, []);
+
   const { data: itemsData } = useApiData(
-    useApiItemListFetcher(selectedCategory, undefined, 20, 0)
+    useApiItemListFetcher(
+      paramCategory.category,
+      paramCategory.subCategory,
+      20,
+      0
+    )
   );
   const items = itemsData?.items ?? null;
-  const categorys = Object.values(Category);
 
   return (
     <div className={styles.itemList}>

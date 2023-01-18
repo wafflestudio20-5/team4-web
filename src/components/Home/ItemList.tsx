@@ -37,7 +37,7 @@ export default function ItemList() {
       <div className={styles.moreView}>
         <button
           onClick={() => {
-            navigate('/itemlist');
+            navigate(`/itemlist/${selectedCategory}`);
           }}
         >
           더 보기 {' >'}

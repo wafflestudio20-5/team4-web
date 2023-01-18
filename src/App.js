@@ -25,7 +25,7 @@ function AppRoutes() {
             <Route path="/coupon" element={<></>} />
             <Route path="/customercenter" element={<></>} />
             <Route path="/goods/:id" element={<DetailPage />} />
-            <Route path="/itemlist" element={<ItemListPage />} />
+            <Route path="/itemlist/:category" element={<ItemListPage />} />
             <Route path="/purchase" element={<PurchasePage />} />
           </Route>
         </Route>
