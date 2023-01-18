@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { postRefresh } from './store/slices/session';
 import Header from './components/Header/';
-import SubHeader from './components/SubHeader/';
 import CategorySideBar from './components/CategorySideBar';
 import HomePage from './components/Home/';
 import DetailPage from './components/DetailPage';

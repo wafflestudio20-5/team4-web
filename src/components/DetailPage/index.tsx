@@ -8,7 +8,7 @@ import DetailPageLayout from './DetailPageLayout';
 import {
   useApiData,
   useApiItemFetcher,
-  apiPutCart,
+  apiPostCart,
   apiPostViewedGoods,
 } from '../../lib/api';
 import { Purchase } from '../../lib/interface';
@@ -24,8 +24,8 @@ export default function DetailPage() {
     quantity: 1,
   });
 
-  const accessToken = useSelector((state: RootState) => {
-    return state.session.accessToken;
+  const { user, accessToken } = useSelector((state: RootState) => {
+    return state.session;
   });
 
   const { id } = useParams<{ id: string }>();
@@ -87,6 +87,10 @@ export default function DetailPage() {
         toast('옵션을 선택해 주세요.');
         return;
       }
+      if (!user) {
+        navigate('/login');
+        return;
+      }
       const purchase: Purchase[] = [
         {
           id: parsedId,
@@ -105,12 +109,16 @@ export default function DetailPage() {
     e.preventDefault();
     if (parsedId && data) {
       const { option, quantity } = input;
+      if (data.item.options && !option) {
+        toast('옵션을 선택해 주세요.');
+        return;
+      }
+      if (!user) {
+        navigate('/login');
+        return;
+      }
       try {
-        await apiPutCart(parsedId, option, quantity, accessToken);
-        setInput({
-          option: undefined,
-          quantity: 1,
-        });
+        await apiPostCart(parsedId, option, quantity, accessToken);
       } catch (error) {
         const e = error as AxiosError;
         if (e.response?.status === 409) {
