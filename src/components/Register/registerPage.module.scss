@@ -74,6 +74,12 @@
               padding: 0 12px;
               border: 0px;
             }
+            .IdCheckT {
+              color: blue;
+            }
+            .IdCheckF {
+              color: red;
+            }
           }
         }
         .inputPasswordArea {
@@ -116,13 +122,14 @@
               padding: 0 12px 0 12px;
               border: 0px;
             }
-            .inputPasswordMessage {
-              width: 100%;
-              height: 16.5px;
-              margin-top: 8px;
-              position: static;
-            }
           }
+        }
+        .inputPasswordMessage {
+          width: 100%;
+          height: 16.5px;
+          margin-top: 8px;
+          position: static;
+          color: red;
         }
         .inputRepeatArea {
           width: 100%;
@@ -141,6 +148,9 @@
               box-sizing: border-box;
               border: 0px;
               padding: 0 12px 0 12px;
+            }
+            .inputRepeatMessage {
+              color: red;
             }
           }
         }
@@ -183,6 +193,9 @@
               border: 0px;
               padding: 0 12px 0 12px;
             }
+          }
+          .inputNickMessage {
+            color: red;
           }
         }
         .inputRecommendIdArea {
@@ -289,6 +302,19 @@
             color: #fff;
             border: 1px;
             border-radius: 4px;
+          }
+          .signupButtonT:hover {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            height: 50px;
+            padding: 14px 16px 15px;
+            border-color: #0078ff;
+            background-color: #0078ff;
+            color: #fff;
+            border: 1px;
+            border-radius: 4px;
+            cursor: pointer;
           }
         }
         .signupButtonHelper {

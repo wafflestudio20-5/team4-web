@@ -1,9 +1,20 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
-import MainHeader from './MainHeader';
+import { RootState, AppDispatch } from '../../store';
+import { postLogout } from '../../store/slices/session';
+import HeaderLayout from './HeaderLayout';
+import { Session } from '../../lib/interface';
 
 function Header() {
   const [query, setQuery] = useState<string>('');
+
+  const dispatch = useDispatch<AppDispatch>();
+  const session: Session = useSelector((state: RootState) => {
+    return state.session;
+  });
+
+  const { user, accessToken } = session;
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
@@ -21,13 +32,20 @@ function Header() {
     setQuery('');
   };
 
+  const onLogout = async (e: React.MouseEvent<HTMLSpanElement>) => {
+    e.preventDefault();
+    if (accessToken) await dispatch(postLogout(accessToken));
+  };
+
   return (
     <>
-      <MainHeader
+      <HeaderLayout
+        user={user}
         query={query}
         onChange={onChange}
         onKeyPress={onKeyPress}
         onSubmit={onSubmit}
+        onLogout={onLogout}
       />
       <Outlet />
     </>

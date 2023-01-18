@@ -90,7 +90,7 @@ export default function RegisterPageLayout({
                       onChange(e);
                     }}
                   ></input>
-                  {IdCheck().message}
+                  <div className={IdCheck().message === '사용 가능한 아이디입니다.' ? styles.IdCheckT : styles.IdCheckF}>{IdCheck().message}</div>
                 </div>
               </div>
               <div className={styles.inputPasswordArea}>
@@ -135,7 +135,7 @@ export default function RegisterPageLayout({
                       onChange(e);
                     }}
                   ></input>
-                  {RePasswordCheck().message}
+                  <div className={styles.inputRepeatMessage}>{RePasswordCheck().message}</div>
                 </div>
               </div>
               <div className={styles.inputNickArea}>
@@ -154,7 +154,7 @@ export default function RegisterPageLayout({
                     }}
                   ></input>
                 </div>
-                {NicknameCheck().message}
+                <div className={styles.inputNickMessage}>{NicknameCheck().message}</div>
               </div>
               <div className={styles.inputRecommendIdArea}>
                 <label className={styles.inputRecommendIdLabel}>
