@@ -105,6 +105,9 @@
     align-items: center;
     justify-content: center;
   }
+  button:hover {
+    cursor: pointer;
+  }
 }
 
 .pagenation {
