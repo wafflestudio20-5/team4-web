@@ -1,0 +1,116 @@
+.itemList {
+  width: calc(100%);
+  max-width: 2000px;
+  min-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.itemListCategory {
+  min-width: 170px;
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    flex: 1;
+    font-size: 36px;
+    padding: 10px 10px;
+    font-family: 'musinsa', sans-serif;
+    text-align: center;
+  }
+
+  .categorycontent {
+    flex: 15;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+
+    .button {
+      display: inline-block;
+      height: 36px;
+      margin: 0 5px 10px;
+      padding: 0 20px;
+      border: 1px solid #e5e5e5;
+      border-radius: 25px;
+      font-weight: lighter;
+      font-size: 16px;
+      line-height: 36px;
+      color: #aaa;
+      vertical-align: top;
+      background-color: #fff;
+      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    }
+
+    .buttonselected {
+      display: inline-block;
+      height: 36px;
+      margin: 0 5px 10px;
+      padding: 0 20px;
+      border: 1px solid #e5e5e5;
+      border-radius: 25px;
+      font-weight: lighter;
+      font-size: 16px;
+      line-height: 36px;
+      background-color: #000;
+      color: #fff;
+      vertical-align: top;
+      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    }
+
+    .button:hover {
+      cursor: pointer;
+    }
+
+    .buttonselected:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.itemListBox {
+  padding: 0px 10px;
+  align-self: center;
+  overflow: hidden;
+  flex: 7;
+  padding-top: 10px;
+  display: grid;
+  width: fit-content;
+  min-width: 1000px;
+  max-width: 1300px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 10px;
+}
+
+.moreView {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  button {
+    display: flex;
+    box-sizing: border-box;
+    width: 400px;
+    height: 80px;
+    margin: 0 5px;
+    border: 1px solid #0078ff;
+    background-color: transparent;
+    font-size: 25px;
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    color: #0078ff;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.pagenation {
+  height: 20px;
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

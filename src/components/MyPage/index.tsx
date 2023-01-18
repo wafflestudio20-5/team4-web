@@ -49,7 +49,10 @@ function MyPage() {
         <Route element={<MyPageLayout user={user} onLogout={onLogout} />}>
           <Route index element={<MyPageMain user={user} />} />
           <Route path="info" element={<MyPageInfo user={user} />} />
-          <Route path="order" element={<MyPageOrder user={user} />} />
+          <Route
+            path="order"
+            element={<MyPageOrder accessToken={accessToken} />}
+          />
           <Route path="review" element={<div>/mypage/review</div>} />
           <Route
             path="item_inquiry"
@@ -59,7 +62,10 @@ function MyPage() {
             path="personal_inquiry"
             element={<div>/mypage/personal_inquiry</div>}
           />
-          <Route path="viewed_goods" element={<MyPageViewed user={user} />} />
+          <Route
+            path="viewed_goods"
+            element={<MyPageViewed accessToken={accessToken} />}
+          />
         </Route>
       </Routes>
     );
