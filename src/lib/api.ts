@@ -129,12 +129,12 @@ export const useApiGetCartListFetcher = (token: string | null) => {
   return f;
 };
 
-export const apiPutCartList = (
+export const apiPatchCart = (
   id: number,
   quantity: number,
   token: string | null
 ) =>
-  axios.put<{}>(
+  axios.patch<{}>(
     'api/user/me/shopping-cart',
     { id, quantity },
     { headers: token ? auth(token) : undefined }
