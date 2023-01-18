@@ -24,8 +24,8 @@ export default function DetailPage() {
     quantity: 1,
   });
 
-  const accessToken = useSelector((state: RootState) => {
-    return state.session.accessToken;
+  const { user, accessToken } = useSelector((state: RootState) => {
+    return state.session;
   });
 
   const { id } = useParams<{ id: string }>();
@@ -87,6 +87,10 @@ export default function DetailPage() {
         toast('옵션을 선택해 주세요.');
         return;
       }
+      if (!user) {
+        navigate('/login');
+        return;
+      }
       const purchase: Purchase[] = [
         {
           id: parsedId,
@@ -107,6 +111,10 @@ export default function DetailPage() {
       const { option, quantity } = input;
       if (data.item.options && !option) {
         toast('옵션을 선택해 주세요.');
+        return;
+      }
+      if (!user) {
+        navigate('/login');
         return;
       }
       try {
