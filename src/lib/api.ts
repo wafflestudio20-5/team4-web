@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from 'react';
 import axios, { AxiosResponse, CancelToken } from 'axios';
 import { User, Item, Category, SubCategory, Purchase } from './interface';
 import { PurchasePostDto } from './dto';
+
+axios.defaults.baseURL = 'http://localhost:3000';
 axios.defaults.withCredentials = true;
 
 const auth = (token: string) => ({ Authorization: `Bearer ${token}` });
