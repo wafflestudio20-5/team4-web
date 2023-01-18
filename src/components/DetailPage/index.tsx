@@ -8,7 +8,7 @@ import DetailPageLayout from './DetailPageLayout';
 import {
   useApiData,
   useApiItemFetcher,
-  apiPutCart,
+  apiPostCart,
   apiPostViewedGoods,
 } from '../../lib/api';
 import { Purchase } from '../../lib/interface';
@@ -106,7 +106,7 @@ export default function DetailPage() {
     if (parsedId && data) {
       const { option, quantity } = input;
       try {
-        await apiPutCart(parsedId, option, quantity, accessToken);
+        await apiPostCart(parsedId, option, quantity, accessToken);
         setInput({
           option: undefined,
           quantity: 1,

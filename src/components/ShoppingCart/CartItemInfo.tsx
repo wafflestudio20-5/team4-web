@@ -4,7 +4,7 @@ import { Purchase } from '../../lib/interface';
 import deletebutton from '../../resources/image/delete.svg';
 import substractbutton from '../../resources/image/remove.svg';
 import addbutton from '../../resources/image/add.svg';
-import { apiPutCart } from '../../lib/api';
+import { apiPutCartList } from '../../lib/api';
 
 interface CartItemInfoProps {
   cartList: Purchase[] | null;
@@ -92,18 +92,13 @@ function PurchaseItem({
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       if (Number(inputs) !== purchase.quantity) {
-        apiPutCart(purchase.id, purchase.option, Number(inputs), accessToken);
+        apiPutCartList(purchase.id, Number(inputs), accessToken);
       }
     }
   };
   const blurEvent = (e: FocusEvent<HTMLInputElement>) => {
     if (Number(e.target.value) !== purchase.quantity) {
-      apiPutCart(
-        purchase.id,
-        purchase.option,
-        Number(e.target.value),
-        accessToken
-      );
+      apiPutCartList(purchase.id, Number(e.target.value), accessToken);
     }
   };
 
@@ -163,12 +158,7 @@ function PurchaseItem({
             src={substractbutton}
             alt="활성화된 상품개수 줄이기"
             onClick={() => {
-              apiPutCart(
-                purchase.id,
-                purchase.option,
-                purchase.quantity - 1,
-                accessToken
-              );
+              apiPutCartList(purchase.id, purchase.quantity - 1, accessToken);
             }}
           ></img>
         )}
@@ -185,12 +175,7 @@ function PurchaseItem({
           src={addbutton}
           alt="상품개수 늘리기"
           onClick={() => {
-            apiPutCart(
-              purchase.id,
-              purchase.option,
-              purchase.quantity + 1,
-              accessToken
-            );
+            apiPutCartList(purchase.id, purchase.quantity + 1, accessToken);
           }}
         ></img>
       </th>
