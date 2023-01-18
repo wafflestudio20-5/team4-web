@@ -50,7 +50,7 @@ export default function LoginPage() {
   };
 
   const onSocialLogin = () => {
-    navigate('http://localhost:8080/oauth2/authorization/kakao');
+    window.location.href = 'http://localhost:8080/oauth2/authorization/kakao';
   };
 
   useEffect(() => {
