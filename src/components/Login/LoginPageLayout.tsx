@@ -97,10 +97,10 @@ function LoginBottom() {
         <span
           className={styles.loginBottomButton}
           onClick={() => {
-            navigate('/');
+            navigate(-1);
           }}
         >
-          홈으로 가기
+          이전 페이지
         </span>
       </div>
     </div>
