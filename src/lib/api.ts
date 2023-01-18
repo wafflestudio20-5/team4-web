@@ -133,8 +133,8 @@ export const apiPutCart = (
   quantity: number,
   token: string | null
 ) =>
-  axios.put<{}>(
-    'api/user/me/shopping-cart',
+  axios.post<{}>(
+    '/api/user/me/shopping-cart',
     { id, option, quantity },
     { headers: token ? auth(token) : undefined }
   );
@@ -145,7 +145,7 @@ export const apiPatchCart = (
   token: string | null
 ) =>
   axios.patch<{}>(
-    'api/user/me/shopping-cart',
+    '/api/user/me/shopping-cart',
     { id, quantity },
     { headers: token ? auth(token) : undefined }
   );
