@@ -16,7 +16,7 @@ export default function PurchasePage() {
     let sum = 0;
 
     for (var idx in purchaseList) {
-      sum += purchaseList[idx].item.oldPrice;
+      sum += purchaseList[idx].item.oldPrice * purchaseList[idx].quantity;
     }
 
     return sum;
@@ -26,7 +26,8 @@ export default function PurchasePage() {
     let sale = 0;
     purchaseList.map((purchase) => {
       if (purchase.item.newPrice) {
-        sale += purchase.item.newPrice - purchase.item.oldPrice;
+        sale +=
+          (purchase.item.newPrice - purchase.item.oldPrice) * purchase.quantity;
       }
     });
     return sale;

@@ -104,12 +104,12 @@ export const useApiGetPurchaseListFetcher = (token: string | null) => {
 };
 
 export const apiPostPurchaseList = (
-  purchaseitems: PurchasePostDto[],
+  purchaseItems: PurchasePostDto[],
   token: string | null
 ) =>
   axios.post<{}>(
     '/api/user/me/purchases',
-    { purchaseitems },
+    { purchaseItems },
     { headers: token ? auth(token) : undefined }
   );
 
