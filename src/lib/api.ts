@@ -92,6 +92,14 @@ export const apiPostReview = (purchase: Purchase, rating: number, content: strin
     );
 };
 
+export const apiPostImage = (formData: FormData, token: string | null) => {
+    axios.post<{}>(
+        '/api/image-upload',
+        formData,
+        { headers: token ? auth(token) : undefined }
+    );
+};
+
 export const useApiItemListFetcher = (
   category: Category | null,
   subCategory?: SubCategory,

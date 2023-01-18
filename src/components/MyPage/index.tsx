@@ -13,6 +13,7 @@ import MyPageWriteReviewsList from './MyPageWriteReviews/indexList';
 import Footer from '../Footer';
 import { Session } from '../../lib/interface';
 import MyPageWriteReviews from "./MyPageWriteReviews";
+import TestPage from "./MyPageWriteReviews/TestPage";
 
 function MyPageLayout({ user, onLogout }: MyPageHeaderProps) {
   return (
@@ -54,6 +55,7 @@ function MyPage() {
           <Route path="order" element={<MyPageOrder user={user} />} />
           <Route path="review" element={<MyPageWriteReviewsList accessToken={accessToken}/>} />
           <Route path="review/write" element={<MyPageWriteReviews />} />
+          <Route path="testpage" element={<TestPage />} />
           <Route
             path="item_inquiry"
             element={<div>/mypage/item_inquiry</div>}
