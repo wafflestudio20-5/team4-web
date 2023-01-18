@@ -40,7 +40,7 @@ export default function MemberHeader({ user, onLogout }: MemberHeaderProps) {
       )}
       */}
       <div className={styles.member_block}>
-        <Link className={styles.member_link} to={user ? `/mypage` : `/login`}>
+        <Link className={styles.member_link} to="/mypage">
           마이페이지
         </Link>
       </div>

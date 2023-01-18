@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import RegisterPageLayout from './registerPage';
 import { apiRegister } from '../../lib/api';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 function RegisterPage() {
   const [input, setInput] = useState({
@@ -45,7 +47,7 @@ function RegisterPage() {
   const regNum = /[0-9]/;
   const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/;
   const regRep = /(.)\1{3}/;
-
+  const navigate = useNavigate();
   const PasswordCheck = () => {
     if (firstInputPassword === false) {
       return { message: '' };
@@ -186,7 +188,8 @@ function RegisterPage() {
     if (registerButtonActivate === true) {
       apiRegister(input.id, input.password, input.nickname)
         .then((r) => {
-          console.log(r);
+          toast('회원가입 되었습니다');
+          navigate('/login', { state: { fromRegister: true } });
         })
         .catch((error) => {
           console.log(error);

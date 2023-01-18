@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { RootState, AppDispatch } from '../../store';
 import { postLogin } from '../../store/slices/session';
 import LoginPageLayout from './LoginPageLayout';
 import { LoginDto } from '../../lib/dto';
 import { Session } from '../../lib/interface';
+import { toast } from 'react-toastify';
 
 export default function LoginPage() {
   const [input, setInput] = useState<LoginDto>({
@@ -18,6 +19,7 @@ export default function LoginPage() {
   });
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -41,17 +43,19 @@ export default function LoginPage() {
           password,
         })
       ).unwrap();
+      toast('로그인 되었습니다.');
     } catch (error) {
-      console.log(error);
+      toast(`${error}`);
     }
   };
 
   const onSocialLogin = () => {
-    window.open('http://localhost:8080/oauth2/authorization/kakao');
+    navigate('http://localhost:8080/oauth2/authorization/kakao');
   };
 
   useEffect(() => {
-    if (session.user) navigate(-1);
+    if (session.user && location.state?.fromRegister) navigate(-3);
+    else if (session.user && !location.state?.fromRegister) navigate(-1);
   });
 
   return (
