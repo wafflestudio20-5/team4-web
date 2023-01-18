@@ -111,10 +111,6 @@ export default function DetailPage() {
       }
       try {
         await apiPostCart(parsedId, option, quantity, accessToken);
-        setInput({
-          option: undefined,
-          quantity: 1,
-        });
       } catch (error) {
         const e = error as AxiosError;
         if (e.response?.status === 409) {
