@@ -105,6 +105,10 @@ export default function DetailPage() {
     e.preventDefault();
     if (parsedId && data) {
       const { option, quantity } = input;
+      if (data.item.options && !option) {
+        toast('옵션을 선택해 주세요.');
+        return;
+      }
       try {
         await apiPostCart(parsedId, option, quantity, accessToken);
         setInput({
