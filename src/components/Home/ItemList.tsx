@@ -20,7 +20,7 @@ export default function ItemList() {
     null
   );
   const { data: itemsData } = useApiData(
-    useApiItemListFetcher(selectedCategory, undefined, 20, 0)
+    useApiItemListFetcher(selectedCategory, undefined, 10, 0)
   );
   const items = itemsData?.items ?? null;
   const categorys = Object.values(Category);
