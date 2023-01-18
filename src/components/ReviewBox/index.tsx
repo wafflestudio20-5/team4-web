@@ -12,9 +12,13 @@ export default function ReviewBox({data}: DataType) {
         {
             return '남성';
         }
-        else
+        else if (data.user.sex === 'female')
         {
             return '여성';
+        }
+        else
+        {
+            return '';
         }
     }
     const sizeText = () => {
