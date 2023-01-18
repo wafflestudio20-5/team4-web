@@ -1,5 +1,15 @@
 import MyPageWriteReviewsLayout from "./MyPageWriteReviewsLayout";
-export default function MyPageWriteReviews() {
+import { useApiGetPurchaseListFetcher, useApiData} from "../../../lib/api";
 
-    return (<MyPageWriteReviewsLayout></MyPageWriteReviewsLayout>);
+export default function MyPageWriteReviews({
+    accessToken,}:{accessToken: string | null; }) {
+
+    const { data: purchasesData } = useApiData(
+        useApiGetPurchaseListFetcher(accessToken)
+    );
+
+    const purchases = purchasesData?.purchaseItems ?? null;
+    console.log(purchases);
+
+    return (<MyPageWriteReviewsLayout purchases={purchases}></MyPageWriteReviewsLayout>);
 }

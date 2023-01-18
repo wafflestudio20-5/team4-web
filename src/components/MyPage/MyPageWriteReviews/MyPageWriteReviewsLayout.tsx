@@ -1,22 +1,8 @@
 import styles from './MyPageWriteReviewsLayout.module.scss';
-interface Item {
-    id: number;
-    name: string;
-    brand: string;
-    images: string[];
-}
-interface Review {
-    id: number;
-}
-interface PurchaseParams {
-    id: number;
-    item: Item;
-    option?: string;
-    createdDateTime: string;
-    review?: Review;
-}
+import {Purchase} from '../../../lib/interface';
+
 interface ReviewItemParams {
-    data: PurchaseParams
+    data: Purchase;
 }
 
 function ReviewItem({data}:ReviewItemParams) {
@@ -25,22 +11,22 @@ function ReviewItem({data}:ReviewItemParams) {
         <tr>
             <td>
                 <div className={styles.reviewItemInfo}>
-                    <a href={`/goods/${data.item.id}`}>
-                        <img src={data.item.images[0]} alt="아이템 사진" />
+                    <a href={`/goods/${data?.item.id}`}>
+                        <img src={data?.item.images[0]} alt="아이템 사진" />
                     </a>
                     <ul>
-                        <li>{data.item.brand}</li>
-                        <li><b>{data.item.name}</b></li>
-                        <li>{data.option}</li>
+                        <li>{data?.item.brand}</li>
+                        <li><b>{data?.item.name}</b></li>
+                        <li>{data?.option}</li>
                     </ul>
                 </div>
             </td>
             <td className={styles.purchaseDate}>
-                {data.createdDateTime}
+                {data?.createdDateTime}
                 <br />
                 구매확정
             </td>
-            {data.review ? <td>
+            {data?.review ? <td>
                 <div className={styles.reviewWriteDone}>
                     후기 작성완료
                 </div>
@@ -53,8 +39,11 @@ function ReviewItem({data}:ReviewItemParams) {
         </tr>
     );
 }
+interface MyPageWriteReviewsLayoutParams {
+    purchases: Purchase[] | null;
+}
 
-export default function MyPageWriteReviewsLayout() {
+export default function MyPageWriteReviewsLayout({purchases}: MyPageWriteReviewsLayoutParams) {
 
 
     return (<div className={styles.reviewWrapper}>
@@ -84,7 +73,11 @@ export default function MyPageWriteReviewsLayout() {
                 </tr>
             </thead>
             <tbody>
-                <ReviewItem data={{id: 1, item: {id:1, name: '오버사이즈 발마칸 코트 DARK NAVY', brand: '인사일런스', images:['https://image.msscdn.net/images/goods_img/20220907/2780253/2780253_2_160.jpg']}, option: "s", createdDateTime: "2022.03.11", }}></ReviewItem>
+            {purchases && purchases?.length !== 0 ? (
+                purchases.map((item) => <ReviewItem data={item} />)
+            ) : (
+                <div className={styles.none}>후기 작성할 목록이 없습니다.</div>
+            )}
 
             </tbody>
 

@@ -1,11 +1,26 @@
 import { useCallback, useEffect, useState } from 'react';
 import axios, { AxiosResponse, CancelToken } from 'axios';
-import { User, Item, Category, SubCategory } from './interface';
+import { User, Item, Category, SubCategory, Purchase } from './interface';
 
 axios.defaults.withCredentials = true;
 
 const auth = (token: string) => ({ Authorization: `Bearer ${token}` });
 
+export const useApiGetPurchaseListFetcher = (token: string | null) => {
+  const f = useCallback(
+      (cancelToken: CancelToken) => {
+        return axios.get<{ purchaseItems: Purchase[] }>(
+            '/api/user/me/purchases',
+            {
+              headers: token ? auth(token) : undefined,
+              cancelToken,
+            }
+        );
+      },
+      [token]
+  );
+  return f;
+};
 
 export const apiRegister = (
   username: string,

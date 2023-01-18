@@ -38,10 +38,11 @@ export interface Purchase {
   id: number;
   user: User;
   item: Item;
-  createdDate: string;
+  createdDateTime: string;
   payment: number;
   quantity: number;
   option?: string;
+  review?: Review;
 }
 
 export interface Review {
