@@ -82,6 +82,15 @@ export const useApiItemFetcher = (id: number | null) => {
   );
   return id === null ? null : f;
 };
+export const apiPostReview = (purchase: Purchase, rating: number, content: string,
+                              size: string, color: string, images: string[], token: string) => {
+    axios.post<{}>(
+        'api/user/me/reviews',
+        {purchase, rating, content, size, color, images},
+        { headers: token ? auth(token) : undefined }
+
+    );
+};
 
 export const useApiItemListFetcher = (
   category: Category | null,

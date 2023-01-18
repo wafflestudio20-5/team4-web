@@ -9,9 +9,10 @@ import MyPageMain from './MyPageMain';
 import MyPageInfo from './MyPageInfo';
 import MyPageOrder from './MyPageOrder';
 import MyPageViewed from './MyPageViewed';
-import MyPageReviews from './MyPageWriteReviews';
+import MyPageWriteReviewsList from './MyPageWriteReviews/indexList';
 import Footer from '../Footer';
 import { Session } from '../../lib/interface';
+import MyPageWriteReviews from "./MyPageWriteReviews";
 
 function MyPageLayout({ user, onLogout }: MyPageHeaderProps) {
   return (
@@ -51,7 +52,8 @@ function MyPage() {
           <Route index element={<MyPageMain user={user} />} />
           <Route path="info" element={<MyPageInfo user={user} />} />
           <Route path="order" element={<MyPageOrder user={user} />} />
-          <Route path="review" element={<MyPageReviews accessToken={accessToken}/>} />
+          <Route path="review" element={<MyPageWriteReviewsList accessToken={accessToken}/>} />
+          <Route path="review/write" element={<MyPageWriteReviews />} />
           <Route
             path="item_inquiry"
             element={<div>/mypage/item_inquiry</div>}
