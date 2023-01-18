@@ -1,29 +1,19 @@
 import styles from "./ReviewBoxLayout.module.scss"
+import {Comment} from '../../lib/interface';
 
 import StarRate from "./StarRate";
 import React from "react";
-interface User {
-    nickname: string;
-    image: string;
-    sex?: string;
-    height: number;
-    weight: number;
-}
-interface Comment {
-    user: User;
-    content: string;
-    createdDateTime: string;
-}
+
 interface ReviewBoxLayoutParams {
     username: string;
     profileImageUrl: string;
     reviewDate: string;
     sex: string;
-    height: number;
-    weight: number;
+    height: number | undefined;
+    weight: number | undefined;
     goodsImageUrl: string;
     goodsName: string;
-    goodsOption: string;
+    goodsOption: string | undefined;
     reviewStar: number;
     reviewId: number;
     reviewContent: string;

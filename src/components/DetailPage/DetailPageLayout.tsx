@@ -12,6 +12,7 @@ import {
   getBarWidth,
 } from '../../lib/formatters/ratingFormatter';
 import styles from './DetailPageLayout.module.scss';
+import ReviewBox from '../ReviewBox/index'
 
 interface DetailPageHeaderProps {
   name: string;
@@ -117,6 +118,7 @@ interface DetailPageLayoutProps {
 
 export default function DetailPageLayout({ item }: DetailPageLayoutProps) {
   return (
+      <>
     <div className={styles.wrapper}>
       <DetailPageHeader
         name={item.name}
@@ -132,5 +134,7 @@ export default function DetailPageLayout({ item }: DetailPageLayoutProps) {
         </div>
       </div>
     </div>
+
+      </>
   );
 }

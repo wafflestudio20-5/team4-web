@@ -1,40 +1,9 @@
 import ReviewBoxLayout from "./ReviewBoxLayout";
 import {useState} from 'react';
-interface User {
-    nickname: string;
-    image: string;
-    sex?: string;
-    height: number;
-    weight: number;
-}
-interface Item {
-    name: string;
-    images: string[];
-}
-interface Purchase {
-    item: Item;
-    option: string;
-}
-interface Comment {
-    user: User;
-    content: string;
-    createdDateTime: string;
+import {Review} from '../../lib/interface';
 
-}
-interface ReviewBoxParams {
-    id: number;
-    user: User;
-    purchase: Purchase;
-    rating: number;
-    content: string;
-    createdDateTime: string;
-    size: string;
-    color: string;
-    comments: Comment[];
-    images: string[];
-}
 interface DataType {
-    data: ReviewBoxParams;
+    data: Review;
 }
 
 export default function ReviewBox({data}: DataType) {
