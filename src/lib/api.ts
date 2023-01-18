@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from 'react';
 import axios, { AxiosResponse, CancelToken } from 'axios';
 import { User, Item, Category, SubCategory, Purchase } from './interface';
 import { PurchasePostDto } from './dto';
+
+axios.defaults.baseURL = 'http://localhost:3000';
 axios.defaults.withCredentials = true;
 
 const auth = (token: string) => ({ Authorization: `Bearer ${token}` });
@@ -155,4 +157,25 @@ export const useApiGetViewedListFetcher = (token: string | null) => {
     [token]
   );
   return f;
+};
+
+export const apiPostCart = (
+  id: number,
+  option: string | undefined,
+  quantity: number,
+  token: string | null
+) => {
+  axios.post<{}>(
+    'api/user/me/shopping-cart',
+    { id, option, quantity },
+    { headers: token ? auth(token) : undefined }
+  );
+};
+
+export const apiPostViewedGoods = (itemId: number, token: string) => {
+  axios.post<{}>(
+    '/api/user/me/recently-viewed',
+    { itemId },
+    { headers: token ? auth(token) : undefined }
+  );
 };
