@@ -234,12 +234,10 @@ function PurchaseArea({
       {options && (
         <div className={styles.dropdown_wrapper}>
           <div className={styles.dropdown}>
-            <select onChange={onChangeOption}>
-              <option defaultValue={undefined}>옵션 선택</option>
+            <select value={'옵션 선택'} onChange={onChangeOption}>
+              <option>옵션 선택</option>
               {options.map((option, idx) => (
-                <option key={idx} value={option}>
-                  {option}
-                </option>
+                <option key={idx}>{option}</option>
               ))}
             </select>
           </div>
