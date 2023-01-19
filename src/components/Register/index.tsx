@@ -11,6 +11,14 @@ function RegisterPage() {
     return state.session;
   });
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (session.user) {
+      navigate(-1);
+    }
+  }, [session, navigate]);
+
   const [input, setInput] = useState({
     id: '',
     password: '',
