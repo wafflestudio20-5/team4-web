@@ -160,26 +160,39 @@ function PriceInfo({ oldPrice, newPrice, sale }: PriceInfoProps) {
         Price Info <span>가격정보</span>
       </div>
       <ul className={styles.info_body}>
-        <li>
-          <span className={styles.info_title}>무신사 판매가</span>
-          <div className={styles.info_price}>
-            <span className={styles.old_price}>
-              {oldPrice.toLocaleString() + '원'}
-            </span>
-          </div>
-        </li>
-        {newPrice && sale && (
-          <li>
-            <span className={styles.info_title}>무신사 회원가</span>
-            <div className={styles.info_price}>
-              <span className={styles.new_price}>
-                {newPrice.toLocaleString() + '원'}
-              </span>
-              <span className={styles.sale}>
-                <span>{sale + '% 이상 할인'}</span>
-              </span>
-            </div>
-          </li>
+        {newPrice && sale ? (
+          <>
+            <li>
+              <span className={styles.info_title}>무신사 판매가</span>
+              <div className={styles.info_price}>
+                <span className={styles.crossed_out_price}>
+                  {oldPrice.toLocaleString() + '원'}
+                </span>
+              </div>
+            </li>
+            <li>
+              <span className={styles.info_title}>무신사 회원가</span>
+              <div className={styles.info_price}>
+                <span className={styles.real_price}>
+                  {newPrice.toLocaleString() + '원'}
+                </span>
+                <span className={styles.sale}>
+                  <span>{sale + '% 이상 할인'}</span>
+                </span>
+              </div>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <span className={styles.info_title}>무신사 판매가</span>
+              <div className={styles.info_price}>
+                <span className={styles.real_price}>
+                  {oldPrice.toLocaleString() + '원'}
+                </span>
+              </div>
+            </li>
+          </>
         )}
       </ul>
       <div className={styles.textbox_red}>

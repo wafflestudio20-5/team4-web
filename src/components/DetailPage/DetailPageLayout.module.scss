@@ -137,12 +137,12 @@
   .info_price {
     display: inline-block;
     width: 282px;
-    .old_price {
+    .crossed_out_price {
       font: 500 17px/21px 'Musinsa', sans-serif;
       color: #aaa;
       text-decoration: line-through;
     }
-    .new_price {
+    .real_price {
       font: 500 17px/21px 'Musinsa', sans-serif;
     }
     .sale {
