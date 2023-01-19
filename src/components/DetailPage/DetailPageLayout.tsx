@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { PurchaseDraft } from '.';
+import { PurchaseDraft, AddToCartModalState } from '.';
 import {
   Item,
   Label,
@@ -206,6 +206,7 @@ interface PurchaseAreaProps {
   price: number;
   input: PurchaseDraft;
   options: string[] | undefined;
+  modalState: AddToCartModalState;
   onChangeOption: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   onClearOption: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onChangeQuantity: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -219,6 +220,7 @@ function PurchaseArea({
   price,
   input,
   options,
+  modalState,
   onChangeOption,
   onClearOption,
   onChangeQuantity,
@@ -228,6 +230,7 @@ function PurchaseArea({
   onAddToCart,
 }: PurchaseAreaProps) {
   const { option, quantity } = input;
+  const { open, message } = modalState;
 
   return (
     <div className={styles.purchase_box}>
@@ -275,10 +278,18 @@ function PurchaseArea({
         <span>{(price * quantity).toLocaleString() + '원'}</span>
       </div>
       <div className={styles.button_wrapper}>
-        <button onClick={onPurchase} className={styles.purchase_button}>
-          바로구매
-        </button>
-        <button onClick={onAddToCart} className={styles.cart_button} />
+        <div className={styles.button_grid}>
+          <button onClick={onPurchase} className={styles.purchase_button}>
+            바로구매
+          </button>
+          <button onClick={onAddToCart} className={styles.cart_button} />
+        </div>
+        {open && (
+          <div className={styles.add_to_cart_modal}>
+            <span>{message}</span>
+            <Link to="/cart">장바구니로 가기</Link>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -287,6 +298,7 @@ function PurchaseArea({
 interface DetailPageLayoutProps {
   item: Item;
   input: PurchaseDraft;
+  modalState: AddToCartModalState;
   displayIdx: number;
   setDisplay: (idx: number) => void;
   onChangeOption: (e: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -301,6 +313,7 @@ interface DetailPageLayoutProps {
 export default function DetailPageLayout({
   item,
   input,
+  modalState,
   displayIdx,
   setDisplay,
   onChangeOption,
@@ -344,6 +357,7 @@ export default function DetailPageLayout({
               price={item.newPrice ? item.newPrice : item.oldPrice}
               input={input}
               options={item.options}
+              modalState={modalState}
               onChangeOption={onChangeOption}
               onClearOption={onClearOption}
               onChangeQuantity={onChangeQuantity}

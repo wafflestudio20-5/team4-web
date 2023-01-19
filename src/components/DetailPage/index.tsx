@@ -18,10 +18,18 @@ export interface PurchaseDraft {
   quantity: number;
 }
 
+export interface AddToCartModalState {
+  open: boolean;
+  message?: string;
+}
+
 export default function DetailPage() {
   const [displayIdx, setDisplayIdx] = useState<number>(0);
   const [input, setInput] = useState<PurchaseDraft>({
     quantity: 1,
+  });
+  const [modal, setModal] = useState<AddToCartModalState>({
+    open: false,
   });
 
   const { user, accessToken } = useSelector((state: RootState) => {
@@ -122,13 +130,37 @@ export default function DetailPage() {
       }
       try {
         await apiPostCart(parsedId, option, quantity, accessToken);
+        openModal('장바구니에 상품이 담겼습니다.');
       } catch (error) {
         const e = error as AxiosError;
-        if (e.response?.status === 409) {
-          toast('이미 장바구니에 있는 상품입니다.');
+        switch (e.response?.status) {
+          case 409:
+            openModal('이미 장바구니에 있는 상품입니다.');
+            return;
+          case 404:
+            toast('상품 정보를 찾을 수 없습니다.');
+            return;
+          default:
+            toast('오류가 발생했습니다. 다시 시도해주세요.');
+            return;
         }
       }
     }
+  };
+
+  const openModal = (msg: string) => {
+    setModal({
+      open: true,
+      message: msg,
+    });
+    setTimeout(
+      () =>
+        setModal({
+          open: false,
+          message: undefined,
+        }),
+      3000
+    );
   };
 
   useEffect(() => {
@@ -151,6 +183,7 @@ export default function DetailPage() {
       <DetailPageLayout
         item={data.item}
         input={input}
+        modalState={modal}
         displayIdx={displayIdx}
         setDisplay={setDisplay}
         onChangeOption={onChangeOption}

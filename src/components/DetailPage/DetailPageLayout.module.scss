@@ -348,9 +348,13 @@
 .button_wrapper {
   width: 400px;
   margin-top: 20px;
-  display: grid;
-  grid-template-columns: 1fr 60px;
-  gap: 5px;
+  clear: both;
+  .button_grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 60px;
+    gap: 5px;
+  }
 }
 
 .purchase_button {
@@ -377,4 +381,33 @@
   border: 1px solid black;
   overflow: hidden;
   cursor: pointer;
+}
+
+.add_to_cart_modal {
+  position: relative;
+  top: -127px;
+  width: 360px;
+  height: 17px;
+  padding: 20px 20px;
+  background: #383838;
+  color: white;
+  border-radius: 4px;
+  span {
+    position: absolute;
+    line-height: normal;
+    font-family: 'Musinsa', sans-serif;
+    font-size: 16px;
+  }
+  a {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-family: 'Musinsa', sans-serif;
+    text-decoration: none;
+    color: #0078ff;
+    font-size: 16px;
+    line-height: normal;
+    cursor: pointer;
+    display: inline-block;
+  }
 }
