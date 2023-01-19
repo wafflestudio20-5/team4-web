@@ -5,7 +5,7 @@ import CartItemInfo from './CartItemInfo';
 import { Session } from '../../lib/interface';
 import { RootState } from '../../store';
 import { useSelector } from 'react-redux';
-import { useApiData, useApiGetCartListFetcher } from '../../lib/api';
+// import { useApiData, useApiGetCartListFetcher } from '../../lib/api';
 import { Purchase, Label, Category, SubCategory } from '../../lib/interface';
 export default function ShoppingCart() {
   const navigate = useNavigate();
@@ -39,6 +39,7 @@ export default function ShoppingCart() {
         label: Label.boutique,
         category: Category.bag,
         subCategory: SubCategory.crossBag,
+        reviewCount: 0,
       },
       option: 'M',
       quantity: 1,
@@ -57,6 +58,7 @@ export default function ShoppingCart() {
         oldPrice: 750000,
         category: Category.outer,
         subCategory: SubCategory.padding,
+        reviewCount: 0,
       },
       option: 'L',
       quantity: 1,
@@ -78,6 +80,7 @@ export default function ShoppingCart() {
         label: Label.boutique,
         category: Category.outer,
         subCategory: SubCategory.jacket,
+        reviewCount: 0,
       },
       option: 'L',
       quantity: 2,

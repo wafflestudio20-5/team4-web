@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import { User } from '../../../lib/interface';
 import { formatDate } from '../../../lib/formatters/dateFormatter';
 import styles from './MyPageHeader.module.scss';
-import point from '../../../resources/image/saving.png';
-import review from '../../../resources/image/write.png';
+// import review from '../../../resources/image/write.png';
 
 export interface MyPageHeaderProps {
   user: User;
@@ -38,18 +37,15 @@ export default function MyPageHeader({ user, onLogout }: MyPageHeaderProps) {
               가입일 : {formatDate(user.registrationDate)}
             </span>
           </div>
+          {/*
           <div className={styles.bottom}>
             <div className={styles.bottom_block}>
-              <img src={point} alt="적립금" />
-              <span>적립금</span>
-              <strong>{user.point}</strong>
-            </div>
-            <div className={styles.bottom_block}>
-              <img src={review} alt="후기작성" />
+              <img src={review} alt="구매후기" />
               <span>구매후기</span>
               <strong>{user.reviewCount}</strong>
             </div>
           </div>
+          */}
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import RegisterPageLayout from './registerPage';
 import { apiRegister } from '../../lib/api';
 import { useNavigate } from 'react-router-dom';
@@ -25,7 +25,6 @@ function RegisterPage() {
     });
   };
   const [firstInputId, setFirstInputId] = useState<boolean>(false);
-  const regex: RegExp = /^[a-z|0-9|\_]+$/;
   const IdCheck = () => {
     if (firstInputId === false) {
       return { message: '' };
@@ -49,11 +48,22 @@ function RegisterPage() {
 
   const [firstInputPassword, setFirstInputPassword] = useState<boolean>(false);
 
-  const regEng = /[a-z|A-Z]/;
-  const regNum = /[0-9]/;
-  const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/;
-  const regRep = /(.)\1{3}/;
-  const navigate = useNavigate();
+  const regEng: RegExp = useMemo(() => {
+    return /[a-z|A-Z]/;
+  }, []);
+  const regNum: RegExp = useMemo(() => {
+    return /[0-9]/;
+  }, []);
+  const regExp: RegExp = useMemo(() => {
+    return /[{}[\]/?.,;:|)*~`!^\-_+<>@#$%&\\=('"]/;
+  }, []);
+  const regRep: RegExp = useMemo(() => {
+    return /(.)\1{3}/;
+  }, []);
+  const regex: RegExp = useMemo(() => {
+    return /^[a-z|0-9|_]+$/;
+  }, []);
+
   const PasswordCheck = () => {
     if (firstInputPassword === false) {
       return { message: '' };
@@ -212,7 +222,7 @@ function RegisterPage() {
     } else {
       setCheck({ ...check, all: false });
     }
-  }, [check.first, check.second, check.third, check.fourth]);
+  }, [check.first, check.second, check.third, check.fourth, check]);
 
   useEffect(() => {
     if (input.id.length >= 5) {
@@ -268,13 +278,17 @@ function RegisterPage() {
     } else {
       setRegisterButtonActivate(false);
     }
-  }, [input, check.first, check.second, check.third]);
-
-  useEffect(() => {
-    if (session.user) {
-      navigate(-1);
-    }
-  }, []);
+  }, [
+    input,
+    check.first,
+    check.second,
+    check.third,
+    regEng,
+    regExp,
+    regNum,
+    regRep,
+    regex,
+  ]);
 
   return (
     <>

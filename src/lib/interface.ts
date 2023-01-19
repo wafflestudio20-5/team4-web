@@ -1,7 +1,6 @@
 export interface User {
   id: number;
   image: string;
-  point: number;
   username: string;
   nickname: string;
   reviewCount: number;
@@ -32,6 +31,7 @@ export interface Item {
   label?: Label;
   category: Category;
   subCategory: SubCategory;
+  reviewCount: number;
 }
 
 export interface Purchase {
