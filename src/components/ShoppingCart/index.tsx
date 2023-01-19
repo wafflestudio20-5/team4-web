@@ -5,7 +5,7 @@ import CartItemInfo from './CartItemInfo';
 import { Session } from '../../lib/interface';
 import { RootState } from '../../store';
 import { useSelector } from 'react-redux';
-import { useApiData, useApiGetCartListFetcher } from '../../lib/api';
+// import { useApiData, useApiGetCartListFetcher } from '../../lib/api';
 import { Purchase, Label, Category, SubCategory } from '../../lib/interface';
 export default function ShoppingCart() {
   const navigate = useNavigate();
