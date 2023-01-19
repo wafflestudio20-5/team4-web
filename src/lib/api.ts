@@ -164,13 +164,12 @@ export const apiPostCart = (
   option: string | undefined,
   quantity: number,
   token: string | null
-) => {
+) =>
   axios.post<{}>(
-    'api/user/me/shopping-cart',
+    '/api/user/me/shopping-cart',
     { id, option, quantity },
     { headers: token ? auth(token) : undefined }
   );
-};
 
 export const apiPostViewedGoods = (itemId: number, token: string) => {
   axios.post<{}>(
