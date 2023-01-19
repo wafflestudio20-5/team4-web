@@ -17,7 +17,7 @@ function RegisterPage() {
     });
   };
   const [firstInputId, setFirstInputId] = useState<boolean>(false);
-  const regex: RegExp = /^[a-z|0-9|\_]+$/;
+  const regex: RegExp = /^[a-z|0-9|_]+$/;
   const IdCheck = () => {
     if (firstInputId === false) {
       return { message: '' };
@@ -43,7 +43,7 @@ function RegisterPage() {
 
   const regEng = /[a-z|A-Z]/;
   const regNum = /[0-9]/;
-  const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/;
+  const regExp = /[{}[\]/?.,;:|)*~`!^\-_+<>@#$%&\\=('"]/;
   const regRep = /(.)\1{3}/;
 
   const PasswordCheck = () => {
@@ -204,11 +204,12 @@ function RegisterPage() {
     } else {
       setCheck({ ...check, all: false });
     }
-  }, [check.first, check.second, check.third, check.fourth]);
+  }, [check.first, check.second, check.third, check.fourth, check]);
 
   useEffect(() => {
     if (input.id.length >= 5) {
-      if (regex.test(input.id) === true) {
+
+      if (regex.test(input.id) === true ) {
         if (input.password.length >= 8) {
           if (regRep.test(input.password) === false) {
             if (
