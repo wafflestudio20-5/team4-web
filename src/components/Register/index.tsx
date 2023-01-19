@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo} from 'react';
 import RegisterPageLayout from './registerPage';
 import { apiRegister } from '../../lib/api';
 
@@ -17,7 +17,6 @@ function RegisterPage() {
     });
   };
   const [firstInputId, setFirstInputId] = useState<boolean>(false);
-  const regex: RegExp = /^[a-z|0-9|_]+$/;
   const IdCheck = () => {
     if (firstInputId === false) {
       return { message: '' };
@@ -41,10 +40,13 @@ function RegisterPage() {
 
   const [firstInputPassword, setFirstInputPassword] = useState<boolean>(false);
 
-  const regEng = /[a-z|A-Z]/;
-  const regNum = /[0-9]/;
-  const regExp = /[{}[\]/?.,;:|)*~`!^\-_+<>@#$%&\\=('"]/;
-  const regRep = /(.)\1{3}/;
+  const regEng: RegExp = useMemo(()=>{return /[a-z|A-Z]/;}, []);
+  const regNum: RegExp = useMemo(()=>{return /[0-9]/;}, []);
+  const regExp: RegExp = useMemo(()=>{return /[{}[\]/?.,;:|)*~`!^\-_+<>@#$%&\\=('"]/;}, []);
+  const regRep: RegExp = useMemo(()=>{return /(.)\1{3}/;}, []);
+  const regex: RegExp = useMemo(()=>{return /^[a-z|0-9|_]+$/;}, []);
+
+
 
   const PasswordCheck = () => {
     if (firstInputPassword === false) {
@@ -261,7 +263,7 @@ function RegisterPage() {
     } else {
       setRegisterButtonActivate(false);
     }
-  }, [input, check.first, check.second, check.third]);
+  }, [input, check.first, check.second, check.third, regEng, regExp, regNum, regRep, regex]);
 
   return (
     <>
