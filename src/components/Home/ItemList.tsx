@@ -98,12 +98,12 @@ function ItemPreviewList({ items }: ItemPreviewListProps) {
   );
 }
 
-function ItemListPagenation() {
-  return (
-    <div className={styles.pagenation}>
-      <span>
-        {'<'}0 0 0 0{'>'}
-      </span>
-    </div>
-  );
-}
+// function ItemListPagenation() {
+//   return (
+//     <div className={styles.pagenation}>
+//       <span>
+//         {'<'}0 0 0 0{'>'}
+//       </span>
+//     </div>
+//   );
+// }
