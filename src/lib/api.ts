@@ -171,10 +171,9 @@ export const apiPostCart = (
     { headers: token ? auth(token) : undefined }
   );
 
-export const apiPostViewedGoods = (itemId: number, token: string) => {
+export const apiPostViewedGoods = (itemId: number, token: string) =>
   axios.post<{}>(
     '/api/user/me/recently-viewed',
     { itemId },
     { headers: token ? auth(token) : undefined }
   );
-};
