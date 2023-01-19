@@ -3,7 +3,7 @@ import { useApiData, useApiItemListFetcher } from '../../lib/api';
 import { Item, Category, displayCategory } from '../../lib/interface';
 import ItemPreview from './ItemPreview';
 import styles from './ItemList.module.scss';
-import { useNavigate, createSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface ItemPreviewListProps {
   items: Item[] | null;
@@ -19,7 +19,6 @@ export default function ItemList() {
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(
     null
   );
-
   const { data: itemsData } = useApiData(
     useApiItemListFetcher(selectedCategory, undefined, 10, 0)
   );
@@ -38,13 +37,7 @@ export default function ItemList() {
       <div className={styles.moreView}>
         <button
           onClick={() => {
-            navigate({
-              pathname: '/itemlist',
-              search: `?${createSearchParams({
-                type: 'category',
-                q: selectedCategory ?? 'all',
-              })}`,
-            });
+            navigate(`/itemlist/${selectedCategory}`);
           }}
         >
           더 보기 {' >'}
@@ -105,12 +98,12 @@ function ItemPreviewList({ items }: ItemPreviewListProps) {
   );
 }
 
-function ItemListPagenation() {
-  return (
-    <div className={styles.pagenation}>
-      <span>
-        {'<'}0 0 0 0{'>'}
-      </span>
-    </div>
-  );
-}
+// function ItemListPagenation() {
+//   return (
+//     <div className={styles.pagenation}>
+//       <span>
+//         {'<'}0 0 0 0{'>'}
+//       </span>
+//     </div>
+//   );
+// }

@@ -24,12 +24,13 @@ export default function PurchasePage() {
 
   const sumSale = (purchaseList: Purchase[]): number => {
     let sale = 0;
-    purchaseList.map((purchase) => {
-      if (purchase.item.newPrice) {
-        sale +=
-          (purchase.item.newPrice - purchase.item.oldPrice) * purchase.quantity;
-      }
-    });
+    purchaseList.map((purchase) =>
+      purchase.item.newPrice
+        ? (sale +=
+            (purchase.item.newPrice - purchase.item.oldPrice) *
+            purchase.quantity)
+        : sale
+    );
     return sale;
   };
 

@@ -1,8 +1,7 @@
 import { useApiData, useApiItemListFetcher } from '../../lib/api';
-import { Item, Category, SubCategory } from '../../lib/interface';
+import { Item } from '../../lib/interface';
 import ItemPreview from './ItemPreview';
 import styles from './ItemList.module.scss';
-import { useSearchParams } from 'react-router-dom';
 
 interface ItemPreviewListProps {
   items: Item[] | null;
@@ -15,29 +14,13 @@ interface ItemPreviewListProps {
 // }
 
 export default function ItemList() {
-  const [searchParams] = useSearchParams();
+  // const [paramCategory, setparamCategory] = useState<{
+  //   category: Category | null;
+  //   subCategory: SubCategory | undefined;
+  // }>({ category: null, subCategory: undefined });
 
-  const type = searchParams.get('type');
-  const query = searchParams.get('q');
-
-  console.log('type: ' + type + ', query: ' + query);
-
-  const category =
-    type === 'category' && query
-      ? Category[query as keyof typeof Category]
-      : null;
-  const subCategory =
-    type === 'subcategory' && query
-      ? SubCategory[query as keyof typeof SubCategory]
-      : undefined;
-
-  //const [paramCategory, setparamCategory] = useState<{
-  //  category: Category | null;
-  //  subCategory: SubCategory | undefined;
-  //}>({ category: null, subCategory: undefined });
-
-  //const param = useParams();
-  //const paramEnum = stringtoEnum(param.category);
+  // const param = useParams();
+  // const paramEnum = stringtoEnum(param.category);
 
   // useEffect(() => {
   //   if (param.category && param.category in Category) {
@@ -50,7 +33,7 @@ export default function ItemList() {
   // }, []);
 
   const { data: itemsData } = useApiData(
-    useApiItemListFetcher(category, subCategory, 20, 0)
+    useApiItemListFetcher(null, undefined, 20, 0)
   );
   const items = itemsData?.items ?? null;
 
