@@ -82,11 +82,11 @@ export const useApiItemFetcher = (id: number | null) => {
   );
   return id === null ? null : f;
 };
-export const apiPostReview = (purchase: Purchase, rating: number, content: string,
-                              size: string, color: string, images: string[], token: string) => {
+export const apiPostReview = (purchaseId: number, rating: number, content: string,
+                              size: string, color: string, images: string[], token: string | null) => {
     axios.post<{}>(
-        'api/user/me/reviews',
-        {purchase, rating, content, size, color, images},
+        '/api/user/me/reviews',
+        {purchaseId, rating, content, size, color, images},
         { headers: token ? auth(token) : undefined }
 
     );

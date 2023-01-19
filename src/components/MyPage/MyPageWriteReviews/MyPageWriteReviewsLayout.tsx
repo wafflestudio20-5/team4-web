@@ -21,10 +21,13 @@ interface MyPageWriteReviewsLayoutParams {
     onTextClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
     onImageClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
     isText: boolean;
+    handleClick: () => void;
+    handleSubmit: (e: React.SyntheticEvent) => void;
+    images: string[];
 }
 
 
-export default function MyPageWriteReviewsLayout({data, input, onChange, setInput, onChangeTextArea, onTextClick, onImageClick, isText}:MyPageWriteReviewsLayoutParams) {
+export default function MyPageWriteReviewsLayout({data, input, onChange, setInput, onChangeTextArea, onTextClick, onImageClick, isText, handleClick, handleSubmit, images}:MyPageWriteReviewsLayoutParams) {
 
     return (<div className={styles.reviewWrapper}>
         <header className={styles.reviewHeader}>
@@ -94,7 +97,10 @@ export default function MyPageWriteReviewsLayout({data, input, onChange, setInpu
                     </textarea>
                     <div className={styles.reviewWriteInputCount}>{input.content.length} 자/20자 이상</div>
                 </div> : <div className={styles.reviewImageInputWrap}>
-
+                    {images.map((img, idx) => (
+                        <img src={img} alt={`${idx}`} key={idx}></img>
+                        ))}
+                    <span className={styles.reviewImageInput} onClick={handleClick}>+</span>
                 </div>}
 
                 <div className={styles.utilityArea}>
@@ -103,7 +109,7 @@ export default function MyPageWriteReviewsLayout({data, input, onChange, setInpu
                 </div>
             </div>
             <div className={styles.postButtonArea}>
-                <button className={styles.postButton}>등록</button>
+                <form onSubmit={handleSubmit}><button className={styles.postButton}>등록</button></form>
             </div>
 
 
