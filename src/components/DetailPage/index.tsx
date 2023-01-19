@@ -40,7 +40,10 @@ export default function DetailPage() {
   };
 
   const onChangeOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if (e.target.value === '옵션 선택') return;
+    if (e.target.value === input.option) {
+      toast('이미 선택된 옵션입니다.');
+      return;
+    }
     setInput({
       option: e.target.value,
       quantity: 1,

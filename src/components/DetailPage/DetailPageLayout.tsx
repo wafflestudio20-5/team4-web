@@ -237,7 +237,9 @@ function PurchaseArea({
             <select value={'옵션 선택'} onChange={onChangeOption}>
               <option>옵션 선택</option>
               {options.map((option, idx) => (
-                <option key={idx}>{option}</option>
+                <option key={idx} value={option}>
+                  {option}
+                </option>
               ))}
             </select>
           </div>
