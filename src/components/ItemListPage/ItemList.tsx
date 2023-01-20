@@ -1,52 +1,68 @@
-import { useSearchParams } from 'react-router-dom';
+import { Item } from '../../lib/interface';
 import ItemPreview from './ItemPreview';
-import { useApiData, useApiItemListFetcher } from '../../lib/api';
-import { Item, Category, SubCategory } from '../../lib/interface';
 import styles from './ItemList.module.scss';
 
-const DEFAULT_FETCH_AMOUNT = 20;
+interface ItemListProps {
+  items: Item[] | null;
+  pageNum: number;
+  setPageNum: React.Dispatch<React.SetStateAction<number>>;
+}
 
-export default function ItemList() {
-  const [searchParams] = useSearchParams();
-
-  const type = searchParams.get('type');
-  const query = searchParams.get('q');
-
-  const category =
-    type === 'category' && query
-      ? Category[query as keyof typeof Category]
-      : undefined;
-  const subCategory =
-    type === 'subcategory' && query
-      ? SubCategory[query as keyof typeof SubCategory]
-      : undefined;
-
-  const { data: itemsData } = useApiData(
-    useApiItemListFetcher(
-      type,
-      category,
-      subCategory,
-      query ?? '',
-      0,
-      DEFAULT_FETCH_AMOUNT
-    )
-  );
-
-  const items = itemsData?.items ?? null;
-
+export default function ItemList({
+  items,
+  pageNum,
+  setPageNum,
+}: ItemListProps) {
   return (
     <div className={styles.itemList}>
-      <ItemPreviewList items={items} />
-      {/* <ItemListPagenation /> */}
+      <ItemListSort pageNum={pageNum} setPageNum={setPageNum} />
+      <ItemPreviewList items={items}></ItemPreviewList>
     </div>
   );
 }
 
-interface ItemPreviewListProps {
-  items: Item[] | null;
+function ItemListSort({
+  pageNum,
+  setPageNum,
+}: {
+  pageNum: number;
+  setPageNum: React.Dispatch<React.SetStateAction<number>>;
+}) {
+  return (
+    <div className={styles.sort}>
+      <div className={styles.sortline}>
+        <div className={styles.sortRuleSelected}>무신사 추천순</div>
+        <div className={styles.sortRule}>낮은 가격순</div>
+        <div className={styles.sortRule}>높은 가격순</div>
+        <div className={styles.sortRule}>별점 순</div>
+        <div className={styles.sortRule}>할인율 순</div>
+        <div className={styles.sortRule}>후기 순</div>
+      </div>
+      <div className={styles.pageline}>
+        <div className={styles.pagenumber}>
+          <div
+            className={styles.page}
+            onClick={() => {
+              setPageNum(pageNum - 1);
+            }}
+          >
+            {'<'}
+          </div>
+          <div
+            className={styles.page}
+            onClick={() => {
+              setPageNum(pageNum + 1);
+            }}
+          >
+            {'>'}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-function ItemPreviewList({ items }: ItemPreviewListProps) {
+function ItemPreviewList({ items }: { items: Item[] | null }) {
   return (
     <div className={styles.itemListBox}>
       {items?.map((item) => (

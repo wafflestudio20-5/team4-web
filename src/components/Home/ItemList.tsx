@@ -11,19 +11,21 @@ interface ItemPreviewListProps {
 
 interface ItemListCategoryProps {
   categorys: Category[];
-  selectedCategory: Category | null;
-  setSelectedCategory: React.Dispatch<React.SetStateAction<Category | null>>;
+  selectedCategory: Category | undefined;
+  setSelectedCategory: React.Dispatch<
+    React.SetStateAction<Category | undefined>
+  >;
 }
 
 export default function ItemList() {
-  const [selectedCategory, setSelectedCategory] = useState<Category | null>(
-    null
-  );
+  const [selectedCategory, setSelectedCategory] = useState<
+    Category | undefined
+  >(undefined);
 
   const { data: itemsData } = useApiData(
     useApiItemListFetcher(
       'category',
-      selectedCategory ?? undefined,
+      selectedCategory,
       undefined,
       undefined,
       0,
@@ -41,7 +43,6 @@ export default function ItemList() {
         setSelectedCategory={setSelectedCategory}
       ></ItemListCategory>
       <ItemPreviewList items={items}></ItemPreviewList>
-      {/* <ItemListPagenation /> */}
       <div className={styles.moreView}>
         <button
           onClick={() => {
@@ -78,7 +79,7 @@ function ItemListCategory({
             className={
               selectedCategory === null ? styles.buttonselected : styles.button
             }
-            onClick={() => setSelectedCategory(null)}
+            onClick={() => setSelectedCategory(undefined)}
           >
             전체
           </button>
