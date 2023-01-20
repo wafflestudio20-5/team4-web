@@ -1,7 +1,8 @@
 import MyPageWriteReviewsLayout from "./MyPageWriteReviewsLayout";
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import React, {useEffect, useState} from 'react';
 import {Purchase} from "../../../lib/interface";
+import {toast} from 'react-toastify';
 import { FileUpload, useFileUpload } from 'use-file-upload';
 import axios from "axios";
 import {apiPostReview} from "../../../lib/api";
@@ -13,6 +14,7 @@ export default function MyPageWriteReviews({accessToken}: MyPageWriteReviewsPara
     const location = useLocation();
 
     const data = location.state as Purchase;
+    const navigate = useNavigate();
 
     const [input, setInput] = useState({
         rating: 0,
@@ -60,6 +62,27 @@ export default function MyPageWriteReviews({accessToken}: MyPageWriteReviewsPara
     const handleSubmit = async (e: React.SyntheticEvent) => {
         e.preventDefault();
         let secureImages: string[] = [];
+        if (input.content.length < 20)
+        {
+            toast("내용이 20자 이상이어야 합니다");
+            return 0;
+        }
+        else if (input.rating === 0)
+        {
+            toast("별점을 입력해주세요");
+            return 0;
+        }
+        else if (input.size === "")
+        {
+            toast("사이즈에 대한 의견를 입력해주세요");
+            return 0;
+        }
+        else if (input.color === "")
+        {
+            toast("색감에 대한 의견을 입력해주세요");
+            return 0;
+        }
+
         // 업로드할 이미지가 있는 경우
         if (imageFiles) {
             // 반드시 JSON 형태가 아닌 FormData 형태로 전송
@@ -75,6 +98,13 @@ export default function MyPageWriteReviews({accessToken}: MyPageWriteReviewsPara
             secureImages = response.data.secureImages;
 
             apiPostReview(data.id, input.rating, input.content, input.size, input.color, secureImages, accessToken);
+            navigate(-1);
+
+        }
+        else
+        {
+            apiPostReview(data.id, input.rating, input.content, input.size, input.color, [], accessToken);
+            navigate(-1);
         }
         // TODO: 이미지 업로드 후 return된 secureImages를 request body에 포함하여 게시글 POST
         // await axios.post('게시글 관련 API', {..., secureImages})
