@@ -1,0 +1,5 @@
+.wrap {
+  flex: 7;
+  display: flex;
+  flex-direction: column;
+}

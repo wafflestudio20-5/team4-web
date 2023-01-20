@@ -11,17 +11,19 @@ import LoginPage from './components/Login/';
 import RegisterPage from './components/Register';
 import PurchasePage from './components/PurchasePage';
 import ShoppingCart from './components/ShoppingCart';
+import ItemListPage from './components/ItemListPage';
 
 function AppRoutes() {
   return (
     <Routes>
       <Route element={<Header />}>
+        <Route index element={<HomePage />} />
         <Route element={<CategorySideBar />}>
-          <Route index element={<HomePage />} />
           <Route path="/cart" element={<ShoppingCart />} />
           <Route path="/coupon" element={<></>} />
           <Route path="/customercenter" element={<></>} />
           <Route path="/goods/:id" element={<DetailPage />} />
+          <Route path="/itemlist" element={<ItemListPage />} />
           <Route path="/purchase" element={<PurchasePage />} />
         </Route>
         <Route path="/mypage/*" element={<MyPage />} />
