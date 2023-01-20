@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { createSearchParams, Link } from 'react-router-dom';
 import { PurchaseDraft } from '.';
 import {
   Item,
@@ -27,10 +27,29 @@ function DetailPageHeader({ category, subCategory }: DetailPageHeaderProps) {
   return (
     <div className={styles.category}>
       <span>
-        {/* 이후에 고칠 예정 */}
-        <Link to="/">{displayCategory(category)}</Link>
+        <Link
+          to={{
+            pathname: '/itemlist',
+            search: `?${createSearchParams({
+              type: 'category',
+              q: category,
+            })}`,
+          }}
+        >
+          {displayCategory(category)}
+        </Link>
         {' > '}
-        <Link to="/">{displaySubCategory(subCategory)}</Link>
+        <Link
+          to={{
+            pathname: '/itemlist',
+            search: `?${createSearchParams({
+              type: 'subcategory',
+              q: subCategory,
+            })}`,
+          }}
+        >
+          {displaySubCategory(subCategory)}
+        </Link>
       </span>
     </div>
   );
