@@ -11,14 +11,14 @@ interface RegisterPageProps {
   isRegisterButtonDisabled: boolean;
 }
 
-export interface RegisterInfo {
+interface RegisterInfo {
   username: string;
   password: string;
   passwordConfirm: string;
   nickname: string;
 }
 
-interface IsAgreementChecked {
+export interface IsAgreementChecked {
   agreementAll: boolean;
   agreementFirst: boolean;
   agreementSecond: boolean;

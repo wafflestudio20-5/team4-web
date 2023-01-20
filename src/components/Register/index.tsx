@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import RegisterPageLayout from './registerPage';
+import RegisterPageLayout, { IsAgreementChecked } from './registerPage';
 import { apiCheckNickname, apiCheckUsername, apiRegister } from '../../lib/api';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -12,14 +12,6 @@ const regexRepeat: RegExp = /(.)\1{3,}/;
 const regexAlphabet: RegExp = /[a-z|A-Z]/;
 const regexNumber: RegExp = /[0-9]/;
 const regexSpecial: RegExp = /[{}[\]/?.,;:|)*~`!^\-_+<>@#$%&\\=('"]/;
-
-interface IsAgreementChecked {
-  agreementAll: boolean;
-  agreementFirst: boolean;
-  agreementSecond: boolean;
-  agreementThird: boolean;
-  agreementFourth: boolean;
-}
 
 function RegisterPage() {
   const session: Session = useSelector((state: RootState) => state.session);
