@@ -69,19 +69,39 @@ export const useApiItemFetcher = (id: number | null) => {
 };
 
 export const useApiItemListFetcher = (
-  category: Category | null,
+  fetchType: string | null,
+  category?: Category,
   subcategory?: SubCategory,
-  count?: number,
-  index?: number
+  query?: string,
+  index?: number,
+  count?: number
 ) => {
   const f = useCallback(
     (cancelToken: CancelToken) => {
-      return axios.get<{ items: Item[] }>('/api/items', {
-        params: { category, subcategory, count, index },
-        cancelToken,
-      });
+      if (fetchType === 'search') {
+        return axios.get<{ items: Item[] }>('/api/search', {
+          params: { query, index, count },
+          cancelToken,
+        });
+      } else if (fetchType === 'subcategory') {
+        return axios.get<{ items: Item[] }>('/api/items', {
+          params: { subcategory, index, count },
+          cancelToken,
+        });
+      } else if (fetchType === 'category') {
+        return axios.get<{ items: Item[] }>('/api/items', {
+          params: { category, index, count },
+          cancelToken,
+        });
+      } else {
+        // if fetchType is null or invalid, fetch from all items
+        return axios.get<{ items: Item[] }>('/api/items', {
+          params: { index, count },
+          cancelToken,
+        });
+      }
     },
-    [category, subcategory, index, count]
+    [fetchType, category, subcategory, query, index, count]
   );
   return f;
 };

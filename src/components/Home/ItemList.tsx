@@ -21,7 +21,14 @@ export default function ItemList() {
   );
 
   const { data: itemsData } = useApiData(
-    useApiItemListFetcher(selectedCategory, undefined, 10, 0)
+    useApiItemListFetcher(
+      'category',
+      selectedCategory ?? undefined,
+      undefined,
+      undefined,
+      0,
+      10
+    )
   );
   const items = itemsData?.items ?? null;
   const categorys = Object.values(Category);
@@ -104,13 +111,3 @@ function ItemPreviewList({ items }: ItemPreviewListProps) {
     </div>
   );
 }
-
-// function ItemListPagenation() {
-//   return (
-//     <div className={styles.pagenation}>
-//       <span>
-//         {'<'}0 0 0 0{'>'}
-//       </span>
-//     </div>
-//   );
-// }

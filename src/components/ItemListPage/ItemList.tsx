@@ -66,7 +66,7 @@ function ItemPreviewList({ items }: { items: Item[] | null }) {
   return (
     <div className={styles.itemListBox}>
       {items?.map((item) => (
-        <ItemPreview key={item.id} item={item}></ItemPreview>
+        <ItemPreview key={item.id} item={item} />
       ))}
     </div>
   );

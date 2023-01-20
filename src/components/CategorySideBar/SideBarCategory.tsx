@@ -1,5 +1,4 @@
 import styles from './SideBarCategory.module.scss';
-
 import {
   displayCategoryIncludeBest,
   displaySubCategory,
@@ -103,6 +102,8 @@ function CloseCategoryBox({
   selectedCategory,
   setSelectedCategory,
 }: CategoryBoxProps) {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.categorys}>
       <div
@@ -119,7 +120,20 @@ function CloseCategoryBox({
       </div>
       <div className={styles.closedsubCategorylist}>
         {SubCategoryInCategory(category)?.map((subcategory) => (
-          <div key={subcategory} className={styles.closedsubcategory}>
+          <div
+            key={subcategory}
+            className={styles.closedsubcategory}
+            onClick={(e) => {
+              e.preventDefault();
+              navigate({
+                pathname: '/itemlist',
+                search: `?${createSearchParams({
+                  type: 'subcategory',
+                  q: subcategory,
+                })}`,
+              });
+            }}
+          >
             {displaySubCategory(subcategory)}
           </div>
         ))}
@@ -154,7 +168,8 @@ function SelectedCategoryBox({
           <div
             key={subcategory}
             className={styles.subcategory}
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
               navigate({
                 pathname: '/itemlist',
                 search: `?${createSearchParams({
