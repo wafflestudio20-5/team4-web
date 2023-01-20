@@ -69,19 +69,39 @@ export const useApiItemFetcher = (id: number | null) => {
 };
 
 export const useApiItemListFetcher = (
-  category: Category | null,
+  fetchType: string | null,
+  category?: Category,
   subCategory?: SubCategory,
-  count?: number,
-  index?: number
+  query?: string,
+  index?: number,
+  count?: number
 ) => {
   const f = useCallback(
     (cancelToken: CancelToken) => {
-      return axios.get<{ items: Item[] }>('/api/items', {
-        params: { category, subCategory, count, index },
-        cancelToken,
-      });
+      if (fetchType === 'search') {
+        return axios.get<{ items: Item[] }>('/api/search', {
+          params: { query, index, count },
+          cancelToken,
+        });
+      } else if (fetchType === 'subcategory') {
+        return axios.get<{ items: Item[] }>('/api/items', {
+          params: { subCategory, index, count },
+          cancelToken,
+        });
+      } else if (fetchType === 'category') {
+        return axios.get<{ items: Item[] }>('/api/items', {
+          params: { category, index, count },
+          cancelToken,
+        });
+      } else {
+        // if fetchType is null or invalid, fetch from all items
+        return axios.get<{ items: Item[] }>('/api/items', {
+          params: { index, count },
+          cancelToken,
+        });
+      }
     },
-    [category, subCategory, index, count]
+    [fetchType, category, subCategory, query, index, count]
   );
   return f;
 };
@@ -103,12 +123,12 @@ export const useApiGetPurchaseListFetcher = (token: string | null) => {
 };
 
 export const apiPostPurchaseList = (
-  purchaseitems: PurchasePostDto[],
+  purchaseItems: PurchasePostDto[],
   token: string | null
 ) =>
   axios.post<{}>(
     '/api/user/me/purchases',
-    { purchaseitems },
+    { purchaseItems },
     { headers: token ? auth(token) : undefined }
   );
 
@@ -128,12 +148,12 @@ export const useApiGetCartListFetcher = (token: string | null) => {
   return f;
 };
 
-export const apiPutCartList = (
+export const apiPatchCart = (
   id: number,
   quantity: number,
   token: string | null
 ) =>
-  axios.put<{}>(
+  axios.patch<{}>(
     'api/user/me/shopping-cart',
     { id, quantity },
     { headers: token ? auth(token) : undefined }
