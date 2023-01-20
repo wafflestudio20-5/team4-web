@@ -50,7 +50,7 @@ function RegisterPage() {
   const [isRegisterButtonDisabled, setIsRegisterButtonDisabled] =
     useState<boolean>(true);
 
-  const onChangeInput = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setRegisterInfo({
       ...registerInfo,
@@ -58,7 +58,7 @@ function RegisterPage() {
     });
   };
 
-  const onChangeCheckbox = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id } = e.target;
     switch (id) {
       case 'agreementAll':

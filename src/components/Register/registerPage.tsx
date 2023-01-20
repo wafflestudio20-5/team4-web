@@ -2,8 +2,8 @@ import React from 'react';
 import styles from './registerPage.module.scss';
 
 interface RegisterPageProps {
-  onChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => Promise<void>;
-  onChangeCheckbox: (e: React.ChangeEvent<HTMLInputElement>) => {};
+  onChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeCheckbox: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onFocusInput: (input: string) => void;
   onClickClear: (input: string) => void;
   onClickTogglePassword: (input: string) => void;
@@ -194,7 +194,7 @@ export default function RegisterPageLayout({
                     onFocus={() => {
                       onFocusInput('passwordConfirm');
                     }}
-                    onChange={async (e) => {
+                    onChange={(e) => {
                       onChangeInput(e);
                     }}
                   ></input>
@@ -252,8 +252,8 @@ export default function RegisterPageLayout({
                     onFocus={() => {
                       onFocusInput('nickname');
                     }}
-                    onChange={async (e) => {
-                      await onChangeInput(e);
+                    onChange={(e) => {
+                      onChangeInput(e);
                     }}
                   ></input>
                   {nickname && (
