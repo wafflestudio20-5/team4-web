@@ -7,6 +7,8 @@ axios.defaults.withCredentials = true;
 
 const auth = (token: string) => ({ Authorization: `Bearer ${token}` });
 
+
+
 export const apiRegister = (
   username: string,
   password: string,
@@ -66,6 +68,23 @@ export const useApiItemFetcher = (id: number | null) => {
     [id]
   );
   return id === null ? null : f;
+};
+export const apiPostReview = (purchaseId: number, rating: number, content: string,
+                              size: string, color: string, images: string[], token: string | null) => {
+    axios.post<{}>(
+        '/api/user/me/reviews',
+        {purchaseId, rating, content, size, color, images},
+        { headers: token ? auth(token) : undefined }
+
+    );
+};
+
+export const apiPostImage = (formData: FormData, token: string | null) => {
+    axios.post<{}>(
+        '/api/image-upload',
+        formData,
+        { headers: token ? auth(token) : undefined }
+    );
 };
 
 export const useApiItemListFetcher = (
