@@ -35,200 +35,107 @@
       .joinForm {
         width: 345px;
         background-color: white;
-        .inputIdArea {
-          width: 345px;
-          height: 79px;
-          background-color: white;
-          .inputIdLabel {
-            height: 21px;
-            width: 48px;
-            margin-bottom: 8px;
+        .inputArea {
+          margin-top: 8px;
+          font-family: '-apple-system', HelveticaNeue, Roboto, 'Noto Sans KR',
+            helvetica, Gulim, sans-serif;
+          line-height: 21px;
+          font-size: 14px;
+          height: 110px;
+          .inputLabel {
             display: inline-block;
-            line-height: 21px;
-            font-size: 14px;
-            font-family: '-apple-system', HelveticaNeue, Roboto, 'Noto Sans KR',
-              helvetica, Gulim, sans-serif;
-            .inputIdDot {
+            margin: 16px 0 8px;
+            .inputDot {
               display: inline-block;
+              overflow: hidden;
+              margin-left: 4px;
               width: 4px;
               height: 4px;
               margin-top: 4px;
               border-radius: 50%;
               background-color: red;
               vertical-align: top;
-              position: relative;
-              left: 3px;
             }
           }
-          .inputIdWrap {
-            width: 345px;
+          .inputWrap {
+            display: flex;
+            box-sizing: border-box;
             height: 50px;
             border: 1px solid #e5e5e5;
             border-radius: 4px;
-            box-sizing: border-box;
-            background-color: white;
-            .inputId {
+            justify-content: space-between;
+            align-items: center;
+            .input {
               width: 100%;
               height: 48px;
-              box-sizing: border-box;
               padding: 0 12px;
-              border: 0px;
-            }
-            .IdCheckT {
-              color: blue;
-            }
-            .IdCheckF {
-              color: red;
-            }
-          }
-        }
-        .inputPasswordArea {
-          margin-top: 8px;
-          width: 100%;
-          height: 95px;
-          background-color: white;
-          .inputPasswordLabel {
-            height: 21px;
-            margin-top: 16px;
-            margin-bottom: 8px;
-            display: inline-block;
-            line-height: 21px;
-            font-size: 14px;
-            font-family: '-apple-system', HelveticaNeue, Roboto, 'Noto Sans KR',
-              helvetica, Gulim, sans-serif;
-            .inputPasswordDot {
-              display: inline-block;
-              width: 4px;
-              height: 4px;
-              margin-top: 4px;
-              border-radius: 50%;
-              background-color: red;
-              vertical-align: top;
-              position: relative;
-              left: 3px;
-            }
-          }
-          .inputPasswordWrap {
-            width: 100%;
-            height: 50px;
-            box-sizing: border-box;
-            border: 1px solid #e5e5e5;
-            border-radius: 4px;
-            background-color: white;
-            .inputPassword {
+              border: none;
+              flex: 0 1 auto;
+              background-color: #fff;
+              font-size: 15px;
+              font-family: '-apple-system', HelveticaNeue, Roboto, 'Noto Sans KR', helvetica, Gulim, sans-serif;
+              color: #000;
+              box-shadow: 0 0 0 30px #fff inset!important;
+              transition: border .2s ease-in-out;
+              appearance: none;
               box-sizing: border-box;
-              width: 100%;
-              height: 48px;
-              padding: 0 12px 0 12px;
-              border: 0px;
+              vertical-align: middle;
+              outline: 0;
+              margin: 0 1px;
             }
+            .inputClearButton {
+              display: flex;
+              margin-right: 7px;
+              padding: 5px;
+              flex: 0 0 auto;
+              appearance: none;
+              border: none;
+              background: 0 0;
+              cursor: pointer;
+            }
+            .showPasswordButton {
+              display: flex;
+              background: url(https://static.msscdn.net/ui/build/m/img/login/ic-30-show-button.svg?v=20230119143941) no-repeat 50% 50%;
+              margin-right: 7px;
+              padding: 0;
+              width: 30px;
+              height: 30px;
+              flex: 0 0 auto;
+              border: none;
+              cursor: pointer;
+            }
+            .hidePasswordButton {
+              display: flex;
+              background: url(https://static.msscdn.net/ui/build/m/img/login/ic-30-hide-button.svg?v=20230119143941) no-repeat 50% 50%;
+              margin-right: 7px;
+              padding: 0;
+              width: 30px;
+              height: 30px;
+              flex: 0 0 auto;
+              border: none;
+              cursor: pointer;
+            }
+          }
+          .inputWrapDanger {
+            border-color: red!important;
+          }
+          .helper {
+            font-size: 12px;
+            margin-top: 1px;
+            margin-left: 2px;
+          }
+          .valid {
+            color: blue;
+          }
+          .invalid {
+            color: red;
           }
         }
-        .inputPasswordMessage {
-          width: 100%;
-          height: 16.5px;
-          margin-top: 8px;
-          position: static;
-          color: red;
+        .inputAreaFirst {
+          margin-top: 0;
         }
-        .inputRepeatArea {
-          width: 100%;
-          height: 50px;
-          margin-top: 8px;
-          background-color: white;
-          .inputRepeatWrap {
-            width: 100%;
-            height: 50px;
-            box-sizing: border-box;
-            border: 1px solid #e5e5e5;
-            border-radius: 4px;
-            .inputRepeat {
-              width: 100%;
-              height: 48px;
-              box-sizing: border-box;
-              border: 0px;
-              padding: 0 12px 0 12px;
-            }
-            .inputRepeatMessage {
-              color: red;
-            }
-          }
-        }
-        .inputNickArea {
-          height: 119.5px;
-          margin-top: 8px;
-          background-color: white;
-          width: 100%;
-          .inputNickLabel {
-            height: 21px;
-            margin-top: 16px;
-            margin-bottom: 8px;
-            display: inline-block;
-            line-height: 21px;
-            font-size: 14px;
-            font-family: '-apple-system', HelveticaNeue, Roboto, 'Noto Sans KR',
-              helvetica, Gulim, sans-serif;
-            .inputNickDot {
-              display: inline-block;
-              width: 4px;
-              height: 4px;
-              margin-top: 4px;
-              border-radius: 50%;
-              background-color: red;
-              vertical-align: top;
-              position: relative;
-              left: 3px;
-            }
-          }
-          .inputNickWrap {
-            width: 100%;
-            height: 50px;
-            box-sizing: border-box;
-            border-radius: 4px;
-            .inputNick {
-              width: 100%;
-              height: 48px;
-              box-sizing: border-box;
-              border: 1px solid #e5e5e5;
-              padding: 0 12px 0 12px;
-            }
-            .validNickname {
-              color: blue;
-            }
-            .invalidNickname {
-              color: red;
-            }
-          }
-        }
-        .inputRecommendIdArea {
-          height: 95px;
-          margin-top: 8px;
-          background-color: white;
-          width: 100%;
-          .inputRecommendIdLabel {
-            height: 21px;
-            margin-top: 16px;
-            margin-bottom: 8px;
-            display: inline-block;
-            line-height: 21px;
-            font-size: 14px;
-            font-family: '-apple-system', HelveticaNeue, Roboto, 'Noto Sans KR',
-              helvetica, Gulim, sans-serif;
-          }
-          .inputRecommendIdWrap {
-            width: 100%;
-            height: 50px;
-            box-sizing: border-box;
-            border: 1px solid #e5e5e5;
-            border-radius: 4px;
-            .inputRecommendId {
-              width: 100%;
-              height: 48px;
-              box-sizing: border-box;
-              border: 0px;
-              padding: 0 12px 0 12px;
-            }
-          }
+        .inputAreaPasswordConfirm {
+          height: 79px
         }
         .agreementForm {
           width: 100%;
