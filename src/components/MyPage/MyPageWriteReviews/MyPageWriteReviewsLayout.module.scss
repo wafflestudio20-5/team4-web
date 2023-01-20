@@ -161,16 +161,13 @@
         font-size: 14px;
         position: relative;
         img {
-          width: 65px;
-          height: 65px;
-          margin-left: 10px;
-          margin-top: 10px;
+          width: 64px;
+          height: 64px;
+
         }
         span {
           margin-left: 10px;
           margin-top: 10px;
-        }
-        .reviewImageInput {
           width: 65px;
           height: 65px;
           background-color: #f1f1f1;
@@ -180,8 +177,7 @@
           vertical-align: middle;
           line-height: 65px;
           font-size: 30px;
-          position: relative;
-          bottom: 34px;
+          overflow: clip;
         }
       }
       .utilityArea {

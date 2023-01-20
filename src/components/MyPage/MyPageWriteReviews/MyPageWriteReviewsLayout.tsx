@@ -96,7 +96,7 @@ export default function MyPageWriteReviewsLayout({data, input, onChange, setInpu
                     <div className={styles.reviewWriteInputCount}>{input.content.length} 자/20자 이상</div>
                 </div> : <div className={styles.reviewImageInputWrap}>
                     {images.map((img, idx) => (
-                        <img src={img} alt={`${idx}`} key={idx}></img>
+                        <span><img src={img} alt={`${idx}`} key={idx}></img></span>
                         ))}
                     <span className={styles.reviewImageInput} onClick={handleClick}>+</span>
                 </div>}

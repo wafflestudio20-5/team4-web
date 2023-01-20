@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface Input {
   rating: number;
@@ -13,12 +13,12 @@ interface StarRateInputParams {
 }
 
 function StarRateInput({input, setInput}:StarRateInputParams) {
-  let AVR_RATE: number;
+  const AVR_RATE = useRef(0);
   const STAR_IDX_ARR = ["first", "second", "third", "fourth", "last"];
   const [ratesResArr, setRatesResArr] = useState([0, 0, 0, 0, 0]);
-  const calcStarRates = useCallback(() => {
+  const calcStarRates = () => {
     let tempStarRatesArr = [0, 0, 0, 0, 0];
-    let starVerScore = (AVR_RATE * 70) / 100;
+    let starVerScore = (AVR_RATE.current * 70) / 100;
     let idx = 0;
     while (starVerScore > 14) {
       tempStarRatesArr[idx] = 14;
@@ -27,16 +27,17 @@ function StarRateInput({input, setInput}:StarRateInputParams) {
     }
     tempStarRatesArr[idx] = starVerScore;
     setRatesResArr(tempStarRatesArr);
-  }, []);
+  };
+
   useEffect(() => {
     if (input.rating === 0) {
       calcStarRates();
     }
-  }, [input.rating, calcStarRates]);
+  }, [input.rating]);
   useEffect(() => {
-    AVR_RATE = input.rating * 10;
+    AVR_RATE.current = input.rating * 10;
     calcStarRates();
-  }, []);
+  }, [input.rating]);
   return (
     <>
       {STAR_IDX_ARR.map((item, idx) => {
@@ -49,7 +50,7 @@ function StarRateInput({input, setInput}:StarRateInputParams) {
               viewBox="0 0 14 13"
               fill="#cacaca"
               onClick={() => {
-                AVR_RATE = (idx + 1) * 20;
+                AVR_RATE.current = (idx + 1) * 20;
                 calcStarRates();
                 setInput({...input, rating: (idx+1)*2});
               }}
@@ -59,7 +60,7 @@ function StarRateInput({input, setInput}:StarRateInputParams) {
                   width={`${ratesResArr[idx]}`}
                   height="39"
                   onClick={() => {
-                    AVR_RATE = (idx + 1) * 20;
+                    AVR_RATE.current = (idx + 1) * 20;
                     calcStarRates();
                     setInput({...input, rating: (idx+1)*2});
                   }}
