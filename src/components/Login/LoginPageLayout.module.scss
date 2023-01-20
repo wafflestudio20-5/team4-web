@@ -152,6 +152,7 @@
   border-radius: 4px;
   font-family: '-apple-system', HelveticaNeue, Roboto, 'Noto Sans KR', helvetica,
     Gulim, sans-serif;
+  cursor: pointer;
 }
 
 .loginUtility {
@@ -179,14 +180,17 @@
     background-color: #f1f1f1;
     appearance: none;
     transition: background 0.2s;
+    cursor: pointer;
   }
   input[type='checkbox']:checked {
     background: gray;
     border: 1px solid black;
+    cursor: pointer;
   }
   .labelCheckBox {
     position: relative;
     bottom: 12px;
+    cursor: pointer;
   }
 }
 
@@ -202,6 +206,7 @@
     color: gray;
     font-family: '-apple-system', HelveticaNeue, Roboto, 'Noto Sans KR',
       helvetica, Gulim, sans-serif;
+    cursor: pointer;
   }
   .findPassword {
     border-left: 0.5px solid gray;
@@ -212,6 +217,7 @@
     color: gray;
     font-family: '-apple-system', HelveticaNeue, Roboto, 'Noto Sans KR',
       helvetica, Gulim, sans-serif;
+    cursor: pointer;
   }
 }
 
@@ -231,6 +237,7 @@
     top: 10px;
     z-index: 4;
     text-align: center;
+    cursor: pointer;
 
     .kakaoLogo {
       width: 30px;
@@ -253,6 +260,7 @@
     background-color: white;
     border-radius: 4px;
     text-align: center;
+    cursor: pointer;
     .appleLogo {
       width: 30px;
       height: 30px;
@@ -277,5 +285,6 @@
     padding: 3px 8px 3px 8px;
     border: 1px solid #0078ff;
     border-radius: 4px;
+    cursor: pointer;
   }
 }

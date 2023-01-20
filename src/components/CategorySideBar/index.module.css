@@ -1,0 +1,78 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.categorySideBar {
+  min-width: 200px;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.openCategorySideBarButton {
+  background-color: transparent;
+  border-top: none;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  border-left: none;
+  padding: 7.5px;
+  width: 25px;
+  height: 25px;
+  margin: 0px;
+  position: absolute;
+  z-index: 99;
+}
+
+.closeCategorySideBarButton {
+  background-color: transparent;
+  border-top: none;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  border-left: none;
+  padding: 7.5px;
+  width: 25px;
+  height: 25px;
+  margin: 0px;
+  position: absolute;
+  left: 220px;
+  z-index: 99;
+}
+
+.select {
+  display: flex;
+  flex-direction: row;
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  line-height: 38px;
+  margin-bottom: 5px;
+}
+
+.button {
+  color: #b2b2b2;
+  border: 0.5px solid #ddd;
+  flex: 1;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  background-color: #f3f3f3;
+}
+
+.buttonselected {
+  border-top: 0.5px solid #ddd;
+  border-right: 0.5px solid #ddd;
+  border-left: 0.5px solid #ddd;
+  flex: 1;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.buttonselected:hover {
+  cursor: pointer;
+}

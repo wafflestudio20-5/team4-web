@@ -1,9 +1,7 @@
-import { useApiItemFetcher, useApiData} from "../../../lib/api";
 import styles from "./MyPageWriteReviewsLayout.module.scss";
-import {useLocation} from "react-router-dom";
 import {Purchase} from "../../../lib/interface";
 import StarRateInput from "./StarRateInput";
-import React, {useEffect} from "react";
+import React from "react";
 interface Input {
     rating: number;
     content: string;

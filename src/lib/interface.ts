@@ -1,7 +1,6 @@
 export interface User {
   id: number;
   image: string;
-  point: number;
   username: string;
   nickname: string;
   reviewCount: number;
@@ -32,14 +31,14 @@ export interface Item {
   label?: Label;
   category: Category;
   subCategory: SubCategory;
+  reviewCount: number;
 }
 
 export interface Purchase {
   id: number;
-  user: User;
   item: Item;
-  createdDateTime: string;
-  payment: number;
+  createdDate?: string;
+  payment?: number;
   quantity: number;
   option?: string;
   review?: Review;
@@ -130,6 +129,12 @@ export enum SubCategory {
   beanie = 'beanie',
 }
 
+export enum Best {
+  best = 'best',
+}
+
+export type CategoryIncludeBest = Category | Best;
+
 export function displayLabel(label: Label) {
   switch (label) {
     case Label.limited:
@@ -147,6 +152,29 @@ export function displayLabel(label: Label) {
 
 export function displayCategory(category: Category) {
   switch (category) {
+    case Category.top:
+      return '상의';
+    case Category.outer:
+      return '아우터';
+    case Category.pants:
+      return '바지';
+    case Category.skirt:
+      return '스커트';
+    case Category.bag:
+      return '가방';
+    case Category.shoes:
+      return '신발';
+    case Category.headWear:
+      return '모자';
+    default:
+      throw new Error('Unknown Category: ' + category);
+  }
+}
+
+export function displayCategoryIncludeBest(category: CategoryIncludeBest) {
+  switch (category) {
+    case Best.best:
+      return '인기';
     case Category.top:
       return '상의';
     case Category.outer:
@@ -220,6 +248,58 @@ export function displaySubCategory(subcategory: SubCategory) {
       return '비니';
     default:
       throw new Error('Unknown SubCategory: ' + subcategory);
+  }
+}
+export function SubCategoryInCategory(category: CategoryIncludeBest) {
+  switch (category) {
+    case Best.best:
+      return [
+        SubCategory.coat,
+        SubCategory.backpack,
+        SubCategory.shirt,
+        SubCategory.slacks,
+      ];
+
+    case Category.top:
+      return [
+        SubCategory.sweater,
+        SubCategory.hoodie,
+        SubCategory.sweatShirt,
+        SubCategory.shirt,
+      ];
+    case Category.outer:
+      return [
+        SubCategory.coat,
+        SubCategory.jacket,
+        SubCategory.padding,
+        SubCategory.cardigan,
+      ];
+    case Category.pants:
+      return [
+        SubCategory.denim,
+        SubCategory.slacks,
+        SubCategory.jogger,
+        SubCategory.leggings,
+      ];
+    case Category.skirt:
+      return [
+        SubCategory.miniSkirt,
+        SubCategory.mediSkirt,
+        SubCategory.longSkirt,
+      ];
+    case Category.bag:
+      return [SubCategory.backpack, SubCategory.crossBag, SubCategory.echoBag];
+    case Category.shoes:
+      return [
+        SubCategory.goodoo,
+        SubCategory.sandal,
+        SubCategory.slipper,
+        SubCategory.sneakers,
+      ];
+    case Category.headWear:
+      return [SubCategory.cap, SubCategory.hat, SubCategory.beanie];
+    default:
+      throw new Error('Unknown Category: ' + category);
   }
 }
 

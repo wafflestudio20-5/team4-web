@@ -80,10 +80,6 @@ export default function MyPageWriteReviews({accessToken}: MyPageWriteReviewsPara
         // await axios.post('게시글 관련 API', {..., secureImages})
     };
 
-    const submitReview = () => {
-
-    }
-
 
     return (<MyPageWriteReviewsLayout data={data} input={input} onChange={onChange} setInput={setInput} onChangeTextArea={onChangeTextArea}
     onTextClick={onTextClick} onImageClick={onImageClick} isText={isText} handleClick={handleClick} handleSubmit={handleSubmit} images={images}></MyPageWriteReviewsLayout>);

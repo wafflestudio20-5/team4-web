@@ -24,7 +24,7 @@ function ReviewItem({data, onClick}:ReviewItemParams) {
                 </div>
             </td>
             <td className={styles.purchaseDate}>
-                {data?.createdDateTime}
+                {data?.createdDate}
                 <br />
                 구매확정
             </td>

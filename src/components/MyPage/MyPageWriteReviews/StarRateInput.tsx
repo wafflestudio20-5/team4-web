@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 interface Input {
   rating: number;
@@ -16,7 +16,7 @@ function StarRateInput({input, setInput}:StarRateInputParams) {
   let AVR_RATE: number;
   const STAR_IDX_ARR = ["first", "second", "third", "fourth", "last"];
   const [ratesResArr, setRatesResArr] = useState([0, 0, 0, 0, 0]);
-  const calcStarRates = () => {
+  const calcStarRates = useCallback(() => {
     let tempStarRatesArr = [0, 0, 0, 0, 0];
     let starVerScore = (AVR_RATE * 70) / 100;
     let idx = 0;
@@ -27,12 +27,12 @@ function StarRateInput({input, setInput}:StarRateInputParams) {
     }
     tempStarRatesArr[idx] = starVerScore;
     setRatesResArr(tempStarRatesArr);
-  };
+  }, []);
   useEffect(() => {
     if (input.rating === 0) {
       calcStarRates();
     }
-  }, [input.rating]);
+  }, [input.rating, calcStarRates]);
   useEffect(() => {
     AVR_RATE = input.rating * 10;
     calcStarRates();

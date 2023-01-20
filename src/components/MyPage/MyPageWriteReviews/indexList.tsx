@@ -1,7 +1,6 @@
 import MyPageWriteReviewsListLayout from "./MyPageWriteReviewsListLayout";
-import MyPageWriteReviewsLayout from "./MyPageWriteReviewsLayout";
-import { Purchase, Label, Category, SubCategory } from '../../../lib/interface';
-import {useNavigate, useParams} from "react-router-dom";
+import { Purchase } from '../../../lib/interface';
+import {useNavigate} from "react-router-dom";
 import { useApiGetPurchaseListFetcher, useApiData} from "../../../lib/api";
 
 export default function MyPageWriteReviewsList({
