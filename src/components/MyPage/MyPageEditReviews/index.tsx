@@ -5,7 +5,7 @@ import React, {useEffect, useState} from "react";
 import {FileUpload, useFileUpload} from "use-file-upload";
 import {toast} from "react-toastify";
 import axios from "axios/index";
-import {apiPostReview} from "../../../lib/api";
+import {apiPutReview} from "../../../lib/api";
 interface MyPageEditReviewsParams {
     accessToken: string | null;
 }
@@ -96,13 +96,13 @@ export default function MyPageEditReviews({accessToken}: MyPageEditReviewsParams
             console.log(response.data.secureImages); // 업로드한 이미지들의 URL로 이루어진 string[]
             secureImages = response.data.secureImages;
 
-            apiPostReview(data.id, input.rating, input.content, input.size, input.color, secureImages, accessToken);
+            apiPutReview(data.id, input.rating, input.content, input.size, input.color, secureImages, accessToken);
             navigate(-1);
 
         }
         else
         {
-            apiPostReview(data.id, input.rating, input.content, input.size, input.color, [], accessToken);
+            apiPutReview(data.id, input.rating, input.content, input.size, input.color, [], accessToken);
             navigate(-1);
         }
         // TODO: 이미지 업로드 후 return된 secureImages를 request body에 포함하여 게시글 POST

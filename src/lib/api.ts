@@ -79,6 +79,16 @@ export const apiPostReview = (id: number, rating: number, content: string,
     );
 };
 
+export const apiPutReview = (id: number, rating: number, content: string,
+                              size: string, color: string, images: string[], token: string | null) => {
+    axios.put<{}>(
+        '/api/user/me/reviews',
+        {id, rating, content, size, color, images},
+        { headers: token ? auth(token) : undefined }
+
+    );
+};
+
 export const apiPostImage = (formData: FormData, token: string | null) => {
     axios.post<{}>(
         '/api/image-upload',
