@@ -70,18 +70,18 @@ export const useApiItemFetcher = (id: number | null) => {
 
 export const useApiItemListFetcher = (
   category: Category | null,
-  subCategory?: SubCategory,
+  subcategory?: SubCategory,
   count?: number,
   index?: number
 ) => {
   const f = useCallback(
     (cancelToken: CancelToken) => {
       return axios.get<{ items: Item[] }>('/api/items', {
-        params: { category, subCategory, count, index },
+        params: { category, subcategory, count, index },
         cancelToken,
       });
     },
-    [category, subCategory, index, count]
+    [category, subcategory, index, count]
   );
   return f;
 };
@@ -134,7 +134,7 @@ export const apiPatchCart = (
   token: string | null
 ) =>
   axios.patch<{}>(
-    'api/user/me/shopping-cart',
+    '/api/user/me/shopping-cart',
     { id, quantity },
     { headers: token ? auth(token) : undefined }
   );
@@ -165,7 +165,7 @@ export const apiPostCart = (
   token: string | null
 ) => {
   axios.post<{}>(
-    'api/user/me/shopping-cart',
+    '/api/user/me/shopping-cart',
     { id, option, quantity },
     { headers: token ? auth(token) : undefined }
   );

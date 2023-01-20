@@ -6,6 +6,7 @@ import {
   CategoryIncludeBest,
   SubCategoryInCategory,
 } from '../../lib/interface';
+import { useNavigate, createSearchParams } from 'react-router-dom';
 
 interface SideBarCategoryProps {
   categorys: CategoryIncludeBest[];
@@ -132,6 +133,8 @@ function SelectedCategoryBox({
   selectedCategory,
   setSelectedCategory,
 }: CategoryBoxProps) {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.selectedCategorys}>
       <div
@@ -148,7 +151,19 @@ function SelectedCategoryBox({
       </div>
       <div className={styles.subCategorylist}>
         {SubCategoryInCategory(category)?.map((subcategory) => (
-          <div key={subcategory} className={styles.subcategory}>
+          <div
+            key={subcategory}
+            className={styles.subcategory}
+            onClick={() => {
+              navigate({
+                pathname: '/itemlist',
+                search: `?${createSearchParams({
+                  type: 'subcategory',
+                  q: subcategory,
+                })}`,
+              });
+            }}
+          >
             {displaySubCategory(subcategory)}
           </div>
         ))}

@@ -1,114 +1,68 @@
-import { useSearchParams } from 'react-router-dom';
-import { useApiData, useApiItemListFetcher } from '../../lib/api';
-import { Item, Category, SubCategory } from '../../lib/interface';
+import { Item } from '../../lib/interface';
 import ItemPreview from './ItemPreview';
 import styles from './ItemList.module.scss';
 
-interface ItemPreviewListProps {
+interface ItemListProps {
   items: Item[] | null;
+  pageNum: number;
+  setPageNum: React.Dispatch<React.SetStateAction<number>>;
 }
 
-// interface ItemListCategoryProps {
-//   categorys: Category[];
-//   selectedCategory: Category | null;
-//   setSelectedCategory: React.Dispatch<React.SetStateAction<Category | null>>;
-// }
-
-export default function ItemList() {
-  const [searchParams] = useSearchParams();
-
-  const type = searchParams.get('type');
-  const query = searchParams.get('q');
-
-  console.log('type: ' + type + ', query: ' + query);
-
-  const category =
-    type === 'category' && query
-      ? Category[query as keyof typeof Category]
-      : null;
-  const subCategory =
-    type === 'subcategory' && query
-      ? SubCategory[query as keyof typeof SubCategory]
-      : undefined;
-
-  // const [paramCategory, setparamCategory] = useState<{
-  //   category: Category | null;
-  //   subCategory: SubCategory | undefined;
-  // }>({ category: null, subCategory: undefined });
-
-  // const param = useParams();
-  // const paramEnum = stringtoEnum(param.category);
-
-  // useEffect(() => {
-  //   if (param.category && param.category in Category) {
-  //     console.log('서브카테고리');
-  //   } else if (param.category && param.category in SubCategory) {
-  //     console.log('서브카테고리');
-  //   } else {
-  //     console.log('전체');
-  //   }
-  // }, []);
-
-  const { data: itemsData } = useApiData(
-    useApiItemListFetcher(category, subCategory, 20, 0)
-  );
-  const items = itemsData?.items ?? null;
-
+export default function ItemList({
+  items,
+  pageNum,
+  setPageNum,
+}: ItemListProps) {
   return (
     <div className={styles.itemList}>
-      {/* <ItemListCategory
-        selectedCategory={selectedCategory}
-        categorys={categorys}
-        setSelectedCategory={setSelectedCategory}
-      ></ItemListCategory> */}
+      <ItemListSort pageNum={pageNum} setPageNum={setPageNum} />
       <ItemPreviewList items={items}></ItemPreviewList>
-      {/* <ItemListPagenation /> */}
     </div>
   );
 }
 
-// function ItemListCategory({
-//   categorys,
-//   selectedCategory,
-//   setSelectedCategory,
-// }: ItemListCategoryProps) {
-//   return (
-//     <div className={styles.itemListCategory}>
-//       <div className={styles.title}>
-//         <div>실시간 랭킹</div>
-//       </div>
-//       <div className={styles.categorycontent}>
-//         <div>
-//           <button
-//             key={null}
-//             className={
-//               selectedCategory === null ? styles.buttonselected : styles.button
-//             }
-//             onClick={() => setSelectedCategory(null)}
-//           >
-//             전체
-//           </button>
-//         </div>
-//         {categorys.map((category) => (
-//           <div key={category}>
-//             <button
-//               className={
-//                 selectedCategory === category
-//                   ? styles.buttonselected
-//                   : styles.button
-//               }
-//               onClick={() => setSelectedCategory(category)}
-//             >
-//               {displayCategory(category)}
-//             </button>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// }
+function ItemListSort({
+  pageNum,
+  setPageNum,
+}: {
+  pageNum: number;
+  setPageNum: React.Dispatch<React.SetStateAction<number>>;
+}) {
+  return (
+    <div className={styles.sort}>
+      <div className={styles.sortline}>
+        <div className={styles.sortRuleSelected}>무신사 추천순</div>
+        <div className={styles.sortRule}>낮은 가격순</div>
+        <div className={styles.sortRule}>높은 가격순</div>
+        <div className={styles.sortRule}>별점 순</div>
+        <div className={styles.sortRule}>할인율 순</div>
+        <div className={styles.sortRule}>후기 순</div>
+      </div>
+      <div className={styles.pageline}>
+        <div className={styles.pagenumber}>
+          <div
+            className={styles.page}
+            onClick={() => {
+              setPageNum(pageNum - 1);
+            }}
+          >
+            {'<'}
+          </div>
+          <div
+            className={styles.page}
+            onClick={() => {
+              setPageNum(pageNum + 1);
+            }}
+          >
+            {'>'}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
-function ItemPreviewList({ items }: ItemPreviewListProps) {
+function ItemPreviewList({ items }: { items: Item[] | null }) {
   return (
     <div className={styles.itemListBox}>
       {items?.map((item) => (
