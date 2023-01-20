@@ -38,7 +38,7 @@ export default function ItemListPage() {
       category,
       subCategory,
       query ?? '',
-      pageNum,
+      pageNum - 1,
       DEFAULT_FETCH_AMOUNT
     )
   );
