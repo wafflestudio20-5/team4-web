@@ -193,9 +193,12 @@
               border: 0px;
               padding: 0 12px 0 12px;
             }
-          }
-          .inputNickMessage {
-            color: red;
+            .validNickname {
+              color: blue;
+            }
+            .invalidNickname {
+              color: red;
+            }
           }
         }
         .inputRecommendIdArea {
@@ -290,6 +293,7 @@
             color: #b3b3b3;
             border: 1px;
             border-radius: 4px;
+            font-weight: bold;
           }
           .signupButtonT {
             display: block;
@@ -302,6 +306,7 @@
             color: #fff;
             border: 1px;
             border-radius: 4px;
+            font-weight: bold;
           }
           .signupButtonT:hover {
             display: block;

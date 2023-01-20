@@ -1,60 +1,41 @@
 import React from 'react';
 import styles from './registerPage.module.scss';
 
-interface inputParams {
-  id: string;
+interface RegisterPageProps {
+  onChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => {};
+  onChangeCheckbox: (e: React.ChangeEvent<HTMLInputElement>) => {};
+  onClickRegister: () => void;
+  registerInfo: RegisterInfo;
+  registerHelper: RegisterInfo;
+  isAgreementChecked: IsAgreementChecked;
+  isRegisterButtonDisabled: boolean;
+}
+
+export interface RegisterInfo {
+  username: string;
   password: string;
-  repassword: string;
+  passwordConfirm: string;
   nickname: string;
 }
 
-interface RegisterPageProps {
-  setFirstInputId: (x: boolean) => void;
-  IdCheck: () => { message: string };
-  setFirstInputPassword: (x: boolean) => void;
-  PasswordCheck: () => { message: string };
-  setFirstInputRePassword: (x: boolean) => void;
-  RePasswordCheck: () => { message: string };
-  NicknameCheck: () => { message: string };
-  allBtnEvent: () => void;
-  firstBtnEvent: () => void;
-  secondBtnEvent: () => void;
-  thirdBtnEvent: () => void;
-  fourthBtnEvent: () => void;
-  registerButtonActivate: boolean;
-  registerButtonFunction: () => void;
-  input: inputParams;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  check: {
-    all: boolean;
-    first: boolean;
-    second: boolean;
-    third: boolean;
-    fourth: boolean;
-  };
-  firstInputPassword: boolean;
+interface IsAgreementChecked {
+  agreementAll: boolean;
+  agreementFirst: boolean;
+  agreementSecond: boolean;
+  agreementThird: boolean;
+  agreementFourth: boolean;
 }
+
 export default function RegisterPageLayout({
-  setFirstInputId,
-  IdCheck,
-  setFirstInputPassword,
-  PasswordCheck,
-  setFirstInputRePassword,
-  RePasswordCheck,
-  NicknameCheck,
-  allBtnEvent,
-  firstBtnEvent,
-  secondBtnEvent,
-  thirdBtnEvent,
-  fourthBtnEvent,
-  registerButtonActivate,
-  registerButtonFunction,
-  input,
-  onChange,
-  check,
-  firstInputPassword,
+  onChangeInput,
+  onChangeCheckbox,
+  onClickRegister,
+  registerInfo,
+  registerHelper,
+  isAgreementChecked,
+  isRegisterButtonDisabled,
 }: RegisterPageProps) {
-  const { id, password, repassword, nickname } = input;
+  const { username, password, passwordConfirm, nickname } = registerInfo;
   return (
     <>
       <div className={styles.background}>
@@ -79,18 +60,25 @@ export default function RegisterPageLayout({
                 <div className={styles.inputIdWrap}>
                   <input
                     className={styles.inputId}
-                    name="id"
-                    value={id}
+                    name="username"
+                    value={username}
                     placeholder="영문, 숫자 5-11자"
                     type="text"
                     maxLength={11}
                     id="inputId"
                     onChange={(e) => {
-                      setFirstInputId(true);
-                      onChange(e);
+                      onChangeInput(e);
                     }}
                   ></input>
-                  <div className={IdCheck().message === '사용 가능한 아이디입니다.' ? styles.IdCheckT : styles.IdCheckF}>{IdCheck().message}</div>
+                  <div
+                    className={
+                      registerHelper.username === '사용 가능한 아이디입니다.'
+                        ? styles.IdCheckT
+                        : styles.IdCheckF
+                    }
+                  >
+                    {registerHelper.username}
+                  </div>
                 </div>
               </div>
               <div className={styles.inputPasswordArea}>
@@ -111,31 +99,29 @@ export default function RegisterPageLayout({
                     maxLength={30}
                     id="inputPassword"
                     onChange={(e) => {
-                      setFirstInputPassword(true);
-                      onChange(e);
+                      onChangeInput(e);
                     }}
                   ></input>
                 </div>
               </div>
-              {firstInputPassword ? (
-                <div className={styles.inputPasswordMessage}>
-                  {PasswordCheck().message}
-                </div>
-              ) : null}
+              <div className={styles.inputPasswordMessage}>
+                {registerHelper.password}
+              </div>
               <div className={styles.inputRepeatArea}>
                 <div className={styles.inputRepeatWrap}>
                   <input
                     className={styles.inputRepeat}
-                    name="repassword"
-                    value={repassword}
+                    name="passwordConfirm"
+                    value={passwordConfirm}
                     placeholder="비밀번호 재입력"
                     type="password"
                     onChange={(e) => {
-                      setFirstInputRePassword(true);
-                      onChange(e);
+                      onChangeInput(e);
                     }}
                   ></input>
-                  <div className={styles.inputRepeatMessage}>{RePasswordCheck().message}</div>
+                  <div className={styles.inputRepeatMessage}>
+                    {registerHelper.passwordConfirm}
+                  </div>
                 </div>
               </div>
               <div className={styles.inputNickArea}>
@@ -150,44 +136,52 @@ export default function RegisterPageLayout({
                     name="nickname"
                     value={nickname}
                     onChange={(e) => {
-                      onChange(e);
+                      onChangeInput(e);
                     }}
                   ></input>
+                  <div
+                    className={
+                      registerHelper.nickname === '사용 가능한 닉네임입니다.'
+                        ? styles.validNickname
+                        : styles.invalidNickname
+                    }
+                  >
+                    {registerHelper.nickname}
+                  </div>
                 </div>
-                <div className={styles.inputNickMessage}>{NicknameCheck().message}</div>
               </div>
-              <div className={styles.inputRecommendIdArea}>
+              {/* <div className={styles.inputRecommendIdArea}>
                 <label className={styles.inputRecommendIdLabel}>
                   친구 초대 추천인 아이디
                 </label>
                 <div className={styles.inputRecommendIdWrap}>
                   <input className={styles.inputRecommendId}></input>
                 </div>
-              </div>
+              </div> */}
               <div className={styles.agreementForm}>
                 <div className={styles.checkboxAll}>
                   <input
                     type="checkbox"
-                    id="checkboxAll"
-                    checked={check.all}
-                    onChange={allBtnEvent}
+                    id="agreementAll"
+                    checked={isAgreementChecked.agreementAll}
+                    onChange={(e) => onChangeCheckbox(e)}
                     className={styles.allCheckButton}
                   ></input>
-                  <label htmlFor="checkboxAll" className={styles.allCheckText}>
+                  <label htmlFor="agreementAll" className={styles.allCheckText}>
                     약관 전체 동의하기
                   </label>
                 </div>
                 <div className={styles.checkbox}>
                   <input
                     type="checkbox"
-                    id="checkboxFirst"
-                    checked={check.first}
-                    onChange={firstBtnEvent}
+                    id="agreementFirst"
+                    checked={isAgreementChecked.agreementFirst}
+                    onChange={(e) => onChangeCheckbox(e)}
                     className={styles.oneCheckButton}
                   ></input>
                   <span className={styles.oneCheckText}>
-                    <label htmlFor="checkboxFirst">
-                      [필수]개인정보 수집 및 이용 동의
+                    <label htmlFor="agreementFirst">
+                      [필수] 개인정보 수집 및 이용 동의
                     </label>
                     <button className={styles.inDetail}>자세히</button>
                   </span>
@@ -195,14 +189,14 @@ export default function RegisterPageLayout({
                 <div className={styles.checkbox}>
                   <input
                     type="checkbox"
-                    id="checkboxSecond"
-                    checked={check.second}
-                    onChange={secondBtnEvent}
+                    id="agreementSecond"
+                    checked={isAgreementChecked.agreementSecond}
+                    onChange={(e) => onChangeCheckbox(e)}
                     className={styles.oneCheckButton}
                   ></input>
                   <span className={styles.oneCheckText}>
-                    <label htmlFor="checkboxSecond">
-                      [필수]무신사, 무신사 스토어 이용 약관
+                    <label htmlFor="agreementSecond">
+                      [필수] 무신사, 무신사 스토어 이용 약관
                     </label>
                     <button className={styles.inDetail}>자세히</button>
                   </span>
@@ -210,28 +204,28 @@ export default function RegisterPageLayout({
                 <div className={styles.checkbox}>
                   <input
                     type="checkbox"
-                    id="checkboxThird"
-                    checked={check.third}
-                    onChange={thirdBtnEvent}
+                    id="agreementThird"
+                    checked={isAgreementChecked.agreementThird}
+                    onChange={(e) => onChangeCheckbox(e)}
                     className={styles.oneCheckButton}
                   ></input>
                   <span className={styles.oneCheckText}>
-                    <label htmlFor="checkboxThird">
-                      [필수]만 14세 미만 가입 제한
+                    <label htmlFor="agreementThird">
+                      [필수] 만 14세 미만 가입 제한
                     </label>
                   </span>
                 </div>
                 <div className={styles.checkbox}>
                   <input
                     type="checkbox"
-                    id="checkboxFourth"
-                    checked={check.fourth}
-                    onChange={fourthBtnEvent}
+                    id="agreementFourth"
+                    checked={isAgreementChecked.agreementFourth}
+                    onChange={(e) => onChangeCheckbox(e)}
                     className={styles.oneCheckButton}
                   ></input>
                   <span className={styles.oneCheckText}>
-                    <label htmlFor="checkboxFourth">
-                      [선택]마케팅 활용 및 광고성 정보 수신 동의
+                    <label htmlFor="agreementFourth">
+                      [선택] 마케팅 활용 및 광고성 정보 수신 동의
                     </label>
                     <button className={styles.inDetail}>자세히</button>
                   </span>
@@ -239,21 +233,22 @@ export default function RegisterPageLayout({
                 <div className={styles.signupButtonArea}>
                   <button
                     className={
-                      registerButtonActivate
-                        ? styles.signupButtonT
-                        : styles.signupButtonF
+                      isRegisterButtonDisabled
+                        ? styles.signupButtonF
+                        : styles.signupButtonT
                     }
-                    onClick={registerButtonFunction}
+                    disabled={isRegisterButtonDisabled}
+                    onClick={onClickRegister}
                   >
                     본인인증하고 가입하기
                   </button>
                 </div>
-                <ul className={styles.signupButtonHelper}>
+                {/* <ul className={styles.signupButtonHelper}>
                   <li className={styles.signupButtonHelperText}>
                     본인인증이 어려운 경우(만 14세 미만 포함),&nbsp;
                     <a href="/login">비회원으로 구매</a>할 수 있습니다.
                   </li>
-                </ul>
+                </ul> */}
               </div>
             </div>
           </div>
