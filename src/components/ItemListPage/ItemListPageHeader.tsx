@@ -9,7 +9,7 @@ import {
 import styles from './ItemListPageHeader.module.scss';
 
 interface ItemListPageHeaderProps {
-  category: Category | null;
+  category: Category | undefined;
   subCategory: SubCategory | undefined;
   getCategorybySubCategory: (subcategory: SubCategory) => Category;
   navigate: NavigateFunction;

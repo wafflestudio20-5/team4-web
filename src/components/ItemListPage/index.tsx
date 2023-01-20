@@ -14,8 +14,11 @@ import { useEffect } from 'react';
 export default function ItemListPage() {
   const navigate = useNavigate();
 
-  const [searchParams] = useSearchParams();
   const [pageNum, setPageNum] = useState<number>(1);
+
+  const DEFAULT_FETCH_AMOUNT = 18;
+
+  const [searchParams] = useSearchParams();
 
   const type = searchParams.get('type');
   const query = searchParams.get('q');
@@ -23,20 +26,28 @@ export default function ItemListPage() {
   const category =
     type === 'category' && query
       ? Category[query as keyof typeof Category]
-      : null;
+      : undefined;
   const subCategory =
     type === 'subcategory' && query
       ? SubCategory[query as keyof typeof SubCategory]
       : undefined;
 
   const { data: itemsData } = useApiData(
-    useApiItemListFetcher(category, subCategory, 18, pageNum - 1)
+    useApiItemListFetcher(
+      type,
+      category,
+      subCategory,
+      query ?? '',
+      pageNum,
+      DEFAULT_FETCH_AMOUNT
+    )
   );
+
+  const items = itemsData?.items ?? null;
 
   useEffect(() => {
     setPageNum(1);
   }, [category, subCategory]);
-  const items = itemsData?.items ?? null;
 
   return (
     <div className={styles.wrap}>
