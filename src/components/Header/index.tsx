@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Outlet } from 'react-router-dom';
+import { createSearchParams, Outlet, useNavigate } from 'react-router-dom';
 import { RootState, AppDispatch } from '../../store';
 import { postLogout } from '../../store/slices/session';
 import HeaderLayout from './HeaderLayout';
@@ -13,6 +13,8 @@ function Header() {
   const session: Session = useSelector((state: RootState) => {
     return state.session;
   });
+
+  const navigate = useNavigate();
 
   const { user, accessToken } = session;
 
@@ -28,7 +30,13 @@ function Header() {
     e: React.MouseEvent<HTMLDivElement> | React.KeyboardEvent<HTMLInputElement>
   ) => {
     e.preventDefault();
-    console.log(`search query: ${query}`);
+    navigate({
+      pathname: '/itemlist',
+      search: `?${createSearchParams({
+        type: 'search',
+        q: query,
+      })}`,
+    });
     setQuery('');
   };
 
