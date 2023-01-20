@@ -1,0 +1,15 @@
+.itemList {
+  width: calc(100%);
+  max-width: 2000px;
+  min-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #ddd;
+}
+
+.itemListBox {
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  height: 700px;
+}

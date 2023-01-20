@@ -249,6 +249,78 @@ export function displaySubCategory(subcategory: SubCategory) {
       throw new Error('Unknown SubCategory: ' + subcategory);
   }
 }
+
+export function stringtoEnum(string: string | undefined) {
+  switch (string) {
+    case 'top':
+      return Category.top;
+    case 'outer':
+      return Category.outer;
+    case 'pants':
+      return Category.pants;
+    case 'skirt':
+      return Category.skirt;
+    case 'bag':
+      return Category.bag;
+    case 'shoes':
+      return Category.shoes;
+    case 'headWear':
+      return Category.headWear;
+    case 'sweater':
+      return SubCategory.sweater;
+    case 'hoodie':
+      return SubCategory.hoodie;
+    case 'sweatShirt':
+      return SubCategory.sweatShirt;
+    case 'shirt':
+      return SubCategory.shirt;
+    case 'coat':
+      return SubCategory.coat;
+    case 'jacket':
+      return SubCategory.jacket;
+    case 'padding':
+      return SubCategory.padding;
+    case 'cardigan':
+      return SubCategory.cardigan;
+    case 'denim':
+      return SubCategory.denim;
+    case 'slacks':
+      return SubCategory.slacks;
+    case 'jogger':
+      return SubCategory.jogger;
+    case 'leggings':
+      return SubCategory.leggings;
+    case 'miniSkirt':
+      return SubCategory.miniSkirt;
+    case 'mediSkirt':
+      return SubCategory.mediSkirt;
+    case 'longSkirt':
+      return SubCategory.longSkirt;
+    case 'backpack':
+      return SubCategory.backpack;
+    case 'crossBag':
+      return SubCategory.crossBag;
+    case 'echoBag':
+      return SubCategory.echoBag;
+    case 'goodoo':
+      return SubCategory.goodoo;
+    case 'sandal':
+      return SubCategory.sandal;
+    case 'slipper':
+      return SubCategory.slipper;
+    case 'sneakers':
+      return SubCategory.sneakers;
+    case 'cap':
+      return SubCategory.cap;
+    case 'hat':
+      return SubCategory.hat;
+    case 'beanie':
+      return SubCategory.beanie;
+    default:
+      return;
+  }
+}
+
 export function SubCategoryInCategory(category: CategoryIncludeBest) {
   switch (category) {
     case Best.best:

@@ -22,7 +22,7 @@ export default function OrderPurchase({
 
   const { accessToken } = session;
 
-  const purchaseitems: {
+  const purchaseItems: {
     id: number;
     option: string | undefined;
     payment: number;
@@ -84,7 +84,7 @@ export default function OrderPurchase({
           <button
             className={styles.purchaseButton}
             onClick={() => {
-              apiPostPurchaseList(purchaseitems, accessToken);
+              apiPostPurchaseList(purchaseItems, accessToken);
             }}
           >
             {finalprice.toLocaleString()} 원 결제하기

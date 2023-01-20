@@ -103,12 +103,12 @@ export const useApiGetPurchaseListFetcher = (token: string | null) => {
 };
 
 export const apiPostPurchaseList = (
-  purchaseitems: PurchasePostDto[],
+  purchaseItems: PurchasePostDto[],
   token: string | null
 ) =>
   axios.post<{}>(
     '/api/user/me/purchases',
-    { purchaseitems },
+    { purchaseItems },
     { headers: token ? auth(token) : undefined }
   );
 
@@ -128,12 +128,12 @@ export const useApiGetCartListFetcher = (token: string | null) => {
   return f;
 };
 
-export const apiPutCartList = (
+export const apiPatchCart = (
   id: number,
   quantity: number,
   token: string | null
 ) =>
-  axios.put<{}>(
+  axios.patch<{}>(
     'api/user/me/shopping-cart',
     { id, quantity },
     { headers: token ? auth(token) : undefined }

@@ -3,6 +3,7 @@ import { useApiData, useApiItemListFetcher } from '../../lib/api';
 import { Item, Category, displayCategory } from '../../lib/interface';
 import ItemPreview from './ItemPreview';
 import styles from './ItemList.module.scss';
+import { useNavigate, createSearchParams } from 'react-router-dom';
 
 interface ItemPreviewListProps {
   items: Item[] | null;
@@ -18,12 +19,13 @@ export default function ItemList() {
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(
     null
   );
+
   const { data: itemsData } = useApiData(
     useApiItemListFetcher(selectedCategory, undefined, 10, 0)
   );
   const items = itemsData?.items ?? null;
   const categorys = Object.values(Category);
-
+  const navigate = useNavigate();
   return (
     <div className={styles.itemList}>
       <ItemListCategory
@@ -34,7 +36,19 @@ export default function ItemList() {
       <ItemPreviewList items={items}></ItemPreviewList>
       {/* <ItemListPagenation /> */}
       <div className={styles.moreView}>
-        <button>더 보러가기 {' >'}</button>
+        <button
+          onClick={() => {
+            navigate({
+              pathname: '/itemlist',
+              search: `?${createSearchParams({
+                type: 'category',
+                q: selectedCategory ?? 'all',
+              })}`,
+            });
+          }}
+        >
+          더 보기 {' >'}
+        </button>
       </div>
     </div>
   );
