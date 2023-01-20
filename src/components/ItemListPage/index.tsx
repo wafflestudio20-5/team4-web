@@ -16,7 +16,7 @@ export default function ItemListPage() {
 
   const [pageNum, setPageNum] = useState<number>(1);
 
-  const DEFAULT_FETCH_AMOUNT = 18;
+  const DEFAULT_FETCH_AMOUNT = 24;
 
   const [searchParams] = useSearchParams();
 

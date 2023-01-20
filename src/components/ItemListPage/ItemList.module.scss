@@ -13,7 +13,6 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 5px;
-  height: 700px;
   border: 1px solid #ddd;
   padding: 5px;
 }
@@ -49,7 +48,6 @@
     border-bottom: 1px solid #ddd;
     .pagenumber {
       padding: 0px 11px;
-      // border: 1px solid;
       display: flex;
       flex-direction: row;
       .page {
