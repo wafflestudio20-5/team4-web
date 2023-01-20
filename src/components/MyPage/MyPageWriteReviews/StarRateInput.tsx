@@ -5,7 +5,6 @@ interface Input {
   content: string;
   size: string;
   color: string;
-  images: string[];
 }
 interface StarRateInputParams {
   input: Input;

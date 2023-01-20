@@ -1,6 +1,6 @@
-import styles from "./MyPageWriteReviewsLayout.module.scss";
-import {Purchase} from "../../../lib/interface";
-import StarRateInput from "./StarRateInput";
+import {Review} from "../../../lib/interface";
+import styles from "./MyPageEditReviewsLayout.module.scss";
+import StarRateInput from "../MyPageWriteReviews/StarRateInput";
 import React from "react";
 interface Input {
     rating: number;
@@ -8,23 +8,23 @@ interface Input {
     size: string;
     color: string;
 }
-
-interface MyPageWriteReviewsLayoutParams {
-    data: Purchase;
+interface MyPageEditReviewsLayoutParams {
+    data: Review;
+    handleSubmit: (e: React.SyntheticEvent) => void;
+    onImageClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    onTextClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+    handleClick: () => void;
+    isText: boolean;
+    images: string[];
     input: Input;
+    onChangeTextArea: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     setInput: (x: Input) => void;
-    onChangeTextArea: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-    onTextClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-    onImageClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-    isText: boolean;
-    handleClick: () => void;
-    handleSubmit: (e: React.SyntheticEvent) => void;
-    images: string[];
+
+
 }
 
-
-export default function MyPageWriteReviewsLayout({data, input, onChange, setInput, onChangeTextArea, onTextClick, onImageClick, isText, handleClick, handleSubmit, images}:MyPageWriteReviewsLayoutParams) {
+export default function MyPageEditReviewsLayout({data, handleSubmit, onImageClick, onTextClick, handleClick, isText, images, input, onChangeTextArea, onChange, setInput}: MyPageEditReviewsLayoutParams) {
 
     return (<div className={styles.reviewWrapper}>
         <header className={styles.reviewHeader}>
@@ -36,10 +36,10 @@ export default function MyPageWriteReviewsLayout({data, input, onChange, setInpu
             <li>
                 아래에 해당할 경우 적립금 지급이 보류되며, 이미 지급받으셨더라도 2차 검수를 통해 적립금을 회수할 수 있습니다. 또한 일부 후기는 조건에 따라 비노출 처리됩니다.
                 <br />- 포장이 제거되지 않았거나 상품의 전체 형태가 또렷하게 보이지 않는 후기
-                    <br />- 상품을 직접 착용한 사진을 사용한 후기
-                        <br />- 상품과 관련없거나 문자 및 기호의 단순 나열, 반복된 내용의 후기
-                            <br />- 개인정보 및 광고, 비속어가 포함된 내용의 후기 (비노출 대상)
-                                <br />- 상품 상세 페이지 등의 판매 이미지 사용, 관련없는 상품의 사진, 타인의 사진을 도용한 후기 (비노출 대상)
+                <br />- 상품을 직접 착용한 사진을 사용한 후기
+                <br />- 상품과 관련없거나 문자 및 기호의 단순 나열, 반복된 내용의 후기
+                <br />- 개인정보 및 광고, 비속어가 포함된 내용의 후기 (비노출 대상)
+                <br />- 상품 상세 페이지 등의 판매 이미지 사용, 관련없는 상품의 사진, 타인의 사진을 도용한 후기 (비노출 대상)
             </li>
             <li>특히 후기 도용 시 적립금 2배 회수, 1년간 커뮤니티 이용 제한, 3개월간 후기 적립금 지급이 중단됩니다.</li>
 
@@ -47,13 +47,13 @@ export default function MyPageWriteReviewsLayout({data, input, onChange, setInpu
         </ul>
         <div className={styles.reviewWrite}>
             <div className={styles.reviewItem}>
-                <a href={`/goods/${data?.item.id}`}>
-                    <img src={data?.item.images[0]} alt={data?.item.name}/>
+                <a href={`/goods/${data.purchase?.item.id}`}>
+                    <img src={data.purchase?.item.images[0]} alt={data.purchase?.item.name}/>
                 </a>
                 <ul>
-                    <li className={styles.brand}>{data?.item.brand}</li>
-                    <li className={styles.name}>{data?.item.name}</li>
-                    <li className={styles.option}>{data?.option}</li>
+                    <li className={styles.brand}>{data.purchase?.item.brand}</li>
+                    <li className={styles.name}>{data.purchase?.item.name}</li>
+                    <li className={styles.option}>{data.purchase?.option}</li>
                 </ul>
             </div>
             <div className={styles.reviewRating}>
@@ -64,11 +64,11 @@ export default function MyPageWriteReviewsLayout({data, input, onChange, setInpu
                 <li className={styles.radioLi}>
                     <span>사이즈</span>
                     <span className={styles.inputWrap}>
-                        <input type="radio" id="ch1" value="large" name="size" onChange={onChange}></input>
+                        <input type="radio" id="ch1" value="large" name="size" onChange={onChange} checked={input.size==='large'}></input>
                         <label htmlFor="ch1">커요</label>
-                        <input type="radio" id="ch2" value="mid" name="size" onChange={onChange}></input>
+                        <input type="radio" id="ch2" value="mid" name="size" onChange={onChange} checked={input.size==='mid'}></input>
                         <label htmlFor="ch2">보통이에요</label>
-                        <input type="radio" id="ch3" value="small" name="size" onChange={onChange}></input>
+                        <input type="radio" id="ch3" value="small" name="size" onChange={onChange} checked={input.size==='small'}></input>
                         <label htmlFor="ch3">작아요</label>
                     </span>
                 </li>
@@ -77,11 +77,11 @@ export default function MyPageWriteReviewsLayout({data, input, onChange, setInpu
                 <li className={styles.radioLi}>
                     <span>색감</span>
                     <span className={styles.inputWrap}>
-                        <input type="radio" id="ch4" value="bright" name="color" onChange={onChange}></input>
+                        <input type="radio" id="ch4" value="bright" name="color" onChange={onChange} checked={input.color==='bright'}></input>
                         <label htmlFor="ch4">선명해요</label>
-                        <input type="radio" id="ch5" value="mid" name="color" onChange={onChange}></input>
+                        <input type="radio" id="ch5" value="mid" name="color" onChange={onChange} checked={input.color==='mid'}></input>
                         <label htmlFor="ch5">보통이에요</label>
-                        <input type="radio" id="ch6" value="dim" name="color" onChange={onChange}></input>
+                        <input type="radio" id="ch6" value="dim" name="color" onChange={onChange} checked={input.color==='dim'}></input>
                         <label htmlFor="ch6">어두워요</label>
                     </span>
                 </li>
@@ -96,7 +96,7 @@ export default function MyPageWriteReviewsLayout({data, input, onChange, setInpu
                 </div> : <div className={styles.reviewImageInputWrap}>
                     {images.map((img, idx) => (
                         <span><img src={img} alt={`${idx}`} key={idx}></img></span>
-                        ))}
+                    ))}
                     <span className={styles.reviewImageInput} onClick={handleClick}>+</span>
                 </div>}
 

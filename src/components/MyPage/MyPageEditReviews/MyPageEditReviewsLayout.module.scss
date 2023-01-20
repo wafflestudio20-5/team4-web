@@ -1,0 +1,233 @@
+.reviewWrapper {
+  width: 1270px;
+  display: inline-block;
+  .reviewHeader {
+    width: 1270px;
+    height: 36px;
+    padding-bottom: 14px;
+    border-bottom: 3px solid black;
+    margin-top: 48px;
+  }
+  ul {
+    padding-left: 20px;
+    li {
+      margin-bottom: 5px;
+      color: #777;
+
+    }
+  }
+  .reviewWrite {
+    width: 1270px;
+    padding-top: 40px;
+    .reviewItem {
+      width: 1270px;
+      height: 96px;
+      padding-bottom: 20px;
+      img {
+        width: 80px;
+        height: 96px;
+
+      }
+      ul {
+        padding-left: 10px;
+        display: inline-block;
+        position: relative;
+        bottom: 15px;
+        .brand {
+          font-size: 14px;
+          color: black;
+        }
+        .name {
+          font-size: 14px;
+          font-weight: 700;
+          color: black;
+        }
+        .option {
+          font-size: 14px;
+          color: #777;
+        }
+        li {
+          margin-top: 7px;
+          margin-bottom: 7px;
+          list-style-type: none;
+        }
+      }
+    }
+    .reviewRating {
+      width: 1118px;
+      height: 30px;
+      padding-top: 20px;
+      padding-left: 152px;
+      padding-bottom: 10px;
+      border-top: 1px solid #f1f1f1;
+      .reviewRatingText {
+        position: relative;
+        right: 150px;
+        bottom: 5px;
+        font-size: 14px;
+      }
+      span {
+        position: relative;
+        right: 100px;
+
+      }
+    }
+    .radioUl {
+      padding-bottom: 4px;
+      border-bottom: 1px solid #f1f1f1;
+      .radioLi {
+        padding-top: 16px;
+        padding-bottom: 16px;
+        padding-left: 153px;
+        width: 1117px;
+        height: 30px;
+        list-style-type: none;
+        position: relative;
+        span {
+          font-size: 14px;
+          position: relative;
+          right: 170px;
+          color: black;
+        }
+        input {
+          display: block;
+          position: absolute;
+          overflow: hidden;
+          width: 1px;
+          height: 1px;
+          margin: -1px;
+          clip: rect(0 0 0 0);
+        }
+        label {
+          width: 90px;
+          height: 26px;
+          padding-top: 2px;
+          border: 1px solid #f1f1f1;
+          display: inline-block;
+          cursor: pointer;
+          text-align: center;
+          vertical-align: middle;
+          color: #a5a5a5;
+        }
+        input:checked + label{
+          width: 90px;
+          height: 26px;
+          padding-top: 2px;
+          border: 1px solid #f1f1f1;
+          display: inline-block;
+          cursor: pointer;
+          text-align: center;
+          vertical-align: middle;
+          background-color: #0078ff;
+          color: white;
+        }
+        .inputWrap {
+          position: absolute;
+          left: 200px;
+          top: 10px;
+
+        }
+      }
+    }
+    .reviewWriteInputArea {
+      padding-top: 16px;
+      margin-bottom: 14px;
+      label {
+        margin-bottom: 8px;
+      }
+      .reviewWriteInputWrap {
+        width: 1268px;
+        height: 228px;
+        padding-bottom: 50px;
+        border: 1px solid black;
+        font-size: 14px;
+        .reviewWriteInput {
+          width: 1256px;
+          height: 216px;
+          padding: 6px;
+          border: none;
+          resize: none;
+        }
+        .reviewWriteInputCount {
+          position: relative;
+          top: 10px;
+          left: 1150px;
+        }
+      }
+      .reviewImageInputWrap {
+        width: 1268px;
+        height: 228px;
+        padding-bottom: 50px;
+        border: 1px solid black;
+        font-size: 14px;
+        position: relative;
+        img {
+          width: 64px;
+          height: 64px;
+
+        }
+        span {
+          margin-left: 10px;
+          margin-top: 10px;
+          width: 65px;
+          height: 65px;
+          background-color: #f1f1f1;
+          border: none;
+          display: inline-block;
+          text-align: center;
+          vertical-align: middle;
+          line-height: 65px;
+          font-size: 30px;
+          overflow: clip;
+        }
+      }
+      .utilityArea {
+        width: 1258px;
+        height: 40px;
+        position: relative;
+        bottom: 45px;
+        .textButton {
+          width: 100px;
+          border-left: 0.1px solid #f3f3f3;
+          border-top: 0.1px solid #f3f3f3;
+          border-bottom: 0.1px solid #f3f3f3;
+          border-right: 0.5px solid black;
+          background-color: white;
+          margin-left: 5px;
+          cursor: pointer;
+
+        }
+        .imageButton {
+          width: 100px;
+          border-left: 0.5px solid black;
+          border-top: 0.1px solid #f3f3f3;
+          border-bottom: 0.1px solid #f3f3f3;
+          border-right: 0.1px solid #f3f3f3;
+          background-color: white;
+          cursor: pointer;
+        }
+      }
+    }
+    .postButtonArea {
+      padding-top: 20px;
+      width: 1270px;
+      height: 40px;
+      text-align: center;
+      .postButton {
+        width: 82px;
+        height: 36px;
+        padding-top: 2px;
+        padding-right: 8px;
+        padding-left: 8px;
+        border: 1px solid black;
+        margin-left: 1px;
+        margin-right: 1px;
+        background-color: black;
+        color: white;
+        box-sizing: border-box;
+        font-family: "Musinsa", sans-serif !important;
+
+      }
+    }
+  }
+}

@@ -1,26 +1,26 @@
-import MyPageWriteReviewsLayout from "./MyPageWriteReviewsLayout";
+import MyPageEditReviewsLayout from "./MyPageEditReviewsLayout";
 import {useLocation, useNavigate} from "react-router-dom";
-import React, {useEffect, useState} from 'react';
-import {Purchase} from "../../../lib/interface";
-import {toast} from 'react-toastify';
-import { FileUpload, useFileUpload } from 'use-file-upload';
-import axios from "axios";
+import {Review} from "../../../lib/interface";
+import React, {useEffect, useState} from "react";
+import {FileUpload, useFileUpload} from "use-file-upload";
+import {toast} from "react-toastify";
+import axios from "axios/index";
 import {apiPostReview} from "../../../lib/api";
-interface MyPageWriteReviewsParams {
+interface MyPageEditReviewsParams {
     accessToken: string | null;
 }
+export default function MyPageEditReviews({accessToken}: MyPageEditReviewsParams) {
 
-export default function MyPageWriteReviews({accessToken}: MyPageWriteReviewsParams) {
     const location = useLocation();
+    const data = location.state as Review;
 
-    const data = location.state as Purchase;
     const navigate = useNavigate();
 
     const [input, setInput] = useState({
-        rating: 0,
-        size: '',
-        color: '',
-        content: '',
+            rating: data.rating,
+            size: data.size,
+            color: data.color,
+            content: data.content,
         }
     );
     const [isText, setIsText] = useState<boolean>(true);
@@ -43,7 +43,7 @@ export default function MyPageWriteReviews({accessToken}: MyPageWriteReviewsPara
     }, [input]);
 
     const [imageFiles, setImageFiles] = useFileUpload();
-    const [images, setImages] = useState<string[]>([]);
+    const [images, setImages] = useState<string[]>(data.images);
 
     const handleClick = () => {
         setImageFiles({ accept: 'image/*', multiple: true }, setImageFilesCallBack);
@@ -109,7 +109,6 @@ export default function MyPageWriteReviews({accessToken}: MyPageWriteReviewsPara
         // await axios.post('게시글 관련 API', {..., secureImages})
     };
 
-
-    return (<MyPageWriteReviewsLayout data={data} input={input} onChange={onChange} setInput={setInput} onChangeTextArea={onChangeTextArea}
-    onTextClick={onTextClick} onImageClick={onImageClick} isText={isText} handleClick={handleClick} handleSubmit={handleSubmit} images={images}></MyPageWriteReviewsLayout>);
+    return (<MyPageEditReviewsLayout data={data} handleSubmit={handleSubmit} onImageClick={onImageClick}
+    onTextClick={onTextClick} handleClick={handleClick} isText={isText} images={images} input={input} onChangeTextArea={onChangeTextArea} setInput={setInput} onChange={onChange}></MyPageEditReviewsLayout>);
 }
