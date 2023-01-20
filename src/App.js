@@ -11,7 +11,9 @@ import LoginPage from './components/Login/';
 import RegisterPage from './components/Register';
 import PurchasePage from './components/PurchasePage';
 import ShoppingCart from './components/ShoppingCart';
+import SocialLoginPage from './components/SocialLoginPage';
 import ItemListPage from './components/ItemListPage';
+
 
 function AppRoutes() {
   return (
@@ -30,6 +32,10 @@ function AppRoutes() {
       </Route>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route
+        path="/oauth2/redirect/:accessToken"
+        element={<SocialLoginPage />}
+      />
     </Routes>
   );
 }
