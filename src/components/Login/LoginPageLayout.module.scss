@@ -159,6 +159,7 @@
   color: white;
   border-radius: 4px;
   font-family: 'Apple SD Gothic Neo', 'NotoSansKR', sans-serif;
+  font-weight: bold;
   cursor: pointer;
 }
 
@@ -255,6 +256,7 @@
     .kakaoText {
       position: relative;
       bottom: 15px;
+      font-weight: bold;
     }
   }
 }
