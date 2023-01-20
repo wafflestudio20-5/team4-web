@@ -13,7 +13,6 @@ import MyPageWriteReviewsList from './MyPageWriteReviews/indexList';
 import Footer from '../Footer';
 import { Session } from '../../lib/interface';
 import MyPageWriteReviews from "./MyPageWriteReviews";
-import MyPageEditReviews from "./MyPageEditReviews";
 
 function MyPageLayout({ user, onLogout }: MyPageHeaderProps) {
   return (
