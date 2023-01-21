@@ -1,23 +1,27 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { apiSocialLogin } from '../../lib/api';
 import { AppDispatch } from '../../store';
-// import { postRefresh } from '../../store/slices/session';
-// import { AppDispatch } from '../../store';
-import { useCookies } from 'react-cookie';
+import { postRefresh } from '../../store/slices/session';
 
 export default function SocialLoginPage() {
-  // const navigate = useNavigate();
-  const [cookies, setCookie] = useCookies(['refreshToken']);
+  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const { accessToken } = useParams();
 
+  const socialLogin = useCallback(
+    async (accessToken: string) => {
+      await apiSocialLogin(accessToken);
+      await dispatch(postRefresh());
+      navigate('/');
+    },
+    [navigate, dispatch]
+  );
+
   useEffect(() => {
-    // navigate('/');
-    setCookie('refreshToken', accessToken!);
-    console.log(cookies);
-    // dispatch(postRefresh());
-  }, [accessToken, cookies, dispatch, setCookie]);
+    if (accessToken) socialLogin(accessToken);
+  }, [accessToken, socialLogin]);
 
   return <></>;
 }

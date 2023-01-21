@@ -19,6 +19,9 @@ export const apiLogin = (username: string, password: string) =>
     password,
   });
 
+export const apiSocialLogin = (token: string) =>
+  axios.post('/api/auth/social-login', null, { headers: auth(token) });
+
 export const apiLogout = (token: string) =>
   axios.post('/api/auth/logout', null, { headers: auth(token) });
 
