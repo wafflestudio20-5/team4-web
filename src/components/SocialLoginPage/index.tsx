@@ -9,8 +9,11 @@ export default function SocialLoginPage() {
   const { accessToken } = useParams<{ accessToken: string }>();
 
   useEffect(() => {
-    dispatch(sessionActions.setAccessToken(accessToken!));
-    navigate('/');
+    if (accessToken) {
+      console.log(accessToken);
+      dispatch(sessionActions.setAccessToken(accessToken));
+      navigate('/');
+    }
   }, [accessToken, dispatch, navigate]);
 
   return <></>;
