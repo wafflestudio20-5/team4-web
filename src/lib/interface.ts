@@ -251,74 +251,60 @@ export function displaySubCategory(subcategory: SubCategory) {
   }
 }
 
-export function stringtoEnum(string: string | undefined) {
-  switch (string) {
-    case 'top':
+export function getCategorybySubCategory(subcategory: SubCategory) {
+  switch (subcategory) {
+    case SubCategory.sweater:
       return Category.top;
-    case 'outer':
+    case SubCategory.hoodie:
+      return Category.top;
+    case SubCategory.sweatShirt:
+      return Category.top;
+    case SubCategory.shirt:
+      return Category.top;
+    case SubCategory.coat:
       return Category.outer;
-    case 'pants':
+    case SubCategory.jacket:
+      return Category.outer;
+    case SubCategory.padding:
+      return Category.outer;
+    case SubCategory.cardigan:
+      return Category.outer;
+    case SubCategory.denim:
       return Category.pants;
-    case 'skirt':
+    case SubCategory.slacks:
+      return Category.pants;
+    case SubCategory.jogger:
+      return Category.pants;
+    case SubCategory.leggings:
+      return Category.pants;
+    case SubCategory.miniSkirt:
       return Category.skirt;
-    case 'bag':
+    case SubCategory.mediSkirt:
+      return Category.skirt;
+    case SubCategory.longSkirt:
+      return Category.skirt;
+    case SubCategory.backpack:
       return Category.bag;
-    case 'shoes':
+    case SubCategory.crossBag:
+      return Category.bag;
+    case SubCategory.echoBag:
+      return Category.bag;
+    case SubCategory.goodoo:
       return Category.shoes;
-    case 'headWear':
+    case SubCategory.sandal:
+      return Category.shoes;
+    case SubCategory.slipper:
+      return Category.shoes;
+    case SubCategory.sneakers:
+      return Category.shoes;
+    case SubCategory.cap:
       return Category.headWear;
-    case 'sweater':
-      return SubCategory.sweater;
-    case 'hoodie':
-      return SubCategory.hoodie;
-    case 'sweatShirt':
-      return SubCategory.sweatShirt;
-    case 'shirt':
-      return SubCategory.shirt;
-    case 'coat':
-      return SubCategory.coat;
-    case 'jacket':
-      return SubCategory.jacket;
-    case 'padding':
-      return SubCategory.padding;
-    case 'cardigan':
-      return SubCategory.cardigan;
-    case 'denim':
-      return SubCategory.denim;
-    case 'slacks':
-      return SubCategory.slacks;
-    case 'jogger':
-      return SubCategory.jogger;
-    case 'leggings':
-      return SubCategory.leggings;
-    case 'miniSkirt':
-      return SubCategory.miniSkirt;
-    case 'mediSkirt':
-      return SubCategory.mediSkirt;
-    case 'longSkirt':
-      return SubCategory.longSkirt;
-    case 'backpack':
-      return SubCategory.backpack;
-    case 'crossBag':
-      return SubCategory.crossBag;
-    case 'echoBag':
-      return SubCategory.echoBag;
-    case 'goodoo':
-      return SubCategory.goodoo;
-    case 'sandal':
-      return SubCategory.sandal;
-    case 'slipper':
-      return SubCategory.slipper;
-    case 'sneakers':
-      return SubCategory.sneakers;
-    case 'cap':
-      return SubCategory.cap;
-    case 'hat':
-      return SubCategory.hat;
-    case 'beanie':
-      return SubCategory.beanie;
+    case SubCategory.hat:
+      return Category.headWear;
+    case SubCategory.beanie:
+      return Category.headWear;
     default:
-      return;
+      throw new Error('Unknown SubCategory: ' + subcategory);
   }
 }
 

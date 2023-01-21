@@ -75,15 +75,11 @@ export default function MyPageWriteReviewsListLayout({purchases, onClick}: MyPag
                     <th scope="col">후기 작성</th>
                 </tr>
             </thead>
-            <tbody>
             {purchases && purchases?.length !== 0 ? (
-                purchases.map((item) => <ReviewItem data={item} onClick={onClick}/>)
+                <tbody>{purchases.map((item) => <ReviewItem data={item} onClick={onClick} key={item.id}/>)}</tbody>
             ) : (
-                <div className={styles.none}>후기 작성할 목록이 없습니다.</div>
+                <div>후기 작성할 목록이 없습니다.</div>
             )}
-
-            </tbody>
-
         </table>
 
 

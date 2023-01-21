@@ -24,6 +24,11 @@
     text-decoration: underline;
   }
 
+  .navi:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
   .iconEntity {
     padding: 0 5px;
   }
@@ -42,30 +47,6 @@
     font-weight: normal;
     display: inline-block;
   }
-  .pagesorting {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-
-    a {
-      text-decoration: none;
-    }
-
-    span {
-      font-size: 14px;
-      color: #b3b3b3;
-      font-weight: 400;
-      line-height: 1.5;
-    }
-
-    .iconEntity {
-      padding: 0 5px;
-    }
-
-    .currentPage {
-      color: #000;
-    }
-  }
 
   .arrowRight {
     display: inline-block;
@@ -74,5 +55,53 @@
     font-size: 14px !important;
     vertical-align: middle;
     overflow: hidden;
+  }
+}
+
+.sortingBar {
+  clear: both;
+  border-bottom: 1px solid #ddd;
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  display: flex;
+  height: 30px;
+  .sortingTitle {
+    padding-left: 20px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-weight: bold;
+  }
+  .sortingOption {
+    flex: 1;
+    div {
+      width: 150px;
+      height: 100%;
+      float: left;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      color: #b2b2b2;
+
+      input {
+        width: 100px;
+        height: 15px;
+        padding: 2px 5px;
+        vertical-align: middle;
+        border: 1px solid #ddd;
+        background: #fff;
+      }
+      button {
+        width: 500px;
+        height: 21px;
+        margin-left: 1px;
+        text-align: center;
+        border: 1px solid #ddd;
+        background: #fff;
+        font-size: 10px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
   }
 }
