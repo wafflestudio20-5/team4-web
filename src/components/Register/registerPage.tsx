@@ -249,6 +249,7 @@ export default function RegisterPageLayout({
                     id="inputNick"
                     name="nickname"
                     placeholder="영문, 숫자 5-11자"
+                    maxLength={11}
                     onFocus={() => {
                       onFocusInput('nickname');
                     }}
