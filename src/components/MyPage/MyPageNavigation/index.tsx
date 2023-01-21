@@ -10,7 +10,7 @@ export default function MyPageNavigation() {
         <Link className={styles.nav} to="/mypage/order">
           주문 내역 조회
         </Link>
-        <Link className={styles.nav} to="/mypage/review">
+        <Link className={styles.nav} to="/mypage/review/">
           구매후기
         </Link>
         <Link className={styles.nav} to="/mypage/item_inquiry">

@@ -2,7 +2,7 @@
   "name": "project_toy",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8080",
+  "proxy": "http://13.209.67.42:8080",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
     "@testing-library/jest-dom": "^5.14.1",
@@ -34,6 +34,7 @@
     "redux": "^4.2.0",
     "sass": "^1.57.1",
     "typescript": "^4.9.4",
+    "use-file-upload": "^1.0.11",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
