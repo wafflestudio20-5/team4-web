@@ -2,11 +2,15 @@ import React from 'react';
 import styles from './registerPage.module.scss';
 
 interface RegisterPageProps {
-  onChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => {};
-  onChangeCheckbox: (e: React.ChangeEvent<HTMLInputElement>) => {};
+  onChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeCheckbox: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onFocusInput: (input: string) => void;
+  onClickClear: (input: string) => void;
+  onClickTogglePassword: (input: string) => void;
   onClickRegister: () => void;
   registerInfo: RegisterInfo;
   registerHelper: RegisterInfo;
+  isInputHidden: { password: boolean; passwordConfirm: boolean };
   isAgreementChecked: IsAgreementChecked;
   isRegisterButtonDisabled: boolean;
 }
@@ -29,9 +33,13 @@ export interface IsAgreementChecked {
 export default function RegisterPageLayout({
   onChangeInput,
   onChangeCheckbox,
+  onFocusInput,
+  onClickClear,
+  onClickTogglePassword,
   onClickRegister,
   registerInfo,
   registerHelper,
+  isInputHidden,
   isAgreementChecked,
   isRegisterButtonDisabled,
 }: RegisterPageProps) {
@@ -52,104 +60,230 @@ export default function RegisterPageLayout({
         <div className={styles.contentArea}>
           <div className={styles.joinContainer}>
             <div className={styles.joinForm}>
-              <div className={styles.inputIdArea}>
-                <label className={styles.inputIdLabel} htmlFor="inputId">
+              <div className={`${styles.inputArea} ${styles.inputAreaFirst}`}>
+                <label className={styles.inputLabel} htmlFor="inputId">
                   아이디
-                  <span className={styles.inputIdDot}></span>
+                  <span className={styles.inputDot}></span>
                 </label>
-                <div className={styles.inputIdWrap}>
+                <div
+                  className={
+                    registerHelper.username &&
+                    registerHelper.username !== '사용 가능한 아이디입니다.'
+                      ? `${styles.inputWrap} ${styles.inputWrapDanger}`
+                      : styles.inputWrap
+                  }
+                >
                   <input
-                    className={styles.inputId}
+                    className={styles.input}
                     name="username"
                     value={username}
                     placeholder="영문, 숫자 5-11자"
                     type="text"
                     maxLength={11}
                     id="inputId"
+                    onFocus={() => {
+                      onFocusInput('username');
+                    }}
                     onChange={(e) => {
                       onChangeInput(e);
                     }}
                   ></input>
-                  <div
-                    className={
-                      registerHelper.username === '사용 가능한 아이디입니다.'
-                        ? styles.IdCheckT
-                        : styles.IdCheckF
-                    }
-                  >
-                    {registerHelper.username}
-                  </div>
+                  {username && (
+                    <button
+                      className={styles.inputClearButton}
+                      type="button"
+                      onClick={() => onClickClear('username')}
+                    >
+                      <svg width={20} height={20} fill="none">
+                        <circle cx="10" cy="10" r="10" fill="#B3B3B3"></circle>
+                        <path
+                          d="M5.52786 5.52742L14.4722 14.4718M14.4722 5.52734L5.52783 14.4717"
+                          stroke="white"
+                        ></path>
+                      </svg>
+                    </button>
+                  )}
+                </div>
+                <div
+                  className={
+                    registerHelper.username === '사용 가능한 아이디입니다.'
+                      ? `${styles.helper} ${styles.valid}`
+                      : `${styles.helper} ${styles.invalid}`
+                  }
+                >
+                  {registerHelper.username}
                 </div>
               </div>
-              <div className={styles.inputPasswordArea}>
-                <label
-                  className={styles.inputPasswordLabel}
-                  htmlFor="inputPassword"
-                >
+
+              <div className={styles.inputArea}>
+                <label className={styles.inputLabel} htmlFor="inputPassword">
                   비밀번호
-                  <span className={styles.inputPasswordDot}></span>
+                  <span className={styles.inputDot}></span>
                 </label>
-                <div className={styles.inputPasswordWrap}>
+                <div
+                  className={
+                    registerHelper.password
+                      ? `${styles.inputWrap} ${styles.inputWrapDanger}`
+                      : styles.inputWrap
+                  }
+                >
                   <input
-                    className={styles.inputPassword}
+                    className={styles.input}
                     name="password"
                     value={password}
                     placeholder="숫자, 영문, 특수문자 조합 최소 8자"
-                    type="password"
+                    type={isInputHidden.password ? 'password' : 'text'}
                     maxLength={30}
                     id="inputPassword"
+                    onFocus={() => {
+                      onFocusInput('password');
+                    }}
                     onChange={(e) => {
                       onChangeInput(e);
                     }}
                   ></input>
+                  {password && (
+                    <button
+                      className={styles.inputClearButton}
+                      type="button"
+                      onClick={() => onClickClear('password')}
+                    >
+                      <svg width={20} height={20} fill="none">
+                        <circle cx="10" cy="10" r="10" fill="#B3B3B3"></circle>
+                        <path
+                          d="M5.52786 5.52742L14.4722 14.4718M14.4722 5.52734L5.52783 14.4717"
+                          stroke="white"
+                        ></path>
+                      </svg>
+                    </button>
+                  )}
+                  {password && (
+                    <button
+                      className={
+                        isInputHidden.password
+                          ? styles.showPasswordButton
+                          : styles.hidePasswordButton
+                      }
+                      onClick={(e) => {
+                        onClickTogglePassword('password');
+                      }}
+                    ></button>
+                  )}
+                </div>
+                <div className={`${styles.helper} ${styles.invalid}`}>
+                  {registerHelper.password}
                 </div>
               </div>
-              <div className={styles.inputPasswordMessage}>
-                {registerHelper.password}
-              </div>
-              <div className={styles.inputRepeatArea}>
-                <div className={styles.inputRepeatWrap}>
+
+              <div
+                className={`${styles.inputArea} ${styles.inputAreaPasswordConfirm}`}
+              >
+                <div
+                  className={
+                    registerHelper.passwordConfirm
+                      ? `${styles.inputWrap} ${styles.inputWrapDanger}`
+                      : styles.inputWrap
+                  }
+                >
                   <input
-                    className={styles.inputRepeat}
+                    className={styles.input}
                     name="passwordConfirm"
                     value={passwordConfirm}
                     placeholder="비밀번호 재입력"
-                    type="password"
+                    type={isInputHidden.passwordConfirm ? 'password' : 'text'}
+                    onFocus={() => {
+                      onFocusInput('passwordConfirm');
+                    }}
                     onChange={(e) => {
                       onChangeInput(e);
                     }}
                   ></input>
-                  <div className={styles.inputRepeatMessage}>
-                    {registerHelper.passwordConfirm}
-                  </div>
+                  {passwordConfirm && (
+                    <button
+                      className={styles.inputClearButton}
+                      type="button"
+                      onClick={() => onClickClear('passwordConfirm')}
+                    >
+                      <svg width={20} height={20} fill="none">
+                        <circle cx="10" cy="10" r="10" fill="#B3B3B3"></circle>
+                        <path
+                          d="M5.52786 5.52742L14.4722 14.4718M14.4722 5.52734L5.52783 14.4717"
+                          stroke="white"
+                        ></path>
+                      </svg>
+                    </button>
+                  )}
+                  {passwordConfirm && (
+                    <button
+                      className={
+                        isInputHidden.passwordConfirm
+                          ? styles.showPasswordButton
+                          : styles.hidePasswordButton
+                      }
+                      onClick={(e) => {
+                        onClickTogglePassword('passwordConfirm');
+                      }}
+                    ></button>
+                  )}
+                </div>
+                <div className={`${styles.helper} ${styles.invalid}`}>
+                  {registerHelper.passwordConfirm}
                 </div>
               </div>
-              <div className={styles.inputNickArea}>
-                <label className={styles.inputNickLabel} htmlFor="inputNick">
+
+              <div className={styles.inputArea}>
+                <label className={styles.inputLabel} htmlFor="inputNick">
                   닉네임
-                  <span className={styles.inputNickDot}></span>
+                  <span className={styles.inputDot}></span>
                 </label>
-                <div className={styles.inputNickWrap}>
+                <div
+                  className={
+                    registerHelper.nickname &&
+                    registerHelper.nickname !== '사용 가능한 닉네임입니다.'
+                      ? `${styles.inputWrap} ${styles.inputWrapDanger}`
+                      : styles.inputWrap
+                  }
+                >
                   <input
-                    className={styles.inputNick}
+                    className={styles.input}
                     id="inputNick"
                     name="nickname"
-                    value={nickname}
+                    placeholder="영문, 숫자 5-11자"
+                    maxLength={11}
+                    onFocus={() => {
+                      onFocusInput('nickname');
+                    }}
                     onChange={(e) => {
                       onChangeInput(e);
                     }}
                   ></input>
-                  <div
-                    className={
-                      registerHelper.nickname === '사용 가능한 닉네임입니다.'
-                        ? styles.validNickname
-                        : styles.invalidNickname
-                    }
-                  >
-                    {registerHelper.nickname}
-                  </div>
+                  {nickname && (
+                    <button
+                      className={styles.inputClearButton}
+                      type="button"
+                      onClick={() => onClickClear('nickname')}
+                    >
+                      <svg width={20} height={20} fill="none">
+                        <circle cx="10" cy="10" r="10" fill="#B3B3B3"></circle>
+                        <path
+                          d="M5.52786 5.52742L14.4722 14.4718M14.4722 5.52734L5.52783 14.4717"
+                          stroke="white"
+                        ></path>
+                      </svg>
+                    </button>
+                  )}
+                </div>
+                <div
+                  className={
+                    registerHelper.nickname === '사용 가능한 닉네임입니다.'
+                      ? `${styles.helper} ${styles.valid}`
+                      : `${styles.helper} ${styles.invalid}`
+                  }
+                >
+                  {registerHelper.nickname}
                 </div>
               </div>
+
               {/* <div className={styles.inputRecommendIdArea}>
                 <label className={styles.inputRecommendIdLabel}>
                   친구 초대 추천인 아이디

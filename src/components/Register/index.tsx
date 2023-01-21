@@ -29,6 +29,16 @@ function RegisterPage() {
     passwordConfirm: '',
     nickname: '',
   });
+  const [isInputFocused, setIsInputFocused] = useState({
+    username: false,
+    password: false,
+    passwordConfirm: false,
+    nickname: false,
+  });
+  const [isInputHidden, setIsInputHidden] = useState({
+    password: true,
+    passwordConfirm: true,
+  });
   const [isAgreementChecked, setIsAgreementChecked] =
     useState<IsAgreementChecked>({
       agreementAll: false,
@@ -40,32 +50,15 @@ function RegisterPage() {
   const [isRegisterButtonDisabled, setIsRegisterButtonDisabled] =
     useState<boolean>(true);
 
-  const onChangeInput = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setRegisterInfo({
       ...registerInfo,
       [name]: value,
     });
-
-    let helperValue = '';
-    switch (name) {
-      case 'username':
-        helperValue = (await getUsernameHelper(value)).message;
-        break;
-      case 'password':
-        helperValue = getPasswordHelper(value).message;
-        break;
-      case 'passwordConfirm':
-        helperValue = getPasswordConfirmHelper(value).message;
-        break;
-      case 'nickname':
-        helperValue = (await getNicknameHelper(value)).message;
-        break;
-    }
-    setRegisterHelper({ ...registerHelper, [name]: helperValue });
   };
 
-  const onChangeCheckbox = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id } = e.target;
     switch (id) {
       case 'agreementAll':
@@ -94,6 +87,54 @@ function RegisterPage() {
     }
   };
 
+  const onFocusInput = (input: string) => {
+    switch (input) {
+      case 'username':
+        setIsInputFocused((prev) => ({ ...prev, username: true }));
+        break;
+      case 'password':
+        setIsInputFocused((prev) => ({ ...prev, password: true }));
+        break;
+      case 'passwordConfirm':
+        setIsInputFocused((prev) => ({ ...prev, passwordConfirm: true }));
+        break;
+      case 'nickname':
+        setIsInputFocused((prev) => ({ ...prev, nickname: true }));
+        break;
+    }
+  };
+
+  const onClickClear = (input: string) => {
+    switch (input) {
+      case 'username':
+        setRegisterInfo((prev) => ({ ...prev, username: '' }));
+        break;
+      case 'password':
+        setRegisterInfo((prev) => ({ ...prev, password: '' }));
+        break;
+      case 'passwordConfirm':
+        setRegisterInfo((prev) => ({ ...prev, passwordConfirm: '' }));
+        break;
+      case 'nickname':
+        setRegisterInfo((prev) => ({ ...prev, nickname: '' }));
+        break;
+    }
+  };
+
+  const onClickTogglePassword = (input: string) => {
+    switch (input) {
+      case 'password':
+        setIsInputHidden((prev) => ({ ...prev, password: !prev.password }));
+        break;
+      case 'passwordConfirm':
+        setIsInputHidden((prev) => ({
+          ...prev,
+          passwordConfirm: !prev.passwordConfirm,
+        }));
+        break;
+    }
+  };
+
   const onClickRegister = () => {
     apiRegister(
       registerInfo.username,
@@ -109,59 +150,77 @@ function RegisterPage() {
       });
   };
 
-  const getUsernameHelper = async (username: string) => {
-    if (!username) return { message: '아이디는 필수정보입니다.' };
-    if (username.length < 5)
-      return { message: '아이디는 5자 이상이어야 합니다.' };
-    if (!regexUsername.test(username))
-      return {
-        message: '아이디는 영문소문자, 숫자, 특수기호(_)만 사용 가능합니다.',
-      };
-    const response = await apiCheckUsername(username);
-    return response.data.isUnique
-      ? { message: '사용 가능한 아이디입니다.' }
-      : { message: '이미 사용 중인 아이디입니다.' };
-  };
+  const getUsernameHelper = useCallback(
+    async (username: string) => {
+      if (!isInputFocused.username) return { message: '' };
+      if (!username) return { message: '아이디는 필수정보입니다.' };
+      if (username.length < 5)
+        return { message: '아이디는 5자 이상이어야 합니다.' };
+      if (!regexUsername.test(username))
+        return {
+          message: '아이디는 영문소문자, 숫자, 특수기호(_)만 사용 가능합니다.',
+        };
+      const response = await apiCheckUsername(username);
+      return response.data.isUnique
+        ? { message: '사용 가능한 아이디입니다.' }
+        : { message: '이미 사용 중인 아이디입니다.' };
+    },
+    [isInputFocused.username]
+  );
 
-  const getPasswordHelper = (password: string) => {
-    if (!password) return { message: '비밀번호는 필수정보입니다.' };
-    if (password.length < 8)
-      return { message: '8~30자 이내로 입력해 주십시오.' };
-    if (regexRepeat.test(password))
-      return {
-        message: '동일문자를 반복해서 4자 이상 사용할 수 없습니다.',
-      };
-    const combinationCount =
-      Number(regexNumber.test(password)) +
-      Number(regexAlphabet.test(password)) +
-      Number(regexSpecial.test(password));
-    if (combinationCount < 2)
-      return {
-        message:
-          '숫자, 영문 대소문자, 특수문자 중 두가지 이상으로 조합해 주십시오.',
-      };
-    return { message: '' };
-  };
+  const getPasswordHelper = useCallback(
+    (password: string) => {
+      if (!isInputFocused.password) return { message: '' };
+      if (!password) return { message: '비밀번호는 필수정보입니다.' };
+      if (password.length < 8)
+        return { message: '8~30자 이내로 입력해 주십시오.' };
+      if (regexRepeat.test(password))
+        return {
+          message: '동일문자를 반복해서 4자 이상 사용할 수 없습니다.',
+        };
+      const combinationCount =
+        Number(regexNumber.test(password)) +
+        Number(regexAlphabet.test(password)) +
+        Number(regexSpecial.test(password));
+      if (combinationCount < 2)
+        return {
+          message:
+            '숫자, 영문 대소문자, 특수문자 중 두가지 이상으로 조합해 주십시오.',
+        };
+      return { message: '' };
+    },
+    [isInputFocused.password]
+  );
 
   const getPasswordConfirmHelper = useCallback(
     (passwordConfirm: string) => {
-      if (!registerInfo.password) return { message: '' };
+      if (!isInputFocused.passwordConfirm) return { message: '' };
       if (!passwordConfirm)
         return { message: '비밀번호 재확인은 필수정보입니다.' };
       if (passwordConfirm !== registerInfo.password)
         return { message: '비밀번호가 일치하지 않습니다.' };
       return { message: '' };
     },
-    [registerInfo.password]
+    [registerInfo.password, isInputFocused.passwordConfirm]
   );
 
-  const getNicknameHelper = async (nickname: string) => {
-    if (!nickname) return { message: '닉네임은 필수정보입니다.' };
-    const response = await apiCheckNickname(nickname);
-    return response.data.isUnique
-      ? { message: '사용 가능한 닉네임입니다.' }
-      : { message: '이미 사용 중인 닉네임입니다.' };
-  };
+  const getNicknameHelper = useCallback(
+    async (nickname: string) => {
+      if (!isInputFocused.nickname) return { message: '' };
+      if (!nickname) return { message: '닉네임은 필수정보입니다.' };
+      if (nickname.length < 5)
+        return { message: '닉네임은 5자 이상이어야 합니다.' };
+      if (!regexUsername.test(nickname))
+        return {
+          message: '닉네임은 영문소문자, 숫자, 특수기호(_)만 사용 가능합니다.',
+        };
+      const response = await apiCheckNickname(nickname);
+      return response.data.isUnique
+        ? { message: '사용 가능한 닉네임입니다.' }
+        : { message: '이미 사용 중인 닉네임입니다.' };
+    },
+    [isInputFocused.nickname]
+  );
 
   const checkFormValidity = useCallback(() => {
     return (
@@ -179,7 +238,37 @@ function RegisterPage() {
     );
   }, [registerInfo, registerHelper, isAgreementChecked]);
 
+  const updateUsernameHelper = useCallback(
+    async (username: string) => {
+      const usernameHelper = await getUsernameHelper(username);
+      setRegisterHelper((prev) => ({
+        ...prev,
+        username: usernameHelper.message,
+      }));
+    },
+    [getUsernameHelper]
+  );
+
+  const updateNicknameHelper = useCallback(
+    async (nickname: string) => {
+      const nicknameHelper = await getNicknameHelper(nickname);
+      setRegisterHelper((prev) => ({
+        ...prev,
+        nickname: nicknameHelper.message,
+      }));
+    },
+    [getNicknameHelper]
+  );
+
   useEffect(() => {
+    updateUsernameHelper(registerInfo.username);
+  }, [registerInfo.username, updateUsernameHelper]);
+
+  useEffect(() => {
+    setRegisterHelper((prev) => ({
+      ...prev,
+      password: getPasswordHelper(registerInfo.password).message,
+    }));
     setRegisterHelper((prev) => ({
       ...prev,
       passwordConfirm: getPasswordConfirmHelper(registerInfo.passwordConfirm)
@@ -188,8 +277,13 @@ function RegisterPage() {
   }, [
     registerInfo.password,
     registerInfo.passwordConfirm,
+    getPasswordHelper,
     getPasswordConfirmHelper,
   ]);
+
+  useEffect(() => {
+    updateNicknameHelper(registerInfo.nickname);
+  }, [registerInfo.nickname, updateNicknameHelper]);
 
   useEffect(() => {
     setIsRegisterButtonDisabled(!checkFormValidity());
@@ -206,9 +300,13 @@ function RegisterPage() {
       <RegisterPageLayout
         onChangeInput={onChangeInput}
         onChangeCheckbox={onChangeCheckbox}
+        onFocusInput={onFocusInput}
+        onClickClear={onClickClear}
+        onClickTogglePassword={onClickTogglePassword}
         onClickRegister={onClickRegister}
         registerInfo={registerInfo}
         registerHelper={registerHelper}
+        isInputHidden={isInputHidden}
         isAgreementChecked={isAgreementChecked}
         isRegisterButtonDisabled={isRegisterButtonDisabled}
       />
