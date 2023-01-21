@@ -1,20 +1,17 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
-import { sessionActions } from '../../store/slices/session';
+import { useNavigate } from 'react-router-dom';
+import { AppDispatch } from '../../store';
+import { postRefresh } from '../../store/slices/session';
 
 export default function SocialLoginPage() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { accessToken } = useParams<{ accessToken: string }>();
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    if (accessToken) {
-      console.log(accessToken);
-      dispatch(sessionActions.setAccessToken(accessToken));
-      navigate('/');
-    }
-  }, [accessToken, dispatch, navigate]);
+    dispatch(postRefresh());
+    navigate('/');
+  }, [dispatch, navigate]);
 
   return <></>;
 }
