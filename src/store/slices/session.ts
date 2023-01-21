@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { apiLogin, apiLogout, apiRefresh, apiGetMyInfo } from '../../lib/api';
 import { LoginDto } from '../../lib/dto';
 import { Session } from '../../lib/interface';
@@ -48,7 +48,11 @@ export const postRefresh = createAsyncThunk<Session>(
 export const sessionSlice = createSlice({
   name: 'session',
   initialState,
-  reducers: {},
+  reducers: {
+    setAccessToken: (state, action: PayloadAction<string>) => {
+      state.accessToken = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(postLogin.fulfilled, (state, action) => {
       state.user = action.payload.user;
@@ -69,4 +73,5 @@ export const sessionSlice = createSlice({
   },
 });
 
+export const sessionActions = sessionSlice.actions;
 export default sessionSlice;
