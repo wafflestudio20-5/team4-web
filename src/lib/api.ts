@@ -90,7 +90,7 @@ export const apiPutReview = (id: number, rating: number, content: string,
         { headers: token ? auth(token) : undefined }
 
     );
-};
+}
 
 export const apiPostImage = (formData: FormData, token: string | null) => {
     return axios.post(
