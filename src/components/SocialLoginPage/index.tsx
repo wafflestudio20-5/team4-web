@@ -10,7 +10,7 @@ export default function SocialLoginPage() {
 
   useEffect(() => {
     dispatch(postRefresh());
-    navigate('/');
+    // navigate('/');
   }, [dispatch, navigate]);
 
   return <></>;
