@@ -80,7 +80,7 @@ export const apiPostReview = (id: number, rating: number, content: string,
 };
 
 export const apiPostImage = (formData: FormData, token: string | null) => {
-    axios.post<{}>(
+    return axios.post(
         '/api/image-upload',
         formData,
         { headers: token ? auth(token) : undefined }
