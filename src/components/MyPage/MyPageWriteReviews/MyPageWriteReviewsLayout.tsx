@@ -65,11 +65,11 @@ export default function MyPageWriteReviewsLayout({data, input, onChange, setInpu
                 <li className={styles.radioLi}>
                     <span>사이즈</span>
                     <span className={styles.inputWrap}>
-                        <input type="radio" id="ch1" value="large" name="size" onChange={onChange}></input>
+                        <input type="radio" id="ch1" value="large" name="size" onChange={onChange} checked={input.size==='large'}></input>
                         <label htmlFor="ch1">커요</label>
-                        <input type="radio" id="ch2" value="mid" name="size" onChange={onChange}></input>
+                        <input type="radio" id="ch2" value="mid" name="size" onChange={onChange} checked={input.size==='mid'}></input>
                         <label htmlFor="ch2">보통이에요</label>
-                        <input type="radio" id="ch3" value="small" name="size" onChange={onChange}></input>
+                        <input type="radio" id="ch3" value="small" name="size" onChange={onChange} checked={input.size==='small'}></input>
                         <label htmlFor="ch3">작아요</label>
                     </span>
                 </li>
@@ -78,11 +78,11 @@ export default function MyPageWriteReviewsLayout({data, input, onChange, setInpu
                 <li className={styles.radioLi}>
                     <span>색감</span>
                     <span className={styles.inputWrap}>
-                        <input type="radio" id="ch4" value="bright" name="color" onChange={onChange}></input>
+                        <input type="radio" id="ch4" value="bright" name="color" onChange={onChange} checked={input.color==='bright'}></input>
                         <label htmlFor="ch4">선명해요</label>
-                        <input type="radio" id="ch5" value="mid" name="color" onChange={onChange}></input>
+                        <input type="radio" id="ch5" value="mid" name="color" onChange={onChange} checked={input.color==='mid'}></input>
                         <label htmlFor="ch5">보통이에요</label>
-                        <input type="radio" id="ch6" value="dim" name="color" onChange={onChange}></input>
+                        <input type="radio" id="ch6" value="dim" name="color" onChange={onChange} checked={input.color==='dim'}></input>
                         <label htmlFor="ch6">어두워요</label>
                     </span>
                 </li>

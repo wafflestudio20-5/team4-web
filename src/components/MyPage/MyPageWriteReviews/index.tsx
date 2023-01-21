@@ -17,8 +17,8 @@ export default function MyPageWriteReviews({accessToken}: MyPageWriteReviewsPara
 
     const [input, setInput] = useState({
         rating: 0,
-        size: '',
-        color: '',
+        size: 'mid',
+        color: 'mid',
         content: '',
         images: [''],
         }
