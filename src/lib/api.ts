@@ -98,7 +98,7 @@ export const apiPostImage = (formData: FormData, token: string | null) => {
         formData,
         { headers: token ? auth(token) : undefined }
     );
-};
+}
 
 export const useApiItemListFetcher = (
   fetchType: string | null,
