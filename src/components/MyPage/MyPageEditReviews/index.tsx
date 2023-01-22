@@ -5,7 +5,7 @@ import React, {useEffect, useState} from "react";
 import {FileUpload, useFileUpload} from "use-file-upload";
 import {toast} from "react-toastify";
 import axios from "axios/index";
-import {apiPutReview} from "../../../lib/api";
+import {apiPutReview, apiPostImage} from "../../../lib/api";
 interface MyPageEditReviewsParams {
     accessToken: string | null;
 }
@@ -92,7 +92,7 @@ export default function MyPageEditReviews({accessToken}: MyPageEditReviewsParams
                 formData.append('images', singleFile.file)
             );
             // 에시 POST (실제 호출 시 api.ts에 따로 함수를 정의하고 auth header 포함하여 요청)
-            const response = await axios.post('/api/image-upload', formData);
+            const response = await apiPostImage(formData, accessToken);
             console.log(response.data.secureImages); // 업로드한 이미지들의 URL로 이루어진 string[]
             secureImages = response.data.secureImages;
 
