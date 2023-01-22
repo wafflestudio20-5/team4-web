@@ -100,11 +100,10 @@ export const apiPutReview = (
     { headers: token ? auth(token) : undefined }
   );
 
-export const apiPostImage = (formData: FormData, token: string | null) => {
-  return axios.post('/api/image-upload', formData, {
+export const apiPostImage = (formData: FormData, token: string | null) =>
+  axios.post('/api/image-upload', formData, {
     headers: token ? auth(token) : undefined,
   });
-};
 
 export const useApiItemListFetcher = (
   fetchType: string | null,
