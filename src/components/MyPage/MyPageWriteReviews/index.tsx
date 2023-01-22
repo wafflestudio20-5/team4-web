@@ -1,6 +1,6 @@
 import MyPageWriteReviewsLayout from './MyPageWriteReviewsLayout';
 import { useLocation, useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Purchase } from '../../../lib/interface';
 import { toast } from 'react-toastify';
 import { FileUpload, useFileUpload } from 'use-file-upload';
@@ -16,6 +16,12 @@ export default function MyPageWriteReviews({
 
   const data = location.state as Purchase;
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!data) {
+      navigate(-1);
+    }
+  }, [data, navigate]);
 
   const [input, setInput] = useState({
     rating: 0,
