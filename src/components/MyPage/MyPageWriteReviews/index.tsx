@@ -1,6 +1,6 @@
 import MyPageWriteReviewsLayout from './MyPageWriteReviewsLayout';
 import { useLocation, useNavigate } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Purchase } from '../../../lib/interface';
 import { toast } from 'react-toastify';
 import { FileUpload, useFileUpload } from 'use-file-upload';
@@ -37,10 +37,6 @@ export default function MyPageWriteReviews({
   const onChangeTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInput({ ...input, content: e.target.value });
   };
-
-  useEffect(() => {
-    console.log(input);
-  }, [input]);
 
   const [imageFiles, setImageFiles] = useFileUpload();
   const [images, setImages] = useState<string[]>([]);
