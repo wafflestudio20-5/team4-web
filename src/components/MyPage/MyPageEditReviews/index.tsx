@@ -17,6 +17,12 @@ export default function MyPageEditReviews({
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!data) {
+      navigate(-1);
+    }
+  }, [data, navigate]);
+
   const [input, setInput] = useState({
     rating: data.rating,
     size: data.size,
@@ -37,10 +43,6 @@ export default function MyPageEditReviews({
   const onChangeTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInput({ ...input, content: e.target.value });
   };
-
-  useEffect(() => {
-    console.log(input);
-  }, [input]);
 
   const [imageFiles, setImageFiles] = useFileUpload();
   const [images, setImages] = useState<string[]>(data.images);
