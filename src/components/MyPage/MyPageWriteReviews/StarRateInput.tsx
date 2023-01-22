@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from 'react';
 
 interface Input {
   rating: number;
@@ -11,9 +11,9 @@ interface StarRateInputParams {
   setInput: (x: Input) => void;
 }
 
-function StarRateInput({input, setInput}:StarRateInputParams) {
+function StarRateInput({ input, setInput }: StarRateInputParams) {
   const AVR_RATE = useRef(0);
-  const STAR_IDX_ARR = ["first", "second", "third", "fourth", "last"];
+  const STAR_IDX_ARR = ['first', 'second', 'third', 'fourth', 'last'];
   const [ratesResArr, setRatesResArr] = useState([0, 0, 0, 0, 0]);
   const calcStarRates = () => {
     let tempStarRatesArr = [0, 0, 0, 0, 0];
@@ -52,7 +52,7 @@ function StarRateInput({input, setInput}:StarRateInputParams) {
               onClick={() => {
                 AVR_RATE.current = (idx + 1) * 20;
                 calcStarRates();
-                setInput({...input, rating: (idx+1)*2});
+                setInput({ ...input, rating: (idx + 1) * 2 });
               }}
             >
               <clipPath id={`${item}inputStarClip`}>
@@ -62,7 +62,7 @@ function StarRateInput({input, setInput}:StarRateInputParams) {
                   onClick={() => {
                     AVR_RATE.current = (idx + 1) * 20;
                     calcStarRates();
-                    setInput({...input, rating: (idx+1)*2});
+                    setInput({ ...input, rating: (idx + 1) * 2 });
                   }}
                 />
               </clipPath>
