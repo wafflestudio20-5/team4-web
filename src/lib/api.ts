@@ -7,8 +7,6 @@ axios.defaults.withCredentials = true;
 
 const auth = (token: string) => ({ Authorization: `Bearer ${token}` });
 
-
-
 export const apiRegister = (
   username: string,
   password: string,
@@ -72,32 +70,41 @@ export const useApiItemFetcher = (id: number | null) => {
   );
   return id === null ? null : f;
 };
-export const apiPostReview = (id: number, rating: number, content: string,
-                              size: string, color: string, images: string[], token: string | null) => {
-    axios.post<{}>(
-        '/api/user/me/reviews',
-        {id, rating, content, size, color, images},
-        { headers: token ? auth(token) : undefined }
+export const apiPostReview = (
+  id: number,
+  rating: number,
+  content: string,
+  size: string,
+  color: string,
+  images: string[],
+  token: string | null
+) =>
+  axios.post<{}>(
+    '/api/user/me/reviews',
+    { id, rating, content, size, color, images },
+    { headers: token ? auth(token) : undefined }
+  );
 
-    );
-};
-
-export const apiPutReview = (id: number, rating: number, content: string,
-                              size: string, color: string, images: string[], token: string | null) => {
-    axios.put<{}>(
-        '/api/user/me/reviews',
-        {id, rating, content, size, color, images},
-        { headers: token ? auth(token) : undefined }
-
-    );
+export const apiPutReview = (
+  id: number,
+  rating: number,
+  content: string,
+  size: string,
+  color: string,
+  images: string[],
+  token: string | null
+) => {
+  axios.put<{}>(
+    '/api/user/me/reviews',
+    { id, rating, content, size, color, images },
+    { headers: token ? auth(token) : undefined }
+  );
 };
 
 export const apiPostImage = (formData: FormData, token: string | null) => {
-    return axios.post(
-        '/api/image-upload',
-        formData,
-        { headers: token ? auth(token) : undefined }
-    );
+  return axios.post('/api/image-upload', formData, {
+    headers: token ? auth(token) : undefined,
+  });
 };
 
 export const useApiItemListFetcher = (
