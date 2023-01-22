@@ -77,7 +77,7 @@ function ItemListCategory({
           <button
             key={null}
             className={
-              selectedCategory === null ? styles.buttonselected : styles.button
+              !selectedCategory ? styles.buttonselected : styles.button
             }
             onClick={() => setSelectedCategory(undefined)}
           >
