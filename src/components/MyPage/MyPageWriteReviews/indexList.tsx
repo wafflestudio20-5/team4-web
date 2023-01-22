@@ -20,8 +20,6 @@ export default function MyPageWriteReviewsList({
     navigate('/mypage/review/write', { state: data });
   };
 
-  console.log(purchases);
-
   return (
     <MyPageWriteReviewsListLayout
       purchases={purchases}
