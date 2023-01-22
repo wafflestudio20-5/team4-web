@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { useApiData, useApiItemListFetcher } from '../../lib/api';
 import { Item, Category, displayCategory } from '../../lib/interface';
 import ItemPreview from './ItemPreview';
-import styles from './ItemList.module.css';
+import styles from './ItemList.module.scss';
+import { useNavigate, createSearchParams } from 'react-router-dom';
 
 interface ItemPreviewListProps {
   items: Item[] | null;
@@ -10,20 +11,30 @@ interface ItemPreviewListProps {
 
 interface ItemListCategoryProps {
   categorys: Category[];
-  selectedCategory: Category | null;
-  setSelectedCategory: React.Dispatch<React.SetStateAction<Category | null>>;
+  selectedCategory: Category | undefined;
+  setSelectedCategory: React.Dispatch<
+    React.SetStateAction<Category | undefined>
+  >;
 }
 
 export default function ItemList() {
-  const [selectedCategory, setSelectedCategory] = useState<Category | null>(
-    null
-  );
+  const [selectedCategory, setSelectedCategory] = useState<
+    Category | undefined
+  >(undefined);
+
   const { data: itemsData } = useApiData(
-    useApiItemListFetcher(selectedCategory)
+    useApiItemListFetcher(
+      'category',
+      selectedCategory,
+      undefined,
+      undefined,
+      0,
+      10
+    )
   );
   const items = itemsData?.items ?? null;
   const categorys = Object.values(Category);
-
+  const navigate = useNavigate();
   return (
     <div className={styles.itemList}>
       <ItemListCategory
@@ -31,8 +42,21 @@ export default function ItemList() {
         categorys={categorys}
         setSelectedCategory={setSelectedCategory}
       ></ItemListCategory>
-      <div className={styles.itemListBox}>
-        <ItemPreviewList items={items}></ItemPreviewList>
+      <ItemPreviewList items={items}></ItemPreviewList>
+      <div className={styles.moreView}>
+        <button
+          onClick={() => {
+            navigate({
+              pathname: '/itemlist',
+              search: `?${createSearchParams({
+                type: 'category',
+                q: selectedCategory ?? 'all',
+              })}`,
+            });
+          }}
+        >
+          더 보기 {' >'}
+        </button>
       </div>
     </div>
   );
@@ -45,16 +69,17 @@ function ItemListCategory({
 }: ItemListCategoryProps) {
   return (
     <div className={styles.itemListCategory}>
-      <div className={styles.title}>실시간 랭킹</div>
+      <div className={styles.title}>
+        <div>실시간 랭킹</div>
+      </div>
       <div className={styles.categorycontent}>
-        <div className={styles.subtitle}>상품</div>
         <div>
           <button
             key={null}
             className={
-              selectedCategory === null ? styles.buttonselected : styles.button
+              !selectedCategory ? styles.buttonselected : styles.button
             }
-            onClick={() => setSelectedCategory(null)}
+            onClick={() => setSelectedCategory(undefined)}
           >
             전체
           </button>
@@ -80,10 +105,10 @@ function ItemListCategory({
 
 function ItemPreviewList({ items }: ItemPreviewListProps) {
   return (
-    <>
-      {items?.map((item, idx) => (
-        <ItemPreview key={item.id} item={item} idx={idx}></ItemPreview>
+    <div className={styles.itemListBox}>
+      {items?.map((item) => (
+        <ItemPreview key={item.id} item={item}></ItemPreview>
       ))}
-    </>
+    </div>
   );
 }

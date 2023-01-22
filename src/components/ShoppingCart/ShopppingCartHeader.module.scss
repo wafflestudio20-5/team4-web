@@ -1,0 +1,77 @@
+.pagenation {
+  height: 25px;
+  line-height: 12px;
+  padding: 15px 18px 0 50px;
+  padding-top: 15px;
+  padding-right: 18px;
+  padding-bottom: 0px;
+  padding-left: 50px;
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  border-bottom: 1px solid #ddd;
+  .nav_sub {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: top;
+    background: transparent;
+  }
+
+  a {
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .iconEntity {
+    padding: 0 5px;
+  }
+}
+
+.rightContents {
+  clear: both;
+  position: relative;
+  padding: 3px 20px;
+  border-bottom: 1px solid #ddd;
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  .titlePage {
+    font-size: 24px;
+    height: 17px;
+    line-height: 17px;
+    font-weight: normal;
+    display: inline-block;
+  }
+  .pagesorting {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    a {
+      text-decoration: none;
+    }
+
+    span {
+      font-size: 14px;
+      color: #b3b3b3;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    .iconEntity {
+      padding: 0 5px;
+    }
+
+    .currentPage {
+      color: #000;
+    }
+  }
+
+  .arrowRight {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    font-size: 14px !important;
+    vertical-align: middle;
+    overflow: hidden;
+  }
+}

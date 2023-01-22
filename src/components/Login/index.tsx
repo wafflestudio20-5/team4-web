@@ -6,6 +6,7 @@ import { postLogin } from '../../store/slices/session';
 import LoginPageLayout from './LoginPageLayout';
 import { LoginDto } from '../../lib/dto';
 import { Session } from '../../lib/interface';
+import { toast } from 'react-toastify';
 
 export default function LoginPage() {
   const [input, setInput] = useState<LoginDto>({
@@ -42,16 +43,19 @@ export default function LoginPage() {
         })
       ).unwrap();
     } catch (error) {
-      console.log(error);
+      toast(`${error}`);
     }
   };
 
   const onSocialLogin = () => {
-    window.open('http://localhost:8080/oauth2/authorization/kakao');
+    window.location.href =
+      'http://13.209.67.42:8080/oauth2/authorization/kakao';
   };
 
   useEffect(() => {
-    if (session.user) navigate(-1);
+    if (session.user) {
+      navigate(-1);
+    }
   });
 
   return (
