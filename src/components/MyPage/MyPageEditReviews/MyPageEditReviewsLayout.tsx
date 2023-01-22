@@ -1,5 +1,5 @@
 import {Review} from "../../../lib/interface";
-import styles from "./MyPageEditReviewsLayout.module.scss";
+import styles from "../MyPageWriteReviews/MyPageWriteReviewsLayout.module.scss";
 import StarRateInput from "../MyPageWriteReviews/StarRateInput";
 import React from "react";
 interface Input {
