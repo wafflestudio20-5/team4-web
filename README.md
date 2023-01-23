@@ -1,5 +1,7 @@
 # team4-web
 
+- 배포 사이트: https://musin4.netlify.app/
+
 ## 로컬 환경에서 리액트 앱을 실행하는 법
 
 ### 1. Node.js가 설치되어 있지 않다면, 설치 링크에서 Node.js를 설치합니다.

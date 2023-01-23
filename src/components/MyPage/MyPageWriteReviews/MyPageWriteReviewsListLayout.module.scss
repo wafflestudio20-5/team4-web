@@ -1,0 +1,100 @@
+.reviewWrapper {
+  display: inline-block;
+  width: 1270px;
+  .reviewHeader {
+    width: 1270px;
+    height: 87px;
+    padding-bottom: 14px;
+    border-bottom: 3px solid black;
+    margin-top: 48px;
+    display: inline-block;
+    h1 {
+      font-weight: 400;
+      display: inline-block;
+      margin-block-start: 0;
+      margin-block-end: 0;
+    }
+    .tabGroup {
+      font-size: 18px;
+      line-height: 27px;
+      vertical-align: top;
+      margin-top: 15px;
+      .tabHistory {
+        color: #ccc;
+      }
+    }
+  }
+  .info {
+    padding-top: 20px;
+    font-size: 14px;
+    display: inline-block;
+    padding-left: 15px;
+    li {
+      display: list-item;
+      margin-top: 5px;
+      color: #777777;
+    }
+  }
+  .reviewTable {
+    width: 1270px;
+    border-top: 1px solid black;
+  }
+}
+.reviewItemInfo {
+  width: 620px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  img {
+    width: 80px;
+    height: 96px;
+    padding-left: 10px;
+  }
+  ul {
+    display: inline-block;
+    position: relative;
+    bottom: 30px;
+    padding-left: 10px;
+    li {
+      list-style-type: none;
+    }
+  }
+}
+.purchaseDate {
+  text-align: center;
+}
+.reviewWriteButton {
+  width: 300px;
+  background-color: #000000;
+  height: 50px;
+  margin-left: 8px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  transition-duration: 0.3s;
+}
+.reviewWriteButton:hover {
+  width: 300px;
+  background-color: #0071f1;
+  height: 50px;
+  margin-left: 8px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+.reviewWriteDone {
+  width: 300px;
+  background-color: #f3f3f3;
+  height: 50px;
+  margin-left: 8px;
+  color: #0078ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+}

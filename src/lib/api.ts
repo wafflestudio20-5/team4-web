@@ -3,7 +3,6 @@ import axios, { AxiosResponse, CancelToken } from 'axios';
 import { User, Item, Category, SubCategory, Purchase } from './interface';
 import { PurchasePostDto } from './dto';
 
-axios.defaults.baseURL = 'http://localhost:3000';
 axios.defaults.withCredentials = true;
 
 const auth = (token: string) => ({ Authorization: `Bearer ${token}` });
@@ -19,6 +18,9 @@ export const apiLogin = (username: string, password: string) =>
     username,
     password,
   });
+
+export const apiSocialLogin = (token: string) =>
+  axios.post('/api/auth/social-login', null, { headers: auth(token) });
 
 export const apiLogout = (token: string) =>
   axios.post('/api/auth/logout', null, { headers: auth(token) });
@@ -68,21 +70,62 @@ export const useApiItemFetcher = (id: number | null) => {
   );
   return id === null ? null : f;
 };
+export const apiPostReview = (
+  id: number,
+  rating: number,
+  content: string,
+  size: string,
+  color: string,
+  images: string[],
+  token: string | null
+) => {
+  axios.post<{}>(
+    '/api/user/me/reviews',
+    { id, rating, content, size, color, images },
+    { headers: token ? auth(token) : undefined }
+  );
+};
+
+export const apiPostImage = (formData: FormData, token: string | null) => {
+  return axios.post('/api/image-upload', formData, {
+    headers: token ? auth(token) : undefined,
+  });
+};
 
 export const useApiItemListFetcher = (
-  category: Category | null,
-  subCategory?: SubCategory,
-  count?: number,
-  index?: number
+  fetchType: string | null,
+  category?: Category,
+  subcategory?: SubCategory,
+  query?: string,
+  index?: number,
+  count?: number
 ) => {
   const f = useCallback(
     (cancelToken: CancelToken) => {
-      return axios.get<{ items: Item[] }>('/api/items', {
-        params: { category, subCategory, count, index },
-        cancelToken,
-      });
+      if (fetchType === 'search') {
+        return axios.get<{ items: Item[] }>('/api/search', {
+          params: { query, index, count },
+          cancelToken,
+        });
+      } else if (fetchType === 'subcategory') {
+        return axios.get<{ items: Item[] }>('/api/items', {
+          params: { subcategory, index, count },
+          cancelToken,
+        });
+      } else if (fetchType === 'category') {
+        return axios.get<{ items: Item[] }>('/api/items', {
+          params: { category, index, count },
+          cancelToken,
+        });
+      } else {
+        // if fetchType is null or invalid, fetch from all items
+        return axios.get<{ items: Item[] }>('/api/items', {
+          params: { index, count },
+          cancelToken,
+        });
+      }
     },
-    [category, subCategory, index, count]
+    [fetchType, category, subcategory, query, index, count]
   );
   return f;
 };
@@ -104,12 +147,12 @@ export const useApiGetPurchaseListFetcher = (token: string | null) => {
 };
 
 export const apiPostPurchaseList = (
-  purchaseitems: PurchasePostDto[],
+  purchaseItems: PurchasePostDto[],
   token: string | null
 ) =>
   axios.post<{}>(
     '/api/user/me/purchases',
-    { purchaseitems },
+    { purchaseItems },
     { headers: token ? auth(token) : undefined }
   );
 
@@ -129,13 +172,13 @@ export const useApiGetCartListFetcher = (token: string | null) => {
   return f;
 };
 
-export const apiPutCartList = (
+export const apiPatchCart = (
   id: number,
   quantity: number,
   token: string | null
 ) =>
-  axios.put<{}>(
-    'api/user/me/shopping-cart',
+  axios.patch<{}>(
+    '/api/user/me/shopping-cart',
     { id, quantity },
     { headers: token ? auth(token) : undefined }
   );

@@ -41,6 +41,7 @@ export interface Purchase {
   payment?: number;
   quantity: number;
   option?: string;
+  review?: Review;
 }
 
 export interface Review {
@@ -249,6 +250,64 @@ export function displaySubCategory(subcategory: SubCategory) {
       throw new Error('Unknown SubCategory: ' + subcategory);
   }
 }
+
+export function getCategorybySubCategory(subcategory: SubCategory) {
+  switch (subcategory) {
+    case SubCategory.sweater:
+      return Category.top;
+    case SubCategory.hoodie:
+      return Category.top;
+    case SubCategory.sweatShirt:
+      return Category.top;
+    case SubCategory.shirt:
+      return Category.top;
+    case SubCategory.coat:
+      return Category.outer;
+    case SubCategory.jacket:
+      return Category.outer;
+    case SubCategory.padding:
+      return Category.outer;
+    case SubCategory.cardigan:
+      return Category.outer;
+    case SubCategory.denim:
+      return Category.pants;
+    case SubCategory.slacks:
+      return Category.pants;
+    case SubCategory.jogger:
+      return Category.pants;
+    case SubCategory.leggings:
+      return Category.pants;
+    case SubCategory.miniSkirt:
+      return Category.skirt;
+    case SubCategory.mediSkirt:
+      return Category.skirt;
+    case SubCategory.longSkirt:
+      return Category.skirt;
+    case SubCategory.backpack:
+      return Category.bag;
+    case SubCategory.crossBag:
+      return Category.bag;
+    case SubCategory.echoBag:
+      return Category.bag;
+    case SubCategory.goodoo:
+      return Category.shoes;
+    case SubCategory.sandal:
+      return Category.shoes;
+    case SubCategory.slipper:
+      return Category.shoes;
+    case SubCategory.sneakers:
+      return Category.shoes;
+    case SubCategory.cap:
+      return Category.headWear;
+    case SubCategory.hat:
+      return Category.headWear;
+    case SubCategory.beanie:
+      return Category.headWear;
+    default:
+      throw new Error('Unknown SubCategory: ' + subcategory);
+  }
+}
+
 export function SubCategoryInCategory(category: CategoryIncludeBest) {
   switch (category) {
     case Best.best:

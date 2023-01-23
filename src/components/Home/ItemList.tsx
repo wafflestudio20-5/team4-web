@@ -3,6 +3,7 @@ import { useApiData, useApiItemListFetcher } from '../../lib/api';
 import { Item, Category, displayCategory } from '../../lib/interface';
 import ItemPreview from './ItemPreview';
 import styles from './ItemList.module.scss';
+import { useNavigate, createSearchParams } from 'react-router-dom';
 
 interface ItemPreviewListProps {
   items: Item[] | null;
@@ -10,20 +11,30 @@ interface ItemPreviewListProps {
 
 interface ItemListCategoryProps {
   categorys: Category[];
-  selectedCategory: Category | null;
-  setSelectedCategory: React.Dispatch<React.SetStateAction<Category | null>>;
+  selectedCategory: Category | undefined;
+  setSelectedCategory: React.Dispatch<
+    React.SetStateAction<Category | undefined>
+  >;
 }
 
 export default function ItemList() {
-  const [selectedCategory, setSelectedCategory] = useState<Category | null>(
-    null
-  );
+  const [selectedCategory, setSelectedCategory] = useState<
+    Category | undefined
+  >(undefined);
+
   const { data: itemsData } = useApiData(
-    useApiItemListFetcher(selectedCategory, undefined, 10, 0)
+    useApiItemListFetcher(
+      'category',
+      selectedCategory,
+      undefined,
+      undefined,
+      0,
+      10
+    )
   );
   const items = itemsData?.items ?? null;
   const categorys = Object.values(Category);
-
+  const navigate = useNavigate();
   return (
     <div className={styles.itemList}>
       <ItemListCategory
@@ -32,9 +43,20 @@ export default function ItemList() {
         setSelectedCategory={setSelectedCategory}
       ></ItemListCategory>
       <ItemPreviewList items={items}></ItemPreviewList>
-      {/* <ItemListPagenation /> */}
       <div className={styles.moreView}>
-        <button>더 보러가기 {' >'}</button>
+        <button
+          onClick={() => {
+            navigate({
+              pathname: '/itemlist',
+              search: `?${createSearchParams({
+                type: 'category',
+                q: selectedCategory ?? 'all',
+              })}`,
+            });
+          }}
+        >
+          더 보기 {' >'}
+        </button>
       </div>
     </div>
   );
@@ -55,9 +77,9 @@ function ItemListCategory({
           <button
             key={null}
             className={
-              selectedCategory === null ? styles.buttonselected : styles.button
+              !selectedCategory ? styles.buttonselected : styles.button
             }
-            onClick={() => setSelectedCategory(null)}
+            onClick={() => setSelectedCategory(undefined)}
           >
             전체
           </button>
@@ -87,16 +109,6 @@ function ItemPreviewList({ items }: ItemPreviewListProps) {
       {items?.map((item) => (
         <ItemPreview key={item.id} item={item}></ItemPreview>
       ))}
-    </div>
-  );
-}
-
-function ItemListPagenation() {
-  return (
-    <div className={styles.pagenation}>
-      <span>
-        {'<'}0 0 0 0{'>'}
-      </span>
     </div>
   );
 }

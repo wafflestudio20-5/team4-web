@@ -13,7 +13,7 @@ export default function CategorySideBar() {
     present: CategoryIncludeBest | null;
     before: CategoryIncludeBest | null;
   }>({ present: null, before: null });
-  const [openCategorySideBar, setopenCategorySideBar] = useState(false);
+  const [openCategorySideBar, setopenCategorySideBar] = useState(true);
 
   const toggleCategorySideBar = () => {
     setopenCategorySideBar(!openCategorySideBar);
