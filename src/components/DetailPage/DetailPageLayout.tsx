@@ -318,6 +318,7 @@ export default function DetailPageLayout({
   onAddToCart,
 }: DetailPageLayoutProps) {
   return (
+
     <div className={styles.wrapper}>
       <DetailPageHeader
         category={item.category}

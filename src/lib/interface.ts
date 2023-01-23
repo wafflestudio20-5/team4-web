@@ -49,6 +49,7 @@ export interface Review {
   user: User;
   content: string;
   createdDateTime: string;
+  modifiedDateTime?: string;
   size: string;
   color: string;
   rating: number;
