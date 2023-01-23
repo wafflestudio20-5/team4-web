@@ -1,7 +1,7 @@
 import ItemOrdered from './ItemOrdered';
 import styles from './MyPageOrder.module.scss';
 import { useApiGetPurchaseListFetcher, useApiData } from '../../../lib/api';
-
+import { formatDate } from '../../../lib/formatters/dateFormatter';
 export default function MyPageOrder({
   accessToken,
 }: {
@@ -12,8 +12,6 @@ export default function MyPageOrder({
   );
 
   const purchases = purchasesData?.purchaseItems ?? null;
-
-  console.log(purchases);
 
   return (
     <div className={styles.wrapper}>
@@ -42,9 +40,14 @@ export default function MyPageOrder({
           <div className={styles.grid_header}>주문금액(수량)</div>
           <div className={styles.grid_header}>주문 상태</div>
         </div>
-
         {purchases && purchases?.length !== 0 ? (
-          purchases.map((item) => <ItemOrdered purchase={item} />)
+          purchases.map((item) => (
+            <ItemOrdered
+              key={item.id}
+              purchase={item}
+              formatDate={formatDate}
+            />
+          ))
         ) : (
           <div className={styles.none}>주문 목록이 없습니다.</div>
         )}
