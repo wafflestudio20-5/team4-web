@@ -230,7 +230,7 @@ function PurchaseArea({
   onAddToCart,
 }: PurchaseAreaProps) {
   const { option, quantity } = input;
-  const { open, message } = modalState;
+  const { open, visible, message } = modalState;
 
   return (
     <div className={styles.purchase_box}>
@@ -284,8 +284,12 @@ function PurchaseArea({
           </button>
           <button onClick={onAddToCart} className={styles.cart_button} />
         </div>
-        {open && (
-          <div className={styles.add_to_cart_modal}>
+        {visible && (
+          <div
+            className={`${styles.add_to_cart_modal} ${
+              open ? styles.open : styles.close
+            }`}
+          >
             <span>{message}</span>
             <Link to="/cart">장바구니로 가기</Link>
           </div>

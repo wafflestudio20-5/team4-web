@@ -392,6 +392,10 @@
   background: #383838;
   color: white;
   border-radius: 4px;
+  animation-duration: 0.25s;
+  animation-timing-function: ease-out;
+  animation-name: fadeIn;
+  animation-fill-mode: forwards;
   span {
     position: absolute;
     line-height: normal;
@@ -409,5 +413,27 @@
     line-height: normal;
     cursor: pointer;
     display: inline-block;
+  }
+}
+
+.add_to_cart_modal.close {
+  animation-name: fadeOut;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }

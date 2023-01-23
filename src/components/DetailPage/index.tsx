@@ -20,6 +20,7 @@ export interface PurchaseDraft {
 
 export interface AddToCartModalState {
   open: boolean;
+  visible: boolean;
   message?: string;
 }
 
@@ -30,6 +31,7 @@ export default function DetailPage() {
   });
   const [modal, setModal] = useState<AddToCartModalState>({
     open: false,
+    visible: false,
   });
 
   const { user, accessToken } = useSelector((state: RootState) => {
@@ -149,18 +151,19 @@ export default function DetailPage() {
   };
 
   const openModal = (msg: string) => {
-    setModal({
-      open: true,
-      message: msg,
-    });
-    setTimeout(
-      () =>
-        setModal({
+    if (!modal.open) {
+      setModal((prevState) => ({
+        ...modal,
+        open: true,
+        message: msg,
+      }));
+      setTimeout(() => {
+        setModal((prevState) => ({
+          ...prevState,
           open: false,
-          message: undefined,
-        }),
-      3000
-    );
+        }));
+      }, 2500);
+    }
   };
 
   useEffect(() => {
@@ -177,6 +180,24 @@ export default function DetailPage() {
       }
     }
   }, [error, navigate]);
+
+  useEffect(() => {
+    if (!modal.visible && modal.open) {
+      setModal((prevState) => ({
+        ...prevState,
+        visible: true,
+      }));
+    }
+    if (modal.visible && !modal.open) {
+      setTimeout(() => {
+        setModal((prevState) => ({
+          ...prevState,
+          visible: false,
+          message: undefined,
+        }));
+      }, 500);
+    }
+  }, [modal.open, modal.visible]);
 
   if (data) {
     return (
