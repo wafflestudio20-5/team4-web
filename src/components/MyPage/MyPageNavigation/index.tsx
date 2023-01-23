@@ -22,9 +22,6 @@ export default function MyPageNavigation() {
         <Link className={styles.nav} to="/mypage/viewed_goods">
           최근 본 상품
         </Link>
-        <Link className={styles.nav} to="/mypage/review/edit">
-          reviewPutTest
-        </Link>
       </div>
       {/*
       <div className={styles.flex}>
