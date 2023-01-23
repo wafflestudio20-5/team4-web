@@ -36,8 +36,6 @@ export default function ShoppingCart() {
 
   const [deleteList, setDeleteList] = useState<number[]>([]);
 
-  console.log(AllCart, deleteList);
-
   const deleteCart = (ids: number[]) => {
     apiDeleteCartList(ids, accessToken);
     setTimeout(() => {

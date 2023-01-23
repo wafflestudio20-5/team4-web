@@ -11,7 +11,7 @@
 .itemListBox {
   overflow: hidden;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-gap: 5px;
   border: 1px solid #ddd;
   padding: 5px;
@@ -26,18 +26,22 @@
   margin-bottom: 5px;
   .sortline {
     font-size: 11px;
-    height: 12px;
+    height: 14px;
     padding: 7px;
     display: flex;
     border-bottom: 1px solid #ddd;
-    .sortRuleSelected {
-      border-right: 1px solid #ddd;
-      padding: 0px 10px;
+    font-weight: bold;
+    .select {
+      color: #000;
     }
-    .sortRule {
-      border-right: 1px solid #ddd;
+    div {
       padding: 0px 10px;
+      border-right: 1px solid #ddd;
       color: #b2b2b2;
+    }
+    span:hover {
+      cursor: pointer;
+      text-decoration: underline;
     }
   }
   .pageline {
