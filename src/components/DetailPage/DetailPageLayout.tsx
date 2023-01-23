@@ -1,5 +1,5 @@
-import { createSearchParams, Link } from 'react-router-dom';
-import { PurchaseDraft } from '.';
+import { Link, createSearchParams } from 'react-router-dom';
+import { PurchaseDraft, AddToCartModalState } from '.';
 import {
   Item,
   Label,
@@ -179,26 +179,39 @@ function PriceInfo({ oldPrice, newPrice, sale }: PriceInfoProps) {
         Price Info <span>가격정보</span>
       </div>
       <ul className={styles.info_body}>
-        <li>
-          <span className={styles.info_title}>무신사 판매가</span>
-          <div className={styles.info_price}>
-            <span className={styles.old_price}>
-              {oldPrice.toLocaleString() + '원'}
-            </span>
-          </div>
-        </li>
-        {newPrice && sale && (
-          <li>
-            <span className={styles.info_title}>무신사 회원가</span>
-            <div className={styles.info_price}>
-              <span className={styles.new_price}>
-                {newPrice.toLocaleString() + '원'}
-              </span>
-              <span className={styles.sale}>
-                <span>{sale + '% 이상 할인'}</span>
-              </span>
-            </div>
-          </li>
+        {newPrice && sale ? (
+          <>
+            <li>
+              <span className={styles.info_title}>무신사 판매가</span>
+              <div className={styles.info_price}>
+                <span className={styles.crossed_out_price}>
+                  {oldPrice.toLocaleString() + '원'}
+                </span>
+              </div>
+            </li>
+            <li>
+              <span className={styles.info_title}>무신사 회원가</span>
+              <div className={styles.info_price}>
+                <span className={styles.real_price}>
+                  {newPrice.toLocaleString() + '원'}
+                </span>
+                <span className={styles.sale}>
+                  <span>{sale + '% 이상 할인'}</span>
+                </span>
+              </div>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <span className={styles.info_title}>무신사 판매가</span>
+              <div className={styles.info_price}>
+                <span className={styles.real_price}>
+                  {oldPrice.toLocaleString() + '원'}
+                </span>
+              </div>
+            </li>
+          </>
         )}
       </ul>
       <div className={styles.textbox_red}>
@@ -212,6 +225,7 @@ interface PurchaseAreaProps {
   price: number;
   input: PurchaseDraft;
   options: string[] | undefined;
+  modalState: AddToCartModalState;
   onChangeOption: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   onClearOption: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onChangeQuantity: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -225,6 +239,7 @@ function PurchaseArea({
   price,
   input,
   options,
+  modalState,
   onChangeOption,
   onClearOption,
   onChangeQuantity,
@@ -234,14 +249,15 @@ function PurchaseArea({
   onAddToCart,
 }: PurchaseAreaProps) {
   const { option, quantity } = input;
+  const { open, visible, message } = modalState;
 
   return (
     <div className={styles.purchase_box}>
       {options && (
         <div className={styles.dropdown_wrapper}>
           <div className={styles.dropdown}>
-            <select onChange={onChangeOption}>
-              <option defaultValue={undefined}>옵션 선택</option>
+            <select value={'옵션 선택'} onChange={onChangeOption}>
+              <option>옵션 선택</option>
               {options.map((option, idx) => (
                 <option key={idx} value={option}>
                   {option}
@@ -281,10 +297,22 @@ function PurchaseArea({
         <span>{(price * quantity).toLocaleString() + '원'}</span>
       </div>
       <div className={styles.button_wrapper}>
-        <button onClick={onPurchase} className={styles.purchase_button}>
-          바로구매
-        </button>
-        <button onClick={onAddToCart} className={styles.cart_button} />
+        <div className={styles.button_grid}>
+          <button onClick={onPurchase} className={styles.purchase_button}>
+            바로구매
+          </button>
+          <button onClick={onAddToCart} className={styles.cart_button} />
+        </div>
+        {visible && (
+          <div
+            className={`${styles.add_to_cart_modal} ${
+              open ? styles.open : styles.close
+            }`}
+          >
+            <span>{message}</span>
+            <Link to="/cart">장바구니로 가기</Link>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -293,6 +321,7 @@ function PurchaseArea({
 interface DetailPageLayoutProps {
   item: Item;
   input: PurchaseDraft;
+  modalState: AddToCartModalState;
   displayIdx: number;
   setDisplay: (idx: number) => void;
   onChangeOption: (e: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -307,6 +336,7 @@ interface DetailPageLayoutProps {
 export default function DetailPageLayout({
   item,
   input,
+  modalState,
   displayIdx,
   setDisplay,
   onChangeOption,
@@ -318,6 +348,7 @@ export default function DetailPageLayout({
   onAddToCart,
 }: DetailPageLayoutProps) {
   return (
+
     <div className={styles.wrapper}>
       <DetailPageHeader
         category={item.category}
@@ -350,6 +381,7 @@ export default function DetailPageLayout({
               price={item.newPrice ? item.newPrice : item.oldPrice}
               input={input}
               options={item.options}
+              modalState={modalState}
               onChangeOption={onChangeOption}
               onClearOption={onClearOption}
               onChangeQuantity={onChangeQuantity}

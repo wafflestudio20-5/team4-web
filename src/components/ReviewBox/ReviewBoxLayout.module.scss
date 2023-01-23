@@ -1,0 +1,369 @@
+.reviewBox {
+  display: block;
+  width: 958px;
+  height: auto;
+  padding-top: 20px;
+  background-color: white;
+  border: 1px solid #ddd;
+  .reviewProfile {
+    width: 930px;
+    height: 48px;
+    padding-left: 13px;
+    padding-right: 15px;
+    background-color: white;
+    .reviewProfilePic {
+      width: 32px;
+      height: 32px;
+      margin-top: 2px;
+      background-color: white;
+      float: left;
+      border-radius: 50%;
+    }
+    .reviewProfileTextWrap {
+      width: 890px;
+      height: 48px;
+      padding-left: 8px;
+      float: right;
+      .reviewProfileText {
+        width: 890px;
+        height: 23px;
+        background-color: white;
+        .reviewProfileName {
+          font-family: "Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+          font-size: 15px;
+          font-weight: 700;
+          display: inline;
+        }
+        .reviewProfileDate {
+          font-family: "Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+          font-size: 12px;
+          padding-top: 2px;
+          margin-left: 727px;
+          vertical-align: top;
+          display: inline;
+          color: #777;
+        }
+      }
+      .reviewProfileInfo {
+        width: 890px;
+        height: 18px;
+        padding-bottom: 9px;
+        margin-top: -2px;
+        background-color: white;
+        .reviewProfileBodyInfo {
+          display: inline;
+          color: #aaa;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+  .reviewGoodsInformation {
+    width: 890px;
+    height: 54px;
+    padding-left: 53px;
+    padding-bottom: 15px;
+    padding-right: 15px;
+    background-color: white;
+    .reviewGoodsThumbnail {
+      width: 45px;
+      height: 54px;
+      display: inline-block;
+      .reviewGoodsPic {
+        width: 45px;
+        height: 54px;
+
+      }
+    }
+    .reviewGoodsItem {
+      width: 835px;
+      height: 36px;
+      padding-top: 1px;
+      margin-left: 10px;
+      display: inline-block;
+      vertical-align: top;
+      position: relative;
+      top: 10px;
+      .reviewGoodsName {
+        color: #777;
+        text-decoration-line: none;
+        font-size: 12px;
+        line-height: 18px;
+      }
+      .reviewGoodsOption {
+        color: #777;
+        font-size: 12px;
+        line-height: 18px;
+        margin: 0;
+
+      }
+    }
+  }
+  .reviewRatingWrap {
+    width: 958px;
+    height: 17px;
+    padding-bottom: 10px;
+    background-color: white;
+    padding-left: 53px;
+
+  }
+  .reviewContent {
+    width: 958px;
+    min-height: 40px;
+    background-color: white;
+    .reviewContentText {
+      font-size: 15px;
+      word-break: break-all;
+      padding: 0 15px 0 53px;
+    }
+    .reviewContentEvaluation {
+      padding: 10px 0 0 53px;
+      .reviewEvaluationList {
+        display: flex;
+        justify-content: flex-start;
+        margin-block-start: 0px;
+        margin-block-end: 0px;
+        margin-inline-end: 0px;
+        margin-inline-start: 0px;
+        padding-inline-start: 0px;
+        .reviewEvaluationItem {
+          align-items: center;
+          box-sizing: border-box;
+          color: #777;
+          display: flex;
+          flex-direction: row;
+          font-size: 12px;
+          height: 25px;
+          text-align: left;
+          vertical-align: top;
+          padding: 0 8px;
+          border: 1px solid #eee;
+          border-radius: 20px;
+          margin-right: 5px;
+          span {
+            color: black;
+          }
+        }
+      }
+
+    }
+    .reviewContentImage {
+      margin: 15px 0 0;
+      padding-left: 53px;
+      .reviewContentImageWrap {
+        padding: 144px 15px 0 0;
+        position: relative;
+        vertical-align: top;
+        background: transparent;
+        .reviewContentImageList {
+          display: flex;
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          margin-block-start: 0;
+          margin-block-end: 0;
+          margin-inline-start: 0px;
+          margin-inline-end: 0px;
+          padding-inline-start: 0;
+          .reviewContentImageItem {
+            list-style-type: none;
+            display: list-item;
+            position: relative;
+            text-align: left;
+            vertical-align: top;
+            overflow: hidden;
+            position: relative;
+            width: 144px;
+            height: 144px;
+            border-radius: 4px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            margin-right: 5px;
+            img {
+              overflow: clip;
+              text-align: left;
+              vertical-align: top;
+              border: none;
+              line-height: 0;
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+  .reviewCommentCount {
+    width: 905px;
+    height: 18px;
+    padding-left: 53px;
+    margin-bottom: 20px;
+    background-color: white;
+    font-weight: 700;
+    span {
+      color: #aaa;
+    }
+  }
+  .reviewCommentList {
+    width: 890px;
+    height: auto;
+    padding-left: 53px;
+    padding-bottom: 15px;
+    padding-right: 15px;
+    background-color: white;
+    .reviewCommentInput {
+      width: 778px;
+      height: 34px;
+      padding-top: 10px;
+      padding-right: 95px;
+      padding-bottom: 10px;
+      padding-left: 15px;
+      position: relative;
+      background: #f3f3f3;
+      border: 1px solid #ddd;
+      .reviewCommentFakeInputBox {
+        width: 776px;
+        height: 32px;
+        background-color: white;
+        border: 1px solid #ddd !important;
+      }
+      .reviewCommentFakeSubmitButton {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        position: absolute;
+        right: 15px;
+        top: 10px;
+        font-size: 12px;
+        font-family: "Apple SD Gothic Neo";
+        font-weight: bold;
+        line-height: 12px;
+        text-align: center;
+        background-color: white;
+        color: #b2b2b2;
+        border: 1px solid #ddd !important;
+      }
+    }
+    .reviewMoreWrap {
+      width: 888px;
+      height: 70px;
+      border-left: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      position: relative;
+      bottom: 15px;
+      background-color: white;
+      .reviewMore {
+        width: 856px;
+        height: 38px;
+        border: 1px solid #ddd;
+        margin-top: 15px;
+        margin-right: 15px;
+        margin-bottom: 15px;
+        margin-left: 15px;
+        background-color: #f3f3f3;
+        position: relative;
+        top: 15px;
+        .reviewMoreText {
+          display: block;
+          width: 856px;
+          height: 38px;
+          text-align: center;
+          position: relative;
+          top: 10px;
+          color: black;
+          text-decoration: none;
+          font-weight: 700;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+.reviewBoxComment {
+  width: 858px;
+  height: auto;
+  padding: 15px;
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  background-color: white;
+  .commentProfilePic {
+    width: 77px;
+    height: 77px;
+    border: 1px solid black;
+    border-radius: 50%;
+    float: left;
+    position: relative;
+    overflow: clip;
+    img {
+      position: absolute;
+      left: 38.5px;
+      top: 38.5px;
+      width: 79px;
+      transform: matrix(1, 0, 0, 1, -39.5, -39.5);
+      text-align: center;
+    }
+  }
+  .commentContentBox {
+    width: 418px;
+    min-height: 50px;
+    margin-left: 90px;
+    margin-right: 350px;
+    background-color: white;
+  }
+  .commentProfileDataArea {
+    width: 768px;
+    margin-left: 90px;
+    vertical-align: top;
+    .commentProfileData {
+      width: 768px;
+      padding-top: 15px;
+      padding-bottom: 14px;
+      font-size: 12px;
+      font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      .commentProfileClass {
+        padding-left: 4px;
+        padding-right: 4px;
+        margin-left: 1px;
+        display: inline-block;
+        color: #666;
+      }
+      .commentProfileName {
+        padding-left: 4px;
+        padding-right: 4px;
+        margin-left: 1px;
+        border-left: 1px solid #ddd;
+        display: inline-block;
+        color: #666;
+      }
+      .commentProfileDate {
+        padding-left: 4px;
+        padding-right: 4px;
+        margin-left: 1px;
+        border-left: 1px solid #ddd;
+        display: inline-block;
+        color: #666;
+      }
+      .commentProfileEdit {
+        color: #b2b2b2;padding-left: 4px;
+        padding-right: 4px;
+        margin-left: 1px;
+        border-left: 1px solid #ddd;
+        display: inline-block;
+      }
+      .commentProfileDelete {
+        color: #b2b2b2;padding-left: 4px;
+        padding-right: 4px;
+        margin-left: 1px;
+        border-left: 1px solid #ddd;
+        display: inline-block;
+      }
+
+    }
+  }
+
+}
