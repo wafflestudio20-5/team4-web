@@ -7,8 +7,6 @@ axios.defaults.withCredentials = true;
 
 const auth = (token: string) => ({ Authorization: `Bearer ${token}` });
 
-
-
 export const apiRegister = (
   username: string,
   password: string,
@@ -72,22 +70,26 @@ export const useApiItemFetcher = (id: number | null) => {
   );
   return id === null ? null : f;
 };
-export const apiPostReview = (id: number, rating: number, content: string,
-                              size: string, color: string, images: string[], token: string | null) => {
-    axios.post<{}>(
-        '/api/user/me/reviews',
-        {id, rating, content, size, color, images},
-        { headers: token ? auth(token) : undefined }
-
-    );
+export const apiPostReview = (
+  id: number,
+  rating: number,
+  content: string,
+  size: string,
+  color: string,
+  images: string[],
+  token: string | null
+) => {
+  axios.post<{}>(
+    '/api/user/me/reviews',
+    { id, rating, content, size, color, images },
+    { headers: token ? auth(token) : undefined }
+  );
 };
 
 export const apiPostImage = (formData: FormData, token: string | null) => {
-    return axios.post(
-        '/api/image-upload',
-        formData,
-        { headers: token ? auth(token) : undefined }
-    );
+  return axios.post('/api/image-upload', formData, {
+    headers: token ? auth(token) : undefined,
+  });
 };
 
 export const useApiItemListFetcher = (
@@ -205,18 +207,16 @@ export const apiPostCart = (
   option: string | undefined,
   quantity: number,
   token: string | null
-) => {
+) =>
   axios.post<{}>(
     '/api/user/me/shopping-cart',
     { id, option, quantity },
     { headers: token ? auth(token) : undefined }
   );
-};
 
-export const apiPostViewedGoods = (itemId: number, token: string) => {
+export const apiPostViewedGoods = (itemId: number, token: string) =>
   axios.post<{}>(
     '/api/user/me/recently-viewed',
     { itemId },
     { headers: token ? auth(token) : undefined }
   );
-};
