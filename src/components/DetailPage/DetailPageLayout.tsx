@@ -286,7 +286,6 @@ function PurchaseArea({
         </button>
         <button onClick={onAddToCart} className={styles.cart_button} />
       </div>
-      <Link to="/inquiry">inquiry test</Link>
     </div>
   );
 }
@@ -303,6 +302,7 @@ interface DetailPageLayoutProps {
   onDecrement: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onPurchase: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onAddToCart: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  inquiryTestClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function DetailPageLayout({
@@ -317,6 +317,7 @@ export default function DetailPageLayout({
   onDecrement,
   onPurchase,
   onAddToCart,
+  inquiryTestClick,
 }: DetailPageLayoutProps) {
   return (
     <div className={styles.wrapper}>
@@ -359,6 +360,7 @@ export default function DetailPageLayout({
               onPurchase={onPurchase}
               onAddToCart={onAddToCart}
             />
+            <button onClick={inquiryTestClick}>InquiryPopUp Test</button>
           </div>
         </div>
       </div>

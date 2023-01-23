@@ -36,7 +36,7 @@ function AppRoutes() {
         path="/oauth2/redirect/:accessToken"
         element={<SocialLoginPage />}
       />
-      <Route path="/inquiry" element={<InquiryPopUpPost />} />
+      <Route path="/inquiry/:id" element={<InquiryPopUpPost />} />
     </Routes>
   );
 }
