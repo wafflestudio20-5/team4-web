@@ -1,22 +1,41 @@
 import { KeyboardEvent, useState, FocusEvent } from 'react';
 import styles from './CartItemInfo.module.scss';
 import { Purchase } from '../../lib/interface';
-import deletebutton from '../../resources/image/delete.svg';
-import substractbutton from '../../resources/image/remove.svg';
-import addbutton from '../../resources/image/add.svg';
 import { apiPatchCart } from '../../lib/api';
+import { DeleteCartModalState } from '.';
 
 interface CartItemInfoProps {
   cartList: Purchase[] | null;
   accessToken: string | null;
+  deleteCart: (ids: number[]) => void;
+  AllCart: number[];
+  deleteList: number[];
+  addDeleteList: (checked: boolean, id: number) => void;
+  modalStatus: DeleteCartModalState;
+  openModal: (list: number[]) => void;
+  closeModal: () => void;
 }
 
 export default function CartItemInfo({
   cartList,
   accessToken,
+  deleteCart,
+  AllCart,
+  deleteList,
+  addDeleteList,
+  modalStatus,
+  openModal,
+  closeModal,
 }: CartItemInfoProps) {
   return (
     <>
+      {modalStatus.visible && (
+        <DeleteModal
+          closeModal={closeModal}
+          modalStatus={modalStatus}
+          deleteCart={deleteCart}
+        />
+      )}
       <div className={styles.orderProductInfo}>
         <h3 className={styles.orderTitle}>장바구니</h3>
         <table className={styles.tableBasicOrder}>
@@ -24,8 +43,6 @@ export default function CartItemInfo({
             <tr>
               <th>전체 {cartList?.length}개</th>
               <th className={styles.th1}>상품 정보</th>
-              {/* <th className={styles.th4}>상품 원가</th>
-              <th className={styles.th6}>회원 할인</th> */}
               <th className={styles.th6}>개당 판매가</th>
               <th className={styles.th2}>수량</th>
               <th className={styles.th2}></th>
@@ -35,15 +52,19 @@ export default function CartItemInfo({
             {cartList && cartList.length !== 0 ? (
               cartList?.map((purchase, idx) => (
                 <PurchaseItem
+                  key={purchase.id}
                   purchase={purchase}
                   idx={idx}
+                  addDeleteList={addDeleteList}
                   accessToken={accessToken}
                 />
               ))
             ) : (
-              <td colSpan={7} className={styles.noitems}>
-                장바구니에 담긴 상품이 없습니다.
-              </td>
+              <tr>
+                <td colSpan={7} className={styles.noitems}>
+                  장바구니에 담긴 상품이 없습니다.
+                </td>
+              </tr>
             )}
           </tbody>
         </table>
@@ -67,8 +88,20 @@ export default function CartItemInfo({
             </ul>
           </div>
           <div className={styles.buttonDiv}>
-            <button>전체 삭제</button>
-            <button>선택 삭제</button>
+            <button
+              onClick={() => {
+                openModal(AllCart);
+              }}
+            >
+              전체 삭제
+            </button>
+            <button
+              onClick={() => {
+                openModal(deleteList);
+              }}
+            >
+              선택 삭제
+            </button>
           </div>
         </div>
       </div>
@@ -79,31 +112,48 @@ export default function CartItemInfo({
 function PurchaseItem({
   purchase,
   idx,
+  addDeleteList,
   accessToken,
 }: {
   purchase: Purchase;
   idx: number;
+  addDeleteList: (checked: boolean, id: number) => void;
   accessToken: string | null;
 }) {
   const [inputs, setInputs] = useState(purchase.quantity.toString());
   const handleInputs = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputs(e.target.value);
+    const parsedValue = parseFloat(e.target.value);
+    setInputs(Number.isNaN(parsedValue) ? '1' : parsedValue.toString());
   };
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       if (Number(inputs) !== purchase.quantity) {
+        purchase.quantity = Number(inputs);
         apiPatchCart(purchase.id, Number(inputs), accessToken);
       }
     }
   };
   const blurEvent = (e: FocusEvent<HTMLInputElement>) => {
-    if (Number(e.target.value) !== purchase.quantity) {
-      apiPatchCart(purchase.id, Number(e.target.value), accessToken);
+    if (Number(inputs) !== purchase.quantity) {
+      purchase.quantity = Number(inputs);
+      apiPatchCart(purchase.id, Number(inputs), accessToken);
     }
   };
 
+  const countDown = () => {
+    setInputs((Number(inputs) - 1).toString());
+    apiPatchCart(purchase.id, purchase.quantity - 1, accessToken);
+    purchase.quantity -= 1;
+  };
+
+  const countUp = () => {
+    setInputs((Number(inputs) + 1).toString());
+    apiPatchCart(purchase.id, purchase.quantity + 1, accessToken);
+    purchase.quantity += 1;
+  };
+
   return (
-    <tr key={purchase.item.id}>
+    <tr>
       <th>{idx + 1}</th>
       <th>
         <div className={styles.Item}>
@@ -125,16 +175,6 @@ function PurchaseItem({
           </div>
         </div>
       </th>
-      {/* <th>
-        <span>{purchase.item.oldPrice?.toLocaleString()}원</span>
-      </th>
-      <th>
-        {purchase.item.newPrice
-          ? `${(
-              purchase.item.newPrice - purchase.item.oldPrice
-            ).toLocaleString()}원`
-          : -0}
-      </th> */}
       <th>
         {purchase.item.newPrice ? (
           <>
@@ -146,46 +186,85 @@ function PurchaseItem({
         )}
       </th>
       <th className={styles.count}>
-        {purchase.quantity === 1 ? (
-          <img
-            className={styles.ButtonGray}
-            src={substractbutton}
-            alt="비활성화된 상품개수 줄이기"
-          ></img>
-        ) : (
-          <img
-            className={styles.Button}
-            src={substractbutton}
-            alt="활성화된 상품개수 줄이기"
-            onClick={() => {
-              apiPatchCart(purchase.id, purchase.quantity - 1, accessToken);
-            }}
-          ></img>
-        )}
-        <input
-          className={styles.input}
-          type="text"
-          value={inputs}
-          onChange={handleInputs}
-          onKeyDown={handleKeyPress}
-          onBlur={blurEvent}
-        ></input>
-        <img
-          className={styles.Button}
-          src={addbutton}
-          alt="상품개수 늘리기"
-          onClick={() => {
-            apiPatchCart(purchase.id, purchase.quantity + 1, accessToken);
-          }}
-        ></img>
+        <div className={styles.selected_amount}>
+          {Number(inputs) === 1 ? (
+            <button
+              style={{
+                color: '#ccc',
+                cursor: 'default',
+              }}
+            >
+              -
+            </button>
+          ) : (
+            <button
+              style={{
+                color: '#000',
+              }}
+              onClick={countDown}
+            >
+              -
+            </button>
+          )}
+
+          <input
+            type="text"
+            value={inputs}
+            onChange={handleInputs}
+            onKeyDown={handleKeyPress}
+            onBlur={blurEvent}
+          />
+          <button onClick={countUp}>+</button>
+        </div>
       </th>
       <th>
-        <img
-          className={styles.deleteButton}
-          src={deletebutton}
-          alt="장바구니에서 삭제하기"
-        ></img>
+        <input
+          type="checkbox"
+          value={purchase.id}
+          onChange={(e) => {
+            addDeleteList(e.target.checked, Number(e.target.value));
+          }}
+        ></input>
       </th>
     </tr>
+  );
+}
+
+function DeleteModal({
+  closeModal,
+  modalStatus,
+  deleteCart,
+}: {
+  closeModal: () => void;
+  modalStatus: DeleteCartModalState;
+  deleteCart: (ids: number[]) => void;
+}) {
+  return (
+    <div className={styles.deletebackground} onClick={closeModal}>
+      <div
+        className={
+          modalStatus.open
+            ? styles.deleteContainer
+            : styles.deleteContainerClose
+        }
+      >
+        <div className={styles.textArea}>
+          <div>장바구니 상품을 삭제하시겠습니까?</div>
+        </div>
+        <div className={styles.deletebuttonArea}>
+          <button
+            className={styles.delete}
+            onClick={() => {
+              deleteCart(modalStatus.data);
+            }}
+          >
+            삭제
+          </button>
+          <button className={styles.deleteclose} onClick={closeModal}>
+            취소
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
