@@ -286,6 +286,7 @@ function PurchaseArea({
         </button>
         <button onClick={onAddToCart} className={styles.cart_button} />
       </div>
+      <Link to="/inquiry">inquiry test</Link>
     </div>
   );
 }

@@ -13,7 +13,7 @@ import PurchasePage from './components/PurchasePage';
 import ShoppingCart from './components/ShoppingCart';
 import SocialLoginPage from './components/SocialLoginPage';
 import ItemListPage from './components/ItemListPage';
-
+import InquiryPopUpPost from './components/InquiryPopUpPost';
 
 function AppRoutes() {
   return (
@@ -36,6 +36,7 @@ function AppRoutes() {
         path="/oauth2/redirect/:accessToken"
         element={<SocialLoginPage />}
       />
+      <Route path="/inquiry" element={<InquiryPopUpPost />} />
     </Routes>
   );
 }
