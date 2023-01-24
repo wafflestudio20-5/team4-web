@@ -88,9 +88,9 @@ export default function ReviewBox({ accessToken }: ReviewBoxProps) {
         </div>
       </div>
       <div className={styles.reply_count}>
-        댓글 <span>{0}개</span>
+        댓글 <span>{1}개</span>
       </div>
-      <div className={styles.comments_list}>
+      <div className={styles.comments_wrapper}>
         {/* 추후 수정 필요 */}
         {accessToken === null ? (
           <div className={styles.comment_input}>
@@ -102,6 +102,23 @@ export default function ReviewBox({ accessToken }: ReviewBoxProps) {
             <Link to="/login">로그인</Link> 후에 작성하실 수 있습니다.
           </div>
         )}
+        <div className={styles.comments_list}>
+          <div className={styles.comment_wrapper}>
+            <div className={styles.comment_profile_image}>
+              <img
+                src="https://image.msscdn.net/mfile_s01/_simbols/_basic/b.png"
+                alt=""
+              />
+            </div>
+            <div className={styles.comment_content}>
+              <p>혹시 바지 정보 알수있을까요??</p>
+            </div>
+            <div className={styles.comment_info}>
+              <p className={styles.comment_created_user}>침착맨</p>
+              <p className={styles.comment_created_time}>2023.01.23 15:25</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

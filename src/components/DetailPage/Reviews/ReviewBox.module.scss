@@ -243,7 +243,7 @@ button {
   }
 }
 
-.comments_list {
+.comments_wrapper {
   padding: 0 15px 15px 53px;
 }
 
@@ -282,4 +282,60 @@ button {
   font-size: inherit;
   text-align: center;
   background: white;
+}
+
+.comments_list {
+  margin-top: -1px;
+  border: 1px solid #ddd;
+  border-top: 0;
+  background-color: white;
+}
+
+.comment_wrapper {
+  position: relative;
+  padding: 15px;
+  border-top: 1px solid #ddd;
+  min-height: 80px;
+}
+
+.comment_profile_image {
+  position: relative;
+  float: left;
+  width: 77px;
+  height: 77px;
+  border: 1px solid #ddd;
+  overflow: hidden;
+  text-align: center;
+  border-radius: 100%;
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 103%;
+    border: none;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+  }
+}
+
+.comment_content {
+  margin: 0 350px 0 90px;
+  p {
+    word-break: break-all;
+  }
+}
+
+.comment_info {
+  margin-left: 90px;
+  color: #666;
+  padding: 15px 0 14px;
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  p {
+    display: inline-block;
+  }
+  .comment_created_time {
+    margin-left: 5px;
+    padding-left: 5px;
+    border-left: 1px solid #ddd;
+  }
 }
