@@ -40,6 +40,18 @@ export default function ReviewBox() {
           <p className={styles.purchase_option_info}>XL 구매</p>
         </div>
       </div>
+      <div className={styles.rating_wrapper}>
+        <div className={styles.rating}>
+          <span className={styles.star_background}>
+            <span
+              className={styles.star_bar}
+              style={{
+                width: `${100}%`,
+              }}
+            />
+          </span>
+        </div>
+      </div>
     </div>
   );
 }
