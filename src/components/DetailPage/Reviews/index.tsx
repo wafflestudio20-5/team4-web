@@ -1,4 +1,6 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store';
 import ReviewsLayout from './ReviewsLayout';
 
 interface ReviewsProps {
@@ -7,5 +9,11 @@ interface ReviewsProps {
 }
 
 export default function Reviews({ count, rating }: ReviewsProps) {
-  return <ReviewsLayout count={count} rating={rating} />;
+  const { accessToken } = useSelector((state: RootState) => {
+    return state.session;
+  });
+
+  return (
+    <ReviewsLayout count={count} rating={rating} accessToken={accessToken} />
+  );
 }

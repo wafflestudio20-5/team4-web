@@ -8,6 +8,10 @@ a {
   cursor: pointer;
 }
 
+button {
+  cursor: pointer;
+}
+
 .wrapper {
   padding-top: 20px;
 }
@@ -224,4 +228,58 @@ a {
   background-size: cover;
   align-items: center;
   justify-content: center;
+}
+
+.reply_count {
+  display: block;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  padding-left: 53px;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 18px;
+  span {
+    color: #aaa;
+  }
+}
+
+.comments_list {
+  padding: 0 15px 15px 53px;
+}
+
+.comment_area_login {
+  padding: 15px;
+  border: 1px solid #ddd;
+  background: white;
+  a {
+    font-weight: bold;
+  }
+}
+
+.comment_input {
+  position: relative;
+  padding: 10px 95px 10px 15px;
+  cursor: pointer;
+  background: #f3f3f3;
+  border: 1px solid #ddd;
+}
+
+.comment_area {
+  height: 32px;
+  border: 1px solid #ddd;
+  background: white;
+}
+
+.submit_button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: #b2b2b2;
+  padding: 10px;
+  border: 1px solid #ddd;
+  font-weight: bold;
+  line-height: 12px;
+  font-size: inherit;
+  text-align: center;
+  background: white;
 }

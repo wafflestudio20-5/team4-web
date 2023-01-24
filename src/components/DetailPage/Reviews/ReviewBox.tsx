@@ -2,7 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './ReviewBox.module.scss';
 
-export default function ReviewBox() {
+interface ReviewBoxProps {
+  accessToken: string | null;
+}
+
+export default function ReviewBox({ accessToken }: ReviewBoxProps) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.profile}>
@@ -82,6 +86,22 @@ export default function ReviewBox() {
             </li>
           </ul>
         </div>
+      </div>
+      <div className={styles.reply_count}>
+        댓글 <span>{0}개</span>
+      </div>
+      <div className={styles.comments_list}>
+        {/* 추후 수정 필요 */}
+        {accessToken === null ? (
+          <div className={styles.comment_input}>
+            <div className={styles.comment_area}></div>
+            <button className={styles.submit_button}>댓글작성</button>
+          </div>
+        ) : (
+          <div className={styles.comment_area_login}>
+            <Link to="/login">로그인</Link> 후에 작성하실 수 있습니다.
+          </div>
+        )}
       </div>
     </div>
   );
