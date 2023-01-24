@@ -52,6 +52,37 @@ export default function ReviewBox() {
           </span>
         </div>
       </div>
+      <div className={styles.content_wrapper}>
+        <div className={styles.content_text}>
+          요즘 입기는 추운거 같네요. 하지만 옷이 예뻐요. 봄까지 존버합니다
+        </div>
+        <ul className={styles.content_eval}>
+          <li className={styles.content_eval_item}>
+            사이즈 <span>보통이에요</span>
+          </li>
+          <li className={styles.content_eval_item}>
+            색감 <span>보통이에요</span>
+          </li>
+        </ul>
+        <div className={styles.content_image_wrapper}>
+          <ul className={styles.content_image_list}>
+            <li
+              className={styles.content_image_item}
+              style={{
+                backgroundImage: `url(${'https://image.msscdn.net/images/goods_img/20220829/2752332/2752332_1_100.jpg'})`,
+              }}
+            >
+              <img
+                src="https://image.msscdn.net/images/goods_img/20220829/2752332/2752332_1_100.jpg"
+                alt=""
+                style={{
+                  display: 'none',
+                }}
+              />
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }
