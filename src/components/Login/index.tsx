@@ -49,7 +49,7 @@ export default function LoginPage() {
 
   const onSocialLogin = () => {
     window.location.href =
-      'http://13.209.67.42:8080/oauth2/authorization/kakao';
+      process.env.REACT_APP_REDIRECT_HOST + '/oauth2/authorization/kakao';
   };
 
   useEffect(() => {
