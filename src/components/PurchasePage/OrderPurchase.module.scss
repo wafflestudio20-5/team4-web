@@ -1,5 +1,4 @@
 .orderPurchase {
-  position: relative;
   padding: 5px 20px 5px 20px;
   .ordertitle {
     margin-bottom: 12px;
@@ -73,5 +72,141 @@
   }
   .purchaseButton:hover {
     cursor: pointer;
+  }
+}
+
+.modalbackground {
+  position: fixed;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  left: 0px;
+  top: 0px;
+  background: rgba(0, 0, 0, 0.5);
+  animation-duration: 0.25s;
+  animation-timing-function: ease-out;
+  animation-name: fadeIn;
+  animation-fill-mode: forwards;
+}
+
+.modalbackgroundClose {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  left: 0px;
+  top: 0px;
+  background: rgba(0, 0, 0, 0.5);
+  animation-duration: 0.25s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+  animation-name: fadeOut;
+}
+
+.modalContainer {
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px;
+  position: absolute;
+  width: 360px;
+  height: 160px;
+  left: calc(50% - 380px / 2);
+  top: calc(50% - 170px / 2);
+  background: #ffffff;
+  border: 1px solid #d8d8d8;
+  animation: modal-show 0.25s;
+}
+
+.modalContainerClose {
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px;
+  position: absolute;
+  width: 360px;
+  height: 160px;
+  left: calc(50% - 380px / 2);
+  top: calc(50% - 170px / 2);
+  background: #ffffff;
+  border: 1px solid #d8d8d8;
+  animation: modal-close 0.25s;
+}
+.textArea {
+  flex: 3;
+  text-align: center;
+  font-size: 16px;
+  padding: 10px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonArea {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    display: inline-block;
+    width: 70px;
+    height: 33px;
+    margin: 3px;
+    line-height: 33px;
+    border: 1px solid #d8d8d8;
+    background-color: #fff;
+    box-sizing: border-box;
+    text-align: center;
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    font-size: 12px;
+  }
+  button:hover {
+    cursor: pointer;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes modal-show {
+  from {
+    opacity: 0;
+    margin-top: -50px;
+  }
+
+  to {
+    opacity: 1;
+    margin-top: 0;
+  }
+}
+
+@keyframes modal-close {
+  from {
+    opacity: 1;
+    margin-top: 0px;
+  }
+
+  to {
+    opacity: 0;
+    margin-top: 50px;
   }
 }

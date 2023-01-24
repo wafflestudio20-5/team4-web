@@ -12,6 +12,7 @@ import {
 } from '../../lib/api';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 export interface DeleteCartModalState {
   open: boolean;
@@ -37,10 +38,14 @@ export default function ShoppingCart() {
   const [deleteList, setDeleteList] = useState<number[]>([]);
 
   const deleteCart = (ids: number[]) => {
-    apiDeleteCartList(ids, accessToken);
-    setTimeout(() => {
-      window.location.reload();
-    }, 250);
+    axios
+      .all(apiDeleteCartList(ids, accessToken))
+      .then(() => {
+        window.location.reload();
+      })
+      .catch(() => {
+        toast('삭제에 실패했습니다.');
+      });
   };
 
   const addDeleteList = (checked: boolean, id: number) => {
@@ -95,7 +100,7 @@ export default function ShoppingCart() {
         <button
           className={styles.purchaseButton}
           onClick={() => {
-            navigate('/purchase', { state: { items: cartList } });
+            navigate('/purchase', { state: { items: cartList, from: 'cart' } });
           }}
         >
           주문하기

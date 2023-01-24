@@ -158,7 +158,7 @@ export default function DetailPage() {
         },
       ];
       navigate('/purchase', {
-        state: { items: purchase },
+        state: { items: purchase, from: 'detail' },
       });
     }
   };
