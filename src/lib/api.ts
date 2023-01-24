@@ -3,6 +3,7 @@ import axios, { AxiosResponse, CancelToken } from 'axios';
 import { User, Item, Category, SubCategory, Purchase } from './interface';
 import { PurchasePostDto } from './dto';
 
+axios.defaults.baseURL = process.env.REACT_APP_DB_HOST;
 axios.defaults.withCredentials = true;
 
 const auth = (token: string) => ({ Authorization: `Bearer ${token}` });
