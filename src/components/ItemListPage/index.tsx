@@ -21,6 +21,7 @@ export default function ItemListPage() {
   const [pageNum, setPageNum] = useState<number>(1);
 
   const DEFAULT_FETCH_AMOUNT = 24;
+  const [sort, setSort] = useState<string | undefined>();
 
   const [searchParams] = useSearchParams();
 
@@ -44,11 +45,15 @@ export default function ItemListPage() {
       subCategory,
       query ?? '',
       pageNum - 1,
-      DEFAULT_FETCH_AMOUNT
+      DEFAULT_FETCH_AMOUNT,
+      sort
     )
   );
 
   const items = itemsData?.items ?? null;
+  const totalPages = itemsData?.totalPages ?? null;
+
+  console.log(totalPages);
 
   const [inputs, setInputs] = useState<string>('');
 
@@ -75,8 +80,6 @@ export default function ItemListPage() {
       });
     }
   };
-
-  const [sort, setSort] = useState<string | undefined>();
 
   useEffect(() => {
     setPageNum(1);

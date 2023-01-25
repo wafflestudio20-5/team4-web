@@ -29,7 +29,8 @@ export default function ItemList() {
       undefined,
       undefined,
       0,
-      10
+      10,
+      undefined
     )
   );
   const items = itemsData?.items ?? null;
