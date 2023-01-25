@@ -2,8 +2,9 @@
   "name": "project_toy",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://13.209.67.42:8080",
+  "proxy": "http://localhost:8080",
   "dependencies": {
+    "@babel/highlight": "^7.18.6",
     "@reduxjs/toolkit": "^1.9.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
@@ -18,6 +19,7 @@
     "@typescript-eslint/eslint-plugin": "^5.47.0",
     "@typescript-eslint/parser": "^5.47.0",
     "axios": "^1.2.1",
+    "env-cmd": "^10.1.0",
     "eslint": "8.22.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-react-app": "^7.0.1",
@@ -38,10 +40,12 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "env-cmd -f env.local react-scripts start",
+    "build": "env-cmd -f env.production react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "deploy": "aws s3 sync ./build s3://wafflestudio-toyproject-musin4-frontend --profile=default",
+    "invalidate": "aws cloudfront create-invalidation --profile=default --distribution-id E2WJCAPEGVT9W8 --paths / /index.html /error.html /service-worker.js /manifest.json /asset-manifest.json /favicon.ico",
     "prettier": "prettier --write --config ./.prettierrc \"**/*.{ts,tsx}\"",
     "lint": "eslint './src/**/*.{ts,tsx}'",
     "lint:fix": "eslint --fix './src/**/*.{ts,tsx}'"
@@ -64,5 +68,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "allowedHosts": "true"
 }

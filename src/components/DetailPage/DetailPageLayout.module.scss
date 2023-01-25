@@ -65,6 +65,7 @@
   list-style: none;
   .image_element {
     cursor: pointer;
+    border: 1px solid transparent;
     float: left;
     width: 60px;
     height: 72px;
@@ -73,7 +74,7 @@
     overflow: hidden;
   }
   .image_element_on {
-    border: 1px solid black;
+    border-color: black;
   }
 }
 
@@ -136,12 +137,12 @@
   .info_price {
     display: inline-block;
     width: 282px;
-    .old_price {
+    .crossed_out_price {
       font: 500 17px/21px 'Musinsa', sans-serif;
       color: #aaa;
       text-decoration: line-through;
     }
-    .new_price {
+    .real_price {
       font: 500 17px/21px 'Musinsa', sans-serif;
     }
     .sale {
@@ -347,9 +348,13 @@
 .button_wrapper {
   width: 400px;
   margin-top: 20px;
-  display: grid;
-  grid-template-columns: 1fr 60px;
-  gap: 5px;
+  clear: both;
+  .button_grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 60px;
+    gap: 5px;
+  }
 }
 
 .purchase_button {
@@ -376,4 +381,59 @@
   border: 1px solid black;
   overflow: hidden;
   cursor: pointer;
+}
+
+.add_to_cart_modal {
+  position: relative;
+  top: -127px;
+  width: 360px;
+  height: 17px;
+  padding: 20px 20px;
+  background: #383838;
+  color: white;
+  border-radius: 4px;
+  animation-duration: 0.25s;
+  animation-timing-function: ease-out;
+  animation-name: fadeIn;
+  animation-fill-mode: forwards;
+  span {
+    position: absolute;
+    line-height: normal;
+    font-family: 'Musinsa', sans-serif;
+    font-size: 16px;
+  }
+  a {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-family: 'Musinsa', sans-serif;
+    text-decoration: none;
+    color: #0078ff;
+    font-size: 16px;
+    line-height: normal;
+    cursor: pointer;
+    display: inline-block;
+  }
+}
+
+.add_to_cart_modal.close {
+  animation-name: fadeOut;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }

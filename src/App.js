@@ -14,7 +14,6 @@ import ShoppingCart from './components/ShoppingCart';
 import SocialLoginPage from './components/SocialLoginPage';
 import ItemListPage from './components/ItemListPage';
 
-
 function AppRoutes() {
   return (
     <Routes>
