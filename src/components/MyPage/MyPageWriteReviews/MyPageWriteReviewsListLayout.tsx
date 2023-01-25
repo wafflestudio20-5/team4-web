@@ -28,7 +28,7 @@ function ReviewItem({ data, onClick }: ReviewItemParams) {
         <br />
         구매확정
       </td>
-      {data?.review ? (
+      {data?.isReviewed ? (
         <td>
           <div className={styles.reviewWriteDone}>후기 작성완료</div>
         </td>

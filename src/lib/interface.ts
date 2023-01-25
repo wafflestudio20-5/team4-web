@@ -41,7 +41,7 @@ export interface Purchase {
   payment?: number;
   quantity: number;
   option?: string;
-  review?: Review;
+  isReviewed?: boolean;
 }
 
 export interface Review {
