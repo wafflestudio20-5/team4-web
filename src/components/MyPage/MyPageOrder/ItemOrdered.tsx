@@ -35,7 +35,7 @@ export default function ItemOrdered({
         </div>
       </div>
       <div className={styles.grid_header}>
-        {formatDate(purchase.createdDate)}
+        {formatDate(purchase.createdDateTime)}
       </div>
       <div className={styles.grid_header}>{purchase.id}</div>
       <div className={styles.grid_header}>
