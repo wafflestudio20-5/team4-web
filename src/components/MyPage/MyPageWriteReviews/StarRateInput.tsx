@@ -5,7 +5,6 @@ interface Input {
   content: string;
   size: string;
   color: string;
-  images: string[];
 }
 interface StarRateInputParams {
   input: Input;
@@ -49,6 +48,7 @@ function StarRateInput({ input, setInput }: StarRateInputParams) {
               height="20"
               viewBox="0 0 14 13"
               fill="#cacaca"
+              cursor="pointer"
               onClick={() => {
                 AVR_RATE.current = (idx + 1) * 20;
                 calcStarRates();

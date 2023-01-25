@@ -6,6 +6,6 @@ export function formatDate(date: string | undefined): string {
     const day = dateObject.getDate();
     return `${year}.${month}.${day}`;
   } else {
-    return '주문일자가 없습니다.';
+    return '날짜가 없습니다.';
   }
 }
