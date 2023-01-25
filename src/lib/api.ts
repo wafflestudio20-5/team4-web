@@ -112,34 +112,35 @@ export const useApiItemListFetcher = (
   subcategory?: SubCategory,
   query?: string,
   index?: number,
-  count?: number
+  count?: number,
+  sort?: string
 ) => {
   const f = useCallback(
     (cancelToken: CancelToken) => {
       if (fetchType === 'search') {
-        return axios.get<{ items: Item[] }>('/api/search', {
-          params: { query, index, count },
+        return axios.get<{ items: Item[]; totalPages: number }>('/api/search', {
+          params: { query, index, count, sort },
           cancelToken,
         });
       } else if (fetchType === 'subcategory') {
-        return axios.get<{ items: Item[] }>('/api/items', {
-          params: { subcategory, index, count },
+        return axios.get<{ items: Item[]; totalPages: number }>('/api/items', {
+          params: { subcategory, index, count, sort },
           cancelToken,
         });
       } else if (fetchType === 'category') {
-        return axios.get<{ items: Item[] }>('/api/items', {
-          params: { category, index, count },
+        return axios.get<{ items: Item[]; totalPages: number }>('/api/items', {
+          params: { category, index, count, sort },
           cancelToken,
         });
       } else {
         // if fetchType is null or invalid, fetch from all items
-        return axios.get<{ items: Item[] }>('/api/items', {
-          params: { index, count },
+        return axios.get<{ items: Item[]; totalPages: number }>('/api/items', {
+          params: { index, count, sort },
           cancelToken,
         });
       }
     },
-    [fetchType, category, subcategory, query, index, count]
+    [fetchType, category, subcategory, query, index, count, sort]
   );
   return f;
 };
@@ -197,11 +198,12 @@ export const apiPatchCart = (
     { headers: token ? auth(token) : undefined }
   );
 
-export const apiDeleteCartList = (ids: number[], token: string) =>
-  axios.delete<{}>('/api/user/me/shopping-cart', {
-    params: ids,
-    headers: token ? auth(token) : undefined,
-  });
+export const apiDeleteCartList = (ids: number[], token: string | null) =>
+  ids.map((id) =>
+    axios.delete<{}>(`/api/user/me/shopping-cart/${id}`, {
+      headers: token ? auth(token) : undefined,
+    })
+  );
 
 export const useApiGetViewedListFetcher = (token: string | null) => {
   const f = useCallback(

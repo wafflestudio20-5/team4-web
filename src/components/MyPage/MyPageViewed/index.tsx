@@ -14,20 +14,20 @@ export default function MyPageViewed({
   const recentlyViewed = viewedData?.recentItems ?? null;
   return (
     <div className={styles.wrapper}>
-      <section id="order">
+      <div id="order">
         <header className={styles.title}>
           <h2>최근 본 상품</h2>
         </header>
         {recentlyViewed && recentlyViewed.length !== 0 ? (
-          <ul className={styles.myRecent}>
+          <div className={styles.myRecent}>
             {recentlyViewed?.map((item) => (
-              <ItemViewed purchase={item} />
+              <ItemViewed key={item.id} purchase={item} />
             ))}
-          </ul>
+          </div>
         ) : (
           <div className={styles.none}>최근 본 상품이 없습니다.</div>
         )}
-      </section>
+      </div>
     </div>
   );
 }

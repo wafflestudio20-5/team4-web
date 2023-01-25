@@ -23,6 +23,7 @@ export interface Item {
   name: string;
   brand: string;
   images: string[];
+  image: string;
   rating: number;
   oldPrice: number;
   sale?: number;
