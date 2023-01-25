@@ -106,28 +106,28 @@ export const useApiItemListFetcher = (
     (cancelToken: CancelToken) => {
       if (fetchType === 'search') {
         return axios.get<{ items: Item[]; totalPages: number }>('/api/search', {
-          params: { query, index, count },
+          params: { query, index, count, sort },
           cancelToken,
         });
       } else if (fetchType === 'subcategory') {
         return axios.get<{ items: Item[]; totalPages: number }>('/api/items', {
-          params: { subcategory, index, count },
+          params: { subcategory, index, count, sort },
           cancelToken,
         });
       } else if (fetchType === 'category') {
         return axios.get<{ items: Item[]; totalPages: number }>('/api/items', {
-          params: { category, index, count },
+          params: { category, index, count, sort },
           cancelToken,
         });
       } else {
         // if fetchType is null or invalid, fetch from all items
         return axios.get<{ items: Item[]; totalPages: number }>('/api/items', {
-          params: { index, count },
+          params: { index, count, sort },
           cancelToken,
         });
       }
     },
-    [fetchType, category, subcategory, query, index, count]
+    [fetchType, category, subcategory, query, index, count, sort]
   );
   return f;
 };
