@@ -1,12 +1,29 @@
 import styles from './InquiryPopUpPostLayout.module.scss';
 import React from 'react';
 import { Item } from '../../lib/interface';
+interface Input {
+  type: string;
+  option: string | undefined;
+  isSecret: boolean;
+  title: string;
+  content: string;
+}
 interface inquiryPopUpPostLayoutParams {
   data: Item | undefined;
+  input: Input;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeCheckbox: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChangeTextarea: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 export default function InquiryPopUpPostLayout({
   data,
+  input,
+  onChange,
+  onChangeCheckbox,
+  onChangeSelect,
+  onChangeTextarea,
 }: inquiryPopUpPostLayoutParams) {
   return (
     <div className={styles.inquiryPopUp}>
@@ -40,19 +57,43 @@ export default function InquiryPopUpPostLayout({
               <th>문의유형</th>
               <td className={styles.typeArea}>
                 <label>
-                  <input type="radio" name="type" value="size" />
+                  <input
+                    type="radio"
+                    name="type"
+                    value="size"
+                    onChange={onChange}
+                    checked={input.type === 'size'}
+                  />
                   <span>사이즈</span>
                 </label>
                 <label>
-                  <input type="radio" name="type" value="delivery" />
+                  <input
+                    type="radio"
+                    name="type"
+                    value="delivery"
+                    onChange={onChange}
+                    checked={input.type === 'delivery'}
+                  />
                   <span>배송</span>
                 </label>
                 <label>
-                  <input type="radio" name="type" value="restock" />
+                  <input
+                    type="radio"
+                    name="type"
+                    value="restock"
+                    onChange={onChange}
+                    checked={input.type === 'restock'}
+                  />
                   <span>재입고</span>
                 </label>
                 <label>
-                  <input type="radio" name="type" value="detail" />
+                  <input
+                    type="radio"
+                    name="type"
+                    value="detail"
+                    onChange={onChange}
+                    checked={input.type === 'detail'}
+                  />
                   <span>상품상세문의</span>
                 </label>
               </td>
@@ -68,7 +109,7 @@ export default function InquiryPopUpPostLayout({
               <th>문의옵션</th>
               <td className={styles.optionArea}>
                 <div>
-                  <select name="option">
+                  <select name="option" onChange={onChangeSelect}>
                     <option>옵션 선택</option>
                     {data?.options?.map((option) => (
                       <option value={option}>{option}</option>
@@ -86,9 +127,16 @@ export default function InquiryPopUpPostLayout({
                   className={styles.titleInput}
                   maxLength={15}
                   placeholder="15자 이내 입력"
+                  value={input.title}
+                  onChange={onChange}
                 />
                 <label>
-                  <input type="checkbox" name="isSecret" />
+                  <input
+                    type="checkbox"
+                    name="isSecret"
+                    onChange={onChangeCheckbox}
+                    checked={input.isSecret}
+                  />
                   <span>비밀글</span>
                 </label>
               </td>
@@ -102,6 +150,8 @@ export default function InquiryPopUpPostLayout({
                   rows={10}
                   cols={45}
                   placeholder="내용 입력"
+                  value={input.content}
+                  onChange={onChangeTextarea}
                 ></textarea>
               </td>
             </tr>

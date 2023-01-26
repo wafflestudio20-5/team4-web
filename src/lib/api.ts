@@ -249,11 +249,11 @@ export const apiPostInquiry = (
   id: number,
   token: string | null,
   type: string,
-  option: string,
+  option: string | undefined,
   isSecret: boolean,
   title: string,
   content: string,
-  images: string[]
+  images: string[] | undefined
 ) =>
   axios.post<{}>(
     `/api/item/${id}/inquiry`,
