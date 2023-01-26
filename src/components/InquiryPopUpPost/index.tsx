@@ -78,11 +78,6 @@ export default function InquiryPopUpPost() {
   const [imageFiles, setImageFiles] = useFileUpload();
   const [images, setImages] = useState<string[] | undefined>(undefined);
 
-  useEffect(() => {
-    console.log(input);
-    console.log(images);
-  }, [input, images]);
-
   const handleClick = () => {
     setImageFiles({ accept: 'image/*', multiple: true }, setImageFilesCallBack);
   };
