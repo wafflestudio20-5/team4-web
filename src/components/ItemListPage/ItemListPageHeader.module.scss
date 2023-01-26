@@ -63,7 +63,9 @@
   border-bottom: 1px solid #ddd;
   font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
   display: flex;
-  height: 30px;
+  height: 40px;
+  font-size: 13px;
+  font-weight: bold;
   .sortingTitle {
     padding-left: 20px;
     width: 200px;
@@ -74,6 +76,11 @@
   }
   .sortingOption {
     flex: 1;
+
+    .select {
+      color: #000;
+    }
+
     div {
       width: 150px;
       height: 100%;
@@ -82,7 +89,10 @@
       align-items: center;
       justify-content: flex-start;
       color: #b2b2b2;
-
+      span:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
       input {
         width: 100px;
         height: 15px;
@@ -90,6 +100,16 @@
         vertical-align: middle;
         border: 1px solid #ddd;
         background: #fff;
+        font-size: 100%;
+        text-indent: 3px;
+        color: #333;
+      }
+
+      input::placeholder {
+        color: #333;
+      }
+      input:focus {
+        outline: none;
       }
       button {
         width: 500px;

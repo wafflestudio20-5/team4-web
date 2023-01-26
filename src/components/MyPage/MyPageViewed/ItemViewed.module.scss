@@ -1,74 +1,99 @@
 .itemPreview {
-  width: 187px;
-  margin-top: 30px;
-  display: inline-block;
-  margin: 0 10px;
-  vertical-align: top;
+  width: 180px;
+  // float: left;
+  border: 1px solid #e5e5e5;
+  padding: 5px;
+}
+.itemPreview:hover {
+  cursor: pointer;
+  border: 1px solid #e5e5e5;
+  box-shadow: inset 0 1px 20px #e5e5e5;
+}
+
+.CGoods {
   display: flex;
   flex-direction: column;
+  position: relative;
+  padding-bottom: 30px;
 }
 
-.previewImage {
-  margin: 5px 0px;
+.image {
   overflow: hidden;
+  position: relative;
+  z-index: 1;
+  padding-top: 115%;
+}
+.previewImage {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: auto;
+  transform: translateY(-50%);
+  mix-blend-mode: multiply;
 }
 
-.previewImage:hover {
-  cursor: pointer;
+.info {
+  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 12px;
 }
 
 .brand {
-  display: block;
   overflow: hidden;
+  margin-bottom: 4px;
+  font-size: 14px;
+  line-height: 19px;
+  color: #000;
   white-space: nowrap;
   text-overflow: ellipsis;
-  font-size: 12px;
-  margin: 14px 0 6px 0;
-}
-
-.brand:hover {
-  cursor: pointer;
-  text-decoration: underline;
 }
 
 .name {
-  display: block;
-  max-height: 44px;
-  font-size: 16px;
-  font-family: 'Musinsa', sans-serif !important;
-  line-height: 22px;
-  font-weight: normal;
-  word-break: keep-all;
+  display: -webkit-box;
   overflow: hidden;
-  margin-bottom: 10px;
+  height: 20px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  line-height: 20px;
+  color: #aaa;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
-
-.name:hover {
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-.crossedOutPrice {
-  display: block;
-  clear: both;
-  font-size: 12px;
-  line-height: 16px;
-  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
-  color: #999;
-  font-weight: normal;
-}
-
-.upto {
-  color: #ff0000;
-  font-family: 'Musinsa', sans-serif !important;
-  float: right;
-  font-size: 16px;
+.price {
+  display: flex;
+  position: relative;
+  font-size: 14px;
+  line-height: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  div {
+    border: 1px solid;
+  }
 }
 
 .realPrice {
-  display: inline-block;
-  font-size: 16px;
-  font-family: 'Musinsa', sans-serif !important;
-  font-weight: normal;
-  font-style: normal;
+  margin-right: 8px;
+  font-size: 14px;
+  line-height: 100%;
+  font-weight: bold;
+}
+
+.crossedOutPrice {
+  font-size: 11px;
+  color: #aaa;
+  flex: 0 0 auto;
+  line-height: 100%;
+}
+
+.sale {
+  font-size: 14px;
+  position: absolute;
+  top: 1px;
+  right: -15px;
+  color: red;
+  line-height: 100%;
 }

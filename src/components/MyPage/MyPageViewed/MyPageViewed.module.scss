@@ -22,9 +22,10 @@
   }
 }
 .myRecent {
-  margin: 20px -50px;
   display: grid;
-  grid-template-columns: repeat(6, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, 195px);
+  grid-gap: 5px;
+  padding: 5px 0px;
 }
 
 .none {

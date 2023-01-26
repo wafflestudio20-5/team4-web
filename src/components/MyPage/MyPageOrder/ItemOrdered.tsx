@@ -3,9 +3,13 @@ import { Purchase } from '../../../lib/interface';
 
 interface ItemOrderedProps {
   purchase: Purchase;
+  formatDate: (date: string | undefined) => string;
 }
 
-export default function ItemOrdered({ purchase }: ItemOrderedProps) {
+export default function ItemOrdered({
+  purchase,
+  formatDate,
+}: ItemOrderedProps) {
   return (
     <div className={styles.grid_order}>
       <div className={styles.grid_header}>
@@ -30,13 +34,12 @@ export default function ItemOrdered({ purchase }: ItemOrderedProps) {
           </div>
         </div>
       </div>
-      <div className={styles.grid_header}>yyyy.mm.dd</div>
-      <div className={styles.grid_header}>12345678</div>
       <div className={styles.grid_header}>
-        {purchase.item.newPrice
-          ? purchase.item.newPrice.toLocaleString()
-          : purchase.item.oldPrice.toLocaleString()}
-        원
+        {formatDate(purchase.createdDateTime)}
+      </div>
+      <div className={styles.grid_header}>{purchase.id}</div>
+      <div className={styles.grid_header}>
+        {purchase.payment?.toLocaleString()} 원
       </div>
       <div className={styles.grid_header}>
         <div className={styles.orderState}>

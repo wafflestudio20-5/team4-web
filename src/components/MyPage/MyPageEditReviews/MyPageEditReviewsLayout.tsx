@@ -1,6 +1,6 @@
-import styles from './MyPageWriteReviewsLayout.module.scss';
-import { Purchase } from '../../../lib/interface';
-import StarRateInput from './StarRateInput';
+import { Review } from '../../../lib/interface';
+import styles from '../MyPageWriteReviews/MyPageWriteReviewsLayout.module.scss';
+import StarRateInput from '../MyPageWriteReviews/StarRateInput';
 import React from 'react';
 interface Input {
   rating: number;
@@ -8,34 +8,33 @@ interface Input {
   size: string;
   color: string;
 }
-
-interface MyPageWriteReviewsLayoutParams {
-  data: Purchase;
+interface MyPageEditReviewsLayoutParams {
+  data: Review;
+  handleSubmit: (e: React.SyntheticEvent) => void;
+  onImageClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onTextClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  handleClick: () => void;
+  isText: boolean;
+  images: string[];
   input: Input;
+  onChangeTextArea: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setInput: (x: Input) => void;
-  onChangeTextArea: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  onTextClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  onImageClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  isText: boolean;
-  handleClick: () => void;
-  handleSubmit: (e: React.SyntheticEvent) => void;
-  images: string[];
 }
 
-export default function MyPageWriteReviewsLayout({
+export default function MyPageEditReviewsLayout({
   data,
+  handleSubmit,
+  onImageClick,
+  onTextClick,
+  handleClick,
+  isText,
+  images,
   input,
+  onChangeTextArea,
   onChange,
   setInput,
-  onChangeTextArea,
-  onTextClick,
-  onImageClick,
-  isText,
-  handleClick,
-  handleSubmit,
-  images,
-}: MyPageWriteReviewsLayoutParams) {
+}: MyPageEditReviewsLayoutParams) {
   return (
     <div className={styles.reviewWrapper}>
       <header className={styles.reviewHeader}>
@@ -74,13 +73,16 @@ export default function MyPageWriteReviewsLayout({
       </ul>
       <div className={styles.reviewWrite}>
         <div className={styles.reviewItem}>
-          <a href={`/goods/${data?.item.id}`}>
-            <img src={data?.item.images[0]} alt={data?.item.name} />
+          <a href={`/goods/${data.purchase?.item.id}`}>
+            <img
+              src={data.purchase?.item.images[0]}
+              alt={data.purchase?.item.name}
+            />
           </a>
           <ul>
-            <li className={styles.brand}>{data?.item.brand}</li>
-            <li className={styles.name}>{data?.item.name}</li>
-            <li className={styles.option}>{data?.option}</li>
+            <li className={styles.brand}>{data.purchase?.item.brand}</li>
+            <li className={styles.name}>{data.purchase?.item.name}</li>
+            <li className={styles.option}>{data.purchase?.option}</li>
           </ul>
         </div>
         <div className={styles.reviewRating}>

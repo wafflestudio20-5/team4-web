@@ -1,8 +1,8 @@
 .reviewWrapper {
-  width: 1270px;
+  width: calc(100% - 250px);
   display: inline-block;
   .reviewHeader {
-    width: 1270px;
+    width: 100%;
     height: 36px;
     padding-bottom: 14px;
     border-bottom: 3px solid black;
@@ -13,19 +13,19 @@
     li {
       margin-bottom: 5px;
       color: #777;
+
     }
   }
   .reviewWrite {
-    width: 1270px;
+    width: 100%;
     padding-top: 40px;
     .reviewItem {
-      width: 1270px;
+      width: 100%;
       height: 96px;
       padding-bottom: 20px;
       img {
         width: 80px;
         height: 96px;
-
       }
       ul {
         padding-left: 10px;
@@ -53,7 +53,7 @@
       }
     }
     .reviewRating {
-      width: 1118px;
+      width: 100%;
       height: 30px;
       padding-top: 20px;
       padding-left: 152px;
@@ -68,7 +68,6 @@
       span {
         position: relative;
         right: 100px;
-
       }
     }
     .radioUl {
@@ -78,7 +77,7 @@
         padding-top: 16px;
         padding-bottom: 16px;
         padding-left: 153px;
-        width: 1117px;
+        width: 100%;
         height: 30px;
         list-style-type: none;
         position: relative;
@@ -106,9 +105,10 @@
           cursor: pointer;
           text-align: center;
           vertical-align: middle;
+          line-height: 26px;
           color: #a5a5a5;
         }
-        input:checked + label{
+        input:checked + label {
           width: 90px;
           height: 26px;
           padding-top: 2px;
@@ -124,7 +124,6 @@
           position: absolute;
           left: 200px;
           top: 10px;
-
         }
       }
     }
@@ -135,26 +134,27 @@
         margin-bottom: 8px;
       }
       .reviewWriteInputWrap {
-        width: 1268px;
+        width: 100%;
         height: 228px;
         padding-bottom: 50px;
         border: 1px solid black;
         font-size: 14px;
+        position: relative;
         .reviewWriteInput {
-          width: 1256px;
+          width: calc(100% - 15px);
           height: 216px;
           padding: 6px;
           border: none;
           resize: none;
         }
         .reviewWriteInputCount {
-          position: relative;
-          top: 10px;
-          left: 1150px;
+          position: absolute;
+          bottom: 20px;
+          right: 30px;
         }
       }
       .reviewImageInputWrap {
-        width: 1268px;
+        width: 100%;
         height: 228px;
         padding-bottom: 50px;
         border: 1px solid black;
@@ -163,7 +163,6 @@
         img {
           width: 64px;
           height: 64px;
-
         }
         span {
           margin-left: 10px;
@@ -181,7 +180,7 @@
         }
       }
       .utilityArea {
-        width: 1258px;
+        width: 100%;
         height: 40px;
         position: relative;
         bottom: 45px;
@@ -194,7 +193,6 @@
           background-color: white;
           margin-left: 5px;
           cursor: pointer;
-
         }
         .imageButton {
           width: 100px;
@@ -209,7 +207,7 @@
     }
     .postButtonArea {
       padding-top: 20px;
-      width: 1270px;
+      width: 100%;
       height: 40px;
       text-align: center;
       .postButton {
@@ -224,8 +222,7 @@
         background-color: black;
         color: white;
         box-sizing: border-box;
-        font-family: "Musinsa", sans-serif !important;
-
+        font-family: 'Musinsa', sans-serif !important;
       }
     }
   }

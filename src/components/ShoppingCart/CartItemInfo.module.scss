@@ -1,5 +1,4 @@
 .orderProductInfo {
-  position: relative;
   padding: 5px 20px 5px 20px;
   .orderTitle {
     font-family: 'musinsa', 'AppleSDGothicNeo', 'Apple SD Gothic Neo',
@@ -40,7 +39,6 @@
         }
       }
       .ItemInfo {
-        position: relative;
         float: left;
         flex: 4;
         display: flex;
@@ -205,5 +203,124 @@
         font-weight: bold;
       }
     }
+  }
+}
+
+.selected_amount {
+  margin: auto 0;
+  white-space: nowrap;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  button {
+    width: 26px;
+    height: 26px;
+    text-align: center;
+    vertical-align: middle;
+    border: 0;
+    background-color: #eee;
+    color: black;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  input {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 1px solid #eee;
+    text-align: center;
+    text-indent: 0;
+    cursor: text;
+  }
+}
+
+.deletebackground {
+  .deleteContainer {
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    display: flex;
+    flex-direction: column;
+    padding: 5px 10px;
+    position: absolute;
+    width: 360px;
+    height: 160px;
+    left: 50%;
+    transform: translate(-50%, -106%);
+    background: #ffffff;
+    border: 1px solid #d8d8d8;
+    animation: modal-show 0.25s;
+  }
+
+  .deleteContainerClose {
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    display: flex;
+    flex-direction: column;
+    padding: 5px 10px;
+    position: absolute;
+    width: 360px;
+    height: 160px;
+    left: 50%;
+    transform: translate(-50%, -106%);
+    // top: calc(50% - 100px);
+    background: #ffffff;
+    border: 1px solid #d8d8d8;
+    animation: modal-close 0.25s;
+  }
+  .textArea {
+    flex: 3;
+    text-align: center;
+    font-size: 16px;
+    padding: 10px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .deletebuttonArea {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 60px;
+
+    button {
+      display: inline-block;
+      width: 60px;
+      height: 33px;
+      margin-left: 6px;
+      line-height: 33px;
+      border: 1px solid #d8d8d8;
+      background-color: #fff;
+      box-sizing: border-box;
+      text-align: center;
+      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      font-size: 12px;
+    }
+    button:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+@keyframes modal-show {
+  from {
+    opacity: 0;
+    margin-top: -30px;
+  }
+
+  to {
+    opacity: 1;
+    margin-top: 0;
+  }
+}
+
+@keyframes modal-close {
+  from {
+    opacity: 1;
+    margin-top: 0px;
+  }
+
+  to {
+    opacity: 0;
+    margin-top: -30px;
   }
 }

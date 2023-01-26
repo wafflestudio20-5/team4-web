@@ -21,7 +21,7 @@ export default function ItemPreview({ item }: ItemPreviewProps) {
         <div className={styles.image}>
           <img
             className={styles.previewImage}
-            src={item.images[0]}
+            src={item.image}
             alt="상품 이미지"
           />
         </div>
