@@ -202,6 +202,21 @@
           margin-right: 10px;
           width: 65px;
           height: 65px;
+          border: none;
+          display: inline-block;
+          text-align: center;
+          vertical-align: middle;
+          line-height: 65px;
+          overflow: clip;
+          img {
+            width: 65px;
+            height: 65px;
+          }
+        }
+        .imageAdd {
+          margin-right: 10px;
+          width: 65px;
+          height: 65px;
           background-color: #f1f1f1;
           border: none;
           display: inline-block;

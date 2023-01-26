@@ -15,6 +15,8 @@ interface inquiryPopUpPostLayoutParams {
   onChangeCheckbox: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   onChangeTextarea: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  handleClick: () => void;
+  images: string[] | undefined;
 }
 
 export default function InquiryPopUpPostLayout({
@@ -24,6 +26,8 @@ export default function InquiryPopUpPostLayout({
   onChangeCheckbox,
   onChangeSelect,
   onChangeTextarea,
+  handleClick,
+  images,
 }: inquiryPopUpPostLayoutParams) {
   return (
     <div className={styles.inquiryPopUp}>
@@ -158,7 +162,14 @@ export default function InquiryPopUpPostLayout({
             <tr>
               <th>이미지</th>
               <td className={styles.imageArea}>
-                <span>+</span>
+                {images?.map((img, idx) => (
+                  <span>
+                    <img src={img} alt={`${idx}`} key={idx}></img>
+                  </span>
+                ))}
+                <span className={styles.imageAdd} onClick={handleClick}>
+                  +
+                </span>
               </td>
             </tr>
           </tbody>
