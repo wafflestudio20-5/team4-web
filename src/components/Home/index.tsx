@@ -1,10 +1,11 @@
 import ItemList from './ItemList';
-import styles from './index.module.css';
+import StyleList from './StyleList';
 
 export default function HomePage() {
   return (
-    <div className={styles.mainContent}>
+    <>
       <ItemList />
-    </div>
+      <StyleList />
+    </>
   );
 }
