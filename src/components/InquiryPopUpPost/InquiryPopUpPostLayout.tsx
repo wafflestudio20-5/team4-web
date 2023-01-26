@@ -1,6 +1,13 @@
 import styles from './InquiryPopUpPostLayout.module.scss';
 import React from 'react';
-export default function InquiryPopUpPostLayout() {
+import { Item } from '../../lib/interface';
+interface inquiryPopUpPostLayoutParams {
+  data: Item | undefined;
+}
+
+export default function InquiryPopUpPostLayout({
+  data,
+}: inquiryPopUpPostLayoutParams) {
   return (
     <div className={styles.inquiryPopUp}>
       <header>
@@ -9,18 +16,21 @@ export default function InquiryPopUpPostLayout() {
       <div className={styles.inquiryInputForm}>
         <div className={styles.inquiryItem}>
           <div className={styles.inquiryItemImage}>
-            <img
-              src="https://image.msscdn.net/images/goods_img/20220831/2758347/2758347_1_125.jpg"
-              alt="T-Logo Hoodie Navy"
-            />
+            <img src={data?.images[0]} alt={data?.name} />
           </div>
           <div className={styles.inquiryItemInfo}>
-            <p className={styles.infoBrand}>디스이즈네버댓</p>
-            <p className={styles.infoName}>T-Logo Hoodie Navy</p>
+            <p className={styles.infoBrand}>{data?.brand}</p>
+            <p className={styles.infoName}>{data?.name}</p>
             <p className={styles.infoPriceBox}>
-              <span className={styles.originPrice}>95,000원</span>
-              &nbsp;66,500원
-              <span className={styles.discount}>30% SALE</span>
+              <span className={styles.originPrice}>
+                {data?.oldPrice.toLocaleString()}원
+              </span>
+              {data?.newPrice ? (
+                <>
+                  &nbsp;{data?.newPrice.toLocaleString()}원
+                  <span className={styles.discount}>{data?.sale}% SALE</span>
+                </>
+              ) : null}
             </p>
           </div>
         </div>
@@ -60,9 +70,9 @@ export default function InquiryPopUpPostLayout() {
                 <div>
                   <select name="option">
                     <option>옵션 선택</option>
-                    <option value="S">S</option>
-                    <option value="M">M</option>
-                    {/*mapping할 자리*/}
+                    {data?.options?.map((option) => (
+                      <option value={option}>{option}</option>
+                    ))}
                   </select>
                 </div>
               </td>
