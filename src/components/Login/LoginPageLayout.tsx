@@ -8,10 +8,15 @@ import { Link } from 'react-router-dom';
 interface LoginFormProps {
   input: LoginDto;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onLogin: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onLogin: (
+    e:
+      | React.MouseEvent<HTMLButtonElement>
+      | React.KeyboardEvent<HTMLInputElement>
+  ) => void;
+  onKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
-function LoginForm({ input, onChange, onLogin }: LoginFormProps) {
+function LoginForm({ input, onChange, onLogin, onKeyPress }: LoginFormProps) {
   const { username, password } = input;
   return (
     <>
@@ -22,6 +27,7 @@ function LoginForm({ input, onChange, onLogin }: LoginFormProps) {
           className={styles.idInput}
           placeholder="아이디"
           onChange={onChange}
+          onKeyPress={onKeyPress}
         />
       </div>
       <div className={styles.passwordInputWrap}>
@@ -32,6 +38,7 @@ function LoginForm({ input, onChange, onLogin }: LoginFormProps) {
           placeholder="비밀번호"
           type="password"
           onChange={onChange}
+          onKeyPress={onKeyPress}
         />
       </div>
       <button className={styles.loginButton} onClick={onLogin}>
@@ -110,7 +117,12 @@ function LoginBottom() {
 interface LoginPageLayoutProps {
   input: LoginDto;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onLogin: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onLogin: (
+    e:
+      | React.MouseEvent<HTMLButtonElement>
+      | React.KeyboardEvent<HTMLInputElement>
+  ) => void;
+  onKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   onSocialLogin: () => void;
 }
 
@@ -118,6 +130,7 @@ export default function LoginPageLayout({
   input,
   onChange,
   onLogin,
+  onKeyPress,
   onSocialLogin,
 }: LoginPageLayoutProps) {
   return (
@@ -141,7 +154,12 @@ export default function LoginPageLayout({
           </div>
           <div className={styles.loginArea}>
             <div className={styles.loginForm}>
-              <LoginForm input={input} onChange={onChange} onLogin={onLogin} />
+              <LoginForm
+                input={input}
+                onChange={onChange}
+                onLogin={onLogin}
+                onKeyPress={onKeyPress}
+              />
               <LoginUtility />
               <SocialLogin onSocialLogin={onSocialLogin} />
               <LoginBottom />
