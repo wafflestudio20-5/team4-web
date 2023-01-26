@@ -17,6 +17,7 @@ interface inquiryPopUpPostLayoutParams {
   onChangeTextarea: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   handleClick: () => void;
   images: string[] | undefined;
+  handleSubmit: (e: React.SyntheticEvent) => void;
 }
 
 export default function InquiryPopUpPostLayout({
@@ -28,6 +29,7 @@ export default function InquiryPopUpPostLayout({
   onChangeTextarea,
   handleClick,
   images,
+  handleSubmit,
 }: inquiryPopUpPostLayoutParams) {
   return (
     <div className={styles.inquiryPopUp}>
@@ -203,7 +205,9 @@ export default function InquiryPopUpPostLayout({
       </dl>
       <div className={styles.buttonArea}>
         <span className={styles.buttonQuit}>취소</span>
-        <span className={styles.buttonSubmit}>작성하기</span>
+        <form onClick={handleSubmit}>
+          <span className={styles.buttonSubmit}>작성하기</span>
+        </form>
       </div>
     </div>
   );

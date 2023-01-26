@@ -246,7 +246,7 @@ export const apiPostViewedGoods = (itemId: number, token: string) =>
   );
 
 export const apiPostInquiry = (
-  id: number,
+  id: number | null,
   token: string | null,
   type: string,
   option: string | undefined,

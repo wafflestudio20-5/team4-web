@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   apiPostImage,
-  apiPostReview,
+  apiPostInquiry,
   useApiData,
   useApiItemFetcher,
 } from '../../lib/api';
@@ -103,6 +103,16 @@ export default function InquiryPopUpPost() {
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     let secureImages: string[] = [];
+    if (input.option === '') {
+      toast('문의유형을 선택해주세요');
+      return 0;
+    } else if (input.title === '') {
+      toast('제목을 입력해주세요');
+      return 0;
+    } else if (input.content === '') {
+      toast('문의내용을 입력해주세요');
+      return 0;
+    }
 
     // 업로드할 이미지가 있는 경우
     if (imageFiles) {
@@ -118,29 +128,27 @@ export default function InquiryPopUpPost() {
       console.log(response.data.secureImages); // 업로드한 이미지들의 URL로 이루어진 string[]
       secureImages = response.data.secureImages;
 
-      {
-        /*apiPostReview(
-        data.id,
-        input.rating,
+      apiPostInquiry(
+        parsedId,
+        accessToken,
+        input.type,
+        input.option,
+        input.isSecret,
+        input.title,
         input.content,
-        input.size,
-        input.color,
-        secureImages,
-        accessToken
-      ).then((response) => navigate(-1));*/
-      }
+        secureImages
+      );
     } else {
-      {
-        /*apiPostReview(
-        data.id,
-        input.rating,
+      apiPostInquiry(
+        parsedId,
+        accessToken,
+        input.type,
+        input.option,
+        input.isSecret,
+        input.title,
         input.content,
-        input.size,
-        input.color,
-        [],
-        accessToken
-      ).then((response) => navigate(-1));*/
-      }
+        undefined
+      );
     }
     // TODO: 이미지 업로드 후 return된 secureImages를 request body에 포함하여 게시글 POST
     // await axios.post('게시글 관련 API', {..., secureImages})
@@ -156,6 +164,7 @@ export default function InquiryPopUpPost() {
       onChangeTextarea={onChangeTextarea}
       handleClick={handleClick}
       images={images}
+      handleSubmit={handleSubmit}
     ></InquiryPopUpPostLayout>
   );
 }

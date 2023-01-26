@@ -247,6 +247,9 @@
       vertical-align: middle;
       transform: translate(-10%, 0);
     }
+    form {
+      display: inline-block;
+    }
     .buttonSubmit {
       border: 1px solid #000000;
       background-color: #000000;
