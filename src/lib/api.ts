@@ -1,6 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
 import axios, { AxiosResponse, CancelToken } from 'axios';
-import { User, Item, Category, SubCategory, Purchase } from './interface';
+import {
+  User,
+  Item,
+  Category,
+  SubCategory,
+  Purchase,
+  Style,
+} from './interface';
 import { PurchasePostDto } from './dto';
 
 axios.defaults.baseURL = process.env.REACT_APP_DB_HOST;
@@ -71,6 +78,7 @@ export const useApiItemFetcher = (id: number | null) => {
   );
   return id === null ? null : f;
 };
+
 export const apiPostReview = (
   id: number,
   rating: number,
@@ -236,3 +244,51 @@ export const apiPostViewedGoods = (itemId: number, token: string) =>
     { itemId },
     { headers: token ? auth(token) : undefined }
   );
+
+export const apiPostStyle = (
+  token: string | null,
+  images: string[],
+  itemIds: number[],
+  content?: string,
+  hashtag?: string
+) =>
+  axios.post<{}>(
+    '/api/style',
+    { images, itemIds, content, hashtag },
+    { headers: token ? auth(token) : undefined }
+  );
+
+export const useApiStyleFetcher = (id: number | null, token: string | null) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      return axios.get<{
+        style: Style;
+        likedCount: number;
+        isFollow: boolean;
+        isLike: boolean;
+      }>(`/api/style/${id}`, {
+        headers: token ? auth(token) : undefined,
+        cancelToken,
+      });
+    },
+    [id, token]
+  );
+  return id === null ? null : f;
+};
+
+export const useApiStyleListFetcher = (
+  index?: number,
+  count?: number,
+  sort?: string
+) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      return axios.get<{ styles: Style[]; totalPages: number }>('/api/styles', {
+        params: { index, count, sort },
+        cancelToken,
+      });
+    },
+    [index, count, sort]
+  );
+  return f;
+};
