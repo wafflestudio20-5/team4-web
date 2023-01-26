@@ -79,6 +79,16 @@ export interface Inquiry {
   createdDateTime: string;
 }
 
+export interface Style {
+  id: number;
+  user: User;
+  images: string[];
+  items: Item[];
+  content?: string;
+  hashtag?: string;
+  createdDateTime: string;
+}
+
 export enum InquiryType {
   size = 'size',
   delivery = 'delivery',
