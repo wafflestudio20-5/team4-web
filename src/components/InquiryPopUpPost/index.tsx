@@ -137,7 +137,16 @@ export default function InquiryPopUpPost() {
         input.title,
         input.content,
         secureImages
-      );
+      )
+        .then((response) => {
+          toast('상품문의가 추가되었습니다');
+          setTimeout(() => window.close(), 7000);
+        })
+        .catch((error) => {
+          if (error.response.status === 404) {
+            toast('상품에 존재하지 않는 옵션입니다');
+          }
+        });
     } else {
       apiPostInquiry(
         parsedId,
@@ -148,7 +157,16 @@ export default function InquiryPopUpPost() {
         input.title,
         input.content,
         undefined
-      );
+      )
+        .then((response) => {
+          toast('상품문의가 추가되었습니다');
+          setTimeout(() => window.close(), 7000);
+        })
+        .catch((error) => {
+          if (error.response.status === 404) {
+            toast('상품에 존재하지 않는 옵션입니다');
+          }
+        });
     }
     // TODO: 이미지 업로드 후 return된 secureImages를 request body에 포함하여 게시글 POST
     // await axios.post('게시글 관련 API', {..., secureImages})

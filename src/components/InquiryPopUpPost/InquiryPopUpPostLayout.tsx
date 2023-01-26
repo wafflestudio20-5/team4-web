@@ -204,7 +204,14 @@ export default function InquiryPopUpPostLayout({
         </dd>
       </dl>
       <div className={styles.buttonArea}>
-        <span className={styles.buttonQuit}>취소</span>
+        <span
+          className={styles.buttonQuit}
+          onClick={() => {
+            window.close();
+          }}
+        >
+          취소
+        </span>
         <form onClick={handleSubmit}>
           <span className={styles.buttonSubmit}>작성하기</span>
         </form>
