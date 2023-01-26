@@ -4,7 +4,7 @@ export interface User {
   username: string;
   nickname: string;
   reviewCount: number;
-  description: string;
+  description?: string;
   registrationDate: string;
   sex?: string;
   height?: number;
