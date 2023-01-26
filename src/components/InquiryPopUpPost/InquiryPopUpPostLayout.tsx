@@ -1,4 +1,5 @@
 import styles from './InquiryPopUpPostLayout.module.scss';
+import React from 'react';
 export default function InquiryPopUpPostLayout() {
   return (
     <div className={styles.inquiryPopUp}>
@@ -68,10 +69,70 @@ export default function InquiryPopUpPostLayout() {
             </tr>
             <tr>
               <th>제목</th>
-              <td></td>
+              <td className={styles.titleArea}>
+                <input
+                  type="text"
+                  name="title"
+                  className={styles.titleInput}
+                  maxLength={15}
+                  placeholder="15자 이내 입력"
+                />
+                <label>
+                  <input type="checkbox" name="isSecret" />
+                  <span>비밀글</span>
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <th>내용</th>
+              <td className={styles.contentArea}>
+                <textarea
+                  name="content"
+                  className={styles.contentInput}
+                  rows={10}
+                  cols={45}
+                  placeholder="내용 입력"
+                ></textarea>
+              </td>
+            </tr>
+            <tr>
+              <th>이미지</th>
+              <td className={styles.imageArea}>
+                <span>+</span>
+              </td>
             </tr>
           </tbody>
         </table>
+      </div>
+      <dl className="qa-info-area">
+        <dt>상품문의 안내</dt>
+        <dd>
+          <ul className="qa-comment">
+            <li>
+              - 상품문의는 재입고, 사이즈, 배송 등 상품에 대하여 브랜드
+              담당자에게 문의하는 게시판입니다.
+            </li>
+            <li>
+              <strong>
+                - 욕설, 비방, 거래 글, 분쟁 유발, 명예훼손, 허위사실 유포, 타
+                쇼핑몰 언급,광고성 등의 부적절한 게시글은 금지합니다. 더불어
+                상품 문의 시 비밀글만 작성되도록 제한됩니다.
+              </strong>
+            </li>
+            <li>
+              <strong>
+                - 주문번호, 연락처, 계좌번호 등의 개인 정보 관련 내용은 공개되지
+                않도록 비밀글로 문의해 주시기 바랍니다.
+              </strong>{' '}
+              공개된 글은 비밀글로 전환될 수 있으며, 개인 정보 노출로 인한
+              피해는 무신사 스토어가 책임지지 않습니다.
+            </li>
+          </ul>
+        </dd>
+      </dl>
+      <div className={styles.buttonArea}>
+        <span className={styles.buttonQuit}>취소</span>
+        <span className={styles.buttonSubmit}>작성하기</span>
       </div>
     </div>
   );
