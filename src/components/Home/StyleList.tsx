@@ -35,7 +35,7 @@ export default function StyleList() {
       <div className={styles.moreView}>
         <button
           onClick={() => {
-            navigate('/');
+            navigate('/stylelist');
           }}
         >
           스타일 더 보기 {' >'}
