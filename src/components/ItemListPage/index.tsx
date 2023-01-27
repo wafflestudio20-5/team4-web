@@ -1,19 +1,19 @@
-import ItemList from './ItemList';
-import ItemListPageHeader from './ItemListPageHeader';
-import styles from './index.module.css';
+import { useState, useEffect } from 'react';
 import {
   useSearchParams,
   useNavigate,
   createSearchParams,
 } from 'react-router-dom';
-import { useState } from 'react';
+import { toast } from 'react-toastify';
+import ItemList from './ItemList';
+import ItemListPageHeader from './ItemListPageHeader';
 import { useApiData, useApiItemListFetcher } from '../../lib/api';
 import {
   Category,
   SubCategory,
   getCategorybySubCategory,
 } from '../../lib/interface';
-import { useEffect } from 'react';
+import styles from './index.module.css';
 
 export default function ItemListPage() {
   const navigate = useNavigate();
@@ -37,6 +37,13 @@ export default function ItemListPage() {
       ? SubCategory[query as keyof typeof SubCategory]
       : undefined;
   const searchKey = type === 'search' && query ? query : undefined;
+
+  useEffect(() => {
+    if (type === 'search' && (!searchKey || searchKey.trim().length === 0)) {
+      toast('유효하지 않은 검색입니다.');
+      navigate(-1);
+    }
+  }, [type, searchKey, navigate]);
 
   const { data: itemsData } = useApiData(
     useApiItemListFetcher(
