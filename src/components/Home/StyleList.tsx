@@ -1,13 +1,12 @@
 // import { useApiData, useApiStyleListFetcher } from '../../lib/api';
 import { Style } from '../../lib/interface';
 import styles from './StyleList.module.scss';
-import styled from 'styled-components';
 import StylePreview from './StylePreview';
 import { useNavigate } from 'react-router-dom';
 import { styleList } from './mockstyle';
 import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import './slick.scss';
+import './slick-theme.scss';
 import { ReactComponent as Next } from '../../resources/image/forward.svg';
 import { ReactComponent as Before } from '../../resources/image/back.svg';
 
@@ -52,48 +51,20 @@ function StylePreviewList({ styleList }: StylePreviewListProps) {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 3,
-    nextArrow: (
-      <Div>
-        <Next />
-      </Div>
-    ),
-    prevArrow: (
-      <DivPre className={styles.slideButton}>
-        <Before />
-      </DivPre>
-    ),
+    Arrow: true,
+    nextArrow: <Next />,
+    prevArrow: <Before />,
   };
   return (
     <div className={styles.itemListBox}>
-      <StyledSlider {...settings}>
+      <Slider {...settings}>
         {styleList?.map((styleSingle) => (
           <StylePreview
             key={styleSingle.id}
             styleSingle={styleSingle}
           ></StylePreview>
         ))}
-      </StyledSlider>
+      </Slider>
     </div>
   );
 }
-
-const StyledSlider = styled(Slider)`
-  .slick-prev::before,
-  .slick-next::before {
-    opacity: 0;
-    display: none;
-  }
-`;
-
-const Div = styled.div`
-  width: 30px;
-  height: 30px;
-  z-index: 99;
-  right: -30px;
-`;
-const DivPre = styled.div`
-  width: 30px;
-  height: 30px;
-  z-index: 99;
-  left: -35px;
-`;
