@@ -79,10 +79,14 @@ function RegisterPage() {
             });
         break;
       default:
-        setIsAgreementChecked((prev) => ({
+        const nextIsAgreementChecked = {
           ...isAgreementChecked,
-          [id]: !prev[id as keyof IsAgreementChecked],
-        }));
+          [id]: !isAgreementChecked[id as keyof IsAgreementChecked],
+        };
+        checkEveryAgreementChecked(nextIsAgreementChecked)
+          ? (nextIsAgreementChecked.agreementAll = true)
+          : (nextIsAgreementChecked.agreementAll = false);
+        setIsAgreementChecked(nextIsAgreementChecked);
         break;
     }
   };
@@ -221,6 +225,22 @@ function RegisterPage() {
     },
     [isInputFocused.nickname]
   );
+
+  const checkEveryAgreementChecked = (
+    isAgreementChecked: IsAgreementChecked
+  ) => {
+    const agreementKeys = Object.keys(isAgreementChecked) as Array<
+      keyof IsAgreementChecked
+    >;
+    let isEveryAgreementChecked = true;
+    agreementKeys.forEach((key) => {
+      if (key !== 'agreementAll' && !isAgreementChecked[key]) {
+        isEveryAgreementChecked = false;
+        return;
+      }
+    });
+    return isEveryAgreementChecked;
+  };
 
   const checkFormValidity = useCallback(() => {
     return (
