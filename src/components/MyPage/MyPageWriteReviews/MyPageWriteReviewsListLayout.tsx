@@ -1,5 +1,6 @@
 import styles from './MyPageWriteReviewsListLayout.module.scss';
 import { Purchase } from '../../../lib/interface';
+import { formatDate } from '../../../lib/formatters/dateFormatter';
 
 interface ReviewItemParams {
   data: Purchase;
@@ -24,11 +25,11 @@ function ReviewItem({ data, onClick }: ReviewItemParams) {
         </div>
       </td>
       <td className={styles.purchaseDate}>
-        {data?.createdDate}
+        {formatDate(data.createdDateTime)}
         <br />
         구매확정
       </td>
-      {data?.review ? (
+      {data?.isReviewed ? (
         <td>
           <div className={styles.reviewWriteDone}>후기 작성완료</div>
         </td>

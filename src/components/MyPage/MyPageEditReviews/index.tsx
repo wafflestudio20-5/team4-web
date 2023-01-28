@@ -1,20 +1,20 @@
-import MyPageWriteReviewsLayout from './MyPageWriteReviewsLayout';
+import MyPageEditReviewsLayout from './MyPageEditReviewsLayout';
 import { useLocation, useNavigate } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
-import { Purchase } from '../../../lib/interface';
-import { toast } from 'react-toastify';
+import { Review } from '../../../lib/interface';
+import React, { useEffect, useState } from 'react';
 import { FileUpload, useFileUpload } from 'use-file-upload';
-import { apiPostImage, apiPostReview } from '../../../lib/api';
-interface MyPageWriteReviewsParams {
+import { toast } from 'react-toastify';
+import axios from 'axios/index';
+import { apiPutReview, apiPostImage } from '../../../lib/api';
+interface MyPageEditReviewsParams {
   accessToken: string | null;
 }
-
-export default function MyPageWriteReviews({
+export default function MyPageEditReviews({
   accessToken,
-}: MyPageWriteReviewsParams) {
+}: MyPageEditReviewsParams) {
   const location = useLocation();
+  const data = location.state as Review;
 
-  const data = location.state as Purchase;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,10 +24,10 @@ export default function MyPageWriteReviews({
   }, [data, navigate]);
 
   const [input, setInput] = useState({
-    rating: 0,
-    size: 'mid',
-    color: 'mid',
-    content: '',
+    rating: data.rating,
+    size: data.size,
+    color: data.color,
+    content: data.content,
   });
   const [isText, setIsText] = useState<boolean>(true);
   const onTextClick = (e: React.MouseEvent<HTMLElement>) => {
@@ -45,7 +45,7 @@ export default function MyPageWriteReviews({
   };
 
   const [imageFiles, setImageFiles] = useFileUpload();
-  const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState<string[]>(data.images);
 
   const handleClick = () => {
     setImageFiles({ accept: 'image/*', multiple: true }, setImageFilesCallBack);
@@ -91,7 +91,7 @@ export default function MyPageWriteReviews({
       console.log(response.data.secureImages); // 업로드한 이미지들의 URL로 이루어진 string[]
       secureImages = response.data.secureImages;
 
-      apiPostReview(
+      apiPutReview(
         data.id,
         input.rating,
         input.content,
@@ -99,9 +99,10 @@ export default function MyPageWriteReviews({
         input.color,
         secureImages,
         accessToken
-      ).then((response) => navigate(-1));
+      );
+      navigate(-1);
     } else {
-      apiPostReview(
+      apiPutReview(
         data.id,
         input.rating,
         input.content,
@@ -109,25 +110,26 @@ export default function MyPageWriteReviews({
         input.color,
         [],
         accessToken
-      ).then((response) => navigate(-1));
+      );
+      navigate(-1);
     }
     // TODO: 이미지 업로드 후 return된 secureImages를 request body에 포함하여 게시글 POST
     // await axios.post('게시글 관련 API', {..., secureImages})
   };
 
   return (
-    <MyPageWriteReviewsLayout
+    <MyPageEditReviewsLayout
       data={data}
-      input={input}
-      onChange={onChange}
-      setInput={setInput}
-      onChangeTextArea={onChangeTextArea}
-      onTextClick={onTextClick}
-      onImageClick={onImageClick}
-      isText={isText}
-      handleClick={handleClick}
       handleSubmit={handleSubmit}
+      onImageClick={onImageClick}
+      onTextClick={onTextClick}
+      handleClick={handleClick}
+      isText={isText}
       images={images}
-    ></MyPageWriteReviewsLayout>
+      input={input}
+      onChangeTextArea={onChangeTextArea}
+      setInput={setInput}
+      onChange={onChange}
+    ></MyPageEditReviewsLayout>
   );
 }

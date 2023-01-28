@@ -5,14 +5,13 @@ import { RootState, AppDispatch } from '../../store';
 import { postLogout } from '../../store/slices/session';
 import MyPageHeader, { MyPageHeaderProps } from './MyPageHeader/';
 import MyPageNavigation from './MyPageNavigation';
-import MyPageMain from './MyPageMain';
 import MyPageInfo from './MyPageInfo';
 import MyPageOrder from './MyPageOrder';
 import MyPageViewed from './MyPageViewed';
+import MyPageWriteReviews from './MyPageWriteReviews';
 import MyPageWriteReviewsList from './MyPageWriteReviews/indexList';
 import Footer from '../Footer';
 import { Session } from '../../lib/interface';
-import MyPageWriteReviews from "./MyPageWriteReviews";
 
 function MyPageLayout({ user, onLogout }: MyPageHeaderProps) {
   return (
@@ -48,15 +47,21 @@ function MyPage() {
     return (
       <Routes>
         <Route element={<MyPageLayout user={user} onLogout={onLogout} />}>
-          <Route index element={<MyPageMain user={user} />} />
+          <Route index element={<MyPageInfo user={user} />} />
           <Route path="info" element={<MyPageInfo user={user} />} />
-          <Route path="review" element={<MyPageWriteReviewsList accessToken={accessToken}/>} />
-          <Route path="review/write" element={<MyPageWriteReviews accessToken={accessToken}/>} />
+          <Route
+            path="review"
+            element={<MyPageWriteReviewsList accessToken={accessToken} />}
+          />
+          <Route
+            path="review/write"
+            element={<MyPageWriteReviews accessToken={accessToken} />}
+          />
+          {/*<Route path="review/edit" element={<MyPageEditReviews data={} accessToken={accessToken}/>} />*/}
           <Route
             path="order"
             element={<MyPageOrder accessToken={accessToken} />}
           />
-
           <Route
             path="item_inquiry"
             element={<div>/mypage/item_inquiry</div>}

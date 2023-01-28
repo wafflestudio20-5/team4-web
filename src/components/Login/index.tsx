@@ -28,7 +28,11 @@ export default function LoginPage() {
     });
   };
 
-  const onLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const onLogin = async (
+    e:
+      | React.MouseEvent<HTMLButtonElement>
+      | React.KeyboardEvent<HTMLInputElement>
+  ) => {
     e.preventDefault();
     const { username, password } = input;
     setInput({
@@ -47,9 +51,13 @@ export default function LoginPage() {
     }
   };
 
+  const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') onLogin(e);
+  };
+
   const onSocialLogin = () => {
     window.location.href =
-      'http://13.209.67.42:8080/oauth2/authorization/kakao';
+      process.env.REACT_APP_REDIRECT_HOST + '/oauth2/authorization/kakao';
   };
 
   useEffect(() => {
@@ -63,6 +71,7 @@ export default function LoginPage() {
       input={input}
       onChange={onChange}
       onLogin={onLogin}
+      onKeyPress={onKeyPress}
       onSocialLogin={onSocialLogin}
     />
   );

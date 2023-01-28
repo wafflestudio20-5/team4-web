@@ -4,7 +4,7 @@ export interface User {
   username: string;
   nickname: string;
   reviewCount: number;
-  description: string;
+  description?: string;
   registrationDate: string;
   sex?: string;
   height?: number;
@@ -23,6 +23,7 @@ export interface Item {
   name: string;
   brand: string;
   images: string[];
+  image: string;
   rating: number;
   oldPrice: number;
   sale?: number;
@@ -37,11 +38,11 @@ export interface Item {
 export interface Purchase {
   id: number;
   item: Item;
-  createdDate?: string;
+  createdDateTime?: string;
   payment?: number;
   quantity: number;
   option?: string;
-  review?: Review;
+  isReviewed?: boolean;
 }
 
 export interface Review {
@@ -75,6 +76,16 @@ export interface Inquiry {
   content: string;
   images: string[];
   isSecret: boolean;
+  createdDateTime: string;
+}
+
+export interface Style {
+  id: number;
+  user: User;
+  images: string[];
+  items: Item[];
+  content?: string;
+  hashtag?: string;
   createdDateTime: string;
 }
 
