@@ -1,6 +1,6 @@
 import styles from './MyPageReviewListLayout.module.scss';
 import { Review } from '../../../lib/interface';
-import StarRate from '../../ReviewBox/StarRate';
+import StarRate from './StarRate';
 import React from 'react';
 interface MyPageReviewListLayoutParams {
   onClickWrite: () => void;
