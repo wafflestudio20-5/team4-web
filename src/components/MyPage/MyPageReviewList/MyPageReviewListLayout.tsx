@@ -1,97 +1,143 @@
 import styles from './MyPageReviewListLayout.module.scss';
-import { Review } from '../../../lib/interface';
+import { Review, Comment } from '../../../lib/interface';
 import StarRate from './StarRate';
-import React from 'react';
+import React, { useState } from 'react';
+import { getRelativeDateTime } from '../../../lib/formatters/dateTimeFormatter';
+import {
+  formatColorReview,
+  formatSizeReview,
+} from '../../../lib/formatters/reviewFormatter';
 interface MyPageReviewListLayoutParams {
   onClickWrite: () => void;
+  data: Review[] | null;
 }
 interface ReviewWrittenItemParams {
   data: Review;
 }
-function ReviewComment() {
+interface ReviewCommentListParams {
+  data: Comment[];
+}
+interface ReviewCommentParams {
+  data: Comment;
+}
+function ReviewComment({ data }: ReviewCommentParams) {
   return (
     <li className={styles.commentItem}>
-      <div className={styles.commentUserPic}></div>
-      <strong className="name">LV 3 이재운72</strong>
-      <span className="time">2023.01.28 16:05</span>
-      <p className="comment">
-        fjfjfjfjfjdajslkdffjfjfjfjfjdajslkdffjfjfjfjfjdajslkdffjfjfjfjfjdajslkdffjfjfjfjfjdajslkdffjfjfjfjfjdajslkdffjfjfjfjfjdajslkdf
-        fjfjfjfjfjdajslkdffjfjfjfjfjdajslkdffjfjfjfjfjdajslkdffjfjfjfjfjdajslkdffjfjfjfjfjdajslkdffjfjfjfjfjdajslkdffjfjfjfjfjdajslkdffjfjfjfjfjdajslkdffjfjfjfjfjdajslkdffjfjfjfjfjdajslkdffjfjfjfjfjdajslkdffjfjfjfjfjdajslkdffjfjfjfjfjdajslkdf
-      </p>
+      <div
+        className={styles.commentUserPic}
+        style={{
+          background: `url(${data.user.image}) no-repeat 50% 50%`,
+        }}
+      ></div>
+      <strong className="name">{data.user.nickname}</strong>
+      <span className="time">{data.createdDateTime}</span>
+      <p className="comment">{data.content}</p>
     </li>
   );
 }
-function ReviewCommentList() {
-  return (
-    <ul className={styles.commentWrap}>
-      <ReviewComment />
-      <p className={styles.moreButton}>
-        <span>댓글 더보기</span>
-      </p>
-    </ul>
-  );
+function ReviewCommentList({ data }: ReviewCommentListParams) {
+  const [more, setMore] = useState<boolean>(false);
+
+  if (data.length <= 2) {
+    return (
+      <ul className={styles.commentWrap}>
+        {data.map((comment) => (
+          <ReviewComment data={comment} />
+        ))}
+      </ul>
+    );
+  } else {
+    if (more === false) {
+      return (
+        <ul className={styles.commentWrap}>
+          <ReviewComment data={data[0]} />
+          <ReviewComment data={data[1]} />
+          <p
+            className={styles.moreButton}
+            onClick={() => {
+              setMore(true);
+            }}
+          >
+            <span>댓글 더보기</span>
+          </p>
+        </ul>
+      );
+    } else {
+      return (
+        <ul className={styles.commentWrap}>
+          {data.map((comment) => (
+            <ReviewComment data={comment} />
+          ))}
+        </ul>
+      );
+    }
+  }
 }
 
-function ReviewWrittenItem() {
+function ReviewWrittenItem({ data }: ReviewWrittenItemParams) {
+  const [showComment, setShowComment] = useState<boolean>(false);
+  const onClick = () => {
+    if (showComment === false) {
+      setShowComment(true);
+    } else {
+      setShowComment(false);
+    }
+  };
   return (
     <li className={styles.reviewWrittenItem}>
       <div className={styles.ItemInfo}>
-        <a href="https://www.musinsa.com/app/goods/2780253/0">
+        <a href={`http://localhost:3000/goods/${data.purchase.item.id}`}>
           <img
-            src="https://image.msscdn.net/images/goods_img/20220907/2780253/2780253_2_100.jpg"
-            alt="아이템 사진"
+            src={data.purchase.item.images[0]}
+            alt={data.purchase.item.name}
           />
         </a>
         <ul>
-          <li>인사일런스</li>
+          <li>{data.purchase.item.brand}</li>
           <li>
-            <b>오버사이즈 발마칸 코트 DARK NAVY</b>
+            <b>{data.purchase.item.name}</b>
           </li>
-          <li>S</li>
+          <li>{data.purchase.option}</li>
         </ul>
       </div>
-      <div className={styles.ItemContent}>
+      <div className={styles.ItemContent} onClick={onClick}>
         <div className={styles.reviewDate}>
-          <span>11일 전</span>
+          <span>{getRelativeDateTime(data.createdDateTime)}</span>
         </div>
         <div className={styles.starWrap}>
-          <StarRate rating_score={10} review_id={1}></StarRate>
+          <StarRate rating_score={data.rating} review_id={data.id}></StarRate>
         </div>
         <div className={styles.reviewContent}>
-          <div className={styles.contentText}>
-            사이즈가 S지만 오버사이즈라서 상당히 기장이나 품이 큽니다. 그점
-            유의하셨으면 좋겠어요! 사이즈가 S지만 오버사이즈라서 상당히 기장이나
-            품이 큽니다. 그점 유의하셨으면 좋겠어요! 사이즈가 S지만
-            오버사이즈라서 상당히 기장이나 품이 큽니다. 그점 유의하셨으면
-            좋겠어요! 사이즈가 S지만 오버사이즈라서 상당히 기장이나 품이 큽니다.
-            그점 유의하셨으면 좋겠어요!
-          </div>
+          <div className={styles.contentText}>{data.content}</div>
           <div className={styles.contentValue}>
             <ul className={styles.reviewEvaluationList}>
               <li className={styles.reviewEvaluationItem}>
                 사이즈&nbsp;
-                <span>커요</span>
+                <span>{formatSizeReview(data.size)}</span>
               </li>
               <li className={styles.reviewEvaluationItem}>
                 색감&nbsp;
-                <span>밝아요</span>
+                <span>{formatColorReview(data.color)}</span>
               </li>
             </ul>
           </div>
         </div>
         <div className={styles.commentCount}>
-          댓글 <span>3개</span>
+          댓글 <span>{data.comments.length}</span>
         </div>
       </div>
       <div className={styles.reviewType}>일반</div>
-      <div className={styles.reviewComment}>
-        <ReviewCommentList />
-      </div>
+      {showComment ? (
+        <div className={styles.reviewComment}>
+          <ReviewCommentList data={data.comments} />
+        </div>
+      ) : null}
     </li>
   );
 }
 export default function MyPageReviewListLayout({
   onClickWrite,
+  data,
 }: MyPageReviewListLayoutParams) {
   return (
     <div className={styles.reviewWrapper}>
@@ -118,8 +164,11 @@ export default function MyPageReviewListLayout({
           <span className={styles.content}>내용</span>
           <span className={styles.type}>후기 종류</span>
         </div>
+
         <ul className={styles.reviewList}>
-          <ReviewWrittenItem />
+          {data?.map((review) => (
+            <ReviewWrittenItem data={review} />
+          ))}
         </ul>
       </div>
     </div>

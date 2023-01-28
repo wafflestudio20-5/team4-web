@@ -96,6 +96,19 @@ export const useApiReviewListFetcher = (
   return id === null ? null : f;
 };
 
+export const useApiGetUserReviewListFetcher = (token: string | null) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      return axios.get<{ reviews: Review[] }>('/api/user/me/reviews', {
+        headers: token ? auth(token) : undefined,
+        cancelToken,
+      });
+    },
+    [token]
+  );
+  return f;
+};
+
 export const apiPostReview = (
   id: number,
   rating: number,
