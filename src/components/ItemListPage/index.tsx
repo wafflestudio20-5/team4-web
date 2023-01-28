@@ -119,6 +119,8 @@ export default function ItemListPage() {
         setSort={setSort}
         pageNum={pageNum}
         setPageNum={setPageNum}
+        searchKey={searchKey}
+        totalPages={totalPages}
       />
     </div>
   );

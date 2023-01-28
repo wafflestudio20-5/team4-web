@@ -16,6 +16,11 @@ function GnbList({ user, onLogout }: GnbListProps) {
       {user ? (
         <ul>
           <li>
+            <Link className={styles.gnb_element_closet} to="/closet/my">
+              나의 옷장
+            </Link>
+          </li>
+          <li>
             <Link className={styles.gnb_element} to="/mypage">
               마이페이지
             </Link>
