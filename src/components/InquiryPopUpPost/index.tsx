@@ -35,7 +35,6 @@ export default function InquiryPopUpPost() {
   useEffect(() => {
     if (error) {
       const payload = error.payload as AxiosError;
-      console.log(payload);
       if (payload.response?.status === 404) {
         toast('해당하는 상품을 찾을 수 없습니다.');
         navigate('/');
