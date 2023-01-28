@@ -10,9 +10,11 @@ import { getBarWidth } from '../../../lib/formatters/ratingFormatter';
 interface MyPageReviewListLayoutParams {
   onClickWrite: () => void;
   data: Review[] | null;
+  onEdit: (data: Review) => void;
 }
 interface ReviewWrittenItemParams {
   data: Review;
+  onEdit: (data: Review) => void;
 }
 interface ReviewCommentListParams {
   data: Comment[];
@@ -74,7 +76,7 @@ function ReviewCommentList({ data }: ReviewCommentListParams) {
   }
 }
 
-function ReviewWrittenItem({ data }: ReviewWrittenItemParams) {
+function ReviewWrittenItem({ data, onEdit }: ReviewWrittenItemParams) {
   const [showComment, setShowComment] = useState<boolean>(false);
   const onClick = () => {
     if (showComment === false) {
@@ -103,6 +105,15 @@ function ReviewWrittenItem({ data }: ReviewWrittenItemParams) {
       <div className={styles.ItemContent} onClick={onClick}>
         <div className={styles.reviewDate}>
           <span>{getRelativeDateTime(data.createdDateTime)}</span>
+          <span
+            onClick={() => {
+              onEdit(data);
+            }}
+          >
+            {' '}
+            &nbsp;&nbsp;수정 |
+          </span>
+          <span> 삭제</span>
         </div>
         <div className={styles.starWrap}>
           <span className={styles.star_background}>
@@ -145,6 +156,7 @@ function ReviewWrittenItem({ data }: ReviewWrittenItemParams) {
 export default function MyPageReviewListLayout({
   onClickWrite,
   data,
+  onEdit,
 }: MyPageReviewListLayoutParams) {
   return (
     <div className={styles.reviewWrapper}>
@@ -174,7 +186,7 @@ export default function MyPageReviewListLayout({
 
         <ul className={styles.reviewList}>
           {data?.map((review) => (
-            <ReviewWrittenItem data={review} />
+            <ReviewWrittenItem data={review} onEdit={onEdit} />
           ))}
         </ul>
       </div>

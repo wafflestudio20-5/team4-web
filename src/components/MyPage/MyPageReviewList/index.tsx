@@ -1,6 +1,7 @@
 import MyPageReviewListLayout from './MyPageReviewListLayout';
 import { useNavigate } from 'react-router-dom';
 import { useApiData, useApiGetUserReviewListFetcher } from '../../../lib/api';
+import { Review } from '../../../lib/interface';
 
 export default function MyPageReviewList({
   accessToken,
@@ -16,11 +17,15 @@ export default function MyPageReviewList({
     useApiGetUserReviewListFetcher(accessToken)
   );
   const reviews = reviewData?.reviews ?? null;
+  const onEdit = (data: Review) => {
+    navigate('/mypage/review/edit', { state: data });
+  };
 
   return (
     <MyPageReviewListLayout
       onClickWrite={onClickWrite}
       data={reviews}
+      onEdit={onEdit}
     ></MyPageReviewListLayout>
   );
 }
