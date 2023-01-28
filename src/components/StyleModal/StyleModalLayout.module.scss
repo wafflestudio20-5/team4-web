@@ -7,8 +7,7 @@
   left: 0;
   right: 0;
   z-index: 9999;
-  overflow: auto;
-  background: rbga(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -25,9 +24,10 @@
 .modal {
   background-color: white;
   border-radius: 10px;
-  border: 1px solid black;
   height: 460px;
-  width: 720px;
+  width: 680px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   animation-duration: 0.25s;
   animation-timing-function: ease-out;
   animation-name: slideUp;
@@ -36,6 +36,31 @@
 
 .wrapper.close > .modal {
   animation-name: slideDown;
+}
+
+.images {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.content {
+  width: 100%;
+}
+
+.header {
+  width: 100%;
+  height: 64px;
+  border-bottom: 1px solid black;
+  display: flex;
+  align-items: center;
+}
+
+.profile {
+  margin-left: 16px;
+}
+
+.profile_image {
+  width: 36px;
+  height: 36px;
 }
 
 @keyframes fadeIn {
