@@ -29,3 +29,43 @@ li {
   width: 960px;
   border: 1px solid #ddd;
 }
+
+.page_index_box {
+  height: 40px;
+  padding-right: 12px;
+  border-bottom: 1px solid #ddd;
+  font-weight: 700;
+  line-height: 40px;
+  text-align: right;
+}
+
+.pagenation_wrapper {
+  width: 100%;
+  height: 40px;
+  text-align: right !important;
+}
+
+.pagenation {
+  display: inline-block;
+  button {
+    border: none;
+    border-left: 1px solid #ddd;
+    width: auto;
+    min-width: 32px;
+    padding: 0 2px;
+    line-height: 40px;
+    text-align: center;
+    color: #b2b2b2;
+    background-color: white;
+    cursor: pointer;
+  }
+  .selected {
+    background-color: #f3f3f3;
+    font-weight: bold;
+    color: black;
+  }
+}
+
+.empty_body {
+  padding-bottom: 30px;
+}

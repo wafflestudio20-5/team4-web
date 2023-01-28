@@ -8,21 +8,52 @@ interface ReviewsProps {
   count: number;
 }
 
-const DEFAULT_REVIEWS_COUNT = 5;
+export const DEFAULT_REVIEWS_COUNT = 1;
 
 export default function Reviews({ itemId, count }: ReviewsProps) {
   /***
    *
+   * 백엔드 수정 전 임시 사용
+   *
+   */
+  count = 2;
+
+  /***
+   *
    * 페이지네이션
+   *
+   * 현재 페이지 번호: index
+   * 유효한 페이지 번호: [0, MAXIMUM_PAGE_INDEX]
+   * 유저에게 보여지는 페이지 번호: [Math.floor(index / DEFAULT_REVIEWS_COUNT) + 1, Math.floor(index / DEFAULT_REVIEWS_COUNT) + 5]
+   * (주의 ! 상태로 관리하는 페이지 번호는 0부터 시작하기 때문에 사용자에게 보여줄 때는 항상 +1을 해야 함)
    *
    */
 
-  const [index, setIndex] = useState<number>(0);
+  const [index, setIndex] = useState(0);
 
-  const MAXIMUM_PAGE_INDEX = Math.ceil(count / DEFAULT_REVIEWS_COUNT);
+  const MAXIMUM_PAGE_INDEX = Math.ceil(count / DEFAULT_REVIEWS_COUNT) - 1;
 
-  const onPageChange = (idx: number) => {
-    if (idx <= MAXIMUM_PAGE_INDEX) setIndex(idx);
+  const onPageSelect = (idx: number) => {
+    setIndex(idx);
+  };
+
+  const onSmallJumpBackwards = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (0 < index) setIndex(index - 1);
+  };
+
+  const onSmallJumpForwards = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (index < MAXIMUM_PAGE_INDEX) setIndex(index + 1);
+  };
+
+  const onBigJumpBackwards = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const bigIndex = Math.floor(index / 5);
+    if (0 < bigIndex) setIndex(bigIndex * 5 - 1);
+  };
+
+  const onBigJumpForwards = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const bigIndex = Math.floor(index / 5);
+    const maximumBigIndex = Math.floor(MAXIMUM_PAGE_INDEX / 5);
+    if (bigIndex < maximumBigIndex) setIndex((bigIndex + 1) * 5 + 1);
   };
 
   /***
@@ -40,8 +71,12 @@ export default function Reviews({ itemId, count }: ReviewsProps) {
     <ReviewsLayout
       count={count}
       reviews={reviews}
-      maxPageIdx={MAXIMUM_PAGE_INDEX}
-      onPageChange={onPageChange}
+      pageIndex={index}
+      onPageSelect={onPageSelect}
+      onSmallJumpBackwards={onSmallJumpBackwards}
+      onSmallJumpForwards={onSmallJumpForwards}
+      onBigJumpBackwards={onBigJumpBackwards}
+      onBigJumpForwards={onBigJumpForwards}
     />
   );
 }
