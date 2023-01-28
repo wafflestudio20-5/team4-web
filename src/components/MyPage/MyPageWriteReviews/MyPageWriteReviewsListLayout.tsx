@@ -51,11 +51,13 @@ function ReviewItem({ data, onClick }: ReviewItemParams) {
 interface MyPageWriteReviewsListLayoutParams {
   purchases: Purchase[] | null;
   onClick: (data: Purchase) => void;
+  onClickReviewList: () => void;
 }
 
 export default function MyPageWriteReviewsListLayout({
   purchases,
   onClick,
+  onClickReviewList,
 }: MyPageWriteReviewsListLayoutParams) {
   return (
     <div className={styles.reviewWrapper}>
@@ -63,7 +65,7 @@ export default function MyPageWriteReviewsListLayout({
         <h1>구매후기</h1>
         <div className={styles.tabGroup}>
           <span className={styles.tabWrite}>후기 작성&nbsp;</span>
-          <span className={styles.tabHistory}> / 후기 내역</span>
+          <span className={styles.tabHistory} onClick={onClickReviewList}> / 후기 내역</span>
         </div>
       </header>
       <ul className={styles.info}>
