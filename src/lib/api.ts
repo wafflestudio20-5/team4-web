@@ -253,7 +253,7 @@ export const apiPostInquiry = (
   isSecret: boolean,
   title: string,
   content: string,
-  images?: string[] | undefined
+  images: string[] | undefined
 ) =>
   axios.post<{}>(
     `/api/item/${id}/inquiry`,
