@@ -8,7 +8,7 @@ import {
   Purchase,
   Style,
 } from './interface';
-import { PurchasePostDto } from './dto';
+import { PatchMyInfoRequestDto, PurchasePostDto } from './dto';
 
 axios.defaults.baseURL = process.env.REACT_APP_DB_HOST;
 axios.defaults.withCredentials = true;
@@ -44,6 +44,14 @@ export const apiCheckNickname = (nickname: string) =>
 
 export const apiGetMyInfo = (token: string) =>
   axios.get<{ user: User }>('/api/user/me', { headers: auth(token) });
+
+export const apiPatchMyInfo = (
+  patchMyInfoRequestDto: PatchMyInfoRequestDto,
+  token: string | null
+) =>
+  axios.patch('/api/user/me', patchMyInfoRequestDto, {
+    headers: token ? auth(token) : undefined,
+  });
 
 export function useApiData<T>(
   fetch: ((cancel: CancelToken) => Promise<AxiosResponse<T>>) | null
@@ -110,7 +118,7 @@ export const apiPutReview = (
   );
 
 export const apiPostImage = (formData: FormData, token: string | null) =>
-  axios.post('/api/image-upload', formData, {
+  axios.post<{ secureImages: string[] }>('/api/image-upload', formData, {
     headers: token ? auth(token) : undefined,
   });
 

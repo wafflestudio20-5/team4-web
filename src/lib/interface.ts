@@ -5,6 +5,7 @@ export interface User {
   nickname: string;
   reviewCount: number;
   description?: string;
+  instaUsername?: string;
   registrationDate: string;
   sex?: string;
   height?: number;
