@@ -152,6 +152,7 @@ export default function DetailPage() {
       const purchase: Purchase[] = [
         {
           id: parsedId,
+          user: user,
           item: data.item,
           quantity: input.quantity,
           option: input.option,

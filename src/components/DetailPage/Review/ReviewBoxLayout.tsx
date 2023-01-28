@@ -38,17 +38,25 @@ export default function ReviewBoxLayout({
     <div className={styles.wrapper}>
       <div className={styles.profile}>
         <div className={styles.profile_image}>
-          <img src={user.image} alt="" />
+          <img src={review.purchase.user.image} alt="" />
         </div>
         <div className={styles.profile_text_wrapper}>
           <div className={styles.profile_text}>
-            <p className={styles.profile_text_left}>{user.nickname}</p>
+            <p className={styles.profile_text_left}>
+              {review.purchase.user.nickname}
+            </p>
             <p className={styles.profile_text_right}>
               {getRelativeDateTime(review.createdDateTime)}
             </p>
           </div>
           <div className={styles.profile_info}>
-            <p>{formatUserInfo(user.sex, user.height, user.weight)}</p>
+            <p>
+              {formatUserInfo(
+                review.purchase.user.sex,
+                review.purchase.user.height,
+                review.purchase.user.weight
+              )}
+            </p>
           </div>
         </div>
       </div>
