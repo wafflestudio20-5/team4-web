@@ -15,25 +15,22 @@ import SocialLoginPage from './components/SocialLoginPage';
 import ItemListPage from './components/ItemListPage';
 import InquiryPopUpPost from './components/InquiryPopUpPost';
 import StyleListPage from './components/StyleListPage';
-import StyleModal from './components/StyleModal';
 
 function AppRoutes() {
   return (
     <Routes>
       <Route element={<Header />}>
-        <Route element={<StyleModal />}>
-          <Route index element={<HomePage />} />
-          <Route element={<CategorySideBar />}>
-            <Route path="/cart" element={<ShoppingCart />} />
-            <Route path="/coupon" element={<></>} />
-            <Route path="/customercenter" element={<></>} />
-            <Route path="/goods/:id" element={<DetailPage />} />
-            <Route path="/itemlist" element={<ItemListPage />} />
-            <Route path="/stylelist" element={<StyleListPage />} />
-            <Route path="/purchase" element={<PurchasePage />} />
-          </Route>
-          <Route path="/mypage/*" element={<MyPage />} />
+        <Route index element={<HomePage />} />
+        <Route element={<CategorySideBar />}>
+          <Route path="/cart" element={<ShoppingCart />} />
+          <Route path="/coupon" element={<></>} />
+          <Route path="/customercenter" element={<></>} />
+          <Route path="/goods/:id" element={<DetailPage />} />
+          <Route path="/itemlist" element={<ItemListPage />} />
+          <Route path="/stylelist" element={<StyleListPage />} />
+          <Route path="/purchase" element={<PurchasePage />} />
         </Route>
+        <Route path="/mypage/*" element={<MyPage />} />
       </Route>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />

@@ -7,7 +7,11 @@
   left: 0;
   right: 0;
   z-index: 9999;
-  background-color: rbga(0, 0, 0, 0.5);
+  overflow: auto;
+  background: rbga(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   animation-duration: 0.25s;
   animation-timing-function: ease-out;
   animation-name: fadeIn;
@@ -21,8 +25,9 @@
 .modal {
   background-color: white;
   border-radius: 10px;
-  min-height: 180px;
-  min-width: 320px;
+  border: 1px solid black;
+  height: 460px;
+  width: 720px;
   animation-duration: 0.25s;
   animation-timing-function: ease-out;
   animation-name: slideUp;
