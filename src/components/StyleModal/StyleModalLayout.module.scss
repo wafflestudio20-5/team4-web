@@ -1,3 +1,11 @@
+h3 {
+  margin: 0;
+}
+
+span {
+  display: block;
+}
+
 .wrapper {
   position: fixed;
   width: 100%;
@@ -42,16 +50,16 @@
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-.content {
+.body {
   width: 100%;
 }
 
 .header {
   width: 100%;
   height: 64px;
-  border-bottom: 1px solid black;
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .profile {
@@ -61,6 +69,150 @@
 .profile_image {
   width: 36px;
   height: 36px;
+}
+
+.profile_text {
+  display: inline-block;
+  margin-left: 16px;
+  vertical-align: top;
+}
+
+.profile_nickname {
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 20px;
+}
+
+.profile_userinfo {
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 10px;
+  line-height: 16px;
+  color: #666;
+}
+
+.close_button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  filter: invert(60%);
+}
+
+.scrollable {
+  margin-left: 16px;
+  height: calc(100% - 64px);
+  overflow-y: scroll;
+}
+
+.content {
+  position: relative;
+}
+
+.content_text_wrapper {
+  padding: 8px 56px 0 0;
+}
+
+.content_text {
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 11px;
+  margin-bottom: 16px;
+}
+
+.content_hashtag {
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 11px;
+  color: #00a3ff;
+}
+
+.like_box_wrapper {
+  margin-top: 20px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.like_box {
+  width: 76px;
+  height: 38px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.like_icon {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  img {
+    width: 24px;
+    height: 24px;
+    filter: invert(70%);
+  }
+}
+
+.like_count {
+  display: flex;
+  justify-content: space-around;
+  font-size: 24px;
+  font-weight: normal;
+  line-height: 36px;
+}
+
+.style_created_time {
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 10px;
+  color: #a1a1a1;
+  position: absolute;
+  top: 8px;
+  right: 16px;
+}
+
+.item_wrapper {
+  margin-top: 18px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  width: 252px;
+  height: 78px;
+  display: grid;
+  grid-template-columns: 78px auto;
+}
+
+.item_image {
+  padding: 1px;
+  img {
+    width: 76px;
+    height: 76px;
+    object-fit: cover;
+  }
+}
+
+.item_info {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item_info_text {
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 10px;
+  .item_info_name {
+    margin-top: 2px;
+    font-weight: 700;
+  }
+}
+
+.item_info_price {
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  .item_info_sale {
+    display: inline-block;
+    color: red;
+  }
 }
 
 @keyframes fadeIn {

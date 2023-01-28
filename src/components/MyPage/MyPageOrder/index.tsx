@@ -1,7 +1,7 @@
 import ItemOrdered from './ItemOrdered';
 import styles from './MyPageOrder.module.scss';
 import { useApiGetPurchaseListFetcher, useApiData } from '../../../lib/api';
-import { formatDate } from '../../../lib/formatters/dateFormatter';
+import { formatDate } from '../../../lib/formatters/dateTimeFormatter';
 export default function MyPageOrder({
   accessToken,
 }: {

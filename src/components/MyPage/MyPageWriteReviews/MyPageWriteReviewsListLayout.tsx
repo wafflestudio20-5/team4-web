@@ -1,6 +1,6 @@
 import styles from './MyPageWriteReviewsListLayout.module.scss';
 import { Purchase } from '../../../lib/interface';
-import { formatDate } from '../../../lib/formatters/dateFormatter';
+import { formatDate } from '../../../lib/formatters/dateTimeFormatter';
 
 interface ReviewItemParams {
   data: Purchase;
