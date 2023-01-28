@@ -19,8 +19,8 @@ function generatePageArray(pageIndex: number, maxPageIndex: number): number[] {
   const array = [];
   const base = Math.floor(pageIndex / 5);
   var idx = 0;
-  while (idx < 5 && base + idx <= maxPageIndex) {
-    array.push(base + idx);
+  while (idx < 5 && base * 5 + idx <= maxPageIndex) {
+    array.push(base * 5 + idx);
     idx++;
   }
   return array;

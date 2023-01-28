@@ -8,7 +8,7 @@ interface ReviewsProps {
   count: number;
 }
 
-export const DEFAULT_REVIEWS_COUNT = 1;
+export const DEFAULT_REVIEWS_COUNT = 5;
 
 export default function Reviews({ itemId, count }: ReviewsProps) {
   /***
@@ -16,7 +16,7 @@ export default function Reviews({ itemId, count }: ReviewsProps) {
    * 백엔드 수정 전 임시 사용
    *
    */
-  count = 2;
+  count = 20;
 
   /***
    *
@@ -53,7 +53,7 @@ export default function Reviews({ itemId, count }: ReviewsProps) {
   const onBigJumpForwards = (e: React.MouseEvent<HTMLButtonElement>) => {
     const bigIndex = Math.floor(index / 5);
     const maximumBigIndex = Math.floor(MAXIMUM_PAGE_INDEX / 5);
-    if (bigIndex < maximumBigIndex) setIndex((bigIndex + 1) * 5 + 1);
+    if (bigIndex < maximumBigIndex) setIndex((bigIndex + 1) * 5);
   };
 
   /***
