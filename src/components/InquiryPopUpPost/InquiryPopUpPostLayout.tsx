@@ -108,7 +108,8 @@ export default function InquiryPopUpPostLayout({
               <th></th>
               <td className={styles.commentArea}>
                 - 클레임(교환/환불/취소)관련 문의는 마이페이지 {'>'} 1:1
-                문의에서 문의 바랍니다.
+                문의에서
+                <br /> 문의 바랍니다.
               </td>
             </tr>
             <tr>
