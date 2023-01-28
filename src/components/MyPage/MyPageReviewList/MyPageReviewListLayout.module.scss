@@ -127,6 +127,24 @@
   .starWrap {
     padding-left: 21px;
     padding-bottom: 10px;
+    height: 14px;
+    position: relative;
+    right: 8px;
+    .star_background {
+      overflow: hidden;
+      width: 90px;
+      height: 100%;
+      background: url('../../../resources/image/big_stars_background.svg') no-repeat;
+      background-position: left top;
+      background-size: 90px 100%;
+    }
+    .star_bar {
+      display: block;
+      height: 100%;
+      background: url('../../../resources/image/big_stars.svg') no-repeat;
+      background-position: left top;
+      background-size: 90px 100%;
+    }
   }
   .reviewContent {
     padding-left: 21px;

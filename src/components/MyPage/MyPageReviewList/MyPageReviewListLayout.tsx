@@ -1,12 +1,12 @@
 import styles from './MyPageReviewListLayout.module.scss';
 import { Review, Comment } from '../../../lib/interface';
-import StarRate from './StarRate';
 import React, { useState } from 'react';
 import { getRelativeDateTime } from '../../../lib/formatters/dateTimeFormatter';
 import {
   formatColorReview,
   formatSizeReview,
 } from '../../../lib/formatters/reviewFormatter';
+import { getBarWidth } from '../../../lib/formatters/ratingFormatter';
 interface MyPageReviewListLayoutParams {
   onClickWrite: () => void;
   data: Review[] | null;
@@ -105,7 +105,14 @@ function ReviewWrittenItem({ data }: ReviewWrittenItemParams) {
           <span>{getRelativeDateTime(data.createdDateTime)}</span>
         </div>
         <div className={styles.starWrap}>
-          <StarRate rating_score={data.rating} review_id={data.id}></StarRate>
+          <span className={styles.star_background}>
+            <span
+              className={styles.star_bar}
+              style={{
+                width: `${getBarWidth(data.rating)}%`,
+              }}
+            />
+          </span>
         </div>
         <div className={styles.reviewContent}>
           <div className={styles.contentText}>{data.content}</div>

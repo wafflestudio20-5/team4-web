@@ -12,28 +12,9 @@ import styles from './ReviewBoxLayout.module.scss';
 
 interface ReviewBoxLayoutProps {
   review: Review;
-  displayCommentBox: boolean;
 }
 
-/***
- *
- * Api 수정 전 사용할 임시 mock-up data입니다.
- * (나중에 user -> review.user로 수정해야 함.)
- *
- */
-
-const user = {
-  nickname: 'honggildong',
-  image: '//image.msscdn.net/mfile_s01/_simbols/_basic/t.png',
-  height: 170,
-  weight: 70,
-  sex: 'male',
-};
-
-export default function ReviewBoxLayout({
-  review,
-  displayCommentBox,
-}: ReviewBoxLayoutProps) {
+export default function ReviewBoxLayout({ review }: ReviewBoxLayoutProps) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.profile}>
@@ -131,7 +112,7 @@ export default function ReviewBoxLayout({
       </div>
       <div className={styles.comments_wrapper}>
         {/* 추후 수정 필요 */}
-        {displayCommentBox ? (
+        {review ? (
           <div className={styles.comment_input}>
             <div className={styles.comment_area}></div>
             <button className={styles.submit_button}>댓글작성</button>

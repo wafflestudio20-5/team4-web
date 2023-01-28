@@ -1,7 +1,6 @@
 import MyPageReviewListLayout from './MyPageReviewListLayout';
 import { useNavigate } from 'react-router-dom';
 import { useApiData, useApiGetUserReviewListFetcher } from '../../../lib/api';
-import { useState } from 'react';
 
 export default function MyPageReviewList({
   accessToken,
