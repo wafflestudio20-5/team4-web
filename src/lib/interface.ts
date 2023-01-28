@@ -4,11 +4,12 @@ export interface User {
   username: string;
   nickname: string;
   reviewCount: number;
-  description?: string;
   registrationDate: string;
-  sex?: string;
   height?: number;
   weight?: number;
+  sex?: string;
+  description?: string;
+  instaUsername?: string;
   socialKey?: string;
 }
 

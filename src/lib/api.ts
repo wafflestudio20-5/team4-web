@@ -307,3 +307,38 @@ export const useApiStyleListFetcher = (
   );
   return f;
 };
+
+export const useApiUserFectcher = (id: number | null, token: string | null) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      return axios.get<{
+        user: User;
+        count: {
+          styleCount: number;
+          followerCount: number;
+          followingCount: number;
+        };
+        isFollow: boolean;
+      }>(`/api/user/${id}`, {
+        headers: token ? auth(token) : undefined,
+        cancelToken,
+      });
+    },
+    [id, token]
+  );
+  return id === null ? null : f;
+};
+
+export const useApiUserStyleFecther = (id: number | null) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      return axios.get<{
+        styles: { id: number; image: string }[];
+      }>(`/api/user/${id}/styles`, {
+        cancelToken,
+      });
+    },
+    [id]
+  );
+  return id === null ? null : f;
+};
