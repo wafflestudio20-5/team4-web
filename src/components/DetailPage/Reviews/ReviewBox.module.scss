@@ -142,7 +142,7 @@ button {
   overflow: hidden;
   width: 90px;
   height: 100%;
-  background: url('../../../resources/image/big_stars.svg') no-repeat;
+  background: url('../../../resources/image/big_stars_background.svg') no-repeat;
   background-position: left top;
   background-size: 90px 100%;
 }
@@ -228,6 +228,10 @@ button {
   background-size: cover;
   align-items: center;
   justify-content: center;
+}
+
+.content_image_item:not(:first-of-type) {
+  margin-left: 5px;
 }
 
 .reply_count {

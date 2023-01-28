@@ -9,7 +9,7 @@ interface ReviewsProps {
   count: number;
 }
 
-const DEFAULT_REVIEWS_COUNT = 10;
+const DEFAULT_REVIEWS_COUNT = 5;
 
 export default function Reviews({ itemId, count }: ReviewsProps) {
   const { accessToken } = useSelector((state: RootState) => {

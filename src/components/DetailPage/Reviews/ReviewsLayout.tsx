@@ -13,15 +13,22 @@ interface ReviewsLayoutProps {
 
 export default function ReviewsLayout({
   count,
+  reviews,
+  maxPageIdx,
   accessToken,
+  onPageChange,
 }: ReviewsLayoutProps) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.title}>{`구매후기(${count})`}</div>
       <div className={styles.body}>
-        <div className={styles.review_list_wrapper}>
-          <ReviewBox accessToken={accessToken} />
-        </div>
+        <ul className={styles.review_list_wrapper}>
+          {reviews?.map((review, idx) => (
+            <li key={idx}>
+              <ReviewBox review={review} accessToken={accessToken} />
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

@@ -1,18 +1,20 @@
 import styles from './ReviewBoxLayout.module.scss';
-import { Comment, Review } from '../../lib/interface';
-
+import { Review } from '../../lib/interface';
+import { formatUserInfo } from '../../lib/formatters/userFormatter';
+import {
+  formatColorReview,
+  formatSizeReview,
+} from '../../lib/formatters/reviewFormatter';
 import StarRate from './StarRate';
 import React from 'react';
 
 interface ReviewBoxLayoutParams {
   reviewDate: string;
-  sex: string;
-  size: string;
-  color: string;
   moreCommentBool: boolean;
   onClick: (e: React.MouseEvent<HTMLInputElement>) => void;
   data: Review;
 }
+
 interface ReviewBoxCommentParams {
   commentProfilePic: string;
   commentContent: string;
@@ -51,9 +53,6 @@ function ReviewBoxComment({
 
 export default function ReviewBoxLayout({
   reviewDate,
-  sex,
-  size,
-  color,
   moreCommentBool,
   onClick,
   data,
@@ -110,7 +109,11 @@ export default function ReviewBoxLayout({
     <div>
       <div className={styles.reviewBox}>
         <div className={styles.reviewProfile}>
-          <img src={data.user.image} className={styles.reviewProfilePic} />
+          <img
+            src={data.user.image}
+            alt=""
+            className={styles.reviewProfilePic}
+          />
           <div className={styles.reviewProfileTextWrap}>
             <div className={styles.reviewProfileText}>
               <p className={styles.reviewProfileName}>{data.user.nickname}님</p>
@@ -118,7 +121,11 @@ export default function ReviewBoxLayout({
             </div>
             <div className={styles.reviewProfileInfo}>
               <p className={styles.reviewProfileBodyInfo}>
-                {sex}, {data.user.height}cm, {data.user.weight}kg
+                {formatUserInfo(
+                  data.user.sex,
+                  data.user.height,
+                  data.user.weight
+                )}
               </p>
             </div>
           </div>
@@ -127,6 +134,7 @@ export default function ReviewBoxLayout({
           <div className={styles.reviewGoodsThumbnail}>
             <img
               src={data.purchase.item.images[0]}
+              alt=""
               className={styles.reviewGoodsPic}
             />
           </div>
@@ -149,11 +157,11 @@ export default function ReviewBoxLayout({
             <ul className={styles.reviewEvaluationList}>
               <li className={styles.reviewEvaluationItem}>
                 사이즈&nbsp;
-                <span>{size}</span>
+                <span>{formatSizeReview(data.size)}</span>
               </li>
               <li className={styles.reviewEvaluationItem}>
                 색감&nbsp;
-                <span>{color}</span>
+                <span>{formatColorReview(data.color)}</span>
               </li>
             </ul>
           </div>
