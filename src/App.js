@@ -13,6 +13,8 @@ import PurchasePage from './components/PurchasePage';
 import ShoppingCart from './components/ShoppingCart';
 import SocialLoginPage from './components/SocialLoginPage';
 import ItemListPage from './components/ItemListPage';
+import InquiryPopUpPost from './components/InquiryPopUpPost';
+import StyleListPage from './components/StyleListPage';
 
 function AppRoutes() {
   return (
@@ -25,6 +27,7 @@ function AppRoutes() {
           <Route path="/customercenter" element={<></>} />
           <Route path="/goods/:id" element={<DetailPage />} />
           <Route path="/itemlist" element={<ItemListPage />} />
+          <Route path="/stylelist" element={<StyleListPage />} />
           <Route path="/purchase" element={<PurchasePage />} />
         </Route>
         <Route path="/mypage/*" element={<MyPage />} />
@@ -35,6 +38,7 @@ function AppRoutes() {
         path="/oauth2/redirect/:accessToken"
         element={<SocialLoginPage />}
       />
+      <Route path="/inquiry/:id" element={<InquiryPopUpPost />} />
     </Routes>
   );
 }

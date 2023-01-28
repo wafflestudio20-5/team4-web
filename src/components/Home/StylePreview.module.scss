@@ -1,0 +1,153 @@
+.itemPreview {
+  width: 450px;
+}
+
+.CGoods {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.stylesWrap {
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.image {
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  padding-top: 115%;
+  cursor: pointer;
+}
+.previewImage {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  height: auto;
+  transform: translateY(-50%);
+  mix-blend-mode: multiply;
+}
+
+.stylesitem {
+  padding: 10px 0px;
+  display: flex;
+
+  .stylesiteminfo {
+    flex: 3;
+    height: 150px;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    .imageDiv {
+      flex: 3;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+      .styleItemImage {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        height: 100%;
+        transform: translateY(-50%);
+        mix-blend-mode: multiply;
+      }
+    }
+    .infoDiv {
+      flex: 7;
+      padding: 10px 5px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      .infoLine {
+        display: -webkit-box;
+        height: 40px;
+        line-height: 40px;
+        font-size: 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: break-all;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+
+        .realPrice {
+          margin-right: 8px;
+          line-height: 100%;
+        }
+
+        .crossedOutPrice {
+          color: #aaa;
+          flex: 0 0 auto;
+          line-height: 100%;
+        }
+
+        .sale {
+          position: absolute;
+          right: 10px;
+          color: red;
+        }
+      }
+    }
+  }
+  .stylesiteminfo:hover {
+    cursor: pointer;
+  }
+}
+
+.stylesUser {
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  position: relative;
+  border-bottom: 1px solid #e5e5e5;
+
+  .stylesUserProfile {
+    padding-left: 10px;
+    flex: 1;
+    z-index: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    .styleItemImage {
+      height: 80%;
+      cursor: pointer;
+    }
+    .stylesUserNickName {
+      padding: 0px 10px;
+      font-size: 20px;
+      text-align: center;
+      font-weight: bold;
+      height: 80%;
+      line-height: 48px;
+      cursor: pointer;
+    }
+  }
+  .styleUserFollow {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    .styleUserFollowDiv {
+      font-size: 18px;
+      color: rgb(72, 189, 235);
+      cursor: pointer;
+    }
+    .styleUserMoreDiv {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img {
+        width: 60%;
+        cursor: pointer;
+      }
+    }
+  }
+}

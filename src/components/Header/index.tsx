@@ -5,6 +5,7 @@ import { RootState, AppDispatch } from '../../store';
 import { postLogout } from '../../store/slices/session';
 import HeaderLayout from './HeaderLayout';
 import { Session } from '../../lib/interface';
+import { toast } from 'react-toastify';
 
 function Header() {
   const [query, setQuery] = useState<string>('');
@@ -30,6 +31,10 @@ function Header() {
     e: React.MouseEvent<HTMLDivElement> | React.KeyboardEvent<HTMLInputElement>
   ) => {
     e.preventDefault();
+    if (query.trim().length === 0) {
+      toast('검색어를 입력해주세요.');
+      return;
+    }
     navigate({
       pathname: '/itemlist',
       search: `?${createSearchParams({

@@ -245,6 +245,21 @@ export const apiPostViewedGoods = (itemId: number, token: string) =>
     { headers: token ? auth(token) : undefined }
   );
 
+export const apiPostInquiry = (
+  id: number | null,
+  token: string | null,
+  type: string,
+  option: string | undefined,
+  isSecret: boolean,
+  title: string,
+  content: string,
+  images: string[] | undefined
+) =>
+  axios.post<{}>(
+    `/api/item/${id}/inquiry`,
+    { type, option, isSecret, title, content, images },
+    { headers: token ? auth(token) : undefined }
+  );
 export const apiPostStyle = (
   token: string | null,
   images: string[],
