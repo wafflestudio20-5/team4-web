@@ -134,7 +134,7 @@ export default function InquiryPopUpPost() {
       )
         .then((response) => {
           toast('상품문의가 추가되었습니다');
-          setTimeout(() => window.close(), 7000);
+          setTimeout(() => window.close(), 3000);
         })
         .catch((error) => {
           if (error.response.status === 404) {
@@ -154,7 +154,7 @@ export default function InquiryPopUpPost() {
       )
         .then((response) => {
           toast('상품문의가 추가되었습니다');
-          setTimeout(() => window.close(), 7000);
+          setTimeout(() => window.close(), 3000);
         })
         .catch((error) => {
           if (error.response.status === 404) {
