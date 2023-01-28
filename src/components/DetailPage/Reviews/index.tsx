@@ -13,13 +13,6 @@ export const DEFAULT_REVIEWS_COUNT = 5;
 export default function Reviews({ itemId, count }: ReviewsProps) {
   /***
    *
-   * 백엔드 수정 전 임시 사용
-   *
-   */
-  count = 20;
-
-  /***
-   *
    * 페이지네이션
    *
    * 현재 페이지 번호: index
@@ -55,12 +48,6 @@ export default function Reviews({ itemId, count }: ReviewsProps) {
     const maximumBigIndex = Math.floor(MAXIMUM_PAGE_INDEX / 5);
     if (bigIndex < maximumBigIndex) setIndex((bigIndex + 1) * 5);
   };
-
-  /***
-   *
-   * api 연결 전 임시 구현
-   *
-   */
 
   const { data: reviewsData } = useApiData(
     useApiReviewListFetcher(itemId, index, DEFAULT_REVIEWS_COUNT)
