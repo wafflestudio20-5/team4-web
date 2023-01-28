@@ -59,7 +59,10 @@ function MyPage() {
             element={<MyPageWriteReviews accessToken={accessToken} />}
           />
           {/*<Route path="review/edit" element={<MyPageEditReviews data={} accessToken={accessToken}/>} />*/}
-          <Route path="review/list" element={<MyPageReviewList />} />
+          <Route
+            path="review/list"
+            element={<MyPageReviewList accessToken={accessToken} />}
+          />
           <Route
             path="order"
             element={<MyPageOrder accessToken={accessToken} />}
