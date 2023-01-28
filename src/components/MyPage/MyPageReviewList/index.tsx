@@ -1,6 +1,10 @@
 import MyPageReviewListLayout from './MyPageReviewListLayout';
 import { useNavigate } from 'react-router-dom';
-import { useApiData, useApiGetUserReviewListFetcher } from '../../../lib/api';
+import {
+  apiDeleteReview,
+  useApiData,
+  useApiGetUserReviewListFetcher,
+} from '../../../lib/api';
 import { Review } from '../../../lib/interface';
 
 export default function MyPageReviewList({
@@ -20,12 +24,16 @@ export default function MyPageReviewList({
   const onEdit = (data: Review) => {
     navigate('/mypage/review/edit', { state: data });
   };
+  const onRemove = (id: number) => {
+    apiDeleteReview(id, accessToken);
+  };
 
   return (
     <MyPageReviewListLayout
       onClickWrite={onClickWrite}
       data={reviews}
       onEdit={onEdit}
+      onRemove={onRemove}
     ></MyPageReviewListLayout>
   );
 }

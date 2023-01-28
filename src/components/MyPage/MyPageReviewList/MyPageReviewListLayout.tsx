@@ -11,10 +11,12 @@ interface MyPageReviewListLayoutParams {
   onClickWrite: () => void;
   data: Review[] | null;
   onEdit: (data: Review) => void;
+  onRemove: (id: number) => void;
 }
 interface ReviewWrittenItemParams {
   data: Review;
   onEdit: (data: Review) => void;
+  onRemove: (id: number) => void;
 }
 interface ReviewCommentListParams {
   data: Comment[];
@@ -76,7 +78,11 @@ function ReviewCommentList({ data }: ReviewCommentListParams) {
   }
 }
 
-function ReviewWrittenItem({ data, onEdit }: ReviewWrittenItemParams) {
+function ReviewWrittenItem({
+  data,
+  onEdit,
+  onRemove,
+}: ReviewWrittenItemParams) {
   const [showComment, setShowComment] = useState<boolean>(false);
   const onClick = () => {
     if (showComment === false) {
@@ -113,7 +119,14 @@ function ReviewWrittenItem({ data, onEdit }: ReviewWrittenItemParams) {
             {' '}
             &nbsp;&nbsp;수정 |
           </span>
-          <span> 삭제</span>
+          <span
+            onClick={() => {
+              onRemove(data.id);
+            }}
+          >
+            {' '}
+            삭제
+          </span>
         </div>
         <div className={styles.starWrap}>
           <span className={styles.star_background}>
@@ -157,6 +170,7 @@ export default function MyPageReviewListLayout({
   onClickWrite,
   data,
   onEdit,
+  onRemove,
 }: MyPageReviewListLayoutParams) {
   return (
     <div className={styles.reviewWrapper}>
@@ -186,7 +200,11 @@ export default function MyPageReviewListLayout({
 
         <ul className={styles.reviewList}>
           {data?.map((review) => (
-            <ReviewWrittenItem data={review} onEdit={onEdit} />
+            <ReviewWrittenItem
+              data={review}
+              onEdit={onEdit}
+              onRemove={onRemove}
+            />
           ))}
         </ul>
       </div>
