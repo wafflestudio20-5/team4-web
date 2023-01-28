@@ -2,10 +2,6 @@ h3 {
   margin: 0;
 }
 
-span {
-  display: block;
-}
-
 .wrapper {
   position: fixed;
   width: 100%;
@@ -118,11 +114,13 @@ span {
   font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
   font-size: 11px;
   margin-bottom: 16px;
+  display: block;
 }
 
 .content_hashtag {
   font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
   font-size: 11px;
+  display: block;
   color: #00a3ff;
 }
 
@@ -202,6 +200,7 @@ span {
   .item_info_name {
     margin-top: 2px;
     font-weight: 700;
+    display: block;
   }
 }
 
