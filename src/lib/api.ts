@@ -6,6 +6,7 @@ import {
   Category,
   SubCategory,
   Purchase,
+  Review,
   Style,
 } from './interface';
 import { PurchasePostDto } from './dto';
@@ -75,6 +76,22 @@ export const useApiItemFetcher = (id: number | null) => {
     (cancelToken: CancelToken) =>
       axios.get<{ item: Item }>(`/api/item/${id}`, { cancelToken }),
     [id]
+  );
+  return id === null ? null : f;
+};
+
+export const useApiReviewListFetcher = (
+  id: number | null,
+  index?: number,
+  count?: number
+) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) =>
+      axios.get<{ reviews: Review[] }>(`/api/item/${id}/reviews`, {
+        params: { index, count },
+        cancelToken,
+      }),
+    [id, index, count]
   );
   return id === null ? null : f;
 };
