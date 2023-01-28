@@ -1,0 +1,127 @@
+.pagenation {
+  height: 25px;
+  line-height: 12px;
+  padding: 15px 18px 0 50px;
+  padding-top: 15px;
+  padding-right: 18px;
+  padding-bottom: 0px;
+  padding-left: 50px;
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  border-bottom: 1px solid #ddd;
+  .nav_sub {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: top;
+    background: transparent;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .navi:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .iconEntity {
+    padding: 0 5px;
+  }
+}
+
+.rightContents {
+  clear: both;
+  position: relative;
+  padding: 3px 20px;
+  border-bottom: 1px solid #ddd;
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  .titlePage {
+    font-size: 24px;
+    height: 17px;
+    line-height: 17px;
+    font-weight: normal;
+    display: inline-block;
+  }
+
+  .arrowRight {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    font-size: 14px !important;
+    vertical-align: middle;
+    overflow: hidden;
+  }
+}
+
+.sortingBar {
+  clear: both;
+  border-bottom: 1px solid #ddd;
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  display: flex;
+  height: 40px;
+  font-size: 13px;
+  font-weight: bold;
+  .sortingTitle {
+    padding-left: 20px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-weight: bold;
+  }
+  .sortingOption {
+    flex: 1;
+
+    .select {
+      color: #000;
+    }
+
+    div {
+      width: 150px;
+      height: 100%;
+      float: left;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      color: #b2b2b2;
+      span:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+      input {
+        width: 100px;
+        height: 15px;
+        padding: 2px 5px;
+        vertical-align: middle;
+        border: 1px solid #ddd;
+        background: #fff;
+        font-size: 100%;
+        text-indent: 3px;
+        color: #333;
+      }
+
+      input::placeholder {
+        color: #333;
+      }
+      input:focus {
+        outline: none;
+      }
+      button {
+        width: 500px;
+        height: 21px;
+        margin-left: 1px;
+        text-align: center;
+        border: 1px solid #ddd;
+        background: #fff;
+        font-size: 10px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
+  }
+}

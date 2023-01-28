@@ -14,12 +14,14 @@ import ShoppingCart from './components/ShoppingCart';
 import SocialLoginPage from './components/SocialLoginPage';
 import ItemListPage from './components/ItemListPage';
 import StyleListPage from './components/StyleListPage';
+import Closet from './components/Closet';
 
 function AppRoutes() {
   return (
     <Routes>
       <Route element={<Header />}>
         <Route index element={<HomePage />} />
+        <Route path="/closet/*" element={<Closet />} />
         <Route element={<CategorySideBar />}>
           <Route path="/cart" element={<ShoppingCart />} />
           <Route path="/coupon" element={<></>} />
