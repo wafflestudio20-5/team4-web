@@ -12,6 +12,9 @@
   button {
     cursor: pointer;
   }
+  input:focus {
+    outline: none;
+  }
 }
 
 .profile {
@@ -270,6 +273,11 @@
   height: 32px;
   border: 1px solid #ddd;
   background: white;
+  input {
+    height: 30px;
+    width: 100%;
+    border: none;
+  }
 }
 
 .submit_button {

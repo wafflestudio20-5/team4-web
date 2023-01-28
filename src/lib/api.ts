@@ -309,3 +309,14 @@ export const useApiStyleListFetcher = (
   );
   return f;
 };
+
+export const apiPostComment = (
+  reviewId: number,
+  content: string,
+  token: string | null
+) =>
+  axios.post<{}>(
+    `/api/user/me/comment`,
+    { reviewId, content },
+    { headers: token ? auth(token) : undefined }
+  );
