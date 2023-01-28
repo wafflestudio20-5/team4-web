@@ -8,6 +8,21 @@
   left: 0;
   z-index: 1;
 }
+
+.headerLogoArea {
+  height: 50px;
+  width: 100%;
+  margin-top: 62px;
+  text-align: center;
+  .headerLogo {
+    position: relative;
+    top: 50%;
+    transform: translate(0%, -50%);
+    width: 95px;
+    height: 16px;
+  }
+}
+
 .header {
   display: flex;
   align-items: center;
@@ -47,7 +62,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
   img {
     width: 120px;
     margin-top: 4px;
@@ -157,6 +171,7 @@
   height: 50px;
   background-color: black;
   color: white;
+  border-color: transparent;
   border-radius: 4px;
   font-family: 'Apple SD Gothic Neo', 'NotoSansKR', sans-serif;
   font-weight: bold;
@@ -166,12 +181,13 @@
 .loginUtility {
   width: 345px;
   height: 21px;
-  padding: 16px 0 4px;
+  padding: 8px 0 4px;
   margin-top: 10px;
   background-color: #ffffff;
   position: relative;
   top: 30px;
   display: flex;
+  justify-content: center;
 }
 
 .loginCheckbox {
@@ -205,7 +221,6 @@
 
 .findDiv {
   position: relative;
-  left: 60px;
   .findId {
     border-left: 0px;
     border-top: 0px;
@@ -232,7 +247,7 @@
 
 .loginSocialArea {
   width: 345px;
-  margin-top: 50px;
+  margin-top: 40px;
   background-color: white;
   .loginKakao {
     width: 311px;
