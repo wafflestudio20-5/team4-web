@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../store';
+
 import { useApiData, useApiReviewListFetcher } from '../../../lib/api';
 import ReviewsLayout from './ReviewsLayout';
 
@@ -12,10 +11,6 @@ interface ReviewsProps {
 const DEFAULT_REVIEWS_COUNT = 5;
 
 export default function Reviews({ itemId, count }: ReviewsProps) {
-  const { accessToken } = useSelector((state: RootState) => {
-    return state.session;
-  });
-
   /***
    *
    * 페이지네이션
@@ -46,7 +41,6 @@ export default function Reviews({ itemId, count }: ReviewsProps) {
       count={count}
       reviews={reviews}
       maxPageIdx={MAXIMUM_PAGE_INDEX}
-      accessToken={accessToken}
       onPageChange={onPageChange}
     />
   );

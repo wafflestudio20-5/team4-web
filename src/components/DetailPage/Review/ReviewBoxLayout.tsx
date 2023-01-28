@@ -8,11 +8,11 @@ import {
   formatSizeReview,
   formatColorReview,
 } from '../../../lib/formatters/reviewFormatter';
-import styles from './ReviewBox.module.scss';
+import styles from './ReviewBoxLayout.module.scss';
 
-interface ReviewBoxProps {
+interface ReviewBoxLayoutProps {
   review: Review;
-  accessToken: string | null;
+  displayCommentBox: boolean;
 }
 
 /***
@@ -30,7 +30,10 @@ const user = {
   sex: 'male',
 };
 
-export default function ReviewBox({ review, accessToken }: ReviewBoxProps) {
+export default function ReviewBoxLayout({
+  review,
+  displayCommentBox,
+}: ReviewBoxLayoutProps) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.profile}>
@@ -120,7 +123,7 @@ export default function ReviewBox({ review, accessToken }: ReviewBoxProps) {
       </div>
       <div className={styles.comments_wrapper}>
         {/* 추후 수정 필요 */}
-        {accessToken === null ? (
+        {displayCommentBox ? (
           <div className={styles.comment_input}>
             <div className={styles.comment_area}></div>
             <button className={styles.submit_button}>댓글작성</button>
