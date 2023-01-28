@@ -1,16 +1,18 @@
 import React from 'react';
 import ReviewBox from './ReviewBox';
+import { Review } from '../../../lib/interface';
 import styles from './ReviewsLayout.module.scss';
 
 interface ReviewsLayoutProps {
   count: number;
-  rating: number;
+  reviews: Review[] | null;
+  maxPageIdx: number;
   accessToken: string | null;
+  onPageChange: (idx: number) => void;
 }
 
 export default function ReviewsLayout({
   count,
-  rating,
   accessToken,
 }: ReviewsLayoutProps) {
   return (

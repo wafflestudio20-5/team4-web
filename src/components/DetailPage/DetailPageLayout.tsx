@@ -393,7 +393,7 @@ export default function DetailPageLayout({
           </div>
         </div>
       </div>
-      <Reviews count={item.reviewCount} rating={item.rating} />
+      <Reviews itemId={item.id} count={item.reviewCount} />
     </div>
   );
 }
