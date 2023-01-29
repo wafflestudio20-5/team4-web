@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { User } from '../../../lib/interface';
-import { formatDate } from '../../../lib/formatters/dateFormatter';
+import { formatDate } from '../../../lib/formatters/dateTimeFormatter';
 import styles from './MyPageHeader.module.scss';
 // import review from '../../../resources/image/write.png';
 

@@ -37,6 +37,7 @@ export interface Item {
 export interface Purchase {
   id: number;
   item: Item;
+  user: User;
   createdDateTime?: string;
   payment?: number;
   quantity: number;
