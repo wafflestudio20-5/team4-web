@@ -8,7 +8,6 @@ interface ItemPreviewProps {
 
 export default function ItemPreview({ item }: ItemPreviewProps) {
   const navigate = useNavigate();
-  // 추후 최근 본 상품에 추가 등 로직 복잡해질 수 있어서 Link말고 navigate로 구현
 
   return (
     <div className={styles.itemPreview}>
@@ -21,7 +20,7 @@ export default function ItemPreview({ item }: ItemPreviewProps) {
         <div className={styles.image}>
           <img
             className={styles.previewImage}
-            src={item.image}
+            src={item.images[0]}
             alt="상품 이미지"
           />
         </div>

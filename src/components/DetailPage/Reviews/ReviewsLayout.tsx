@@ -45,7 +45,7 @@ export default function ReviewsLayout({
       {count > 0 ? (
         <div className={styles.body}>
           <div className={styles.review_list_wrapper}>
-            <ul>
+            <ul className={styles.review_list}>
               {reviews?.map((review, idx) => (
                 <li key={idx}>
                   <ReviewBox review={review} />

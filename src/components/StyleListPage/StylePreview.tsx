@@ -1,7 +1,7 @@
 import { Style } from '../../lib/interface';
 import styles from './StylePreview.module.scss';
 import { useNavigate } from 'react-router-dom';
-import more from '../../resources/image/more.svg';
+// import more from '../../resources/image/more.svg';
 
 interface StylePreviewProps {
   styleSingle: Style;
@@ -14,7 +14,7 @@ export default function StylePreview({ styleSingle }: StylePreviewProps) {
     <div className={styles.itemPreview}>
       <div className={styles.CGoods}>
         <div className={styles.stylesWrap}>
-          <div className={styles.stylesUser}>
+          {/* <div className={styles.stylesUser}>
             <div className={styles.stylesUserProfile}>
               <img
                 className={styles.styleItemImage}
@@ -39,7 +39,7 @@ export default function StylePreview({ styleSingle }: StylePreviewProps) {
                 <img src={more} alt="추가 옵션 버튼" />
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div
             className={styles.image}

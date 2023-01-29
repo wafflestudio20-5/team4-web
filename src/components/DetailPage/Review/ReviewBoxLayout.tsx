@@ -12,9 +12,27 @@ import styles from './ReviewBoxLayout.module.scss';
 
 interface ReviewBoxLayoutProps {
   review: Review;
+  displayCommentBox: boolean;
+  comment: string;
+  onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: (
+    e:
+      | React.MouseEvent<HTMLButtonElement>
+      | React.KeyboardEvent<HTMLInputElement>
+  ) => void;
+  onKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
-export default function ReviewBoxLayout({ review }: ReviewBoxLayoutProps) {
+export default function ReviewBoxLayout({
+  review,
+  displayCommentBox,
+  comment,
+  onClick,
+  onChange,
+  onSubmit,
+  onKeyPress,
+}: ReviewBoxLayoutProps) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.profile}>
@@ -111,11 +129,18 @@ export default function ReviewBoxLayout({ review }: ReviewBoxLayoutProps) {
         댓글 <span>{review.comments.length}개</span>
       </div>
       <div className={styles.comments_wrapper}>
-        {/* 추후 수정 필요 */}
-        {review ? (
-          <div className={styles.comment_input}>
-            <div className={styles.comment_area}></div>
-            <button className={styles.submit_button}>댓글작성</button>
+        {displayCommentBox ? (
+          <div className={styles.comment_input} onClick={onClick}>
+            <div className={styles.comment_area}>
+              <input
+                value={comment}
+                onChange={onChange}
+                onKeyPress={onKeyPress}
+              />
+            </div>
+            <button className={styles.submit_button} onClick={onSubmit}>
+              댓글작성
+            </button>
           </div>
         ) : (
           <div className={styles.comment_area_login}>
