@@ -1,8 +1,13 @@
+import React from 'react';
 import styles from './StyleModalLayout.module.scss';
 import close from '../../resources/image/close.png';
 import like from '../../resources/image/like.png';
 
-function StyleModalHeader() {
+interface StyleModalHeaderProps {
+  onClose: (e: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
+function StyleModalHeader({ onClose }: StyleModalHeaderProps) {
   return (
     <div className={styles.header}>
       <div className={styles.profile}>
@@ -16,7 +21,9 @@ function StyleModalHeader() {
           <div className={styles.profile_userinfo}>160cm · 50kg</div>
         </div>
       </div>
-      <img src={close} alt="닫기" className={styles.close_button} />
+      <button className={styles.close_button} onClick={onClose}>
+        <img src={close} alt="닫기" />
+      </button>
     </div>
   );
 }
@@ -67,19 +74,41 @@ function StyleModalItem() {
   );
 }
 
-export default function StyleModalLayout() {
+interface StyleModalLayoutProps {
+  open: boolean;
+  visible: boolean;
+  outside: React.MutableRefObject<null>;
+  onClose: (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => void;
+  onOuterClick: (e: React.MouseEvent<HTMLDivElement>) => void;
+}
+
+export default function StyleModalLayout({
+  open,
+  visible,
+  outside,
+  onClose,
+  onOuterClick,
+}: StyleModalLayoutProps) {
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.modal}>
-        <div className={styles.images}></div>
-        <div className={styles.body}>
-          <StyleModalHeader />
-          <div className={styles.scrollable}>
-            <StyleModalContent />
-            <StyleModalItem />
+    <>
+      {visible && (
+        <div
+          ref={outside}
+          onClick={onOuterClick}
+          className={`${styles.wrapper} ${open ? styles.open : styles.close}`}
+        >
+          <div className={styles.modal}>
+            <div className={styles.images}></div>
+            <div className={styles.body}>
+              <StyleModalHeader onClose={onClose} />
+              <div className={styles.scrollable}>
+                <StyleModalContent />
+                <StyleModalItem />
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
