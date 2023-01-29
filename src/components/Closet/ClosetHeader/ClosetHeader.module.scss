@@ -125,10 +125,25 @@
   color: black;
   text-align: center;
   line-height: 50px;
+  cursor: pointer;
+}
+
+.followstyle {
+  height: 50px;
+  width: 280px;
+  background-color: #0088ff;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  cursor: pointer;
 }
 
 .insta {
   height: 50px;
+  cursor: pointer;
 }
 
 .bottom {

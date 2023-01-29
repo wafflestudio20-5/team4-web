@@ -22,7 +22,7 @@ function AppRoutes() {
     <Routes>
       <Route element={<Header />}>
         <Route index element={<HomePage />} />
-        <Route path="/closet/:id" element={<Closet />} />
+        <Route path="/closet/*" element={<Closet />} />
         <Route element={<CategorySideBar />}>
           <Route path="/cart" element={<ShoppingCart />} />
           <Route path="/coupon" element={<></>} />
