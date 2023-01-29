@@ -19,11 +19,15 @@ export default function MyPageWriteReviewsList({
   const onClick = (data: Purchase) => {
     navigate('/mypage/review/write', { state: data });
   };
+  const onClickReviewList = () => {
+    navigate('/mypage/review/list');
+  }
 
   return (
     <MyPageWriteReviewsListLayout
       purchases={purchases}
       onClick={onClick}
+      onClickReviewList={onClickReviewList}
     ></MyPageWriteReviewsListLayout>
   );
 }

@@ -23,7 +23,6 @@ export interface Item {
   name: string;
   brand: string;
   images: string[];
-  image: string;
   rating: number;
   oldPrice: number;
   sale?: number;
@@ -38,6 +37,7 @@ export interface Item {
 export interface Purchase {
   id: number;
   item: Item;
+  user: User;
   createdDateTime?: string;
   payment?: number;
   quantity: number;

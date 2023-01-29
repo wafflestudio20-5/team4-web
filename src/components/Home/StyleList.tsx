@@ -1,9 +1,8 @@
-// import { useApiData, useApiStyleListFetcher } from '../../lib/api';
+import { useApiData, useApiStyleListFetcher } from '../../lib/api';
 import { Style } from '../../lib/interface';
 import styles from './StyleList.module.scss';
 import StylePreview from './StylePreview';
 import { useNavigate } from 'react-router-dom';
-import { styleList } from './mockstyle';
 import Slider from 'react-slick';
 import './slick.scss';
 import './slick-theme.scss';
@@ -15,10 +14,10 @@ interface StylePreviewListProps {
 }
 
 export default function StyleList() {
-  //   const { data: styleData } = useApiData(
-  //     useApiStyleListFetcher(0, 10, undefined)
-  //   );
-  //   const styleList = styleData?.styles ?? null;
+  const { data: styleData } = useApiData(
+    useApiStyleListFetcher(0, 30, undefined)
+  );
+  const styleList = styleData?.styles ?? null;
 
   const navigate = useNavigate();
   return (

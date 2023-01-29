@@ -6,6 +6,7 @@ import {
   Category,
   SubCategory,
   Purchase,
+  Review,
   Style,
 } from './interface';
 import { PurchasePostDto } from './dto';
@@ -79,6 +80,35 @@ export const useApiItemFetcher = (id: number | null) => {
   return id === null ? null : f;
 };
 
+export const useApiReviewListFetcher = (
+  id: number | null,
+  index?: number,
+  count?: number
+) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) =>
+      axios.get<{ reviews: Review[] }>(`/api/item/${id}/reviews`, {
+        params: { index, count },
+        cancelToken,
+      }),
+    [id, index, count]
+  );
+  return id === null ? null : f;
+};
+
+export const useApiGetUserReviewListFetcher = (token: string | null) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      return axios.get<{ reviews: Review[] }>('/api/user/me/reviews', {
+        headers: token ? auth(token) : undefined,
+        cancelToken,
+      });
+    },
+    [token]
+  );
+  return f;
+};
+
 export const apiPostReview = (
   id: number,
   rating: number,
@@ -89,7 +119,7 @@ export const apiPostReview = (
   token: string | null
 ) =>
   axios.post<{}>(
-    '/api/user/me/reviews',
+    '/api/user/me/review',
     { id, rating, content, size, color, images },
     { headers: token ? auth(token) : undefined }
   );
@@ -104,10 +134,15 @@ export const apiPutReview = (
   token: string | null
 ) =>
   axios.put<{}>(
-    '/api/user/me/reviews',
+    '/api/user/me/review',
     { id, rating, content, size, color, images },
     { headers: token ? auth(token) : undefined }
   );
+
+export const apiDeleteReview = (id: number, token: string | null) =>
+  axios.delete<{}>(`/api/user/me/review/${id}`, {
+    headers: token ? auth(token) : undefined,
+  });
 
 export const apiPostImage = (formData: FormData, token: string | null) =>
   axios.post('/api/image-upload', formData, {
@@ -307,3 +342,14 @@ export const useApiStyleListFetcher = (
   );
   return f;
 };
+
+export const apiPostComment = (
+  reviewId: number,
+  content: string,
+  token: string | null
+) =>
+  axios.post<{}>(
+    `/api/user/me/comment`,
+    { reviewId, content },
+    { headers: token ? auth(token) : undefined }
+  );
