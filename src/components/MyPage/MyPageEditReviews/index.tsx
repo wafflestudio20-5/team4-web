@@ -4,7 +4,6 @@ import { Review } from '../../../lib/interface';
 import React, { useEffect, useState } from 'react';
 import { FileUpload, useFileUpload } from 'use-file-upload';
 import { toast } from 'react-toastify';
-import axios from 'axios/index';
 import { apiPutReview, apiPostImage } from '../../../lib/api';
 interface MyPageEditReviewsParams {
   accessToken: string | null;
@@ -99,8 +98,7 @@ export default function MyPageEditReviews({
         input.color,
         secureImages,
         accessToken
-      );
-      navigate(-1);
+      ).then((response) => navigate(-1));
     } else {
       apiPutReview(
         data.id,
@@ -110,8 +108,7 @@ export default function MyPageEditReviews({
         input.color,
         [],
         accessToken
-      );
-      navigate(-1);
+      ).then((response) => navigate(-1));
     }
     // TODO: 이미지 업로드 후 return된 secureImages를 request body에 포함하여 게시글 POST
     // await axios.post('게시글 관련 API', {..., secureImages})

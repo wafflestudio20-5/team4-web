@@ -10,6 +10,8 @@ import MyPageOrder from './MyPageOrder';
 import MyPageViewed from './MyPageViewed';
 import MyPageWriteReviews from './MyPageWriteReviews';
 import MyPageWriteReviewsList from './MyPageWriteReviews/indexList';
+import MyPageReviewList from './MyPageReviewList';
+import MyPageEditReviews from './MyPageEditReviews';
 import Footer from '../Footer';
 import { Session } from '../../lib/interface';
 
@@ -57,7 +59,14 @@ function MyPage() {
             path="review/write"
             element={<MyPageWriteReviews accessToken={accessToken} />}
           />
-          {/*<Route path="review/edit" element={<MyPageEditReviews data={} accessToken={accessToken}/>} />*/}
+          <Route
+            path="review/edit"
+            element={<MyPageEditReviews accessToken={accessToken} />}
+          />
+          <Route
+            path="review/list"
+            element={<MyPageReviewList accessToken={accessToken} />}
+          />
           <Route
             path="order"
             element={<MyPageOrder accessToken={accessToken} />}
