@@ -373,7 +373,13 @@ export default function BasicInfo({
                 <div className={styles.password_row_wrapper}>
                   <label className={styles.password_label}>현재 비밀번호</label>
                   <div className={styles.input_helper_wrapper}>
-                    <div className={styles.input_wrapper}>
+                    <div
+                      className={
+                        passwordHelper
+                          ? `${styles.input_wrapper} ${styles.inputWrapDanger}`
+                          : styles.input_wrapper
+                      }
+                    >
                       <input
                         className={styles.input}
                         type={isInputHidden.password ? 'password' : 'text'}
@@ -409,7 +415,13 @@ export default function BasicInfo({
                 <div className={styles.password_row_wrapper}>
                   <label className={styles.password_label}>새 비밀번호</label>
                   <div className={styles.input_helper_wrapper}>
-                    <div className={styles.input_wrapper}>
+                    <div
+                      className={
+                        newPasswordHelper
+                          ? `${styles.input_wrapper} ${styles.inputWrapDanger}`
+                          : styles.input_wrapper
+                      }
+                    >
                       <input
                         className={styles.input}
                         type={isInputHidden.newPassword ? 'password' : 'text'}
@@ -448,7 +460,13 @@ export default function BasicInfo({
                     새 비밀번호 재입력
                   </label>
                   <div className={styles.input_helper_wrapper}>
-                    <div className={styles.input_wrapper}>
+                    <div
+                      className={
+                        newPasswordConfirmHelper
+                          ? `${styles.input_wrapper} ${styles.inputWrapDanger}`
+                          : styles.input_wrapper
+                      }
+                    >
                       <input
                         className={styles.input}
                         type={
@@ -492,6 +510,9 @@ export default function BasicInfo({
                   className={styles.grid_cancel_button}
                   onClick={() => {
                     setIsChangePasswordClicked(false);
+                    setPassword('');
+                    setNewPassword('');
+                    setNewPasswordConfirm('');
                     setIsPasswordFocused(false);
                     setIsNewPasswordFocused(false);
                   }}
@@ -530,7 +551,14 @@ export default function BasicInfo({
           <div className={styles.grid_block}>
             {isChangeNicknameClicked ? (
               <>
-                <div className={styles.input_wrapper}>
+                <div
+                  className={
+                    nicknameHelper &&
+                    nicknameHelper !== '사용 가능한 닉네임입니다.'
+                      ? `${styles.input_wrapper} ${styles.inputWrapDanger}`
+                      : styles.input_wrapper
+                  }
+                >
                   <input
                     className={styles.input}
                     defaultValue={user.nickname}
