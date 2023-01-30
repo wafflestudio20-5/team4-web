@@ -1,6 +1,9 @@
+import React from 'react';
 import { Style } from '../../lib/interface';
-import styles from './StylePreview.module.scss';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setOpen } from '../../store/slices/modal';
+import styles from './StylePreview.module.scss';
 import more from '../../resources/image/more.svg';
 
 interface StylePreviewProps {
@@ -9,6 +12,12 @@ interface StylePreviewProps {
 
 export default function StylePreview({ styleSingle }: StylePreviewProps) {
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const onModalOpen = (e: React.MouseEvent<HTMLDivElement>) => {
+    dispatch(setOpen(styleSingle.id));
+  };
 
   return (
     <div className={styles.itemPreview}>
@@ -41,12 +50,7 @@ export default function StylePreview({ styleSingle }: StylePreviewProps) {
             </div>
           </div>
 
-          <div
-            className={styles.image}
-            // onClick={() => {
-            //   스타일모달 디스패치;
-            // }}
-          >
+          <div className={styles.image} onClick={onModalOpen}>
             <img
               className={styles.previewImage}
               src={styleSingle.images[0]}

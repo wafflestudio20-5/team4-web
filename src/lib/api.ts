@@ -308,7 +308,10 @@ export const apiPostStyle = (
     { headers: token ? auth(token) : undefined }
   );
 
-export const useApiStyleFetcher = (id: number | null, token: string | null) => {
+export const useApiStyleFetcher = (
+  id: number | undefined,
+  token: string | null
+) => {
   const f = useCallback(
     (cancelToken: CancelToken) => {
       return axios.get<{
@@ -323,7 +326,7 @@ export const useApiStyleFetcher = (id: number | null, token: string | null) => {
     },
     [id, token]
   );
-  return id === null ? null : f;
+  return id === undefined ? null : f;
 };
 
 export const useApiStyleListFetcher = (

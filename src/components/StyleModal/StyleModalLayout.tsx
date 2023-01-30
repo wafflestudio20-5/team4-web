@@ -1,4 +1,5 @@
 import React from 'react';
+import { StyleData } from '../../lib/interface';
 import styles from './StyleModalLayout.module.scss';
 import close from '../../resources/image/close.png';
 import like from '../../resources/image/like.png';
@@ -76,6 +77,7 @@ function StyleModalItem() {
 
 interface StyleModalLayoutProps {
   open: boolean;
+  data: StyleData;
   visible: boolean;
   outside: React.MutableRefObject<null>;
   onClose: (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => void;
@@ -84,11 +86,14 @@ interface StyleModalLayoutProps {
 
 export default function StyleModalLayout({
   open,
+  data,
   visible,
   outside,
   onClose,
   onOuterClick,
 }: StyleModalLayoutProps) {
+  console.log(data);
+
   return (
     <>
       {visible && (

@@ -89,6 +89,13 @@ export interface Style {
   createdDateTime: string;
 }
 
+export interface StyleData {
+  style: Style;
+  likedCount: number;
+  isFollow: boolean;
+  isLike: boolean;
+}
+
 export enum InquiryType {
   size = 'size',
   delivery = 'delivery',
