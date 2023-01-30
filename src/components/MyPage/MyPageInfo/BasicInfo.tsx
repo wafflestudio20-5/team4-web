@@ -582,7 +582,7 @@ export default function BasicInfo({
                     {nicknameHelper}
                   </div>
                 </div>
-                <ul className={styles.nickname_constraint}>
+                <ul className={styles.constraint}>
                   <li>최소 5자 이상, 최대 15자 이하로 작성해주세요.</li>
                   <li>영문 소문자, 숫자, 특수기호(_)만 사용 가능합니다.</li>
                 </ul>
