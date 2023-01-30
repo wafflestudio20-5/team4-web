@@ -21,7 +21,10 @@ export function formatUserInfo(
   return s + h + w;
 }
 
-export function formatUserSize(height: number, weight: number): string {
+export function formatUserSize(
+  height: number | undefined,
+  weight: number | undefined
+): string {
   const heightString = height ? `${height}cm` : '';
   const weightString = height && weight ? ` · ${weight}kg` : '';
 

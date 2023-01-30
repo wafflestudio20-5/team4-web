@@ -50,8 +50,16 @@
   background-color: rgba(0, 0, 0, 0.1);
 }
 
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px 0 0 10px;
+}
+
 .body {
   width: 100%;
+  overflow-y: hidden;
 }
 
 .header {
@@ -91,6 +99,23 @@
   color: #666;
 }
 
+.follow_box {
+  border: 1px solid;
+  border-radius: 3px;
+  margin: -17px 0 0 14px;
+  padding: 2px 5px 4px 5px;
+}
+
+.followed {
+  border-color: #a1a1a1;
+  color: #a1a1a1;
+}
+
+.not_followed {
+  border-color: #00a3ff;
+  color: #00a3ff;
+}
+
 .close_button {
   position: absolute;
   top: 10px;
@@ -109,7 +134,7 @@
 .scrollable {
   margin-left: 16px;
   height: calc(100% - 64px);
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .content {
@@ -117,7 +142,7 @@
 }
 
 .content_text_wrapper {
-  padding: 8px 56px 0 0;
+  padding: 8px 56px 12px 0;
 }
 
 .content_text {
@@ -135,29 +160,45 @@
 }
 
 .like_box_wrapper {
-  margin-top: 20px;
+  padding-top: 8px;
   font-weight: bold;
-  color: rgba(0, 0, 0, 0.2);
 }
 
 .like_box {
   width: 76px;
   height: 38px;
   border-radius: 4px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 2px solid;
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+
+.liked {
+  border-color: #fb3958;
+  color: #fb3958;
+  .like_icon_img {
+    filter: invert(33%) sepia(39%) saturate(6022%) hue-rotate(334deg)
+      brightness(111%) contrast(97%);
+  }
+}
+
+.not_liked {
+  border-color: rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.2);
+  .like_icon_img {
+    filter: invert(70%);
+  }
 }
 
 .like_icon {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  border-right: 2px solid;
+  border-color: inherit;
   img {
     width: 24px;
     height: 24px;
-    filter: invert(70%);
   }
 }
 
@@ -167,6 +208,7 @@
   font-size: 24px;
   font-weight: normal;
   line-height: 36px;
+  color: inherit;
 }
 
 .style_created_time {
@@ -183,17 +225,21 @@
   border-radius: 4px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   width: 252px;
-  height: 78px;
+  height: 76px;
   display: grid;
   grid-template-columns: 78px auto;
 }
 
+.item_wrapper:last-of-type {
+  margin-bottom: 18px;
+}
+
 .item_image {
-  padding: 1px;
   img {
     width: 76px;
     height: 76px;
     object-fit: cover;
+    border-radius: 4px 0 0 4px;
   }
 }
 
