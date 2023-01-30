@@ -88,7 +88,7 @@
   margin: -5px 2px;
   border: 1px solid #e5e5e5;
   background-color: white;
-  min-width: 100px;
+  min-width: 120px;
   height: 32px;
   line-height: 30px;
   vertical-align: middle;
@@ -165,7 +165,6 @@
 
 .input_wrapper {
   display: flex;
-  flex-direction: column;
   box-sizing: border-box;
   max-width: 300px;
   width: 100%;
@@ -173,14 +172,13 @@
   border: 1px solid #e5e5e5;
   border-radius: 4px;
   // justify-content: space-between;
-  // align-items: center;
+  align-items: center;
   .input {
-    height: 50px;
-    padding: 0 10px;
+    width: 100%;
+    padding: 0 8px;
     border: none;
-    // flex: 0 1 auto;
     background-color: #fff;
-    font-size: 15px;
+    font-size: 14px;
     font-family: '-apple-system', HelveticaNeue, Roboto,
       'Noto Sans KR', helvetica, Gulim, sans-serif;
     color: #000;
@@ -249,12 +247,16 @@
   margin: 0;
 }
 
-.password_label_input_wrapper {
+.password_row_wrapper {
   display: flex;
-  margin-bottom: 20px;
   .password_label {
     min-width: 165px;
     font-size: 14px;
+    padding-top: 3px;
+  }
+  .input_helper_wrapper {
+    padding-right: 20px;
+    width: 400px
   }
 }
 

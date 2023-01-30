@@ -15,6 +15,8 @@ import {
 import { FileUpload, useFileUpload } from 'use-file-upload';
 import { useCallback, useEffect, useState } from 'react';
 import styles from './MyPageInfo.module.scss';
+import { AxiosError } from 'axios';
+import { toast } from 'react-toastify';
 
 interface BasicInfoProps {
   user: User;
@@ -34,23 +36,11 @@ export default function BasicInfo({
   accessToken,
   setIsLoading,
 }: BasicInfoProps) {
+  /* IMAGE */
   const [imageFile, setImageFile] = useFileUpload();
   const [image, setImage] = useState(user.image);
   const [isChangeImageClicked, setIsChangeImageClicked] = useState(false);
 
-  const [password, setPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [newPasswordHelper, setNewPasswordHelper] = useState('');
-  const [newPasswordConfirm, setNewPasswordConfirm] = useState('');
-  const [newPasswordConfirmHelper, setNewPasswordConfirmHelper] = useState('');
-  const [isChangePasswordClicked, setIsChangePasswordClicked] = useState(false);
-
-  const [nickname, setNickname] = useState(user.nickname);
-  const [nicknameHelper, setNicknameHelper] = useState('');
-  const [isChangeNicknameClicked, setIsChangeNicknameClicked] = useState(false);
-  const [isNicknameFocused, setIsNicknameFocused] = useState(false);
-
-  /* IMAGE */
   const setImageFileCallBack = (file: FileUpload | [FileUpload]) => {
     const fileUpload = file as FileUpload;
     const localImage = URL.createObjectURL(fileUpload.file);
@@ -90,43 +80,165 @@ export default function BasicInfo({
   };
 
   /* PASSWORD */
-  const onClickChangePassword = useCallback(async () => {
-    const response = await apiCheckPassword(password);
-    // if (response.status === 401)
-  }, [password]);
+  const [password, setPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [newPasswordConfirm, setNewPasswordConfirm] = useState('');
 
-  const getPasswordHelper = (password: string) => {
-    if (!password) return { message: '새 비밀번호를 입력해주세요.' };
-    if (password.length < 8)
-      return { message: '8~30자 이내로 입력해 주십시오.' };
-    if (regexRepeat.test(password))
-      return {
-        message: '동일문자를 반복해서 4자 이상 사용할 수 없습니다.',
-      };
-    const combinationCount =
-      Number(regexNumber.test(password)) +
-      Number(regexAlphabet.test(password)) +
-      Number(regexSpecial.test(password));
-    if (combinationCount < 2)
-      return {
-        message:
-          '숫자, 영문 대소문자, 특수문자 중 두가지 이상으로 조합해 주십시오.',
-      };
-    return { message: '' };
-  };
+  const [passwordHelper, setPasswordHelper] = useState('');
+  const [newPasswordHelper, setNewPasswordHelper] = useState('');
+  const [newPasswordConfirmHelper, setNewPasswordConfirmHelper] = useState('');
+
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
+  const [isNewPasswordFocused, setIsNewPasswordFocused] = useState(false);
+
+  const [isInputHidden, setIsInputHidden] = useState({
+    password: true,
+    newPassword: true,
+    newPasswordConfirm: true,
+  });
+
+  const [isChangePasswordClicked, setIsChangePasswordClicked] = useState(false);
+
+  const onClickChangePassword = useCallback(async () => {
+    try {
+      await apiCheckPassword(password, accessToken);
+      await apiPatchMyInfo({ password: newPassword }, accessToken);
+    } catch (error) {
+      const axiosError = error as AxiosError;
+      if (axiosError.code === 'ERR_BAD_REQUEST') {
+        toast('현재 비밀번호가 올바르지 않습니다.');
+        setPassword('');
+        setNewPassword('');
+        setNewPasswordConfirm('');
+        setIsPasswordFocused(false);
+        setIsNewPasswordFocused(false);
+        return;
+      } else toast('[서버 오류] 요청을 처리할 수 없습니다.');
+    }
+    window.location.reload();
+  }, [password, newPassword, accessToken]);
+
+  const getPasswordHelper = useCallback(
+    (password: string) => {
+      if (!isPasswordFocused) return { message: '' };
+      if (!password) return { message: '필수 정보입니다.' };
+      if (password.length < 8)
+        return { message: '8~30자 이내로 입력해 주십시오.' };
+      if (regexRepeat.test(password))
+        return {
+          message: '동일문자를 반복해서 4자 이상 사용할 수 없습니다.',
+        };
+      const combinationCount =
+        Number(regexNumber.test(password)) +
+        Number(regexAlphabet.test(password)) +
+        Number(regexSpecial.test(password));
+      if (combinationCount < 2)
+        return {
+          message:
+            '숫자, 영문 대소문자, 특수문자 중 두가지 이상으로 조합해 주십시오.',
+        };
+      return { message: '' };
+    },
+    [isPasswordFocused]
+  );
+
+  const getNewPasswordHelper = useCallback(
+    (newPassword: string) => {
+      if (!isNewPasswordFocused) return { message: '' };
+      if (!newPassword) return { message: '필수 정보입니다.' };
+      if (newPassword.length < 8)
+        return { message: '8~30자 이내로 입력해 주십시오.' };
+      if (regexRepeat.test(newPassword))
+        return {
+          message: '동일문자를 반복해서 4자 이상 사용할 수 없습니다.',
+        };
+      const combinationCount =
+        Number(regexNumber.test(newPassword)) +
+        Number(regexAlphabet.test(newPassword)) +
+        Number(regexSpecial.test(newPassword));
+      if (combinationCount < 2)
+        return {
+          message:
+            '숫자, 영문 대소문자, 특수문자 중 두가지 이상으로 조합해 주십시오.',
+        };
+      if (newPassword === password)
+        return {
+          message: '입력하신 현재 비밀번호와 동일합니다.',
+        };
+      return { message: '' };
+    },
+    [isNewPasswordFocused, password]
+  );
 
   const getPasswordConfirmHelper = useCallback(
     (passwordConfirm: string) => {
-      if (!passwordConfirm)
-        return { message: '비밀번호 재확인은 필수정보입니다.' };
+      if (!isNewPasswordFocused) return { message: '' };
+      if (!passwordConfirm) return { message: '필수 정보입니다.' };
       if (passwordConfirm !== newPassword)
         return { message: '비밀번호가 일치하지 않습니다.' };
       return { message: '' };
     },
-    [newPassword]
+    [newPassword, isNewPasswordFocused]
   );
 
+  const onClickTogglePassword = (input: string) => {
+    switch (input) {
+      case 'password':
+        setIsInputHidden((prev) => ({ ...prev, password: !prev.password }));
+        break;
+      case 'newPassword':
+        setIsInputHidden((prev) => ({
+          ...prev,
+          newPassword: !prev.newPassword,
+        }));
+        break;
+      case 'newPasswordConfirm':
+        setIsInputHidden((prev) => ({
+          ...prev,
+          newPasswordConfirm: !prev.newPasswordConfirm,
+        }));
+        break;
+    }
+  };
+
+  const checkPasswordInputs = useCallback(() => {
+    return (password &&
+      newPassword &&
+      newPasswordConfirm &&
+      passwordHelper === '' &&
+      newPasswordHelper === '' &&
+      newPasswordConfirmHelper === '') as boolean;
+  }, [
+    password,
+    passwordHelper,
+    newPassword,
+    newPasswordHelper,
+    newPasswordConfirm,
+    newPasswordConfirmHelper,
+  ]);
+
+  useEffect(() => {
+    setPasswordHelper(getPasswordHelper(password).message);
+  }, [password, getPasswordHelper]);
+
+  useEffect(() => {
+    setNewPasswordHelper(getNewPasswordHelper(newPassword).message);
+    setNewPasswordConfirmHelper(
+      getPasswordConfirmHelper(newPasswordConfirm).message
+    );
+  }, [
+    newPassword,
+    newPasswordConfirm,
+    getNewPasswordHelper,
+    getPasswordConfirmHelper,
+  ]);
+
   /* NICKNAME */
+  const [nickname, setNickname] = useState(user.nickname);
+  const [nicknameHelper, setNicknameHelper] = useState('');
+  const [isChangeNicknameClicked, setIsChangeNicknameClicked] = useState(false);
+  const [isNicknameFocused, setIsNicknameFocused] = useState(false);
+
   const onClickChangeNickname = useCallback(async () => {
     if (nickname === user.nickname) {
       setIsChangeNicknameClicked(false);
@@ -258,50 +370,113 @@ export default function BasicInfo({
           <div className={styles.grid_block}>
             {isChangePasswordClicked ? (
               <>
-                <div className={styles.password_label_input_wrapper}>
+                <div className={styles.password_row_wrapper}>
                   <label className={styles.password_label}>현재 비밀번호</label>
-                  <div className={styles.input_wrapper}>
-                    <input className={styles.input} type="password" />
-                    <div
-                      className={
-                        nicknameHelper === '사용 가능한 닉네임입니다.'
-                          ? `${styles.helper} ${styles.valid}`
-                          : `${styles.helper} ${styles.invalid}`
-                      }
-                    >
-                      {'sd'}
+                  <div className={styles.input_helper_wrapper}>
+                    <div className={styles.input_wrapper}>
+                      <input
+                        className={styles.input}
+                        type={isInputHidden.password ? 'password' : 'text'}
+                        value={password}
+                        maxLength={30}
+                        onChange={(e) => {
+                          setPassword(e.target.value);
+                        }}
+                        onFocus={() => {
+                          setIsPasswordFocused(true);
+                        }}
+                      />
+                      {password && (
+                        <button
+                          className={
+                            isInputHidden.password
+                              ? styles.show_password_button
+                              : styles.hide_password_button
+                          }
+                          onClick={(e) => {
+                            onClickTogglePassword('password');
+                          }}
+                        ></button>
+                      )}
+                    </div>
+                    <div className={styles.helper_container}>
+                      <div className={`${styles.helper} ${styles.invalid}`}>
+                        {passwordHelper}
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div className={styles.password_label_input_wrapper}>
+                <div className={styles.password_row_wrapper}>
                   <label className={styles.password_label}>새 비밀번호</label>
-                  <div className={styles.helper_container}>
-                    <input className={styles.password_input} type="password" />
-                    <div
-                      className={
-                        nicknameHelper === '사용 가능한 닉네임입니다.'
-                          ? `${styles.helper} ${styles.valid}`
-                          : `${styles.helper} ${styles.invalid}`
-                      }
-                    >
-                      {'sd'}
+                  <div className={styles.input_helper_wrapper}>
+                    <div className={styles.input_wrapper}>
+                      <input
+                        className={styles.input}
+                        type={isInputHidden.newPassword ? 'password' : 'text'}
+                        maxLength={30}
+                        value={newPassword}
+                        placeholder="숫자, 영문, 특수문자 조합 최소 8자"
+                        onChange={(e) => {
+                          setNewPassword(e.target.value);
+                        }}
+                        onFocus={() => {
+                          setIsNewPasswordFocused(true);
+                        }}
+                      />
+                      {newPassword && (
+                        <button
+                          className={
+                            isInputHidden.newPassword
+                              ? styles.show_password_button
+                              : styles.hide_password_button
+                          }
+                          onClick={(e) => {
+                            onClickTogglePassword('newPassword');
+                          }}
+                        ></button>
+                      )}
+                    </div>
+                    <div className={styles.helper_container}>
+                      <div className={`${styles.helper} ${styles.invalid}`}>
+                        {newPasswordHelper}
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div className={styles.password_label_input_wrapper}>
+                <div className={styles.password_row_wrapper}>
                   <label className={styles.password_label}>
                     새 비밀번호 재입력
                   </label>
-                  <input className={styles.password_input} type="password" />
-                  <div className={styles.helper_container}>
-                    <div
-                      className={
-                        nicknameHelper === '사용 가능한 닉네임입니다.'
-                          ? `${styles.helper} ${styles.valid}`
-                          : `${styles.helper} ${styles.invalid}`
-                      }
-                    >
-                      {nicknameHelper}
+                  <div className={styles.input_helper_wrapper}>
+                    <div className={styles.input_wrapper}>
+                      <input
+                        className={styles.input}
+                        type={
+                          isInputHidden.newPasswordConfirm ? 'password' : 'text'
+                        }
+                        value={newPasswordConfirm}
+                        maxLength={30}
+                        onChange={(e) => {
+                          setNewPasswordConfirm(e.target.value);
+                        }}
+                      />
+                      {newPasswordConfirm && (
+                        <button
+                          className={
+                            isInputHidden.newPasswordConfirm
+                              ? styles.show_password_button
+                              : styles.hide_password_button
+                          }
+                          onClick={(e) => {
+                            onClickTogglePassword('newPasswordConfirm');
+                          }}
+                        ></button>
+                      )}
+                    </div>
+                    <div className={styles.helper_container}>
+                      <div className={`${styles.helper} ${styles.invalid}`}>
+                        {newPasswordConfirmHelper}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -317,23 +492,20 @@ export default function BasicInfo({
                   className={styles.grid_cancel_button}
                   onClick={() => {
                     setIsChangePasswordClicked(false);
+                    setIsPasswordFocused(false);
+                    setIsNewPasswordFocused(false);
                   }}
                 >
                   취소
                 </button>
                 <button
                   className={
-                    newPasswordHelper === '' && newPasswordConfirmHelper === ''
+                    checkPasswordInputs()
                       ? styles.grid_confirm_button
                       : styles.grid_disabled_button
                   }
                   onClick={onClickChangePassword}
-                  disabled={
-                    !(
-                      newPasswordHelper === '' &&
-                      newPasswordConfirmHelper === ''
-                    )
-                  }
+                  disabled={!checkPasswordInputs()}
                 >
                   완료
                 </button>

@@ -23,7 +23,9 @@ export default function AdditionalInfo({
           <div className={styles.grid_block}>
             <strong className={styles.grid_strong}>{user.sex}</strong>
           </div>
-          <div className={styles.grid_block}></div>
+          <div className={styles.grid_block}>
+            <button className={styles.grid_button}>성별 변경</button>
+          </div>
         </div>
       </div>
       <div className={styles.content}>
@@ -35,7 +37,7 @@ export default function AdditionalInfo({
             </strong>
           </div>
           <div className={styles.grid_block}>
-            <button className={styles.grid_button}>변경하기</button>
+            <button className={styles.grid_button}>키 / 몸무게 변경</button>
           </div>
         </div>
       </div>
@@ -46,7 +48,7 @@ export default function AdditionalInfo({
             <strong className={styles.grid_strong}>{user.description}</strong>
           </div>
           <div className={styles.grid_block}>
-            <button className={styles.grid_button}>변경하기</button>
+            <button className={styles.grid_button}>자기소개 변경</button>
           </div>
         </div>
       </div>
@@ -57,7 +59,7 @@ export default function AdditionalInfo({
             <strong className={styles.grid_strong}>{user.instaUsername}</strong>
           </div>
           <div className={styles.grid_block}>
-            <button className={styles.grid_button}>변경하기</button>
+            <button className={styles.grid_button}>Instagram ID 변경</button>
           </div>
         </div>
       </div>
