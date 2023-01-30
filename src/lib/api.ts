@@ -42,6 +42,9 @@ export const apiCheckUsername = (username: string) =>
 export const apiCheckNickname = (nickname: string) =>
   axios.post<{ isUnique: boolean }>('/api/auth/nickname', { nickname });
 
+export const apiCheckPassword = (currentPassword: string) =>
+  axios.post('/api/auth/password', { currentPassword });
+
 export const apiGetMyInfo = (token: string) =>
   axios.get<{ user: User }>('/api/user/me', { headers: auth(token) });
 
