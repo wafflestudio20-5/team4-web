@@ -1,0 +1,261 @@
+.wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  animation-duration: 0.25s;
+  animation-timing-function: ease-out;
+  animation-name: fadeIn;
+  animation-fill-mode: forwards;
+  h3 {
+    margin: 0;
+  }
+  button {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+}
+
+.wrapper.close {
+  animation-name: fadeOut;
+}
+
+.modal {
+  background-color: white;
+  border-radius: 10px;
+  height: 460px;
+  width: 680px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  animation-duration: 0.25s;
+  animation-timing-function: ease-out;
+  animation-name: slideUp;
+  animation-fill-mode: forwards;
+}
+
+.wrapper.close > .modal {
+  animation-name: slideDown;
+}
+
+.images {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.body {
+  width: 100%;
+}
+
+.header {
+  width: 100%;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.profile {
+  margin-left: 16px;
+}
+
+.profile_image {
+  width: 36px;
+  height: 36px;
+}
+
+.profile_text {
+  display: inline-block;
+  margin-left: 16px;
+  vertical-align: top;
+}
+
+.profile_nickname {
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 20px;
+}
+
+.profile_userinfo {
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 10px;
+  line-height: 16px;
+  color: #666;
+}
+
+.close_button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  img {
+    width: 24px;
+    height: 24px;
+    filter: invert(60%);
+  }
+}
+
+.scrollable {
+  margin-left: 16px;
+  height: calc(100% - 64px);
+  overflow-y: scroll;
+}
+
+.content {
+  position: relative;
+}
+
+.content_text_wrapper {
+  padding: 8px 56px 0 0;
+}
+
+.content_text {
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 11px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.content_hashtag {
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 11px;
+  display: block;
+  color: #00a3ff;
+}
+
+.like_box_wrapper {
+  margin-top: 20px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.like_box {
+  width: 76px;
+  height: 38px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.like_icon {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  img {
+    width: 24px;
+    height: 24px;
+    filter: invert(70%);
+  }
+}
+
+.like_count {
+  display: flex;
+  justify-content: space-around;
+  font-size: 24px;
+  font-weight: normal;
+  line-height: 36px;
+}
+
+.style_created_time {
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 10px;
+  color: #a1a1a1;
+  position: absolute;
+  top: 8px;
+  right: 16px;
+}
+
+.item_wrapper {
+  margin-top: 18px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  width: 252px;
+  height: 78px;
+  display: grid;
+  grid-template-columns: 78px auto;
+}
+
+.item_image {
+  padding: 1px;
+  img {
+    width: 76px;
+    height: 76px;
+    object-fit: cover;
+  }
+}
+
+.item_info {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item_info_text {
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 10px;
+  .item_info_name {
+    margin-top: 2px;
+    font-weight: 700;
+    display: block;
+  }
+}
+
+.item_info_price {
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  .item_info_sale {
+    display: inline-block;
+    color: red;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(-100px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-100px);
+  }
+}
