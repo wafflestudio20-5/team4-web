@@ -9,3 +9,14 @@ export interface PurchasePostDto {
   payment: number;
   quantity: number;
 }
+
+export interface PatchMyInfoRequestDto {
+  image?: string;
+  password?: string;
+  nickname?: string;
+  sex?: string;
+  height?: number;
+  weight?: number;
+  description?: string;
+  instaUsername?: string;
+}

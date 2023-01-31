@@ -6,12 +6,13 @@ import { useSelector } from 'react-redux';
 import { Session } from '../../lib/interface';
 import { RootState } from '../../store';
 import { toast } from 'react-toastify';
-
-const regexUsername: RegExp = /^[a-z0-9_]+$/;
-const regexRepeat: RegExp = /(.)\1{3,}/;
-const regexAlphabet: RegExp = /[a-z|A-Z]/;
-const regexNumber: RegExp = /[0-9]/;
-const regexSpecial: RegExp = /[{}[\]/?.,;:|)*~`!^\-_+<>@#$%&\\=('"]/;
+import {
+  regexAlphabet,
+  regexNumber,
+  regexRepeat,
+  regexSpecial,
+  regexUsername,
+} from '../../lib/formatters/regexFormatter';
 
 function RegisterPage() {
   const session: Session = useSelector((state: RootState) => state.session);
@@ -79,10 +80,14 @@ function RegisterPage() {
             });
         break;
       default:
-        setIsAgreementChecked((prev) => ({
+        const nextIsAgreementChecked = {
           ...isAgreementChecked,
-          [id]: !prev[id as keyof IsAgreementChecked],
-        }));
+          [id]: !isAgreementChecked[id as keyof IsAgreementChecked],
+        };
+        checkEveryAgreementChecked(nextIsAgreementChecked)
+          ? (nextIsAgreementChecked.agreementAll = true)
+          : (nextIsAgreementChecked.agreementAll = false);
+        setIsAgreementChecked(nextIsAgreementChecked);
         break;
     }
   };
@@ -221,6 +226,22 @@ function RegisterPage() {
     },
     [isInputFocused.nickname]
   );
+
+  const checkEveryAgreementChecked = (
+    isAgreementChecked: IsAgreementChecked
+  ) => {
+    const agreementKeys = Object.keys(isAgreementChecked) as Array<
+      keyof IsAgreementChecked
+    >;
+    let isEveryAgreementChecked = true;
+    agreementKeys.forEach((key) => {
+      if (key !== 'agreementAll' && !isAgreementChecked[key]) {
+        isEveryAgreementChecked = false;
+        return;
+      }
+    });
+    return isEveryAgreementChecked;
+  };
 
   const checkFormValidity = useCallback(() => {
     return (

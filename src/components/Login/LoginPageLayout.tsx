@@ -47,24 +47,22 @@ function LoginForm({ input, onChange, onLogin, onKeyPress }: LoginFormProps) {
   );
 }
 
-function LoginUtility() {
-  return (
-    <div className={styles.loginUtility}>
-      {/*
-      <div className={styles.loginCheckbox}>
-        <input type="checkbox" id="autoLoginCheckbox" />
-        <label htmlFor="autoLoginCheckbox" className={styles.labelCheckBox}>
-          자동 로그인
-        </label>
-      </div>
-      */}
-      <span className={styles.findDiv}>
-        <button className={styles.findId}>아이디 찾기</button>
-        <button className={styles.findPassword}>비밀번호 찾기</button>
-      </span>
-    </div>
-  );
-}
+// function LoginUtility() {
+//   return (
+//     <div className={styles.loginUtility}>
+//       <div className={styles.loginCheckbox}>
+//         <input type="checkbox" id="autoLoginCheckbox" />
+//         <label htmlFor="autoLoginCheckbox" className={styles.labelCheckBox}>
+//           자동 로그인
+//         </label>
+//       </div>
+//       <span className={styles.findDiv}>
+//         <button className={styles.findId}>아이디 찾기</button>
+//         <button className={styles.findPassword}>비밀번호 찾기</button>
+//       </span>
+//     </div>
+//   );
+// }
 
 interface SocialLoginProps {
   onSocialLogin: () => void;
@@ -177,7 +175,7 @@ export default function LoginPageLayout({
                 onLogin={onLogin}
                 onKeyPress={onKeyPress}
               />
-              <LoginUtility />
+              {/* <LoginUtility /> */}
               <SocialLogin onSocialLogin={onSocialLogin} />
               <LoginBottom />
             </div>
