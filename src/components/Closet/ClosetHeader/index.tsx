@@ -133,9 +133,11 @@ export default function ClosetHeader({
                 src={insta}
                 alt={'인스타그램으로'}
                 onClick={() => {
-                  window.open(
-                    `https://www.instagram.com/${user.instaUsername}/`
-                  );
+                  if (user.instaUsername) {
+                    window.open(
+                      `https://www.instagram.com/${user.instaUsername}/`
+                    );
+                  }
                 }}
               />
             </div>
