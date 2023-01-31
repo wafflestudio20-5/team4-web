@@ -9,9 +9,10 @@ import {
 import { getBarWidth } from '../../../lib/formatters/ratingFormatter';
 interface MyPageReviewListLayoutParams {
   onClickWrite: () => void;
-  data: Review[] | null;
+  data: Review[] | undefined;
   onEdit: (data: Review) => void;
   onRemove: (id: number) => void;
+  temp: number[]
 }
 interface ReviewWrittenItemParams {
   data: Review;
@@ -171,6 +172,7 @@ export default function MyPageReviewListLayout({
   data,
   onEdit,
   onRemove,
+    temp,
 }: MyPageReviewListLayoutParams) {
   return (
     <div className={styles.reviewWrapper}>
@@ -199,13 +201,11 @@ export default function MyPageReviewListLayout({
         </div>
 
         <ul className={styles.reviewList}>
-          {data?.map((review) => (
-            <ReviewWrittenItem
+          {data?.filter(review => temp.includes(review.id) === false).map((review=>(<ReviewWrittenItem
               data={review}
               onEdit={onEdit}
               onRemove={onRemove}
-            />
-          ))}
+          />)))}
         </ul>
       </div>
     </div>
