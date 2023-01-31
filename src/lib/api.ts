@@ -363,7 +363,6 @@ export const useApiStyleListFetcher = (
   return f;
 };
 
-<<<<<<< HEAD
 export const useApiUserFectcher = (id: number | null, token: string | null) => {
   const f = useCallback(
     (cancelToken: CancelToken) => {
@@ -398,7 +397,6 @@ export const useApiUserStyleFecther = (id: number | null) => {
   );
   return id === null ? null : f;
 };
-=======
 export const apiPostComment = (
   reviewId: number,
   content: string,
@@ -409,4 +407,3 @@ export const apiPostComment = (
     { reviewId, content },
     { headers: token ? auth(token) : undefined }
   );
->>>>>>> main
