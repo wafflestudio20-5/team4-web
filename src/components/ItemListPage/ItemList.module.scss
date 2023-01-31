@@ -1,7 +1,7 @@
 .itemList {
-  width: calc(100%);
+  width: calc(100% - 10px);
   max-width: 2000px;
-  min-width: 1000px;
+  min-width: 700px;
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid #ddd;
@@ -9,7 +9,6 @@
 }
 
 .itemListBox {
-  overflow: hidden;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-gap: 5px;

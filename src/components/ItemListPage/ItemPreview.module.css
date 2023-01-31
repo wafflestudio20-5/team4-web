@@ -1,6 +1,5 @@
 .itemPreview {
   padding: 5px 5px;
-  flex: 0 0 auto;
 }
 .itemPreview:hover {
   cursor: pointer;

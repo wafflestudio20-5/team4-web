@@ -1,13 +1,10 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import StyleList from './StyleList';
 import StyleListPageHeader from './StylelistPageHeader';
 import { useApiData, useApiStyleListFetcher } from '../../lib/api';
 import styles from './index.module.css';
 
 export default function ItemListPage() {
-  const navigate = useNavigate();
-
   const [index, setIndex] = useState(0);
 
   const [sort, setSort] = useState<string | undefined>();
@@ -45,7 +42,7 @@ export default function ItemListPage() {
 
   return (
     <div className={styles.wrap}>
-      <StyleListPageHeader navigate={navigate} />
+      <StyleListPageHeader />
       <StyleList
         styleList={styleList}
         sort={sort}

@@ -235,7 +235,7 @@ export default function ItemListPageHeader({
           <span>검색</span>
         </div>
         <div className={styles.sortingOption}>
-          <div>
+          <div className={styles.sortingInput}>
             <input
               value={inputs}
               onChange={handleInputs}

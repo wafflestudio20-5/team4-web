@@ -14,6 +14,8 @@ export default function ClosetHeader({
   accessToken,
   isMe,
 }: ClosetHeaderProps) {
+  // const navigate = useNavigate();
+
   const { data: userData } = useApiData(
     useApiUserFectcher(parsedId, accessToken)
   );
@@ -42,16 +44,40 @@ export default function ClosetHeader({
             </div>
             <div className={styles.flex}>
               {isMe ? (
-                <div className={styles.poststyle}>게시물 작성</div>
+                <div
+                  className={styles.poststyle}
+                  // onClick={() => {
+                  //   navigate(스타일 작성 페이지);
+                  // }}
+                >
+                  게시물 작성
+                </div>
               ) : isFollow ? (
-                <div className={styles.poststyle}>팔로잉</div>
+                <div
+                  className={styles.poststyle}
+                  // onClick={() => {
+                  //   팔로우 DELETE;
+                  // }}
+                >
+                  팔로잉
+                </div>
               ) : (
-                <div className={styles.followstyle}>팔로우</div>
+                <div
+                  className={styles.followstyle}
+                  // onClick={() => {
+                  //   팔로우 POST;
+                  // }}
+                >
+                  팔로우
+                </div>
               )}
               <img
                 className={styles.insta}
                 src={insta}
                 alt={'인스타그램으로'}
+                // onClick={() => {
+                //   navigate("인스타그램 url")
+                // }}
               />
             </div>
           </div>
