@@ -6,9 +6,10 @@ import {
   Category,
   SubCategory,
   Purchase,
+  Review,
   Style,
 } from './interface';
-import { PurchasePostDto } from './dto';
+import { PatchMyInfoRequestDto, PurchasePostDto } from './dto';
 
 axios.defaults.baseURL = process.env.REACT_APP_DB_HOST;
 axios.defaults.withCredentials = true;
@@ -42,8 +43,28 @@ export const apiCheckUsername = (username: string) =>
 export const apiCheckNickname = (nickname: string) =>
   axios.post<{ isUnique: boolean }>('/api/auth/nickname', { nickname });
 
+export const apiCheckPassword = (
+  currentPassword: string,
+  token: string | null
+) =>
+  axios.post(
+    '/api/auth/password',
+    { currentPassword },
+    {
+      headers: token ? auth(token) : undefined,
+    }
+  );
+
 export const apiGetMyInfo = (token: string) =>
   axios.get<{ user: User }>('/api/user/me', { headers: auth(token) });
+
+export const apiPatchMyInfo = (
+  patchMyInfoRequestDto: PatchMyInfoRequestDto,
+  token: string | null
+) =>
+  axios.patch('/api/user/me', patchMyInfoRequestDto, {
+    headers: token ? auth(token) : undefined,
+  });
 
 export function useApiData<T>(
   fetch: ((cancel: CancelToken) => Promise<AxiosResponse<T>>) | null
@@ -79,6 +100,35 @@ export const useApiItemFetcher = (id: number | null) => {
   return id === null ? null : f;
 };
 
+export const useApiReviewListFetcher = (
+  id: number | null,
+  index?: number,
+  count?: number
+) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) =>
+      axios.get<{ reviews: Review[] }>(`/api/item/${id}/reviews`, {
+        params: { index, count },
+        cancelToken,
+      }),
+    [id, index, count]
+  );
+  return id === null ? null : f;
+};
+
+export const useApiGetUserReviewListFetcher = (token: string | null) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      return axios.get<{ reviews: Review[] }>('/api/user/me/reviews', {
+        headers: token ? auth(token) : undefined,
+        cancelToken,
+      });
+    },
+    [token]
+  );
+  return f;
+};
+
 export const apiPostReview = (
   id: number,
   rating: number,
@@ -89,7 +139,7 @@ export const apiPostReview = (
   token: string | null
 ) =>
   axios.post<{}>(
-    '/api/user/me/reviews',
+    '/api/user/me/review',
     { id, rating, content, size, color, images },
     { headers: token ? auth(token) : undefined }
   );
@@ -104,13 +154,18 @@ export const apiPutReview = (
   token: string | null
 ) =>
   axios.put<{}>(
-    '/api/user/me/reviews',
+    '/api/user/me/review',
     { id, rating, content, size, color, images },
     { headers: token ? auth(token) : undefined }
   );
 
+export const apiDeleteReview = (id: number, token: string | null) =>
+  axios.delete<{}>(`/api/user/me/review/${id}`, {
+    headers: token ? auth(token) : undefined,
+  });
+
 export const apiPostImage = (formData: FormData, token: string | null) =>
-  axios.post('/api/image-upload', formData, {
+  axios.post<{ secureImages: string[] }>('/api/image-upload', formData, {
     headers: token ? auth(token) : undefined,
   });
 
@@ -308,6 +363,7 @@ export const useApiStyleListFetcher = (
   return f;
 };
 
+<<<<<<< HEAD
 export const useApiUserFectcher = (id: number | null, token: string | null) => {
   const f = useCallback(
     (cancelToken: CancelToken) => {
@@ -342,3 +398,15 @@ export const useApiUserStyleFecther = (id: number | null) => {
   );
   return id === null ? null : f;
 };
+=======
+export const apiPostComment = (
+  reviewId: number,
+  content: string,
+  token: string | null
+) =>
+  axios.post<{}>(
+    `/api/user/me/comment`,
+    { reviewId, content },
+    { headers: token ? auth(token) : undefined }
+  );
+>>>>>>> main

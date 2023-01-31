@@ -4,6 +4,8 @@ export interface User {
   username: string;
   nickname: string;
   reviewCount: number;
+  description?: string;
+  instaUsername?: string;
   registrationDate: string;
   height?: number;
   weight?: number;
@@ -38,6 +40,7 @@ export interface Item {
 export interface Purchase {
   id: number;
   item: Item;
+  user: User;
   createdDateTime?: string;
   payment?: number;
   quantity: number;

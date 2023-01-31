@@ -1,6 +1,5 @@
 .wrapper {
   width: 100%;
-  border-bottom: 1px solid #ddd;
 }
 
 .category {
@@ -32,6 +31,7 @@
 
 .body {
   padding: 25px 30px 20px 30px;
+  border-bottom: 1px solid #ddd;
   .body_grid {
     display: grid;
     grid-template-columns: auto 1fr;

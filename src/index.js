@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import store from './store';
 import App from './App';
+import StyleModal from './components/StyleModal';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,6 +15,7 @@ root.render(
     <BrowserRouter>
       <App />
     </BrowserRouter>
+    <StyleModal />
     <ToastContainer />
   </Provider>
 );

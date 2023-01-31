@@ -10,6 +10,8 @@ import MyPageOrder from './MyPageOrder';
 import MyPageViewed from './MyPageViewed';
 import MyPageWriteReviews from './MyPageWriteReviews';
 import MyPageWriteReviewsList from './MyPageWriteReviews/indexList';
+import MyPageReviewList from './MyPageReviewList';
+import MyPageEditReviews from './MyPageEditReviews';
 import Footer from '../Footer';
 import { Session } from '../../lib/interface';
 
@@ -47,8 +49,14 @@ function MyPage() {
     return (
       <Routes>
         <Route element={<MyPageLayout user={user} onLogout={onLogout} />}>
-          <Route index element={<MyPageInfo user={user} />} />
-          <Route path="info" element={<MyPageInfo user={user} />} />
+          <Route
+            index
+            element={<MyPageInfo user={user} accessToken={accessToken} />}
+          />
+          <Route
+            path="info"
+            element={<MyPageInfo user={user} accessToken={accessToken} />}
+          />
           <Route
             path="review"
             element={<MyPageWriteReviewsList accessToken={accessToken} />}
@@ -57,7 +65,14 @@ function MyPage() {
             path="review/write"
             element={<MyPageWriteReviews accessToken={accessToken} />}
           />
-          {/*<Route path="review/edit" element={<MyPageEditReviews data={} accessToken={accessToken}/>} />*/}
+          <Route
+            path="review/edit"
+            element={<MyPageEditReviews accessToken={accessToken} />}
+          />
+          <Route
+            path="review/list"
+            element={<MyPageReviewList accessToken={accessToken} />}
+          />
           <Route
             path="order"
             element={<MyPageOrder accessToken={accessToken} />}

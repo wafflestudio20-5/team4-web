@@ -85,10 +85,10 @@
 }
 
 .grid_button {
-  margin: -5px 0;
+  margin: -5px 2px;
   border: 1px solid #e5e5e5;
   background-color: white;
-  min-width: 100px;
+  min-width: 120px;
   height: 32px;
   line-height: 30px;
   vertical-align: middle;
@@ -108,86 +108,184 @@
   font-weight: bold;
 }
 
-.social_content {
-  padding: 10px 0 59px;
-  ul {
-    margin: 0;
-    padding-left: 0;
-  }
-}
-
-.social_tab {
-  position: relative;
-  padding: 10px 0 10px 167px;
-  list-style: none;
-  font-size: 14px;
-  span {
-    position: absolute;
-    top: 14px;
-    left: 0;
-    line-height: 21px;
-  }
-  input {
-    position: absolute;
-    overflow: hidden;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    clip: rect(0 0 0 0);
-  }
-}
-
-.label_checked {
-  min-width: 50px;
-  height: 30px;
-  padding: 6px 0;
-  float: left;
-  margin-right: -1px;
-  border: 1px solid #0078ff;
-  border-radius: 4px 0 0 4px;
-  font-size: 12px;
-  box-sizing: border-box;
-  color: white;
-  background: #0078ff;
-  text-align: center;
-  cursor: pointer;
-  z-index: 1;
-}
-
-.label_unchecked {
-  min-width: 50px;
-  height: 30px;
-  padding: 6px 0;
-  float: left;
-  margin-right: -1px;
-  border: 1px solid #ebebeb;
-  border-radius: 0 4px 4px 0;
-  font-size: 12px;
-  box-sizing: border-box;
-  color: #a5a5a5;
-  text-align: center;
-  cursor: pointer;
-  z-index: 1;
-}
-
-.edit_button {
-  position: absolute;
-  right: 0;
-  padding: 0 8px;
-  margin-left: 15px;
-  border: 1px solid #e5e5e5;
-  background-color: white;
-  min-width: 60px;
+.grid_cancel_button {
+  margin: -5px 2px;
+  border: 1px solid #f1f1f1;
+  background-color: #f1f1f1;
+  color: black;
+  min-width: 70px;
   height: 32px;
   line-height: 30px;
+  padding-top: 0;
   font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif !important;
-  box-sizing: border-box;
-  cursor: pointer;
-  transition: border 0.2s ease-in-out;
+  font-size: 14px;
+  transition: border 0.2s, background 0.2s ease-in-out;
 }
 
-.edit_button:hover {
-  border-color: black;
+.grid_cancel_button:hover {
+  border-color: #d8d8d8;
+  background-color: #d8d8d8;
+}
+
+.grid_confirm_button {
+  margin: -5px 2px;
+  border: 1px solid black;
+  background-color: black;
+  color: white;
+  min-width: 70px;
+  height: 32px;
+  line-height: 30px;
+  padding-top: 0;
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif !important;
+  font-size: 14px;
+  transition: border 0.2s, background 0.2s ease-in-out;
+}
+
+.grid_confirm_button:hover {
+  border-color: #0078ff;
+  background-color: #0078ff;
+}
+
+.grid_disabled_button {
+  margin: -5px 2px;
+  border: 1px solid #ccc;
+  background-color: #ccc;
+  color: white;
+  min-width: 70px;
+  height: 32px;
+  line-height: 30px;
+  padding-top: 0;
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif !important;
+  font-size: 14px;
+}
+
+.button_container {
+  margin-top: 15px;
+}
+
+.input_wrapper {
+  display: flex;
+  box-sizing: border-box;
+  max-width: 300px;
+  width: 100%;
+  height: 30px;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  align-items: center;
+  .input {
+    width: 100%;
+    padding: 0 8px;
+    border: none;
+    background-color: #fff;
+    font-size: 14px;
+    font-family: '-apple-system', HelveticaNeue, Roboto,
+      'Noto Sans KR', helvetica, Gulim, sans-serif;
+    color: #000;
+    box-shadow: 0 0 0 30px #fff inset !important;
+    transition: border 0.2s ease-in-out;
+    appearance: none;
+    box-sizing: border-box;
+    vertical-align: middle;
+    outline: 0;
+    margin: 0 1px;
+  }
+  .numeric_input {
+    text-align: right;
+  }
+  .input_clear_button {
+    display: flex;
+    margin-right: 7px;
+    padding: 5px;
+    flex: 0 0 auto;
+    appearance: none;
+    border: none;
+    background: 0 0;
+    cursor: pointer;
+  }
+  .show_password_button {
+    display: flex;
+    background: url(https://static.msscdn.net/ui/build/m/img/login/ic-30-show-button.svg?v=20230119143941)
+      no-repeat 50% 50%;
+    margin-right: 7px;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    flex: 0 0 auto;
+    border: none;
+    cursor: pointer;
+  }
+  .hide_password_button {
+    display: flex;
+    background: url(https://static.msscdn.net/ui/build/m/img/login/ic-30-hide-button.svg?v=20230119143941)
+      no-repeat 50% 50%;
+    margin-right: 7px;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    flex: 0 0 auto;
+    border: none;
+    cursor: pointer;
+  }
+}
+.inputWrapDanger {
+  border-color: red !important;
+}
+.additional_input_wrapper {
+  max-width: 500px;
+  margin-bottom: 10px;
+}
+.numeric_input_wrapper {
+  max-width: 50px;
+}
+
+.helper_container {
+  height: 30px;
+  .helper {
+    font-size: 12px;
+    margin-top: 1px;
+    margin-left: 2px;
+  }
+  .valid {
+    color: #14aaff;
+  }
+  .invalid {
+    color: red;
+  }
+}
+
+.constraint {
+  padding-left: 18px;
+  color:#777777;
+  margin: 0;
+}
+
+.password_row_wrapper {
+  display: flex;
+  .password_label {
+    min-width: 165px;
+    font-size: 14px;
+    padding-top: 3px;
+  }
+  .input_helper_wrapper {
+    padding-right: 20px;
+    width: 400px
+  }
+}
+
+.numeric_row_wrapper {
+  display: flex;
+  .label {
+    min-width: 80px;
+    font-size: 14px;
+    padding-top: 3px;
+    margin-left: 5px;
+  }
+  .input_label_helper_wrapper {
+    padding-right: 20px;
+    .input_label_wrapper {
+      display: flex;
+    }
+  }
 }
 
 .description_content {
@@ -202,4 +300,35 @@
   font-size: 14px;
   color: #777777;
   line-height: 400px;
+}
+
+.modalbackground {
+  position: fixed;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  left: 0px;
+  top: 0px;
+  background: rgba(0, 0, 0, 0.5);
+  animation-duration: 0.25s;
+  animation-timing-function: ease-out;
+  animation-name: fadeIn;
+  animation-fill-mode: forwards;
+}
+
+.modalContainer {
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px;
+  position: absolute;
+  width: 360px;
+  height: 160px;
+  left: calc(50% - 380px / 2);
+  top: calc(50% - 170px / 2);
+  background: #ffffff;
+  border: 1px solid #d8d8d8;
+  animation: modal-show 0.25s;
 }

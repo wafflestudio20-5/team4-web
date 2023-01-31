@@ -1,5 +1,7 @@
+import React from 'react';
 import { Link, createSearchParams } from 'react-router-dom';
 import { PurchaseDraft, AddToCartModalState } from '.';
+import Reviews from './Reviews';
 import {
   Item,
   Label,
@@ -16,7 +18,6 @@ import {
   getBarWidth,
 } from '../../lib/formatters/ratingFormatter';
 import styles from './DetailPageLayout.module.scss';
-import React from 'react';
 
 interface DetailPageHeaderProps {
   category: Category;
@@ -350,7 +351,6 @@ export default function DetailPageLayout({
   inquiryTestClick,
 }: DetailPageLayoutProps) {
   return (
-
     <div className={styles.wrapper}>
       <DetailPageHeader
         category={item.category}
@@ -396,6 +396,7 @@ export default function DetailPageLayout({
           </div>
         </div>
       </div>
+      <Reviews itemId={item.id} count={item.reviewCount} />
     </div>
   );
 }
