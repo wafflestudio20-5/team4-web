@@ -88,7 +88,7 @@ export function useApiData<T>(
       });
     return () => source.cancel();
   }, [fetch]);
-  return { data, loading, error };
+  return { data, loading, error, setResult };
 }
 
 export const useApiItemFetcher = (id: number | null) => {
@@ -384,6 +384,19 @@ export const useApiUserFectcher = (id: number | null, token: string | null) => {
   return id === null ? null : f;
 };
 
+export const apiGetUser = (id: number | null, token: string | null) =>
+  axios.get<{
+    user: User;
+    count: {
+      styleCount: number;
+      followerCount: number;
+      followingCount: number;
+    };
+    isFollow: boolean;
+  }>(`/api/user/${id}`, {
+    headers: token ? auth(token) : undefined,
+  });
+
 export const useApiUserStyleFecther = (id: number | null) => {
   const f = useCallback(
     (cancelToken: CancelToken) => {
@@ -407,3 +420,13 @@ export const apiPostComment = (
     { reviewId, content },
     { headers: token ? auth(token) : undefined }
   );
+
+export const apiPostFollow = (userId: number, token: string | null) =>
+  axios.post<{}>(`/api/user/${userId}/follow`, {
+    headers: token ? auth(token) : undefined,
+  });
+
+export const apiDeleteFollow = (userId: number, token: string | null) =>
+  axios.delete<{}>(`/api/user/${userId}/follow`, {
+    headers: token ? auth(token) : undefined,
+  });

@@ -1,7 +1,15 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './ClosetHeader.module.scss';
 import insta from '../../../resources/image/insta.png';
-import { useApiUserFectcher, useApiData } from '../../../lib/api';
+import {
+  useApiUserFectcher,
+  useApiData,
+  apiGetUser,
+  apiPostFollow,
+  apiDeleteFollow,
+} from '../../../lib/api';
+import { formatUserInfoCloset } from '../../../lib/formatters/userFormatter';
+import { toast } from 'react-toastify';
 
 interface ClosetHeaderProps {
   parsedId: number | null;
@@ -14,14 +22,63 @@ export default function ClosetHeader({
   accessToken,
   isMe,
 }: ClosetHeaderProps) {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  const { data: userData } = useApiData(
+  const { data, setResult } = useApiData(
     useApiUserFectcher(parsedId, accessToken)
   );
-  const user = userData?.user ?? null;
-  const count = userData?.count ?? null;
-  const isFollow = userData?.isFollow ?? null;
+  const user = data?.user ?? null;
+  const count = data?.count ?? null;
+  const isFollow = data?.isFollow ?? null;
+
+  const FollowUser = (id: number, token: string | null) => {
+    if (!token) {
+      navigate('/login');
+      return;
+    }
+    apiPostFollow(id, token)
+      .then(() => {
+        apiGetUser(id, token)
+          .then((res) => {
+            setResult((prev) => ({
+              ...prev,
+              data: res.data,
+              error: undefined,
+              loading: false,
+            }));
+          })
+          .catch(() => {
+            window.location.reload();
+          });
+      })
+      .catch(() => {
+        toast('다시 시도해주세요');
+      });
+  };
+  const unFollowUser = (id: number, token: string | null) => {
+    if (!token) {
+      navigate('/login');
+      return;
+    }
+    apiDeleteFollow(id, token)
+      .then(() => {
+        apiGetUser(id, token)
+          .then((res) => {
+            setResult((prev) => ({
+              ...prev,
+              data: res.data,
+              error: undefined,
+              loading: false,
+            }));
+          })
+          .catch(() => {
+            window.location.reload();
+          });
+      })
+      .catch(() => {
+        toast('다시 시도해주세요');
+      });
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -36,7 +93,7 @@ export default function ClosetHeader({
             </div>
             <div className={styles.userprofile}>
               <div className={styles.profiletext}>
-                {user?.sex} / {user?.height} · {user?.weight}kg
+                {formatUserInfoCloset(user?.sex, user?.height, user?.weight)}
               </div>
               <div className={styles.profiletext}>
                 {user?.description ? user?.description : ''}
@@ -55,18 +112,18 @@ export default function ClosetHeader({
               ) : isFollow ? (
                 <div
                   className={styles.poststyle}
-                  // onClick={() => {
-                  //   팔로우 DELETE;
-                  // }}
+                  onClick={() => {
+                    unFollowUser(user.id, accessToken);
+                  }}
                 >
                   팔로잉
                 </div>
               ) : (
                 <div
                   className={styles.followstyle}
-                  // onClick={() => {
-                  //   팔로우 POST;
-                  // }}
+                  onClick={() => {
+                    FollowUser(user.id, accessToken);
+                  }}
                 >
                   팔로우
                 </div>
@@ -75,9 +132,11 @@ export default function ClosetHeader({
                 className={styles.insta}
                 src={insta}
                 alt={'인스타그램으로'}
-                // onClick={() => {
-                //   navigate("인스타그램 url")
-                // }}
+                onClick={() => {
+                  window.open(
+                    `https://www.instagram.com/${user.instaUsername}/`
+                  );
+                }}
               />
             </div>
           </div>

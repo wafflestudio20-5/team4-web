@@ -2,6 +2,7 @@
   width: calc(100%);
   min-width: 1000px;
   max-width: 3600px;
+  min-height: calc(100vh - 475px);
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid #ddd;
@@ -17,7 +18,7 @@
 .itemNullBox {
   border: 1px solid #ddd;
   display: flex;
-  height: 500px;
+  height: calc(100vh - 475px);
   padding: 5px;
   justify-content: center;
   align-items: center;
