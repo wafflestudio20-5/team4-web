@@ -88,6 +88,7 @@
 
 .reviewWrittenItem {
   list-style-type: none;
+  position: relative;
 }
 .ItemInfo {
   width: calc(25% - 20px);
@@ -107,6 +108,7 @@
     padding-left: 10px;
     li {
       list-style-type: none;
+      width: 180px;
     }
   }
 }
@@ -197,6 +199,10 @@
   text-align: center;
   width: 10%;
   display: inline-block;
+  position: absolute;
+  top: 50%;
+
+
 }
 .reviewComment {
   padding-left: calc(25% + 21px);
