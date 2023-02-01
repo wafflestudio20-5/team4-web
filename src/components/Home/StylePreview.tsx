@@ -29,15 +29,15 @@ export default function StylePreview({ styleSingle }: StylePreviewProps) {
                 className={styles.styleItemImage}
                 src={styleSingle.user.image}
                 alt="상품 이미지"
-                // onClick={() => {
-                //   navigate(이사람 옷장);
-                // }}
+                onClick={() => {
+                  navigate(`/closet/${styleSingle.user.id}`);
+                }}
               />
               <div
                 className={styles.stylesUserNickName}
-                // onClick={() => {
-                //   navigate(이사람 옷장);
-                // }}
+                onClick={() => {
+                  navigate(`/closet/${styleSingle.user.id}`);
+                }}
               >
                 {styleSingle.user.nickname}
               </div>

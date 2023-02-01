@@ -1,0 +1,26 @@
+.itemList {
+  width: calc(100%);
+  min-width: 1000px;
+  max-width: 3600px;
+  min-height: calc(100vh - 475px);
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #ddd;
+}
+
+.itemListBox {
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  grid-gap: 2px;
+}
+
+.itemNullBox {
+  border: 1px solid #ddd;
+  display: flex;
+  height: calc(100vh - 475px);
+  padding: 5px;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+}

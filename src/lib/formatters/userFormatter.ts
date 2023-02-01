@@ -21,6 +21,18 @@ export function formatUserInfo(
   return s + h + w;
 }
 
+export function formatUserInfoCloset(
+  sex: string | undefined,
+  height: number | undefined,
+  weight: number | undefined
+): string {
+  const s = sex ? `${formatSex(sex)}, ` : '';
+  const h = height ? `${height}cm ·  ` : '';
+  const w = height && weight ? `${weight}kg` : '';
+
+  return s + h + w;
+}
+
 export function formatUserSize(
   height: number | undefined,
   weight: number | undefined

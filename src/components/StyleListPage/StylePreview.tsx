@@ -14,33 +14,6 @@ export default function StylePreview({ styleSingle }: StylePreviewProps) {
     <div className={styles.itemPreview}>
       <div className={styles.CGoods}>
         <div className={styles.stylesWrap}>
-          {/* <div className={styles.stylesUser}>
-            <div className={styles.stylesUserProfile}>
-              <img
-                className={styles.styleItemImage}
-                src={styleSingle.user.image}
-                alt="상품 이미지"
-                // onClick={() => {
-                //   navigate(이사람 옷장);
-                // }}
-              />
-              <div
-                className={styles.stylesUserNickName}
-                // onClick={() => {
-                //   navigate(이사람 옷장);
-                // }}
-              >
-                {styleSingle.user.nickname}
-              </div>
-            </div>
-            <div className={styles.styleUserFollow}>
-              <div className={styles.styleUserFollowDiv}>팔로우</div>
-              <div className={styles.styleUserMoreDiv}>
-                <img src={more} alt="추가 옵션 버튼" />
-              </div>
-            </div>
-          </div> */}
-
           <div
             className={styles.image}
             // onClick={() => {
