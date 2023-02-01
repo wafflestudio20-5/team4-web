@@ -169,6 +169,18 @@ export default function StyleModal() {
       });
   };
 
+  /***
+   *
+   * 유저, 아이템 클릭 시 관련 페이지로 이동
+   *
+   */
+
+  const onUserClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    navigate(`/closet/${data?.style.user.id}`);
+    dispatch(setClose());
+  };
+
   if (data && socials !== undefined) {
     return (
       <StyleModalLayout
@@ -186,6 +198,7 @@ export default function StyleModal() {
         onUnlike={onUnlike}
         onFollow={onFollow}
         onUnfollow={onUnfollow}
+        onUserClick={onUserClick}
       />
     );
   }

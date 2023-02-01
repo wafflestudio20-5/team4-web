@@ -69,6 +69,7 @@ interface StyleModalHeaderProps {
   onFollow: (e: React.MouseEvent<HTMLDivElement>) => void;
   onUnfollow: (e: React.MouseEvent<HTMLDivElement>) => void;
   onClose: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onUserClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 function StyleModalHeader({
@@ -78,10 +79,11 @@ function StyleModalHeader({
   onFollow,
   onUnfollow,
   onClose,
+  onUserClick,
 }: StyleModalHeaderProps) {
   return (
     <div className={styles.header}>
-      <div className={styles.profile}>
+      <div className={styles.profile} onClick={onUserClick}>
         <img className={styles.profile_image} src={user.image} alt="" />
         <div className={styles.profile_text}>
           <h3 className={styles.profile_nickname}>{user.nickname}</h3>
@@ -201,6 +203,7 @@ interface StyleModalLayoutProps {
   onUnlike: (e: React.MouseEvent<HTMLDivElement>) => void;
   onFollow: (e: React.MouseEvent<HTMLDivElement>) => void;
   onUnfollow: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onUserClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export default function StyleModalLayout({
@@ -218,6 +221,7 @@ export default function StyleModalLayout({
   onUnlike,
   onFollow,
   onUnfollow,
+  onUserClick,
 }: StyleModalLayoutProps) {
   return (
     <>
@@ -237,6 +241,7 @@ export default function StyleModalLayout({
                 onFollow={onFollow}
                 onUnfollow={onUnfollow}
                 onClose={onClose}
+                onUserClick={onUserClick}
               />
               <div className={styles.scrollable}>
                 <StyleModalContent
