@@ -422,9 +422,13 @@ export const apiPostComment = (
   );
 
 export const apiPostFollow = (userId: number, token: string | null) =>
-  axios.post<{}>(`/api/user/${userId}/follow`, {
-    headers: token ? auth(token) : undefined,
-  });
+  axios.post<{}>(
+    `/api/user/${userId}/follow`,
+    {},
+    {
+      headers: token ? auth(token) : undefined,
+    }
+  );
 
 export const apiDeleteFollow = (userId: number, token: string | null) =>
   axios.delete<{}>(`/api/user/${userId}/follow`, {

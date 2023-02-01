@@ -128,18 +128,18 @@ export default function ClosetHeader({
                   팔로우
                 </div>
               )}
-              <img
-                className={styles.insta}
-                src={insta}
-                alt={'인스타그램으로'}
-                onClick={() => {
-                  if (user.instaUsername) {
+              {user?.instaUsername && (
+                <img
+                  className={styles.insta}
+                  src={insta}
+                  alt={'인스타그램으로'}
+                  onClick={() => {
                     window.open(
                       `https://www.instagram.com/${user.instaUsername}/`
                     );
-                  }
-                }}
-              />
+                  }}
+                />
+              )}
             </div>
           </div>
           <div className={styles.userrate}>
