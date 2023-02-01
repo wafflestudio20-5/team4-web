@@ -31,6 +31,10 @@ export default function MyPageStyleWrite({
 
     setInput({ ...input, [name]: value });
   };
+  const [tempSelect, setTempSelect] = useState<number>(-1);
+  const onChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setInput({ ...input, itemIds: [...input.itemIds, Number(e.target.value)] });
+  };
   useEffect(() => {
     console.log(input);
   });
@@ -104,6 +108,8 @@ export default function MyPageStyleWrite({
       handleClick={handleClick}
       input={input}
       onChangeTextArea={onChangeTextArea}
+      purchases={purchases}
+      onChangeSelect={onChangeSelect}
     ></MyPageStyleWriteLayout>
   );
 }

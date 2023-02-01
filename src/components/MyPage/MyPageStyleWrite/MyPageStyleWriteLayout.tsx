@@ -1,6 +1,8 @@
 import styles from './MyPageStyleWriteLayout.module.scss';
 import search_button from '../../../resources/image/search_icon.png';
 import close_button from '../../../resources/image/close.png';
+import { Purchase } from '../../../lib/interface';
+import React from 'react';
 interface Input {
   content: string;
   hashtag: string;
@@ -11,6 +13,8 @@ interface MyPageStyleWriteLayoutParams {
   handleClick: () => void;
   input: Input;
   onChangeTextArea: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  purchases: Purchase[] | null;
+  onChangeSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export default function MyPageStyleWriteLayout({
@@ -18,6 +22,8 @@ export default function MyPageStyleWriteLayout({
   handleClick,
   input,
   onChangeTextArea,
+  purchases,
+  onChangeSelect,
 }: MyPageStyleWriteLayoutParams) {
   return (
     <div className={styles.postWrapper}>
@@ -80,15 +86,21 @@ export default function MyPageStyleWriteLayout({
             코디한 아이템 중 무신사에서 구매한 상품을 공유해 주세요.
           </p>
           <div className={styles.searchItem}>
-            <label htmlFor="searchItemInput">브랜드명 / 상품명 입력 </label>
-            <input
-              id="searchItemInput"
-              type="text"
-              maxLength={30}
-              // value={query}
-              // onChange={onChange}
-              // onKeyPress={onKeyPress}
-            />
+            <select name="items" onChange={onChangeSelect}>
+              <option>브랜드명 / 상품명 입력</option>
+              {purchases
+                ?.filter(
+                  (purchase) =>
+                    input.itemIds.includes(purchase.item.id) === false
+                )
+                .map((purchase) => (
+                  <option value={purchase.item.id}>
+                    {purchase.item.id}|{purchase.item.brand}|
+                    {purchase.item.name}|{purchase.option}
+                  </option>
+                ))}
+            </select>
+
             <div className={styles.searchButton}>
               <img src={search_button} alt="search_button" />
             </div>
