@@ -1,5 +1,5 @@
 import React from 'react';
-import { User, Item, StyleData } from '../../lib/interface';
+import { User, Item, Style } from '../../lib/interface';
 import { formatUserSize } from '../../lib/formatters/userFormatter';
 import { getRelativeDateTime } from '../../lib/formatters/dateTimeFormatter';
 import styles from './StyleModalLayout.module.scss';
@@ -65,12 +65,18 @@ function StyleModalImages({ images }: StyleModalImagesProps) {
 interface StyleModalHeaderProps {
   user: User;
   isFollowed: boolean;
+  isLoggedIn: boolean;
+  onFollow: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onUnfollow: (e: React.MouseEvent<HTMLDivElement>) => void;
   onClose: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 function StyleModalHeader({
   user,
   isFollowed,
+  isLoggedIn,
+  onFollow,
+  onUnfollow,
   onClose,
 }: StyleModalHeaderProps) {
   return (
@@ -84,13 +90,16 @@ function StyleModalHeader({
           </div>
         </div>
       </div>
-      <div
-        className={`${styles.follow_box} ${
-          isFollowed ? styles.followed : styles.not_followed
-        }`}
-      >
-        {isFollowed ? '팔로잉' : '팔로우'}
-      </div>
+      {isLoggedIn && (
+        <div
+          className={`${styles.follow_box} ${
+            isFollowed ? styles.followed : styles.not_followed
+          }`}
+          onClick={isFollowed ? onUnfollow : onFollow}
+        >
+          {isFollowed ? '팔로잉' : '팔로우'}
+        </div>
+      )}
       <button className={styles.close_button} onClick={onClose}>
         <img src={close} alt="닫기" />
       </button>
@@ -174,23 +183,37 @@ function StyleModalItems({ items }: StyleModalItemsProps) {
 
 interface StyleModalLayoutProps {
   open: boolean;
-  data: StyleData;
   visible: boolean;
   outside: React.MutableRefObject<null>;
   onClose: (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => void;
   onOuterClick: (e: React.MouseEvent<HTMLDivElement>) => void;
+  style: Style;
+  likedCount: number;
+  isLoggedIn: boolean;
+  isLiked: boolean;
+  isFollowed: boolean;
+  onLike: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onUnlike: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onFollow: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onUnfollow: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export default function StyleModalLayout({
   open,
-  data,
   visible,
   outside,
   onClose,
   onOuterClick,
+  style,
+  likedCount,
+  isLoggedIn,
+  isLiked,
+  isFollowed,
+  onLike,
+  onUnlike,
+  onFollow,
+  onUnfollow,
 }: StyleModalLayoutProps) {
-  const { style, likedCount, isFollow, isLike } = data;
-
   return (
     <>
       {visible && (
@@ -204,7 +227,10 @@ export default function StyleModalLayout({
             <div className={styles.body}>
               <StyleModalHeader
                 user={style.user}
-                isFollowed={isFollow}
+                isFollowed={isFollowed}
+                isLoggedIn={isLoggedIn}
+                onFollow={onFollow}
+                onUnfollow={onUnfollow}
                 onClose={onClose}
               />
               <div className={styles.scrollable}>
@@ -213,7 +239,7 @@ export default function StyleModalLayout({
                   hashtag={style.hashtag}
                   createdDateTime={style.createdDateTime}
                   likedCount={likedCount}
-                  isLiked={isLike}
+                  isLiked={isLiked}
                 />
                 <StyleModalItems items={style.items} />
               </div>
