@@ -14,8 +14,8 @@ root.render(
   <Provider store={store}>
     <BrowserRouter>
       <App />
+      <StyleModal />
     </BrowserRouter>
-    <StyleModal />
     <ToastContainer />
   </Provider>
 );

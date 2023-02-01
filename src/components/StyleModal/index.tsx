@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
@@ -25,8 +26,6 @@ export default function StyleModal() {
   const { open, styleId } = useSelector((state: RootState) => {
     return state.modal;
   });
-
-  console.log(`open: ${open}, visible: ${visible}`);
 
   const dispatch = useDispatch();
 
@@ -96,6 +95,8 @@ export default function StyleModal() {
     }
   }, [data]);
 
+  const navigate = useNavigate();
+
   const userId = data?.style.user.id;
 
   const onFollow = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -139,7 +140,8 @@ export default function StyleModal() {
   const onLike = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     if (!accessToken) {
-      toast('먼저 로그인해주세요.');
+      navigate('/login');
+      dispatch(setClose());
       return;
     }
     if (socials)
@@ -153,7 +155,8 @@ export default function StyleModal() {
   const onUnlike = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     if (!accessToken) {
-      toast('먼저 로그인해주세요.');
+      navigate('/login');
+      dispatch(setClose());
       return;
     }
     if (socials)
