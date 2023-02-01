@@ -6,14 +6,58 @@ import styles from './StyleModalLayout.module.scss';
 import close from '../../resources/image/close.png';
 import like from '../../resources/image/like.png';
 
+/* Slick Slider */
+
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import forward from '../../resources/image/forward.svg';
+import backward from '../../resources/image/back.svg';
+
+interface ArrowProps {
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
+}
+
+function BeforeArrow({ onClick }: ArrowProps) {
+  return (
+    <div className={styles.prevArrow} onClick={onClick}>
+      <img className={styles.previewImage} src={backward} alt="이전 슬라이드" />
+    </div>
+  );
+}
+
+function NextArrow({ onClick }: ArrowProps) {
+  return (
+    <div className={styles.nextArrow} onClick={onClick}>
+      <img className={styles.previewImage} src={forward} alt="다음 슬라이드" />
+    </div>
+  );
+}
+
+/* Style Modal Layout */
+
 interface StyleModalImagesProps {
   images: string[];
 }
 
 function StyleModalImages({ images }: StyleModalImagesProps) {
+  const settings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    Arrow: true,
+    prevArrow: <BeforeArrow />,
+    nextArrow: <NextArrow />,
+  };
+
   return (
     <div className={styles.images}>
-      <img src={images[0]} alt="" className={styles.image} />
+      <Slider {...settings} className={styles.slider}>
+        {images?.map((image, idx) => (
+          <img key={idx} src={image} alt="" className={styles.image} />
+        ))}
+      </Slider>
     </div>
   );
 }

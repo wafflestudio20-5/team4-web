@@ -86,7 +86,7 @@ export function NextArrow({ onClick }: ArrowProps) {
 export function BeforeArrow({ onClick }: ArrowProps) {
   return (
     <div className={styles.beforeArrow} onClick={onClick}>
-      <img className={styles.previewImage} src={backward} alt="다음 슬라이드" />
+      <img className={styles.previewImage} src={backward} alt="이전 슬라이드" />
     </div>
   );
 }
