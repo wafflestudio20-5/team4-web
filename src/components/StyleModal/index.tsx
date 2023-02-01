@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 import { RootState } from '../../store';
-import { setClose } from '../../store/slices/modal';
+import { setClose, setSuspend } from '../../store/slices/modal';
 import {
   useApiData,
   useApiStyleFetcher,
@@ -174,15 +174,16 @@ export default function StyleModal() {
    * 유저, 아이템 클릭 시 관련 페이지로 이동
    *
    */
+  const location = useLocation();
 
   const onUserClick = (userId: number) => {
     navigate(`/closet/${userId}`);
-    dispatch(setClose());
+    dispatch(setSuspend(location.key));
   };
 
   const onItemClick = (itemId: number) => {
     navigate(`/goods/${itemId}`);
-    dispatch(setClose());
+    dispatch(setSuspend(location.key));
   };
 
   if (data && socials !== undefined) {
