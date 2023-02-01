@@ -113,6 +113,8 @@ interface StyleModalContentProps {
   createdDateTime: string;
   likedCount: number;
   isLiked: boolean;
+  onLike: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onUnlike: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 function StyleModalContent({
@@ -121,6 +123,8 @@ function StyleModalContent({
   createdDateTime,
   likedCount,
   isLiked,
+  onLike,
+  onUnlike,
 }: StyleModalContentProps) {
   return (
     <div className={styles.content}>
@@ -135,6 +139,7 @@ function StyleModalContent({
           className={`${styles.like_box} ${
             isLiked ? styles.liked : styles.not_liked
           }`}
+          onClick={isLiked ? onUnlike : onLike}
         >
           <div className={styles.like_icon}>
             <img src={like} alt="like" className={styles.like_icon_img} />
@@ -240,6 +245,8 @@ export default function StyleModalLayout({
                   createdDateTime={style.createdDateTime}
                   likedCount={likedCount}
                   isLiked={isLiked}
+                  onLike={onLike}
+                  onUnlike={onUnlike}
                 />
                 <StyleModalItems items={style.items} />
               </div>

@@ -78,13 +78,21 @@ export default function StyleModal() {
    *
    */
 
-  const [isFollowed, setIsFollowed] = useState<boolean | undefined>(undefined);
-  const [isLiked, setIsLiked] = useState<boolean | undefined>(undefined);
+  interface Socials {
+    likedCount: number;
+    isFollowed: boolean;
+    isLiked: boolean;
+  }
+
+  const [socials, setSocials] = useState<Socials | undefined>(undefined);
 
   useEffect(() => {
     if (data) {
-      setIsFollowed(data.isFollow);
-      setIsLiked(data.isLike);
+      setSocials({
+        likedCount: data.likedCount,
+        isFollowed: data.isFollow,
+        isLiked: data.isLike,
+      });
     }
   }, [data]);
 
@@ -98,7 +106,11 @@ export default function StyleModal() {
     }
     apiPostFollow(userId, accessToken)
       .then(() => {
-        setIsFollowed(true);
+        if (socials)
+          setSocials({
+            ...socials,
+            isFollowed: true,
+          });
       })
       .catch((error) => {
         toast('요청에 실패했습니다. 다시 시도해주세요.');
@@ -113,7 +125,11 @@ export default function StyleModal() {
     }
     apiDeleteFollow(userId, accessToken)
       .then(() => {
-        setIsFollowed(false);
+        if (socials)
+          setSocials({
+            ...socials,
+            isFollowed: false,
+          });
       })
       .catch((error) => {
         toast('요청에 실패했습니다. 다시 시도해주세요.');
@@ -122,15 +138,33 @@ export default function StyleModal() {
 
   const onLike = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
-    setIsLiked(true);
+    if (!accessToken) {
+      toast('먼저 로그인해주세요.');
+      return;
+    }
+    if (socials)
+      setSocials({
+        ...socials,
+        likedCount: socials.likedCount + 1,
+        isLiked: true,
+      });
   };
 
   const onUnlike = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
-    setIsLiked(false);
+    if (!accessToken) {
+      toast('먼저 로그인해주세요.');
+      return;
+    }
+    if (socials)
+      setSocials({
+        ...socials,
+        likedCount: socials.likedCount - 1,
+        isLiked: false,
+      });
   };
 
-  if (data && isFollowed !== undefined && isLiked !== undefined) {
+  if (data && socials !== undefined) {
     return (
       <StyleModalLayout
         open={open}
@@ -139,10 +173,10 @@ export default function StyleModal() {
         onClose={onClose}
         onOuterClick={onOuterClick}
         style={data.style}
-        likedCount={data.likedCount}
         isLoggedIn={accessToken !== null}
-        isLiked={isLiked}
-        isFollowed={isFollowed}
+        likedCount={socials.likedCount}
+        isLiked={socials.isLiked}
+        isFollowed={socials.isFollowed}
         onLike={onLike}
         onUnlike={onUnlike}
         onFollow={onFollow}
