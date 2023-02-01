@@ -140,6 +140,7 @@ export default function StyleModal() {
   const onLike = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     if (!accessToken) {
+      toast('로그인 후 사용할 수 있는 기능입니다.');
       navigate('/login');
       dispatch(setClose());
       return;
@@ -155,6 +156,7 @@ export default function StyleModal() {
   const onUnlike = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     if (!accessToken) {
+      toast('로그인 후 사용할 수 있는 기능입니다.');
       navigate('/login');
       dispatch(setClose());
       return;
