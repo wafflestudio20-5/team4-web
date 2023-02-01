@@ -1,8 +1,24 @@
 import styles from './MyPageStyleWriteLayout.module.scss';
 import search_button from '../../../resources/image/search_icon.png';
 import close_button from '../../../resources/image/close.png';
+interface Input {
+  content: string;
+  hashtag: string;
+  itemIds: number[];
+}
+interface MyPageStyleWriteLayoutParams {
+  images: string[];
+  handleClick: () => void;
+  input: Input;
+  onChangeTextArea: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+}
 
-export default function MyPageStyleWriteLayout() {
+export default function MyPageStyleWriteLayout({
+  images,
+  handleClick,
+  input,
+  onChangeTextArea,
+}: MyPageStyleWriteLayoutParams) {
   return (
     <div className={styles.postWrapper}>
       <header className={styles.postHeader}>
@@ -15,14 +31,17 @@ export default function MyPageStyleWriteLayout() {
             나의 스타일 사진을 한 장 이상 공유해 주세요.
           </p>
           <div className={styles.postImageInputWrap}>
-            {/*images.map((img, idx) => (
-                            <span>
+            {images.map((img, idx) => (
+              <span>
                 <img src={img} alt={`${idx}`} key={idx}></img>
               </span>
-                        ))*/}
-            <span className={styles.postImageInput} /*onClick={handleClick}*/>
+            ))}
+            <span className={styles.postImageInput} onClick={handleClick}>
               +
             </span>
+            <div className={styles.postWriteInputCount}>
+              {images.length} 개/5 개
+            </div>
           </div>
         </div>
         <p className={styles.title}>글 작성</p>
@@ -31,12 +50,12 @@ export default function MyPageStyleWriteLayout() {
           <textarea
             className={styles.postWriteInput}
             id="postWriteInput"
-            //value={input.content}
-            //onChange={onChangeTextArea}
+            value={input.content}
+            onChange={onChangeTextArea}
             name="content"
           ></textarea>
           <div className={styles.postWriteInputCount}>
-            {/*input.content.length*/} 자
+            {input.content.length} 자
           </div>
         </div>
         <div className={styles.hashtagInputArea}>
@@ -46,12 +65,12 @@ export default function MyPageStyleWriteLayout() {
               className={styles.hashtagInput}
               id="hashtagInput"
               maxLength={20}
-              // value={input.content}
-              // onChange={onChangeTextArea}
-              // name="content"
+              value={input.hashtag}
+              onChange={onChangeTextArea}
+              name="hashtag"
             ></textarea>
             <div className={styles.hashtagInputCount}>
-              {/*input.content.length*/}자/20자 이내
+              {input.hashtag.length}자/20자 이내
             </div>
           </div>
         </div>
@@ -70,10 +89,7 @@ export default function MyPageStyleWriteLayout() {
               // onChange={onChange}
               // onKeyPress={onKeyPress}
             />
-            <div
-              className={styles.searchButton}
-              // onClick={onSubmit}
-            >
+            <div className={styles.searchButton}>
               <img src={search_button} alt="search_button" />
             </div>
           </div>

@@ -161,12 +161,14 @@
         .searchButton {
           background-color: black;
           cursor: pointer;
-          height: 22px;
+          height: 30px;
           padding: 4px;
-          width: 22px;
+          width: 28px;
+          position: relative;
           img {
             filter: invert(100%);
             height: 100%;
+            z-index: 0;
           }
         }
       }
@@ -291,11 +293,10 @@
       border: none;
       resize: none;
     }
-
-    .postWriteInputCount {
-      position: absolute;
-      bottom: 10px;
-      right: 30px;
-    }
   }
+}
+.postWriteInputCount {
+  position: absolute;
+  bottom: 10px;
+  right: 30px;
 }
