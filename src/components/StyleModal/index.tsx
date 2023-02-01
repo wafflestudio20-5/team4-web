@@ -175,9 +175,13 @@ export default function StyleModal() {
    *
    */
 
-  const onUserClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    navigate(`/closet/${data?.style.user.id}`);
+  const onUserClick = (userId: number) => {
+    navigate(`/closet/${userId}`);
+    dispatch(setClose());
+  };
+
+  const onItemClick = (itemId: number) => {
+    navigate(`/goods/${itemId}`);
     dispatch(setClose());
   };
 
@@ -199,6 +203,7 @@ export default function StyleModal() {
         onFollow={onFollow}
         onUnfollow={onUnfollow}
         onUserClick={onUserClick}
+        onItemClick={onItemClick}
       />
     );
   }

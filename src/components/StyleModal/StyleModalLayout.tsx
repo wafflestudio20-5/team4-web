@@ -69,7 +69,7 @@ interface StyleModalHeaderProps {
   onFollow: (e: React.MouseEvent<HTMLDivElement>) => void;
   onUnfollow: (e: React.MouseEvent<HTMLDivElement>) => void;
   onClose: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  onUserClick: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onUserClick: (userId: number) => void;
 }
 
 function StyleModalHeader({
@@ -83,7 +83,7 @@ function StyleModalHeader({
 }: StyleModalHeaderProps) {
   return (
     <div className={styles.header}>
-      <div className={styles.profile} onClick={onUserClick}>
+      <div className={styles.profile} onClick={() => onUserClick(user.id)}>
         <img className={styles.profile_image} src={user.image} alt="" />
         <div className={styles.profile_text}>
           <h3 className={styles.profile_nickname}>{user.nickname}</h3>
@@ -160,13 +160,18 @@ function StyleModalContent({
 
 interface StyleModalItemsProps {
   items: Item[];
+  onItemClick: (itemId: number) => void;
 }
 
-function StyleModalItems({ items }: StyleModalItemsProps) {
+function StyleModalItems({ items, onItemClick }: StyleModalItemsProps) {
   return (
     <>
       {items.map((item, idx) => (
-        <div key={idx} className={styles.item_wrapper}>
+        <div
+          key={idx}
+          className={styles.item_wrapper}
+          onClick={() => onItemClick(item.id)}
+        >
           <div className={styles.item_image}>
             <img src={item.images[0]} alt="상품 이미지" />
           </div>
@@ -203,7 +208,8 @@ interface StyleModalLayoutProps {
   onUnlike: (e: React.MouseEvent<HTMLDivElement>) => void;
   onFollow: (e: React.MouseEvent<HTMLDivElement>) => void;
   onUnfollow: (e: React.MouseEvent<HTMLDivElement>) => void;
-  onUserClick: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onUserClick: (userId: number) => void;
+  onItemClick: (itemId: number) => void;
 }
 
 export default function StyleModalLayout({
@@ -222,6 +228,7 @@ export default function StyleModalLayout({
   onFollow,
   onUnfollow,
   onUserClick,
+  onItemClick,
 }: StyleModalLayoutProps) {
   return (
     <>
@@ -253,7 +260,10 @@ export default function StyleModalLayout({
                   onLike={onLike}
                   onUnlike={onUnlike}
                 />
-                <StyleModalItems items={style.items} />
+                <StyleModalItems
+                  items={style.items}
+                  onItemClick={onItemClick}
+                />
               </div>
             </div>
           </div>
