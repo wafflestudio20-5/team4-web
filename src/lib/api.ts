@@ -397,7 +397,7 @@ export const apiGetUser = (id: number | null, token: string | null) =>
     headers: token ? auth(token) : undefined,
   });
 
-export const useApiUserStyleFecther = (id: number | null) => {
+export const useApiUserStyleListFecther = (id: number | null) => {
   const f = useCallback(
     (cancelToken: CancelToken) => {
       return axios.get<{

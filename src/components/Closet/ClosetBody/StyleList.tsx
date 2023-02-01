@@ -20,7 +20,7 @@ function StylePreviewList({
 }) {
   return (
     <>
-      {styleList?.length !== 0 || !styleList ? (
+      {styleList?.length !== 0 ? (
         <div className={styles.itemListBox}>
           {styleList?.map((styleSingle) => (
             <StylePreview key={styleSingle.id} styleSingle={styleSingle} />
