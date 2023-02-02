@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import axios, { AxiosResponse, CancelToken } from 'axios';
 import {
   User,
+  SimpleUser,
   Item,
   Category,
   SubCategory,
@@ -451,3 +452,47 @@ export const apiDeleteLike = (styleId: number, token: string | null) =>
   axios.delete<{}>(`/api/style/${styleId}/like`, {
     headers: token ? auth(token) : undefined,
   });
+
+export const useApiGetSearchUserFetcher = (
+  query: string,
+  index?: number,
+  count?: number
+) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      return axios.get<{
+        users: SimpleUser[];
+      }>('/api/user/search', {
+        params: { query, index, count },
+        cancelToken,
+      });
+    },
+    [query, index, count]
+  );
+  return f;
+};
+
+export const useApiGetFollowListFetcher = (
+  id: number,
+  followOrFollowing: string
+) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      if (followOrFollowing === 'follower') {
+        return axios.get<{
+          users: SimpleUser[];
+        }>(`/api/user/${id}/followers`, {
+          cancelToken,
+        });
+      } else {
+        return axios.get<{
+          users: SimpleUser[];
+        }>(`/api/user/${id}/followings`, {
+          cancelToken,
+        });
+      }
+    },
+    [id, followOrFollowing]
+  );
+  return f;
+};

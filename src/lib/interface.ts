@@ -13,6 +13,13 @@ export interface User {
   socialKey?: string;
 }
 
+export interface SimpleUser {
+  id: number;
+  username: string;
+  nickname: string;
+  image: string;
+}
+
 export interface Session {
   user: User | null | undefined;
   accessToken: string | null;
