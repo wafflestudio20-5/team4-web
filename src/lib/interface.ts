@@ -14,7 +14,7 @@ export interface User {
 }
 
 export interface Session {
-  user: User | null;
+  user: User | null | undefined;
   accessToken: string | null;
 }
 

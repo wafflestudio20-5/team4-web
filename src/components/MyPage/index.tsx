@@ -42,7 +42,7 @@ function MyPage() {
   };
 
   useEffect(() => {
-    if (!user) navigate('/login');
+    if (user === null) navigate(-1);
   }, [user, navigate]);
 
   if (user)
