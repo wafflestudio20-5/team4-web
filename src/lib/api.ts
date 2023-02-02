@@ -8,6 +8,7 @@ import {
   Purchase,
   Review,
   Style,
+  SimpleUser,
 } from './interface';
 import { PatchMyInfoRequestDto, PurchasePostDto } from './dto';
 
@@ -88,7 +89,7 @@ export function useApiData<T>(
       });
     return () => source.cancel();
   }, [fetch]);
-  return { data, loading, error, setResult };
+  return { data, loading, error };
 }
 
 export const useApiItemFetcher = (id: number | null) => {
@@ -437,3 +438,47 @@ export const apiDeleteFollow = (userId: number, token: string | null) =>
   axios.delete<{}>(`/api/user/${userId}/follow`, {
     headers: token ? auth(token) : undefined,
   });
+
+export const useApiGetSearchUserFetcher = (
+  query: string,
+  index?: number,
+  count?: number
+) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      return axios.get<{
+        users: SimpleUser[];
+      }>('/api/user/search', {
+        params: { query, index, count },
+        cancelToken,
+      });
+    },
+    [query, index, count]
+  );
+  return f;
+};
+
+export const useApiGetFollowListFetcher = (
+  id: number,
+  followOrFollowing: string
+) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      if (followOrFollowing === 'follower') {
+        return axios.get<{
+          users: SimpleUser[];
+        }>(`/api/user/${id}/followers`, {
+          cancelToken,
+        });
+      } else {
+        return axios.get<{
+          users: SimpleUser[];
+        }>(`/api/user/${id}/followings`, {
+          cancelToken,
+        });
+      }
+    },
+    [id, followOrFollowing]
+  );
+  return f;
+};

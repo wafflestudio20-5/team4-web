@@ -58,8 +58,7 @@
 }
 
 .name {
-  display: flex;
-  vertical-align: baseline;
+  margin-bottom: 0px;
   strong {
     font-size: 58px;
     line-height: 72px;
@@ -96,12 +95,91 @@
   justify-content: center;
   gap: 60px;
   margin-top: 72px;
+  z-index: 10;
+
+  .modal {
+    border: 1px solid #e5e5e5;
+    position: absolute;
+    bottom: -180px;
+    width: 230px;
+    height: 300px;
+    background-color: rgb(250, 250, 250);
+    z-index: 999;
+    padding: 0px 10px;
+    overflow: auto;
+    .modalTitle {
+      padding: 10px 5px;
+      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      font-size: 15px;
+      color: black;
+      display: flex;
+      .modalCount {
+        flex: 1;
+      }
+      div {
+        display: flex;
+        align-items: center;
+      }
+      img {
+        width: 24px;
+        height: 24px;
+        filter: invert(60%);
+      }
+    }
+
+    .user {
+      font-family: 'musinsa', sans-serif;
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      height: auto;
+
+      .categoryshead {
+        font-family: 'musinsa', sans-serif;
+        font-size: 14px;
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        align-items: center;
+        padding: 3px 5px;
+      }
+      img {
+        width: 30px;
+        height: 30px;
+      }
+      .usernickname {
+        color: black;
+        padding: 0px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .user:hover {
+      cursor: pointer;
+      background-color: #e6e6e6;
+    }
+    .null {
+      margin: 15px 0px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #b2b2b2;
+    }
+  }
 }
 
 .num {
   font-family: Musinsa, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
   font-size: 58px;
   text-align: center;
+}
+
+.follow {
+  font-family: Musinsa, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 58px;
+  text-align: center;
+  cursor: pointer;
 }
 
 .text {

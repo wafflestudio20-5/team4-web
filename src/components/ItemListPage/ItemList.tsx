@@ -150,34 +150,29 @@ function ItemListSort({
             </div>
           </div>
         ) : (
-          <div className={styles.sortChoice}>
-            <div className={styles.search}>
-              <span>검색 결과</span>
+          <div className={styles.sortChoice}></div>
+        )}
+        <div className={styles.pageline}>
+          <div className={styles.page_index_box}>
+            {MAXIMUM_PAGE_INDEX + 1} 페이지 중 {pageIndex + 1} 페이지
+          </div>
+          <div className={styles.pagenation_wrapper}>
+            <div className={styles.pagenation}>
+              <button onClick={onBigJumpBackwards}>{'<<'}</button>
+              <button onClick={onSmallJumpBackwards}>{'<'}</button>
+              {pageArray.map((pageIdx) => (
+                <button
+                  key={pageIdx}
+                  className={`${pageIdx === pageIndex && styles.selected}`}
+                  onClick={() => onPageSelect(pageIdx)}
+                >
+                  {pageIdx + 1}
+                </button>
+              ))}
+              <button onClick={onSmallJumpForwards}>{'>'}</button>
+              <button onClick={onBigJumpForwards}>{'>>'}</button>
             </div>
           </div>
-        )}
-        <div className={styles.pagenation_wrapper}>
-          <div className={styles.pagenation}>
-            <button onClick={onBigJumpBackwards}>{'<<'}</button>
-            <button onClick={onSmallJumpBackwards}>{'<'}</button>
-            {pageArray.map((pageIdx) => (
-              <button
-                key={pageIdx}
-                className={`${pageIdx === pageIndex && styles.selected}`}
-                onClick={() => onPageSelect(pageIdx)}
-              >
-                {pageIdx + 1}
-              </button>
-            ))}
-            <button onClick={onSmallJumpForwards}>{'>'}</button>
-            <button onClick={onBigJumpForwards}>{'>>'}</button>
-          </div>
-        </div>
-      </div>
-
-      <div className={styles.pageline}>
-        <div className={styles.page_index_box}>
-          {MAXIMUM_PAGE_INDEX + 1} 페이지 중 {pageIndex + 1} 페이지
         </div>
       </div>
     </div>
