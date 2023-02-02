@@ -147,7 +147,7 @@ function StyleModalContent({
             <img src={like} alt="like" className={styles.like_icon_img} />
           </div>
           <div className={styles.like_count}>
-            <div>{likedCount}</div>
+            <span>{likedCount}</span>
           </div>
         </div>
       </div>

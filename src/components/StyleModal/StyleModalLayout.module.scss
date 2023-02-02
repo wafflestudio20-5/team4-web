@@ -149,10 +149,7 @@
   border: 1px solid;
   border-radius: 3px;
   margin: -17px 0 0 14px;
-  padding: 1px 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 2px 5px 4px 5px;
   cursor: pointer;
 }
 
@@ -255,20 +252,15 @@
 
 .like_count {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-around;
   font-size: 24px;
   font-weight: normal;
+  line-height: 36px;
   color: inherit;
-  text-align: center;
-  div {
-    padding-top: 3px;
-  }
 }
 
 .style_created_time {
-  font-family: 'Apple SD Gothic Neo', 'NotoSansKR', sans-serif;
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
   font-size: 10px;
   color: #a1a1a1;
   position: absolute;
