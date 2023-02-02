@@ -1,5 +1,5 @@
 import styles from './MyPageInquiryListLayout.module.scss';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Inquiry } from '../../../lib/interface';
 import { formatTypeInquiry } from '../../../lib/formatters/inquiryFormatter';
 import { formatDate } from '../../../lib/formatters/dateTimeFormatter';
@@ -88,6 +88,8 @@ interface MyPageInquiryListLayoutParams {
   MAXIMUM_PAGE_INDEX: number;
   pageArray: number[];
   onPageSelect: (idx: number) => void;
+  onBigJumpBackwards: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onBigJumpForwards: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function MyPageInquiryListLayout({
@@ -95,6 +97,8 @@ export default function MyPageInquiryListLayout({
   MAXIMUM_PAGE_INDEX,
   pageArray,
   onPageSelect,
+  onBigJumpBackwards,
+  onBigJumpForwards,
 }: MyPageInquiryListLayoutParams) {
   return (
     <div className={styles.inquiryListWrap}>
@@ -125,15 +129,18 @@ export default function MyPageInquiryListLayout({
         </tbody>
       </table>
       <div className={styles.pagination}>
+        <button onClick={onBigJumpBackwards}>{'<<'}</button>
+        &nbsp;
         {pageArray.map((page) => (
           <span
             onClick={() => {
               onPageSelect(page);
             }}
           >
-            {page + 1} &nbsp;
+            {page + 1}&nbsp;
           </span>
         ))}
+        <button onClick={onBigJumpForwards}>{'>>'}</button>
       </div>
     </div>
   );

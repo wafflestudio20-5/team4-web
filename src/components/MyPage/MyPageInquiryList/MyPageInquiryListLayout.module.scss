@@ -210,6 +210,11 @@ tr{
   text-align: center;
   span {
     cursor: pointer;
-    font-size: 14px;
+    font-size: 20px;
+  }
+  button {
+    background-color: white;
+    border: 0;
+    cursor: pointer;
   }
 }
