@@ -92,6 +92,10 @@ tr{
   text-align: left;
   vertical-align: middle;
   position: relative;
+  cursor: pointer;
+}
+.inquiryItemTitle:hover {
+  text-decoration: underline;
 }
 .inquiryItemType {
   margin: 10px 0;
