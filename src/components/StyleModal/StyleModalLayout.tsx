@@ -1,26 +1,107 @@
 import React from 'react';
+import { User, Item, Style } from '../../lib/interface';
+import { formatUserSize } from '../../lib/formatters/userFormatter';
+import { getRelativeDateTime } from '../../lib/formatters/dateTimeFormatter';
 import styles from './StyleModalLayout.module.scss';
 import close from '../../resources/image/close.png';
 import like from '../../resources/image/like.png';
 
-interface StyleModalHeaderProps {
-  onClose: (e: React.MouseEvent<HTMLButtonElement>) => void;
+/* Slick Slider */
+
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import forward from '../../resources/image/forward.svg';
+import backward from '../../resources/image/back.svg';
+
+interface ArrowProps {
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
-function StyleModalHeader({ onClose }: StyleModalHeaderProps) {
+function BeforeArrow({ onClick }: ArrowProps) {
+  return (
+    <div className={styles.prevArrow} onClick={onClick}>
+      <img className={styles.previewImage} src={backward} alt="이전 슬라이드" />
+    </div>
+  );
+}
+
+function NextArrow({ onClick }: ArrowProps) {
+  return (
+    <div className={styles.nextArrow} onClick={onClick}>
+      <img className={styles.previewImage} src={forward} alt="다음 슬라이드" />
+    </div>
+  );
+}
+
+/* Style Modal Layout */
+
+interface StyleModalImagesProps {
+  images: string[];
+}
+
+function StyleModalImages({ images }: StyleModalImagesProps) {
+  const settings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    Arrow: true,
+    prevArrow: <BeforeArrow />,
+    nextArrow: <NextArrow />,
+  };
+
+  return (
+    <div className={styles.images}>
+      <Slider {...settings} className={styles.slider}>
+        {images?.map((image, idx) => (
+          <img key={idx} src={image} alt="" className={styles.image} />
+        ))}
+      </Slider>
+    </div>
+  );
+}
+
+interface StyleModalHeaderProps {
+  user: User;
+  isFollowed: boolean;
+  isLoggedIn: boolean;
+  onFollow: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onUnfollow: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onClose: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onUserClick: (userId: number) => void;
+}
+
+function StyleModalHeader({
+  user,
+  isFollowed,
+  isLoggedIn,
+  onFollow,
+  onUnfollow,
+  onClose,
+  onUserClick,
+}: StyleModalHeaderProps) {
   return (
     <div className={styles.header}>
-      <div className={styles.profile}>
-        <img
-          className={styles.profile_image}
-          src="https://image.msscdn.net/mfile_s01/_simbols/_basic/c.png"
-          alt=""
-        />
+      <div className={styles.profile} onClick={() => onUserClick(user.id)}>
+        <img className={styles.profile_image} src={user.image} alt="" />
         <div className={styles.profile_text}>
-          <h3 className={styles.profile_nickname}>cococo</h3>
-          <div className={styles.profile_userinfo}>160cm · 50kg</div>
+          <h3 className={styles.profile_nickname}>{user.nickname}</h3>
+          <div className={styles.profile_userinfo}>
+            {formatUserSize(user.height, user.weight)}
+          </div>
         </div>
       </div>
+      {isLoggedIn && (
+        <div
+          className={`${styles.follow_box} ${
+            isFollowed ? styles.followed : styles.not_followed
+          }`}
+          onClick={isFollowed ? onUnfollow : onFollow}
+        >
+          {isFollowed ? '팔로잉' : '팔로우'}
+        </div>
+      )}
       <button className={styles.close_button} onClick={onClose}>
         <img src={close} alt="닫기" />
       </button>
@@ -28,49 +109,87 @@ function StyleModalHeader({ onClose }: StyleModalHeaderProps) {
   );
 }
 
-function StyleModalContent() {
+interface StyleModalContentProps {
+  content?: string;
+  hashtag?: string;
+  createdDateTime: string;
+  likedCount: number;
+  isLiked: boolean;
+  onLike: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onUnlike: (e: React.MouseEvent<HTMLDivElement>) => void;
+}
+
+function StyleModalContent({
+  content,
+  hashtag,
+  createdDateTime,
+  likedCount,
+  isLiked,
+  onLike,
+  onUnlike,
+}: StyleModalContentProps) {
   return (
     <div className={styles.content}>
-      <div className={styles.content_text_wrapper}>
-        <span className={styles.content_text}>어쩌고 저쩌고</span>
-        <span className={styles.content_hashtag}>{'#ootd #outfit'}</span>
-      </div>
+      {content && (
+        <div className={styles.content_text_wrapper}>
+          <span className={styles.content_text}>{content}</span>
+          <span className={styles.content_hashtag}>{hashtag}</span>
+        </div>
+      )}
       <div className={styles.like_box_wrapper}>
-        <div className={styles.like_box}>
+        <div
+          className={`${styles.like_box} ${
+            isLiked ? styles.liked : styles.not_liked
+          }`}
+          onClick={isLiked ? onUnlike : onLike}
+        >
           <div className={styles.like_icon}>
-            <img src={like} alt="like" />
+            <img src={like} alt="like" className={styles.like_icon_img} />
           </div>
           <div className={styles.like_count}>
-            <span>3</span>
+            <span>{likedCount}</span>
           </div>
         </div>
       </div>
-      <span className={styles.style_created_time}>5시간 전</span>
+      <span className={styles.style_created_time}>
+        {getRelativeDateTime(createdDateTime)}
+      </span>
     </div>
   );
 }
 
-function StyleModalItem() {
+interface StyleModalItemsProps {
+  items: Item[];
+  onItemClick: (itemId: number) => void;
+}
+
+function StyleModalItems({ items, onItemClick }: StyleModalItemsProps) {
   return (
-    <div className={styles.item_wrapper}>
-      <div className={styles.item_image}>
-        <img
-          src="https://image.msscdn.net/images/goods_img/20230125/3036796/3036796_16746132910861_320.jpg"
-          alt="상품 이미지"
-        />
-      </div>
-      <div className={styles.item_info}>
-        <div className={styles.item_info_text}>
-          <span className={styles.item_info_brand}>피그먼트</span>
-          <span className={styles.item_info_name}>
-            {'윈터비조 스커트(PBBW-WSKW004)'}
-          </span>
+    <>
+      {items.map((item, idx) => (
+        <div
+          key={idx}
+          className={styles.item_wrapper}
+          onClick={() => onItemClick(item.id)}
+        >
+          <div className={styles.item_image}>
+            <img src={item.images[0]} alt="상품 이미지" />
+          </div>
+          <div className={styles.item_info}>
+            <div className={styles.item_info_text}>
+              <span className={styles.item_info_brand}>{item.brand}</span>
+              <span className={styles.item_info_name}>{item.name}</span>
+            </div>
+            <div className={styles.item_info_price}>
+              {item.newPrice ? item.newPrice : item.oldPrice}{' '}
+              {item.sale && (
+                <span className={styles.item_info_sale}>{item.sale}%</span>
+              )}
+            </div>
+          </div>
         </div>
-        <div className={styles.item_info_price}>
-          41,300원 <span className={styles.item_info_sale}>30%</span>
-        </div>
-      </div>
-    </div>
+      ))}
+    </>
   );
 }
 
@@ -80,6 +199,17 @@ interface StyleModalLayoutProps {
   outside: React.MutableRefObject<null>;
   onClose: (e: React.MouseEvent<HTMLButtonElement | HTMLDivElement>) => void;
   onOuterClick: (e: React.MouseEvent<HTMLDivElement>) => void;
+  style: Style;
+  likedCount: number;
+  isLoggedIn: boolean;
+  isLiked: boolean;
+  isFollowed: boolean;
+  onLike: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onUnlike: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onFollow: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onUnfollow: (e: React.MouseEvent<HTMLDivElement>) => void;
+  onUserClick: (userId: number) => void;
+  onItemClick: (itemId: number) => void;
 }
 
 export default function StyleModalLayout({
@@ -88,6 +218,17 @@ export default function StyleModalLayout({
   outside,
   onClose,
   onOuterClick,
+  style,
+  likedCount,
+  isLoggedIn,
+  isLiked,
+  isFollowed,
+  onLike,
+  onUnlike,
+  onFollow,
+  onUnfollow,
+  onUserClick,
+  onItemClick,
 }: StyleModalLayoutProps) {
   return (
     <>
@@ -98,12 +239,31 @@ export default function StyleModalLayout({
           className={`${styles.wrapper} ${open ? styles.open : styles.close}`}
         >
           <div className={styles.modal}>
-            <div className={styles.images}></div>
+            <StyleModalImages images={style.images} />
             <div className={styles.body}>
-              <StyleModalHeader onClose={onClose} />
+              <StyleModalHeader
+                user={style.user}
+                isFollowed={isFollowed}
+                isLoggedIn={isLoggedIn}
+                onFollow={onFollow}
+                onUnfollow={onUnfollow}
+                onClose={onClose}
+                onUserClick={onUserClick}
+              />
               <div className={styles.scrollable}>
-                <StyleModalContent />
-                <StyleModalItem />
+                <StyleModalContent
+                  content={style.content}
+                  hashtag={style.hashtag}
+                  createdDateTime={style.createdDateTime}
+                  likedCount={likedCount}
+                  isLiked={isLiked}
+                  onLike={onLike}
+                  onUnlike={onUnlike}
+                />
+                <StyleModalItems
+                  items={style.items}
+                  onItemClick={onItemClick}
+                />
               </div>
             </div>
           </div>

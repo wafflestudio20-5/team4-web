@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 import './slick.scss';
 import './slick-theme.scss';
-import { ReactComponent as Next } from '../../resources/image/forward.svg';
-import { ReactComponent as Before } from '../../resources/image/back.svg';
+import forward from '../../resources/image/forwardArrow.svg';
+import backward from '../../resources/image/backwardArrow.svg';
 
 interface StylePreviewListProps {
   styleList: Style[] | null;
@@ -51,8 +51,11 @@ function StylePreviewList({ styleList }: StylePreviewListProps) {
     slidesToShow: 3,
     slidesToScroll: 3,
     Arrow: true,
-    nextArrow: <Next />,
-    prevArrow: <Before />,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    pauseOnHover: true,
+    nextArrow: <NextArrow />,
+    prevArrow: <BeforeArrow />,
   };
   return (
     <div className={styles.itemListBox}>
@@ -64,6 +67,26 @@ function StylePreviewList({ styleList }: StylePreviewListProps) {
           ></StylePreview>
         ))}
       </Slider>
+    </div>
+  );
+}
+
+interface ArrowProps {
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
+}
+
+export function NextArrow({ onClick }: ArrowProps) {
+  return (
+    <div className={styles.nextArrow} onClick={onClick}>
+      <img className={styles.previewImage} src={forward} alt="다음 슬라이드" />
+    </div>
+  );
+}
+
+export function BeforeArrow({ onClick }: ArrowProps) {
+  return (
+    <div className={styles.beforeArrow} onClick={onClick}>
+      <img className={styles.previewImage} src={backward} alt="이전 슬라이드" />
     </div>
   );
 }

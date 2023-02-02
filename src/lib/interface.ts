@@ -7,9 +7,9 @@ export interface User {
   description?: string;
   instaUsername?: string;
   registrationDate: string;
-  sex?: string;
   height?: number;
   weight?: number;
+  sex?: string;
   socialKey?: string;
 }
 

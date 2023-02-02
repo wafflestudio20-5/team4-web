@@ -88,7 +88,7 @@ export function useApiData<T>(
       });
     return () => source.cancel();
   }, [fetch]);
-  return { data, loading, error };
+  return { data, loading, error, setResult };
 }
 
 export const useApiItemFetcher = (id: number | null) => {
@@ -328,7 +328,10 @@ export const apiPostStyle = (
     { headers: token ? auth(token) : undefined }
   );
 
-export const useApiStyleFetcher = (id: number | null, token: string | null) => {
+export const useApiStyleFetcher = (
+  id: number | undefined,
+  token: string | null
+) => {
   const f = useCallback(
     (cancelToken: CancelToken) => {
       return axios.get<{
@@ -343,7 +346,7 @@ export const useApiStyleFetcher = (id: number | null, token: string | null) => {
     },
     [id, token]
   );
-  return id === null ? null : f;
+  return id === undefined ? null : f;
 };
 
 export const useApiStyleListFetcher = (
@@ -363,6 +366,53 @@ export const useApiStyleListFetcher = (
   return f;
 };
 
+export const useApiUserFectcher = (id: number | null, token: string | null) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      return axios.get<{
+        user: User;
+        count: {
+          styleCount: number;
+          followerCount: number;
+          followingCount: number;
+        };
+        isFollow: boolean;
+      }>(`/api/user/${id}`, {
+        headers: token ? auth(token) : undefined,
+        cancelToken,
+      });
+    },
+    [id, token]
+  );
+  return id === null ? null : f;
+};
+
+export const apiGetUser = (id: number | null, token: string | null) =>
+  axios.get<{
+    user: User;
+    count: {
+      styleCount: number;
+      followerCount: number;
+      followingCount: number;
+    };
+    isFollow: boolean;
+  }>(`/api/user/${id}`, {
+    headers: token ? auth(token) : undefined,
+  });
+
+export const useApiUserStyleListFecther = (id: number | null) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      return axios.get<{
+        styles: { id: number; image: string }[];
+      }>(`/api/user/${id}/styles`, {
+        cancelToken,
+      });
+    },
+    [id]
+  );
+  return id === null ? null : f;
+};
 export const apiPostComment = (
   reviewId: number,
   content: string,
@@ -373,3 +423,17 @@ export const apiPostComment = (
     { reviewId, content },
     { headers: token ? auth(token) : undefined }
   );
+
+export const apiPostFollow = (userId: number, token: string | null) =>
+  axios.post<{}>(
+    `/api/user/${userId}/follow`,
+    {},
+    {
+      headers: token ? auth(token) : undefined,
+    }
+  );
+
+export const apiDeleteFollow = (userId: number, token: string | null) =>
+  axios.delete<{}>(`/api/user/${userId}/follow`, {
+    headers: token ? auth(token) : undefined,
+  });
