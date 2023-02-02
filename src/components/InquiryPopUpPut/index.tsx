@@ -1,10 +1,11 @@
-import InquiryPopUpPostLayout from './InquiryPopUpPostLayout';
+import InquiryPopUpPutLayout from './InquiryPopUpPutLayout';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   apiPostImage,
   apiPostInquiry,
   useApiData,
+  useApiInquiryListFetcher,
   useApiItemFetcher,
 } from '../../lib/api';
 import { useSelector } from 'react-redux';
@@ -12,6 +13,7 @@ import { RootState } from '../../store';
 import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 import { FileUpload, useFileUpload } from 'use-file-upload';
+import { DEFAULT_INQUIRIES_COUNT } from '../MyPage/MyPageInquiryList';
 
 interface inputInterface {
   type: string;
@@ -21,33 +23,27 @@ interface inputInterface {
   content: string;
 }
 
-export default function InquiryPopUpPost() {
-  const { id } = useParams<{ id: string }>();
+export default function InquiryPopUpPut() {
+  const { id, index } = useParams<{ id: string; index: string }>();
   const parsedId = id ? parseInt(id) : null;
+  const parsedIndex = index ? parseInt(index) : undefined;
 
   const { accessToken } = useSelector((state: RootState) => {
     return state.session;
   });
 
-  const { data, error } = useApiData(useApiItemFetcher(parsedId));
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (error) {
-      const payload = error.payload as AxiosError;
-      if (payload.response?.status === 404) {
-        toast('해당하는 상품을 찾을 수 없습니다.');
-        navigate('/');
-      }
-    }
-  }, [error, navigate]);
+  const { data: inquiriesData } = useApiData(
+    useApiInquiryListFetcher(accessToken, parsedIndex, DEFAULT_INQUIRIES_COUNT)
+  );
+  const inquiry =
+    inquiriesData?.inquiries.filter((inquiry) => inquiry.id === parsedId) ?? [];
 
   const [input, setInput] = useState<inputInterface>({
-    type: '',
-    option: undefined,
-    isSecret: false,
-    title: '',
-    content: '',
+    type: inquiry[0].type,
+    option: inquiry[0].option,
+    isSecret: inquiry[0].isSecret,
+    title: inquiry[0].title,
+    content: inquiry[0].content,
   });
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,7 +71,7 @@ export default function InquiryPopUpPost() {
   //input radio //select //input checkbox //input text //textarea
 
   const [imageFiles, setImageFiles] = useFileUpload();
-  const [images, setImages] = useState<string[] | undefined>(undefined);
+  const [images, setImages] = useState<string[] | undefined>(inquiry[0].images);
 
   const handleClick = () => {
     setImageFiles({ accept: 'image/*', multiple: true }, setImageFilesCallBack);
@@ -167,8 +163,8 @@ export default function InquiryPopUpPost() {
   };
 
   return (
-    <InquiryPopUpPostLayout
-      data={data?.item}
+    <InquiryPopUpPutLayout
+      data={inquiry[0]?.item}
       input={input}
       onChange={onChange}
       onChangeCheckbox={onChangeCheckbox}
@@ -177,6 +173,6 @@ export default function InquiryPopUpPost() {
       handleClick={handleClick}
       images={images}
       handleSubmit={handleSubmit}
-    ></InquiryPopUpPostLayout>
+    ></InquiryPopUpPutLayout>
   );
 }

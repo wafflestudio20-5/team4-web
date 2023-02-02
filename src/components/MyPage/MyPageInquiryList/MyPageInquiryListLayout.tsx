@@ -5,8 +5,9 @@ import { formatTypeInquiry } from '../../../lib/formatters/inquiryFormatter';
 import { formatDate } from '../../../lib/formatters/dateTimeFormatter';
 interface InquiryItemParams {
   inquiry: Inquiry;
+  inquiryEditClick: (id: number) => void;
 }
-function InquiryItem({ inquiry }: InquiryItemParams) {
+function InquiryItem({ inquiry, inquiryEditClick }: InquiryItemParams) {
   const [show, setShow] = useState<boolean>(false);
   return (
     <>
@@ -52,7 +53,14 @@ function InquiryItem({ inquiry }: InquiryItemParams) {
             <div className={styles.inquiryItemIsAnsweredFalse}>
               <span className={styles.falseText}>답변 대기</span>
               <div className={styles.falseButton}>
-                <button className={styles.edit}>수정</button>
+                <button
+                  className={styles.edit}
+                  onClick={() => {
+                    inquiryEditClick(inquiry.id);
+                  }}
+                >
+                  수정
+                </button>
                 <button className={styles.delete}>삭제</button>
               </div>
             </div>
@@ -89,6 +97,7 @@ interface MyPageInquiryListLayoutParams {
   onPageSelect: (idx: number) => void;
   onBigJumpBackwards: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onBigJumpForwards: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  inquiryEditClick: (id: number) => void;
 }
 
 export default function MyPageInquiryListLayout({
@@ -98,6 +107,7 @@ export default function MyPageInquiryListLayout({
   onPageSelect,
   onBigJumpBackwards,
   onBigJumpForwards,
+  inquiryEditClick,
 }: MyPageInquiryListLayoutParams) {
   return (
     <div className={styles.inquiryListWrap}>
@@ -123,7 +133,10 @@ export default function MyPageInquiryListLayout({
         </thead>
         <tbody>
           {inquiries?.map((inquiry) => (
-            <InquiryItem inquiry={inquiry} />
+            <InquiryItem
+              inquiry={inquiry}
+              inquiryEditClick={inquiryEditClick}
+            />
           ))}
         </tbody>
       </table>

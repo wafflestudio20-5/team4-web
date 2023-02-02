@@ -57,6 +57,13 @@ export default function MyPageInquiryList({
       toast('이동할 페이지가 없습니다');
     }
   };
+  const inquiryEditClick = (id: number) => {
+    window.open(
+      `/inquiry/edit/${id}/${index}`,
+      'inquiry',
+      'width=572,height=805,location=no,status=no,scrollbars=yes, resizable=yes'
+    );
+  };
 
   return (
     <MyPageInquiryListLayout
@@ -66,6 +73,7 @@ export default function MyPageInquiryList({
       onPageSelect={onPageSelect}
       onBigJumpBackwards={onBigJumpBackwards}
       onBigJumpForwards={onBigJumpForwards}
+      inquiryEditClick={inquiryEditClick}
     ></MyPageInquiryListLayout>
   );
 }

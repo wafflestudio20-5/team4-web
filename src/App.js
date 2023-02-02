@@ -16,6 +16,7 @@ import ItemListPage from './components/ItemListPage';
 import InquiryPopUpPost from './components/InquiryPopUpPost';
 import StyleListPage from './components/StyleListPage';
 import Closet from './components/Closet';
+import InquiryPopUpPut from './components/InquiryPopUpPut';
 
 function AppRoutes() {
   return (
@@ -41,6 +42,7 @@ function AppRoutes() {
         element={<SocialLoginPage />}
       />
       <Route path="/inquiry/:id" element={<InquiryPopUpPost />} />
+      <Route path="/inquiry/edit/:id/:index" element={<InquiryPopUpPut />} />
     </Routes>
   );
 }
