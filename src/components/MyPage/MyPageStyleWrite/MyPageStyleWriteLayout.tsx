@@ -1,5 +1,4 @@
 import styles from './MyPageStyleWriteLayout.module.scss';
-import search_button from '../../../resources/image/search_icon.png';
 import close_button from '../../../resources/image/close.png';
 import { Purchase } from '../../../lib/interface';
 import React from 'react';
@@ -15,6 +14,9 @@ interface MyPageStyleWriteLayoutParams {
   onChangeTextArea: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   purchases: Purchase[] | null;
   onChangeSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  tempSelect: number;
+  onRemove: (id: number) => void;
+  handleSubmit: (e: React.SyntheticEvent) => void;
 }
 
 export default function MyPageStyleWriteLayout({
@@ -24,6 +26,9 @@ export default function MyPageStyleWriteLayout({
   onChangeTextArea,
   purchases,
   onChangeSelect,
+  tempSelect,
+  onRemove,
+  handleSubmit,
 }: MyPageStyleWriteLayoutParams) {
   return (
     <div className={styles.postWrapper}>
@@ -86,8 +91,8 @@ export default function MyPageStyleWriteLayout({
             코디한 아이템 중 무신사에서 구매한 상품을 공유해 주세요.
           </p>
           <div className={styles.searchItem}>
-            <select name="items" onChange={onChangeSelect}>
-              <option>브랜드명 / 상품명 입력</option>
+            <select name="items" onChange={onChangeSelect} value={tempSelect}>
+              <option>브랜드명 / 상품명</option>
               {purchases
                 ?.filter(
                   (purchase) =>
@@ -95,64 +100,42 @@ export default function MyPageStyleWriteLayout({
                 )
                 .map((purchase) => (
                   <option value={purchase.item.id}>
-                    {purchase.item.id}|{purchase.item.brand}|
-                    {purchase.item.name}|{purchase.option}
+                    {purchase.item.brand}|{purchase.item.name}|{purchase.option}
                   </option>
                 ))}
             </select>
-
-            <div className={styles.searchButton}>
-              <img src={search_button} alt="search_button" />
-            </div>
           </div>
           <p className={styles.subtitle}>추가된 상품</p>
-          <div className={styles.postItem}>
-            <a href={`/goods/`}>
-              {' '}
-              {/*href수정 필요*/}
-              <img
-                src={
-                  'https://image.msscdn.net/images/goods_img/20230127/3043312/3043312_16750477395934_500.jpg'
-                }
-                alt={'이미지'}
-              />
-            </a>
-            <ul>
-              <li className={styles.brand}>브랜드 이름 들어가요</li>
-              <li className={styles.name}>이름들어가요</li>
-              <li className={styles.option}>옵션</li>
-            </ul>
-            <img
-              className={styles.closeBtn}
-              src={close_button}
-              alt="close_button"
-            />
-          </div>
-          <div className={styles.postItem}>
-            <a href={`/goods/`}>
-              {' '}
-              {/*href수정 필요*/}
-              <img
-                src={
-                  'https://image.msscdn.net/images/goods_img/20230127/3043312/3043312_16750477395934_500.jpg'
-                }
-                alt={'이미지'}
-              />
-            </a>
-            <ul>
-              <li className={styles.brand}>브랜드 이름 들어가요</li>
-              <li className={styles.name}>이름들어가요</li>
-              <li className={styles.option}>옵션</li>
-            </ul>
-            <img
-              className={styles.closeBtn}
-              src={close_button}
-              alt="close_button"
-            />
-          </div>
+          {purchases
+            ?.filter(
+              (purchase) => input.itemIds.includes(purchase.item.id) === true
+            )
+            .map((purchase) => (
+              <div className={styles.postItem}>
+                <a href={`/goods/${purchase.item.id}`}>
+                  <img
+                    src={purchase.item.images[0]}
+                    alt={`${purchase.item.id}`}
+                  />
+                </a>
+                <ul>
+                  <li className={styles.brand}>{purchase.item.brand}</li>
+                  <li className={styles.name}>{purchase.item.name}</li>
+                  <li className={styles.option}>{purchase.option}</li>
+                </ul>
+                <img
+                  className={styles.closeBtn}
+                  src={close_button}
+                  alt="close_button"
+                  onClick={() => {
+                    onRemove(purchase.item.id);
+                  }}
+                />
+              </div>
+            ))}
         </div>
         <div className={styles.postButtonArea}>
-          <form>
+          <form onClick={handleSubmit}>
             <button className={styles.postButton}>등록</button>
           </form>
         </div>

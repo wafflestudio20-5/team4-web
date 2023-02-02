@@ -1,8 +1,7 @@
 import MyPageStyleWriteLayout from './MyPageStyleWriteLayout';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   apiPostImage,
-  apiPostReview,
   apiPostStyle,
   useApiData,
   useApiGetPurchaseListFetcher,
@@ -34,10 +33,14 @@ export default function MyPageStyleWrite({
   const [tempSelect, setTempSelect] = useState<number>(-1);
   const onChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setInput({ ...input, itemIds: [...input.itemIds, Number(e.target.value)] });
+    setTempSelect(Number(e.target.value));
   };
-  useEffect(() => {
-    console.log(input);
-  });
+  const onRemove = (id: number) => {
+    setInput({
+      ...input,
+      itemIds: input.itemIds.filter((itemId) => itemId !== id),
+    });
+  };
 
   const { data: purchasesData } = useApiData(
     useApiGetPurchaseListFetcher(accessToken)
@@ -110,6 +113,9 @@ export default function MyPageStyleWrite({
       onChangeTextArea={onChangeTextArea}
       purchases={purchases}
       onChangeSelect={onChangeSelect}
+      tempSelect={tempSelect}
+      onRemove={onRemove}
+      handleSubmit={handleSubmit}
     ></MyPageStyleWriteLayout>
   );
 }
