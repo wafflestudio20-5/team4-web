@@ -1,4 +1,4 @@
-import styles from './MyPageStyleWriteLayout.module.scss';
+import styles from './StyleWriteLayout.module.scss';
 import close_button from '../../../resources/image/close.png';
 import { Purchase } from '../../../lib/interface';
 import React from 'react';
@@ -7,7 +7,7 @@ interface Input {
   hashtag: string;
   itemIds: number[];
 }
-interface MyPageStyleWriteLayoutParams {
+interface StyleWriteLayoutParams {
   images: string[];
   handleClick: () => void;
   input: Input;
@@ -19,7 +19,7 @@ interface MyPageStyleWriteLayoutParams {
   handleSubmit: (e: React.SyntheticEvent) => void;
 }
 
-export default function MyPageStyleWriteLayout({
+export default function StyleWriteLayout({
   images,
   handleClick,
   input,
@@ -29,7 +29,7 @@ export default function MyPageStyleWriteLayout({
   tempSelect,
   onRemove,
   handleSubmit,
-}: MyPageStyleWriteLayoutParams) {
+}: StyleWriteLayoutParams) {
   return (
     <div className={styles.postWrapper}>
       <header className={styles.postHeader}>

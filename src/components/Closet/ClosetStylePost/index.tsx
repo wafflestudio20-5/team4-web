@@ -1,5 +1,5 @@
-import MyPageStyleWriteLayout from './MyPageStyleWriteLayout';
-import React, { useState } from 'react';
+import StyleWriteLayout from './StyleWriteLayout';
+import React, { useEffect, useState } from 'react';
 import {
   apiPostImage,
   apiPostStyle,
@@ -9,15 +9,19 @@ import {
 import { FileUpload, useFileUpload } from 'use-file-upload';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { User } from '../../../lib/interface';
+import ClosetHeader from '../ClosetHeader';
 interface Input {
   content: string;
   hashtag: string;
   itemIds: number[];
 }
 
-export default function MyPageStyleWrite({
+export default function StyleWrite({
+  user,
   accessToken,
 }: {
+  user: User | null;
   accessToken: string | null;
 }) {
   const [input, setInput] = useState<Input>({
@@ -105,17 +109,28 @@ export default function MyPageStyleWrite({
     // await axios.post('게시글 관련 API', {..., secureImages})
   };
 
+  useEffect(() => {
+    if (!user) {
+      navigate('/login');
+    }
+  });
+  const parsedId = user?.id ?? null;
+  const isMe: boolean = true;
+
   return (
-    <MyPageStyleWriteLayout
-      images={images}
-      handleClick={handleClick}
-      input={input}
-      onChangeTextArea={onChangeTextArea}
-      purchases={purchases}
-      onChangeSelect={onChangeSelect}
-      tempSelect={tempSelect}
-      onRemove={onRemove}
-      handleSubmit={handleSubmit}
-    ></MyPageStyleWriteLayout>
+    <>
+      <ClosetHeader parsedId={parsedId} accessToken={accessToken} isMe={isMe} />
+      <StyleWriteLayout
+        images={images}
+        handleClick={handleClick}
+        input={input}
+        onChangeTextArea={onChangeTextArea}
+        purchases={purchases}
+        onChangeSelect={onChangeSelect}
+        tempSelect={tempSelect}
+        onRemove={onRemove}
+        handleSubmit={handleSubmit}
+      ></StyleWriteLayout>
+    </>
   );
 }

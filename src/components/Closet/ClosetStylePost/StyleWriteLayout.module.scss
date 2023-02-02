@@ -1,5 +1,6 @@
 .postWrapper {
-  width: calc(100vw - 350px);
+  width: calc(100vw - 150px);
+  margin-left: 75px;
   display: inline-block;
   textarea:focus {
     outline: none;

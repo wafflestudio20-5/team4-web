@@ -14,7 +14,6 @@ import MyPageReviewList from './MyPageReviewList';
 import MyPageEditReviews from './MyPageEditReviews';
 import Footer from '../Footer';
 import { Session } from '../../lib/interface';
-import MyPageStyleWrite from './MyPageStyleWrite';
 
 function MyPageLayout({ user, onLogout }: MyPageHeaderProps) {
   return (
@@ -89,10 +88,6 @@ function MyPage() {
           <Route
             path="viewed_goods"
             element={<MyPageViewed accessToken={accessToken} />}
-          />
-          <Route
-            path="style/write"
-            element={<MyPageStyleWrite accessToken={accessToken} />}
           />
         </Route>
       </Routes>
