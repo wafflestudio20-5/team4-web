@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from 'react';
 import axios, { AxiosResponse, CancelToken } from 'axios';
 import {
   User,
-  SimpleUser,
   Item,
   Category,
   SubCategory,
