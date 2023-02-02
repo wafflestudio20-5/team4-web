@@ -100,8 +100,8 @@ function ItemListSort({
 
   return (
     <div className={styles.sort}>
-      <div className={styles.sortline}>
-        {!searchKey ? (
+      {!searchKey ? (
+        <div className={styles.sortline}>
           <div className={styles.sortChoice}>
             <div className={!sort ? styles.select : ''}>
               <span
@@ -149,13 +149,13 @@ function ItemListSort({
               </span>
             </div>
           </div>
-        ) : (
-          <div className={styles.sortChoice}>
-            <div className={styles.search}>
-              <span>검색 결과</span>
-            </div>
-          </div>
-        )}
+        </div>
+      ) : null}
+
+      <div className={styles.pageline}>
+        <div className={styles.page_index_box}>
+          {MAXIMUM_PAGE_INDEX + 1} 페이지 중 {pageIndex + 1} 페이지
+        </div>
         <div className={styles.pagenation_wrapper}>
           <div className={styles.pagenation}>
             <button onClick={onBigJumpBackwards}>{'<<'}</button>
@@ -172,12 +172,6 @@ function ItemListSort({
             <button onClick={onSmallJumpForwards}>{'>'}</button>
             <button onClick={onBigJumpForwards}>{'>>'}</button>
           </div>
-        </div>
-      </div>
-
-      <div className={styles.pageline}>
-        <div className={styles.page_index_box}>
-          {MAXIMUM_PAGE_INDEX + 1} 페이지 중 {pageIndex + 1} 페이지
         </div>
       </div>
     </div>

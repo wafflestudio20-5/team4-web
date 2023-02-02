@@ -147,7 +147,7 @@ function StyleModalContent({
             <img src={like} alt="like" className={styles.like_icon_img} />
           </div>
           <div className={styles.like_count}>
-            <span>{likedCount}</span>
+            <div>{likedCount}</div>
           </div>
         </div>
       </div>
@@ -181,7 +181,9 @@ function StyleModalItems({ items, onItemClick }: StyleModalItemsProps) {
               <span className={styles.item_info_name}>{item.name}</span>
             </div>
             <div className={styles.item_info_price}>
-              {item.newPrice ? item.newPrice : item.oldPrice}{' '}
+              {item.newPrice
+                ? `${item.newPrice.toLocaleString()} 원`
+                : `${item.oldPrice.toLocaleString()} 원`}{' '}
               {item.sale && (
                 <span className={styles.item_info_sale}>{item.sale}%</span>
               )}

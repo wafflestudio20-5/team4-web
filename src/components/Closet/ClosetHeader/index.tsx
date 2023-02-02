@@ -4,12 +4,12 @@ import insta from '../../../resources/image/insta.png';
 import {
   useApiUserFectcher,
   useApiData,
-  apiGetUser,
   apiPostFollow,
   apiDeleteFollow,
 } from '../../../lib/api';
 import { formatUserInfoCloset } from '../../../lib/formatters/userFormatter';
 import { toast } from 'react-toastify';
+import { useEffect, useState } from 'react';
 
 interface ClosetHeaderProps {
   parsedId: number | null;
@@ -24,12 +24,25 @@ export default function ClosetHeader({
 }: ClosetHeaderProps) {
   const navigate = useNavigate();
 
-  const { data, setResult } = useApiData(
-    useApiUserFectcher(parsedId, accessToken)
-  );
+  const { data } = useApiData(useApiUserFectcher(parsedId, accessToken));
   const user = data?.user ?? null;
-  const count = data?.count ?? null;
-  const isFollow = data?.isFollow ?? null;
+
+  interface Socials {
+    count: {
+      styleCount: number;
+      followerCount: number;
+      followingCount: number;
+    };
+    isFollow: boolean;
+  }
+
+  const [socials, setSocials] = useState<Socials | undefined>(undefined);
+
+  useEffect(() => {
+    if (data) {
+      setSocials({ count: data.count, isFollow: data.isFollow });
+    }
+  }, [data]);
 
   const FollowUser = (id: number, token: string | null) => {
     if (!token) {
@@ -38,18 +51,17 @@ export default function ClosetHeader({
     }
     apiPostFollow(id, token)
       .then(() => {
-        apiGetUser(id, token)
-          .then((res) => {
-            setResult((prev) => ({
-              ...prev,
-              data: res.data,
-              error: undefined,
-              loading: false,
-            }));
-          })
-          .catch(() => {
-            window.location.reload();
+        if (socials) {
+          setSocials({
+            ...socials,
+            count: {
+              styleCount: socials.count.styleCount,
+              followerCount: socials.count.followerCount + 1,
+              followingCount: socials.count.followingCount,
+            },
+            isFollow: true,
           });
+        }
       })
       .catch(() => {
         toast('다시 시도해주세요');
@@ -62,18 +74,17 @@ export default function ClosetHeader({
     }
     apiDeleteFollow(id, token)
       .then(() => {
-        apiGetUser(id, token)
-          .then((res) => {
-            setResult((prev) => ({
-              ...prev,
-              data: res.data,
-              error: undefined,
-              loading: false,
-            }));
-          })
-          .catch(() => {
-            window.location.reload();
+        if (socials) {
+          setSocials({
+            ...socials,
+            count: {
+              styleCount: socials.count.styleCount,
+              followerCount: socials.count.followerCount - 1,
+              followingCount: socials.count.followingCount,
+            },
+            isFollow: false,
           });
+        }
       })
       .catch(() => {
         toast('다시 시도해주세요');
@@ -89,7 +100,7 @@ export default function ClosetHeader({
           <div className={styles.info}>
             <div className={styles.name}>
               <strong>{user?.nickname}</strong>
-              <Link to="/mypage/info">회원정보변경</Link>
+              {isMe && <Link to="/mypage/info">회원정보변경</Link>}
             </div>
             <div className={styles.userprofile}>
               <div className={styles.profiletext}>
@@ -109,7 +120,7 @@ export default function ClosetHeader({
                 >
                   게시물 작성
                 </div>
-              ) : isFollow ? (
+              ) : socials?.isFollow ? (
                 <div
                   className={styles.poststyle}
                   onClick={() => {
@@ -144,15 +155,15 @@ export default function ClosetHeader({
           </div>
           <div className={styles.userrate}>
             <div>
-              <div className={styles.num}>{count?.styleCount}</div>
+              <div className={styles.num}>{socials?.count?.styleCount}</div>
               <div className={styles.text}>게시물</div>
             </div>
             <div>
-              <div className={styles.num}>{count?.followerCount}</div>
+              <div className={styles.num}>{socials?.count?.followerCount}</div>
               <div className={styles.text}>팔로워</div>
             </div>
             <div>
-              <div className={styles.num}>{count?.followingCount}</div>
+              <div className={styles.num}>{socials?.count?.followingCount}</div>
               <div className={styles.text}>팔로잉</div>
             </div>
           </div>
