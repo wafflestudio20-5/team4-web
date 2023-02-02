@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { Inquiry } from '../../../lib/interface';
 import { formatTypeInquiry } from '../../../lib/formatters/inquiryFormatter';
 import { formatDate } from '../../../lib/formatters/dateTimeFormatter';
-import { toast } from 'react-toastify';
 interface InquiryItemParams {
   inquiry: Inquiry;
 }

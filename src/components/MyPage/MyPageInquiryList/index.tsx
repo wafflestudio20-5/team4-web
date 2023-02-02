@@ -1,9 +1,9 @@
 import MyPageInquiryListLayout from './MyPageInquiryListLayout';
 import { useApiData, useApiInquiryListFetcher } from '../../../lib/api';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
-export const DEFAULT_INQUIRIES_COUNT = 2;
+export const DEFAULT_INQUIRIES_COUNT = 5;
 
 function generatePageArray(pageIndex: number, maxPageIndex: number): number[] {
   const array = [];
@@ -31,12 +31,6 @@ export default function MyPageInquiryList({
   const inquiries = inquiriesData?.inquiries ?? null;
   const totalPages = inquiriesData?.totalPages ?? 0;
   const MAXIMUM_PAGE_INDEX = totalPages - 1;
-  useEffect(() => {
-    console.log(inquiriesData);
-    console.log(inquiries);
-    console.log(MAXIMUM_PAGE_INDEX);
-    console.log(index);
-  });
   const pageArray = generatePageArray(index, MAXIMUM_PAGE_INDEX);
 
   const onPageSelect = (idx: number) => {
