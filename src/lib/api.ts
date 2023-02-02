@@ -457,3 +457,28 @@ export const useApiGetSearchUserFetcher = (
   );
   return f;
 };
+
+export const useApiGetFollowListFetcher = (
+  id: number,
+  followOrFollowing: string
+) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      if (followOrFollowing === 'follower') {
+        return axios.get<{
+          users: SimpleUser[];
+        }>(`/api/user/${id}/followers`, {
+          cancelToken,
+        });
+      } else {
+        return axios.get<{
+          users: SimpleUser[];
+        }>(`/api/user/${id}/followings`, {
+          cancelToken,
+        });
+      }
+    },
+    [id, followOrFollowing]
+  );
+  return f;
+};

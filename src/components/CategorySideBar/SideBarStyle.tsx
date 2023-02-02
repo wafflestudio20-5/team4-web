@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useApiGetSearchUserFetcher, useApiData } from '../../lib/api';
-import { SimpleUser } from '../../lib/interface';
 import styles from './SideBarStyle.module.scss';
 import close from '../../resources/image/close.png';
 import { useNavigate } from 'react-router-dom';
@@ -65,7 +64,6 @@ export default function SideBarStyle() {
           );
         })
       )}
-      {}
       <div className={styles.styletap}>
         <div>
           <div

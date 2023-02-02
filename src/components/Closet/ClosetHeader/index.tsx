@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavigateFunction, useNavigate } from 'react-router-dom';
 import styles from './ClosetHeader.module.scss';
 import insta from '../../../resources/image/insta.png';
 import {
@@ -6,10 +6,13 @@ import {
   useApiData,
   apiPostFollow,
   apiDeleteFollow,
+  useApiGetFollowListFetcher,
 } from '../../../lib/api';
 import { formatUserInfoCloset } from '../../../lib/formatters/userFormatter';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
+import { User } from '../../../lib/interface';
+import close from '../../../resources/image/close.png';
 
 interface ClosetHeaderProps {
   parsedId: number | null;
@@ -91,6 +94,33 @@ export default function ClosetHeader({
       });
   };
 
+  const [modalStatus, setModalStatus] = useState({
+    followerOrFollowing: '',
+    open: false,
+  });
+
+  const toggleModal = (prop: string) => {
+    if (prop !== modalStatus.followerOrFollowing) {
+      setModalStatus((prev) => ({
+        ...prev,
+        followerOrFollowing: prop,
+        open: true,
+      }));
+      return;
+    }
+    setModalStatus((prev) => ({
+      ...prev,
+      open: !prev.open,
+    }));
+  };
+
+  const closeModal = () => {
+    setModalStatus((prev) => ({
+      ...prev,
+      open: false,
+    }));
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.title}>My Closet</div>
@@ -156,18 +186,107 @@ export default function ClosetHeader({
           <div className={styles.userrate}>
             <div>
               <div className={styles.num}>{socials?.count?.styleCount}</div>
-              <div className={styles.text}>게시물</div>
+              <div className={styles.text}>게시글</div>
             </div>
             <div>
-              <div className={styles.num}>{socials?.count?.followerCount}</div>
+              <div
+                className={styles.follow}
+                onClick={() => {
+                  toggleModal('follower');
+                }}
+              >
+                {socials?.count?.followerCount}
+              </div>
               <div className={styles.text}>팔로워</div>
             </div>
             <div>
-              <div className={styles.num}>{socials?.count?.followingCount}</div>
+              <div
+                className={styles.follow}
+                onClick={() => {
+                  toggleModal('following');
+                }}
+              >
+                {socials?.count?.followingCount}
+              </div>
               <div className={styles.text}>팔로잉</div>
             </div>
+            {modalStatus.open && (
+              <FollowModal
+                user={user}
+                navigate={navigate}
+                closeModal={closeModal}
+                followerOrFollowing={modalStatus.followerOrFollowing}
+              />
+            )}
           </div>
         </div>
+      )}
+    </div>
+  );
+}
+
+function FollowModal({
+  user,
+  navigate,
+  closeModal,
+  followerOrFollowing,
+}: {
+  user: User;
+  navigate: NavigateFunction;
+  closeModal: () => void;
+  followerOrFollowing: string;
+}) {
+  const { data, loading } = useApiData(
+    useApiGetFollowListFetcher(user.id, followerOrFollowing)
+  );
+
+  return (
+    <div className={styles.modal}>
+      {!loading ? (
+        <>
+          <div className={styles.modalTitle}>
+            <div className={styles.modalCount}>
+              {followerOrFollowing === 'follower' ? '팔로워' : '팔로잉'}{' '}
+              {data?.users.length}명
+            </div>
+            <div>
+              <img
+                src={close}
+                alt={'모달 닫기 버튼'}
+                onClick={() => {
+                  closeModal();
+                }}
+              />
+            </div>
+          </div>
+          {data && data?.users.length === 0 ? (
+            <div className={styles.null}>
+              <div>
+                {' '}
+                {followerOrFollowing === 'follower' ? '팔로워' : '팔로잉'} 없음
+              </div>
+            </div>
+          ) : (
+            data?.users?.map((user) => {
+              return (
+                <div
+                  key={user.id}
+                  className={styles.user}
+                  onClick={() => {
+                    navigate(`/closet/${user.id}`);
+                  }}
+                >
+                  <div className={styles.categoryshead}>
+                    <img src={user.image} alt="검색 유저 프로필" />
+                    <div className={styles.usernickname}>{user.nickname}</div>
+                  </div>
+                </div>
+              );
+            })
+          )}
+        </>
+      ) : (
+        <></>
       )}
     </div>
   );
