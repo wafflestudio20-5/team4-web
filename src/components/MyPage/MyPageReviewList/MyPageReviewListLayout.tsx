@@ -94,7 +94,7 @@ function ReviewWrittenItem({
   return (
     <li className={styles.reviewWrittenItem}>
       <div className={styles.ItemInfo}>
-        <a href={`http://localhost:3000/goods/${data.purchase.item.id}`}>
+        <a href={`/goods/${data.purchase.item.id}`}>
           <img
             src={data.purchase.item.images[0]}
             alt={data.purchase.item.name}

@@ -206,3 +206,10 @@ tr{
 .inquiryItemComment {
   background-color: #f7f7f7;
 }
+.pagination {
+  text-align: center;
+  span {
+    cursor: pointer;
+    font-size: 14px;
+  }
+}

@@ -1,28 +1,28 @@
 import styles from './MyPageInquiryListLayout.module.scss';
 import { useState } from 'react';
-function InquiryItem() {
+import { Inquiry } from '../../../lib/interface';
+import { formatTypeInquiry } from '../../../lib/formatters/inquiryFormatter';
+import { formatDate } from '../../../lib/formatters/dateTimeFormatter';
+import { toast } from 'react-toastify';
+interface InquiryItemParams {
+  inquiry: Inquiry;
+}
+function InquiryItem({ inquiry }: InquiryItemParams) {
   const [show, setShow] = useState<boolean>(false);
   return (
     <>
       <tr>
         <td>
           <div className={styles.inquiryItemInfo}>
-            <a href="/app/goods/3036129/0" className={styles.imageBlock}>
-              <img
-                src={
-                  '//image.msscdn.net/images/goods_img/20230120/3036129/3036129_16745604936368_100.jpg'
-                }
-                alt="버프워시 버핑레더 인시전 바이커 자켓_Washing Black&amp;Ivory"
-              />
+            <a href={`/goods/${inquiry.item.id}`} className={styles.imageBlock}>
+              <img src={inquiry.item.images[0]} alt={inquiry.item.name} />
             </a>
             <ul className={styles.textInfo}>
-              <li className={styles.brand}>라퍼지스토어</li>
+              <li className={styles.brand}>{inquiry.item.brand}</li>
               <li className={styles.name}>
-                <a href="/app/goods/3036129/0">
-                  버프워시 버핑레더 인시전 바이커 자켓_Washing Black&amp;Ivory
-                </a>
+                <a href={`/goods/${inquiry.item.id}`}>{inquiry.item.name}</a>
               </li>
-              <li>S</li>
+              <li>{inquiry.option}</li>
             </ul>
           </div>
         </td>
@@ -33,64 +33,69 @@ function InquiryItem() {
               setShow((prevState) => !prevState);
             }}
           >
-            사이즈 문의드립니다.
+            {inquiry.title}
           </div>
         </td>
         <td>
-          <div className={styles.inquiryItemType}>사이즈</div>
+          <div className={styles.inquiryItemType}>
+            {formatTypeInquiry(inquiry.type)}
+          </div>
         </td>
         <td>
-          <div className={styles.inquiryItemDate}>2023.01.27</div>
+          <div className={styles.inquiryItemDate}>
+            {formatDate(inquiry.createdDateTime)}
+          </div>
         </td>
         <td>
-          {/*<div className={styles.inquiryItemIsAnsweredFalse}>
-            <span className={styles.falseText}>답변 대기</span>
-            <div className={styles.falseButton}>
-              <button className={styles.edit}>수정</button>
-              <button className={styles.delete}>삭제</button>
+          {inquiry.isAnswered ? (
+            <div className={styles.inquiryItemIsAnsweredTrue}>답변 완료</div>
+          ) : (
+            <div className={styles.inquiryItemIsAnsweredFalse}>
+              <span className={styles.falseText}>답변 대기</span>
+              <div className={styles.falseButton}>
+                <button className={styles.edit}>수정</button>
+                <button className={styles.delete}>삭제</button>
+              </div>
             </div>
-          </div>*/}
-          <div className={styles.inquiryItemIsAnsweredTrue}>답변 완료</div>
+          )}
         </td>
       </tr>
       {show ? (
         <>
           <tr className={styles.inquiryItemContent}>
             <td></td>
-            <td className={styles.contentText}>
-              170cm에 66kg 남자가 입으면 작을까요?
-            </td>
+            <td className={styles.contentText}>{inquiry.content}</td>
             <td></td>
             <td></td>
             <td></td>
           </tr>
-          <tr className={styles.inquiryItemComment}>
-            <td>라퍼지스토어 담당자</td>
-            <td>
-              안녕하세요 고객님 라퍼지스토어입니다. 사이즈 추천의 경우, 동일
-              사이즈더라도 체형 및 희망핏감에 따라 상이할 수 있으므로 정확한
-              안내 해드리기 어려운 점 양해 부탁드리며, 평소 자주 입으시는 제품과
-              기재 된 사이즈표 참고 후 구매 권장드리고 있습니다. 감사합니다.
-              안녕하세요 고객님 라퍼지스토어입니다. 사이즈 추천의 경우, 동일
-              사이즈더라도 체형 및 희망핏감에 따라 상이할 수 있으므로 정확한
-              안내 해드리기 어려운 점 양해 부탁드리며, 평소 자주 입으시는 제품과
-              기재 된 사이즈표 참고 후 구매 권장드리고 있습니다. 감사합니다.
-              안녕하세요 고객님 라퍼지스토어입니다. 사이즈 추천의 경우, 동일
-              사이즈더라도 체형 및 희망핏감에 따라 상이할 수 있으므로 정확한
-              안내 해드리기 어려운 점 양해 부탁드리며, 평소 자주 입으시는 제품과
-              기재 된 사이즈표 참고 후 구매 권장드리고 있습니다. 감사합니다.
-            </td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
+          {inquiry.isAnswered ? (
+            <tr className={styles.inquiryItemComment}>
+              <td>{inquiry.item.brand} 담당자</td>
+              <td>{inquiry.comment}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          ) : null}
         </>
       ) : null}
     </>
   );
 }
+interface MyPageInquiryListLayoutParams {
+  inquiries: Inquiry[] | null;
+  MAXIMUM_PAGE_INDEX: number;
+  pageArray: number[];
+  onPageSelect: (idx: number) => void;
+}
 
-export default function MyPageInquiryListLayout() {
+export default function MyPageInquiryListLayout({
+  inquiries,
+  MAXIMUM_PAGE_INDEX,
+  pageArray,
+  onPageSelect,
+}: MyPageInquiryListLayoutParams) {
   return (
     <div className={styles.inquiryListWrap}>
       <header className={styles.header}>
@@ -114,9 +119,22 @@ export default function MyPageInquiryListLayout() {
           </tr>
         </thead>
         <tbody>
-          <InquiryItem />
+          {inquiries?.map((inquiry) => (
+            <InquiryItem inquiry={inquiry} />
+          ))}
         </tbody>
       </table>
+      <div className={styles.pagination}>
+        {pageArray.map((page) => (
+          <span
+            onClick={() => {
+              onPageSelect(page);
+            }}
+          >
+            {page + 1} &nbsp;
+          </span>
+        ))}
+      </div>
     </div>
   );
 }
