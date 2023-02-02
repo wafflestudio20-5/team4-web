@@ -4,6 +4,7 @@ import { useState } from 'react';
 import togglebutton from '../../resources/image/menu.svg';
 import { Outlet } from 'react-router-dom';
 import SideBarCategory from './SideBarCategory';
+import SideBarStyle from './SideBarStyle';
 
 export default function CategorySideBar() {
   const categorys: CategoryIncludeBest[] = Object.values(Category);
@@ -33,7 +34,7 @@ export default function CategorySideBar() {
                 setTitleCategory('품목');
               }}
             >
-              품목
+              카테고리
             </div>
             <div
               className={
@@ -55,7 +56,9 @@ export default function CategorySideBar() {
               selectedCategory={selectedCategory}
               setSelectedCategory={setSelectedCategory}
             />
-          ) : null}
+          ) : (
+            <SideBarStyle />
+          )}
         </div>
       )}
       <img

@@ -18,8 +18,6 @@ import styles from './index.module.css';
 export default function ItemListPage() {
   const navigate = useNavigate();
 
-  const [pageNum, setPageNum] = useState<number>(1);
-
   const DEFAULT_FETCH_AMOUNT = 24;
   const [sort, setSort] = useState<string | undefined>();
 
@@ -45,22 +43,47 @@ export default function ItemListPage() {
     }
   }, [type, searchKey, navigate]);
 
+  const [index, setIndex] = useState(0);
+
   const { data: itemsData } = useApiData(
     useApiItemListFetcher(
       type,
       category,
       subCategory,
       query ?? '',
-      pageNum - 1,
+      index,
       DEFAULT_FETCH_AMOUNT,
       sort
     )
   );
 
   const items = itemsData?.items ?? null;
-  const totalPages = itemsData?.totalPages ?? null;
+  const totalPages = itemsData?.totalPages ?? 1;
 
-  console.log(totalPages);
+  const MAXIMUM_PAGE_INDEX = totalPages - 1;
+
+  const onPageSelect = (idx: number) => {
+    setIndex(idx);
+  };
+
+  const onSmallJumpBackwards = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (0 < index) setIndex(index - 1);
+  };
+
+  const onSmallJumpForwards = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (index < MAXIMUM_PAGE_INDEX) setIndex(index + 1);
+  };
+
+  const onBigJumpBackwards = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const bigIndex = Math.floor(index / 5);
+    if (0 < bigIndex) setIndex(bigIndex * 5 - 1);
+  };
+
+  const onBigJumpForwards = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const bigIndex = Math.floor(index / 5);
+    const maximumBigIndex = Math.floor(MAXIMUM_PAGE_INDEX / 5);
+    if (bigIndex < maximumBigIndex) setIndex((bigIndex + 1) * 5);
+  };
 
   const [inputs, setInputs] = useState<string>('');
 
@@ -89,7 +112,7 @@ export default function ItemListPage() {
   };
 
   useEffect(() => {
-    setPageNum(1);
+    setIndex(0);
   }, [category, subCategory, searchKey]);
 
   useEffect(() => {
@@ -117,10 +140,14 @@ export default function ItemListPage() {
         items={items}
         sort={sort}
         setSort={setSort}
-        pageNum={pageNum}
-        setPageNum={setPageNum}
+        index={index}
+        onPageSelect={onPageSelect}
+        onSmallJumpBackwards={onSmallJumpBackwards}
+        onSmallJumpForwards={onSmallJumpForwards}
+        onBigJumpBackwards={onBigJumpBackwards}
+        onBigJumpForwards={onBigJumpForwards}
         searchKey={searchKey}
-        totalPages={totalPages}
+        MAXIMUM_PAGE_INDEX={MAXIMUM_PAGE_INDEX}
       />
     </div>
   );

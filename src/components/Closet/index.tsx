@@ -1,3 +1,29 @@
+import { Route, Routes } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Session } from '../../lib/interface';
+import { RootState } from '../../store';
+import ClosetOther from './ClosetOther';
+import ClosetMy from './ClosetMy';
+
 export default function Closet() {
-  return <>옷장페이지입니다.</>;
+  const session: Session = useSelector((state: RootState) => {
+    return state.session;
+  });
+
+  const { user, accessToken } = session;
+
+  return (
+    <>
+      <Routes>
+        <Route
+          path=":id"
+          element={<ClosetOther user={user} accessToken={accessToken} />}
+        />
+        <Route
+          path="my"
+          element={<ClosetMy user={user} accessToken={accessToken} />}
+        />
+      </Routes>
+    </>
+  );
 }
