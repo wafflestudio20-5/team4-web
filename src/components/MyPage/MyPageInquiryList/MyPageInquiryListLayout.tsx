@@ -42,7 +42,16 @@ function InquiryItem() {
         <td>
           <div className={styles.inquiryItemDate}>2023.01.27</div>
         </td>
-        <td>{/*답변완료, 답변대기 로직 구현*/}</td>
+        <td>
+          {/*<div className={styles.inquiryItemIsAnsweredFalse}>
+            <span className={styles.falseText}>답변 대기</span>
+            <div className={styles.falseButton}>
+              <button className={styles.edit}>수정</button>
+              <button className={styles.delete}>삭제</button>
+            </div>
+          </div>*/}
+          <div className={styles.inquiryItemIsAnsweredTrue}>답변 완료</div>
+        </td>
       </tr>
       {show ? (
         <>

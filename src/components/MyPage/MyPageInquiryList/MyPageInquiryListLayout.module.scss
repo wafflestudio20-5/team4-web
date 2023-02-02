@@ -123,6 +123,77 @@ tr{
   vertical-align: middle;
   position: relative;
 }
+.inquiryItemIsAnsweredFalse {
+  margin: 10px 0;
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  min-height: 96px;
+  font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-size: 14px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1.5;
+  position: relative;
+  color: #ff0000;
+  .falseText {
+    width: 100%;
+    display: inline;
+    height: 14px;
+    position: relative;
+    top: 25px;
+  }
+  .falseButton {
+    width: 100%;
+    display: block;
+    position: relative;
+    top: 30px;
+    .edit {
+      transform: translate(-5%, 0);
+      border: 1px solid #e5e5e5;
+      background-color: #ffffff;
+      color: #000000;
+      height: 29px;
+      line-height: 30px;
+      padding-top: 0;
+      font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif !important;
+      min-width: 45px;
+    }
+    .edit:hover {
+      transition-duration: 300ms;
+      border: 1px solid black;
+    }
+    .delete {
+      transform: translate(5%, 0);
+      border: 1px solid #e5e5e5;
+      background-color: #ffffff;
+      color: #000000;
+      height: 29px;
+      line-height: 30px;
+      padding-top: 0;
+      font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif !important;
+      min-width: 45px;
+    }
+    .delete:hover {
+      transition-duration: 300ms;
+      border: 1px solid black;
+    }
+  }
+}
+.inquiryItemIsAnsweredTrue {
+  margin: 10px 0;
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  min-height: 96px;
+  font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-size: 14px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 96px;
+  position: relative;
+  color: #14aaff;
+}
 .inquiryItemContent {
   background-color: #f7f7f7;
   .contentText {
