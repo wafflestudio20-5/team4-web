@@ -4,7 +4,8 @@ import { formatUserSize } from '../../lib/formatters/userFormatter';
 import { getRelativeDateTime } from '../../lib/formatters/dateTimeFormatter';
 import styles from './StyleModalLayout.module.scss';
 import close from '../../resources/image/close.png';
-import like from '../../resources/image/like.png';
+import heart from '../../resources/image/heart.png';
+import filled_heart from '../../resources/image/heart_full.png';
 
 /* Slick Slider */
 
@@ -144,7 +145,11 @@ function StyleModalContent({
           onClick={isLiked ? onUnlike : onLike}
         >
           <div className={styles.like_icon}>
-            <img src={like} alt="like" className={styles.like_icon_img} />
+            <img
+              src={isLiked ? filled_heart : heart}
+              alt="like"
+              className={styles.like_icon_img}
+            />
           </div>
           <div className={styles.like_count}>
             <span>{likedCount}</span>
