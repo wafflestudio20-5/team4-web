@@ -1,5 +1,5 @@
 import styles from './InquiryPopUpPutLayout.module.scss';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Item } from '../../lib/interface';
 interface Input {
   type: string;

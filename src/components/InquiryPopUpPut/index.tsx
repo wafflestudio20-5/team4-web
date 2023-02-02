@@ -1,16 +1,14 @@
 import InquiryPopUpPutLayout from './InquiryPopUpPutLayout';
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import {
   apiPostImage,
-  apiPostInquiry,
+  apiPutInquiry,
   useApiData,
   useApiInquiryListFetcher,
-  useApiItemFetcher,
 } from '../../lib/api';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 import { FileUpload, useFileUpload } from 'use-file-upload';
 import { DEFAULT_INQUIRIES_COUNT } from '../MyPage/MyPageInquiryList';
@@ -31,7 +29,6 @@ export default function InquiryPopUpPut() {
   const { accessToken } = useSelector((state: RootState) => {
     return state.session;
   });
-
   const { data: inquiriesData } = useApiData(
     useApiInquiryListFetcher(accessToken, parsedIndex, DEFAULT_INQUIRIES_COUNT)
   );
@@ -39,12 +36,14 @@ export default function InquiryPopUpPut() {
     inquiriesData?.inquiries.filter((inquiry) => inquiry.id === parsedId) ?? [];
 
   const [input, setInput] = useState<inputInterface>({
-    type: inquiry[0].type,
-    option: inquiry[0].option,
-    isSecret: inquiry[0].isSecret,
-    title: inquiry[0].title,
-    content: inquiry[0].content,
+    type: inquiry[0]?.type,
+    option: inquiry[0]?.option,
+    isSecret: inquiry[0]?.isSecret,
+    title: inquiry[0]?.title,
+    content: inquiry[0]?.content,
   });
+
+  console.log(inquiry[0]?.type);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -71,7 +70,7 @@ export default function InquiryPopUpPut() {
   //input radio //select //input checkbox //input text //textarea
 
   const [imageFiles, setImageFiles] = useFileUpload();
-  const [images, setImages] = useState<string[] | undefined>(inquiry[0].images);
+  const [images, setImages] = useState<string[] | undefined>(undefined);
 
   const handleClick = () => {
     setImageFiles({ accept: 'image/*', multiple: true }, setImageFilesCallBack);
@@ -118,18 +117,18 @@ export default function InquiryPopUpPut() {
       console.log(response.data.secureImages); // 업로드한 이미지들의 URL로 이루어진 string[]
       secureImages = response.data.secureImages;
 
-      apiPostInquiry(
+      apiPutInquiry(
         parsedId,
-        accessToken,
         input.type,
-        input.option,
-        input.isSecret,
+        accessToken,
         input.title,
         input.content,
+        input.option,
+        input.isSecret,
         secureImages
       )
         .then((response) => {
-          toast('상품문의가 추가되었습니다');
+          toast('상품문의가 수정되었습니다');
           setTimeout(() => window.close(), 3000);
         })
         .catch((error) => {
@@ -138,18 +137,18 @@ export default function InquiryPopUpPut() {
           }
         });
     } else {
-      apiPostInquiry(
+      apiPutInquiry(
         parsedId,
-        accessToken,
         input.type,
-        input.option,
-        input.isSecret,
+        accessToken,
         input.title,
         input.content,
+        input.option,
+        input.isSecret,
         undefined
       )
         .then((response) => {
-          toast('상품문의가 추가되었습니다');
+          toast('상품문의가 수정되었습니다');
           setTimeout(() => window.close(), 3000);
         })
         .catch((error) => {

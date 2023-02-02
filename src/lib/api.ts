@@ -315,6 +315,21 @@ export const useApiInquiryListFetcher = (
   );
   return f;
 };
+export const apiPutInquiry = (
+  id: number | null,
+  type: string,
+  token: string | null,
+  title: string,
+  content: string,
+  option: string | undefined,
+  isSecret: boolean,
+  images: string[] | undefined
+) =>
+  axios.put<{}>(
+    `/api/user/me/item-inquiries`,
+    { id, type, title, content, option, isSecret, images },
+    { headers: token ? auth(token) : undefined }
+  );
 export const apiPostStyle = (
   token: string | null,
   images: string[],
