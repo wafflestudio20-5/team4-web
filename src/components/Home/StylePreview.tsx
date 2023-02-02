@@ -43,7 +43,7 @@ export default function StylePreview({ styleSingle }: StylePreviewProps) {
               </div>
             </div>
             <div className={styles.styleUserFollow}>
-              <div className={styles.styleUserFollowDiv}>팔로우</div>
+              {/* <div className={styles.styleUserFollowDiv}>CLOSET</div> */}
               <div className={styles.styleUserMoreDiv}>
                 <img src={more} alt="추가 옵션 버튼" />
               </div>

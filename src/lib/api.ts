@@ -9,6 +9,7 @@ import {
   Purchase,
   Review,
   Style,
+  SimpleUser,
 } from './interface';
 import { PatchMyInfoRequestDto, PurchasePostDto } from './dto';
 
@@ -89,7 +90,7 @@ export function useApiData<T>(
       });
     return () => source.cancel();
   }, [fetch]);
-  return { data, loading, error, setResult };
+  return { data, loading, error };
 }
 
 export const useApiItemFetcher = (id: number | null) => {

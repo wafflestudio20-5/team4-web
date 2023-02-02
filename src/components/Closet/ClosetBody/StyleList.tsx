@@ -28,7 +28,7 @@ function StylePreviewList({
         </div>
       ) : (
         <div className={styles.itemNullBox}>
-          <div>스타일이 없습니다.</div>
+          <div>게시글이 없습니다.</div>
         </div>
       )}
     </>

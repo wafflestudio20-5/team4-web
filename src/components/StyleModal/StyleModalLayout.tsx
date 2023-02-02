@@ -186,7 +186,9 @@ function StyleModalItems({ items, onItemClick }: StyleModalItemsProps) {
               <span className={styles.item_info_name}>{item.name}</span>
             </div>
             <div className={styles.item_info_price}>
-              {item.newPrice ? item.newPrice : item.oldPrice}{' '}
+              {item.newPrice
+                ? `${item.newPrice.toLocaleString()} 원`
+                : `${item.oldPrice.toLocaleString()} 원`}{' '}
               {item.sale && (
                 <span className={styles.item_info_sale}>{item.sale}%</span>
               )}
