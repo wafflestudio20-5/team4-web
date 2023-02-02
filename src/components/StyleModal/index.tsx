@@ -136,13 +136,15 @@ export default function StyleModal() {
         toast('요청에 실패했습니다. 다시 시도해주세요.');
       });
   };
+  
+  const location = useLocation();
 
   const onLike = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     if (!accessToken) {
       toast('로그인 후 사용할 수 있는 기능입니다.');
       navigate('/login');
-      dispatch(setClose());
+      dispatch(setSuspend(location.key));
       return;
     }
     if (socials)
@@ -158,7 +160,7 @@ export default function StyleModal() {
     if (!accessToken) {
       toast('로그인 후 사용할 수 있는 기능입니다.');
       navigate('/login');
-      dispatch(setClose());
+      dispatch(setSuspend(location.key));
       return;
     }
     if (socials)
@@ -174,7 +176,6 @@ export default function StyleModal() {
    * 유저, 아이템 클릭 시 관련 페이지로 이동
    *
    */
-  const location = useLocation();
 
   const onUserClick = (userId: number) => {
     navigate(`/closet/${userId}`);
