@@ -13,6 +13,7 @@ import {
   apiPostLike,
   apiDeleteLike,
 } from '../../lib/api';
+import ClickBlocker from './ClickBlocker';
 import StyleModalLayout from './StyleModalLayout';
 
 export default function StyleModal() {
@@ -59,7 +60,9 @@ export default function StyleModal() {
     return state.session;
   });
 
-  const { data, error } = useApiData(useApiStyleFetcher(styleId, accessToken));
+  const { data, loading, error } = useApiData(
+    useApiStyleFetcher(styleId, accessToken)
+  );
 
   // error이 null이거나 undefined라면 아무런 효과도 일어나지 않습니다.
   useEffect(() => {
@@ -209,7 +212,9 @@ export default function StyleModal() {
     dispatch(setSuspend(location.key));
   };
 
-  if (data && socials !== undefined) {
+  if (loading) {
+    return <ClickBlocker />;
+  } else if (data && socials) {
     return (
       <StyleModalLayout
         open={open}
