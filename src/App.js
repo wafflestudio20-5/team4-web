@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setOpen } from './store/slices/modal';
+import { setReload } from './store/slices/modal';
 import { postRefresh } from './store/slices/session';
 import Header from './components/Header/';
 import CategorySideBar from './components/CategorySideBar';
@@ -56,7 +56,7 @@ export default function App() {
   const location = useLocation();
 
   useEffect(() => {
-    if (locationKey === location.key) dispatch(setOpen());
+    if (locationKey === location.key) dispatch(setReload());
   }, [locationKey, location.key, dispatch]);
 
   useEffect(() => {

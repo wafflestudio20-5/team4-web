@@ -10,6 +10,8 @@ import {
   useApiStyleFetcher,
   apiPostFollow,
   apiDeleteFollow,
+  apiPostLike,
+  apiDeleteLike,
 } from '../../lib/api';
 import StyleModalLayout from './StyleModalLayout';
 
@@ -102,7 +104,7 @@ export default function StyleModal() {
   const onFollow = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     if (!userId) {
-      toast('요청에 실패했습니다. 다시 시도해주세요.');
+      toast('요청 처리 중 문제가 발생했습니다. 다시 시도해주세요.');
       return;
     }
     apiPostFollow(userId, accessToken)
@@ -114,14 +116,14 @@ export default function StyleModal() {
           });
       })
       .catch((error) => {
-        toast('요청에 실패했습니다. 다시 시도해주세요.');
+        toast('요청 처리 중 문제가 발생했습니다. 다시 시도해주세요.');
       });
   };
 
   const onUnfollow = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     if (!userId) {
-      toast('요청에 실패했습니다. 다시 시도해주세요.');
+      toast('요청 처리 중 문제가 발생했습니다. 다시 시도해주세요.');
       return;
     }
     apiDeleteFollow(userId, accessToken)
@@ -133,41 +135,61 @@ export default function StyleModal() {
           });
       })
       .catch((error) => {
-        toast('요청에 실패했습니다. 다시 시도해주세요.');
+        toast('요청 처리 중 문제가 발생했습니다. 다시 시도해주세요.');
       });
   };
-  
+
   const location = useLocation();
 
   const onLike = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
+    if (!styleId) {
+      toast('요청 처리 중 문제가 발생했습니다. 다시 시도해주세요.');
+      return;
+    }
     if (!accessToken) {
       toast('로그인 후 사용할 수 있는 기능입니다.');
       navigate('/login');
       dispatch(setSuspend(location.key));
       return;
     }
-    if (socials)
-      setSocials({
-        ...socials,
-        likedCount: socials.likedCount + 1,
-        isLiked: true,
+    apiPostLike(styleId, accessToken)
+      .then(() => {
+        if (socials)
+          setSocials({
+            ...socials,
+            likedCount: socials.likedCount + 1,
+            isLiked: true,
+          });
+      })
+      .catch((error) => {
+        toast('요청 처리 중 문제가 발생했습니다. 다시 시도해주세요.');
       });
   };
 
   const onUnlike = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
+    if (!styleId) {
+      toast('요청 처리 중 문제가 발생했습니다. 다시 시도해주세요.');
+      return;
+    }
     if (!accessToken) {
       toast('로그인 후 사용할 수 있는 기능입니다.');
       navigate('/login');
       dispatch(setSuspend(location.key));
       return;
     }
-    if (socials)
-      setSocials({
-        ...socials,
-        likedCount: socials.likedCount - 1,
-        isLiked: false,
+    apiDeleteLike(styleId, accessToken)
+      .then(() => {
+        if (socials)
+          setSocials({
+            ...socials,
+            likedCount: socials.likedCount - 1,
+            isLiked: false,
+          });
+      })
+      .catch((error) => {
+        toast('요청 처리 중 문제가 발생했습니다. 다시 시도해주세요.');
       });
   };
 
