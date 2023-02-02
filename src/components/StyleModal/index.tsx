@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 import { RootState } from '../../store';
-import { setClose, setSuspend } from '../../store/slices/modal';
+import { setClose, setSuspend, setReload } from '../../store/slices/modal';
 import {
   useApiData,
   useApiStyleFetcher,
@@ -26,7 +26,7 @@ export default function StyleModal() {
 
   const outside = useRef(null);
 
-  const { open, styleId } = useSelector((state: RootState) => {
+  const { open, styleId, locationKey } = useSelector((state: RootState) => {
     return state.modal;
   });
 
@@ -196,18 +196,22 @@ export default function StyleModal() {
       });
   };
 
+  useEffect(() => {
+    if (!open && locationKey === location.key) dispatch(setReload());
+  }, [open, locationKey, location.key, dispatch]);
+
   /***
    *
    * 유저, 아이템 클릭 시 관련 페이지로 이동
    *
    */
 
-  const onUserClick = (userId: number) => {
+  const onUserClick = async (userId: number) => {
     navigate(`/closet/${userId}`);
     dispatch(setSuspend(location.key));
   };
 
-  const onItemClick = (itemId: number) => {
+  const onItemClick = async (itemId: number) => {
     navigate(`/goods/${itemId}`);
     dispatch(setSuspend(location.key));
   };
