@@ -8,6 +8,7 @@ import {
   Purchase,
   Review,
   Style,
+  SimpleUser,
 } from './interface';
 import { PatchMyInfoRequestDto, PurchasePostDto } from './dto';
 
@@ -437,3 +438,22 @@ export const apiDeleteFollow = (userId: number, token: string | null) =>
   axios.delete<{}>(`/api/user/${userId}/follow`, {
     headers: token ? auth(token) : undefined,
   });
+
+export const useApiGetSearchUserFetcher = (
+  query: string,
+  index?: number,
+  count?: number
+) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      return axios.get<{
+        users: SimpleUser[];
+      }>('/api/user/search', {
+        params: { query, index, count },
+        cancelToken,
+      });
+    },
+    [query, index, count]
+  );
+  return f;
+};
