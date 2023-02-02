@@ -119,3 +119,15 @@ tr{
   vertical-align: middle;
   position: relative;
 }
+.inquiryItemContent {
+  background-color: #f7f7f7;
+  .contentText {
+    text-align: left;
+  }
+  td {
+    border-bottom: 1px solid #e2e2e2;
+  }
+}
+.inquiryItemComment {
+  background-color: #f7f7f7;
+}
