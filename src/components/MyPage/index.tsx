@@ -72,7 +72,10 @@ function MyPage() {
             path="order"
             element={<MyPageOrder accessToken={accessToken} />}
           />
-          <Route path="item_inquiry" element={<MyPageInquiryList />} />
+          <Route
+            path="item_inquiry"
+            element={<MyPageInquiryList accessToken={accessToken} />}
+          />
           <Route
             path="personal_inquiry"
             element={<div>/mypage/personal_inquiry</div>}

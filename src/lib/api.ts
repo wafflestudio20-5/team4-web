@@ -8,6 +8,7 @@ import {
   Purchase,
   Review,
   Style,
+  Inquiry,
 } from './interface';
 import { PurchasePostDto } from './dto';
 
@@ -295,6 +296,25 @@ export const apiPostInquiry = (
     { type, option, isSecret, title, content, images },
     { headers: token ? auth(token) : undefined }
   );
+export const useApiInquiryListFetcher = (
+  token: string | null,
+  index?: number,
+  count?: number
+) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) =>
+      axios.get<{ inquiries: Inquiry[]; totalPages: number }>(
+        `/api/user/me/item-inquiries/`,
+        {
+          params: { index, count },
+          cancelToken,
+          headers: token ? auth(token) : undefined,
+        }
+      ),
+    [index, count, token]
+  );
+  return f;
+};
 export const apiPostStyle = (
   token: string | null,
   images: string[],
