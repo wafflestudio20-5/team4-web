@@ -68,12 +68,14 @@ export interface Comment {
 
 export interface Inquiry {
   id: number;
+  item: Item;
   user: User;
   isAnswered: boolean;
   type: InquiryType;
-  options: string[];
+  option?: string;
   title: string;
   content: string;
+  comment?: string;
   images: string[];
   isSecret: boolean;
   createdDateTime: string;
