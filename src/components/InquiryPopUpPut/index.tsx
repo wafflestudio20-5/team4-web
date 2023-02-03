@@ -33,8 +33,6 @@ export default function InquiryPopUpPut() {
     content: inquiry?.content,
   });
 
-  console.log(inquiry?.type);
-
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
@@ -150,6 +148,9 @@ export default function InquiryPopUpPut() {
     // TODO: 이미지 업로드 후 return된 secureImages를 request body에 포함하여 게시글 POST
     // await axios.post('게시글 관련 API', {..., secureImages})
   };
+  const close = () => {
+    navigate(-1);
+  };
 
   return (
     <InquiryPopUpPutLayout
@@ -162,6 +163,7 @@ export default function InquiryPopUpPut() {
       handleClick={handleClick}
       images={images}
       handleSubmit={handleSubmit}
+      close={close}
     ></InquiryPopUpPutLayout>
   );
 }

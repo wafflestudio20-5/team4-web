@@ -5,7 +5,6 @@ import {
   useApiInquiryListFetcher,
 } from '../../../lib/api';
 import React, { useState } from 'react';
-import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { Inquiry } from '../../../lib/interface';
 
@@ -45,11 +44,8 @@ export default function MyPageInquiryList({
 
   const onBigJumpBackwards = (e: React.MouseEvent<HTMLButtonElement>) => {
     const bigIndex = Math.floor(index / DEFAULT_INQUIRIES_COUNT);
-    if (0 < bigIndex) {
-      setIndex(bigIndex * DEFAULT_INQUIRIES_COUNT - 1);
-    } else {
-      toast('이동할 페이지가 없습니다');
-    }
+    if (0 < bigIndex) setIndex(bigIndex * DEFAULT_INQUIRIES_COUNT - 1);
+    else setIndex(0);
   };
 
   const onBigJumpForwards = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -57,11 +53,9 @@ export default function MyPageInquiryList({
     const maximumBigIndex = Math.floor(
       MAXIMUM_PAGE_INDEX / DEFAULT_INQUIRIES_COUNT
     );
-    if (bigIndex < maximumBigIndex) {
+    if (bigIndex < maximumBigIndex)
       setIndex((bigIndex + 1) * DEFAULT_INQUIRIES_COUNT);
-    } else {
-      toast('이동할 페이지가 없습니다');
-    }
+    else setIndex(MAXIMUM_PAGE_INDEX);
   };
   const navigate = useNavigate();
   const inquiryEditClick = (data: Inquiry) => {
@@ -69,6 +63,7 @@ export default function MyPageInquiryList({
   };
   const inquiryDeleteClick = (id: number) => {
     apiDeleteInquiry(id, accessToken);
+    window.location.reload();
   };
 
   return (

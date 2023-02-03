@@ -50,97 +50,101 @@ export default function StyleWriteLayout({
             <span className={styles.postImageInput} onClick={handleClick}>
               +
             </span>
-            <div className={styles.postWriteInputCount}>
-              {images.length} 개/5 개
-            </div>
           </div>
-        </div>
-        <p className={styles.title}>글 작성</p>
-        <label htmlFor="postWriteInput">스타일에 대해 설명해 주세요.</label>
-        <div className={styles.postWriteInputWrap}>
-          <textarea
-            className={styles.postWriteInput}
-            id="postWriteInput"
-            value={input.content}
-            onChange={onChangeTextArea}
-            name="content"
-          ></textarea>
-          <div className={styles.postWriteInputCount}>
-            {input.content.length} 자
-          </div>
-        </div>
-        <div className={styles.hashtagInputArea}>
-          <label htmlFor="hashtagInput">해시태그를 달아 보세요.</label>
-          <div className={styles.hashtagInputWrap}>
-            <textarea
-              className={styles.hashtagInput}
-              id="hashtagInput"
-              maxLength={20}
-              value={input.hashtag}
-              onChange={onChangeTextArea}
-              name="hashtag"
-            ></textarea>
-            <div className={styles.hashtagInputCount}>
-              {input.hashtag.length}자/20자 이내
-            </div>
-          </div>
-        </div>
-        <div className={styles.searchItemArea}>
-          <p className={styles.title}>상품 정보</p>
-          <p className={styles.subtitle}>
-            코디한 아이템 중 무신사에서 구매한 상품을 공유해 주세요.
-          </p>
-          <div className={styles.searchItem}>
-            <select name="items" onChange={onChangeSelect} value={tempSelect}>
-              <option>브랜드명 / 상품명</option>
-              {purchases
-                ?.filter(
-                  (purchase) =>
-                    input.itemIds.includes(purchase.item.id) === false
-                )
-                .map((purchase) => (
-                  <option value={purchase.item.id} key={purchase.item.id}>
-                    {purchase.item.brand}|{purchase.item.name}|{purchase.option}
-                  </option>
-                ))}
-            </select>
-          </div>
-          <p className={styles.subtitle}>추가된 상품</p>
-          {purchases
-            ?.filter(
-              (purchase) => input.itemIds.includes(purchase.item.id) === true
-            )
-            .map((purchase) => (
-              <div className={styles.postItem} key={purchase.item.id}>
-                <a href={`/goods/${purchase.item.id}`} key={purchase.item.id}>
-                  <img
-                    src={purchase.item.images[0]}
-                    alt={`${purchase.item.id}`}
-                    key={purchase.item.id}
-                  />
-                </a>
-                <ul key={purchase.item.id}>
-                  <li className={styles.brand} key={purchase.item.id}>
-                    {purchase.item.brand}
-                  </li>
-                  <li className={styles.name} key={purchase.item.id}>
-                    {purchase.item.name}
-                  </li>
-                  <li className={styles.option} key={purchase.item.id}>
-                    {purchase.option}
-                  </li>
-                </ul>
-                <img
-                  className={styles.closeBtn}
-                  src={close_button}
-                  alt="close_button"
-                  key={purchase.item.id}
-                  onClick={() => {
-                    onRemove(purchase.item.id);
-                  }}
-                />
+
+          <p>{images.length} 장 / 최대 5 장</p>
+          <div className={styles.postWriteInputArea}>
+            <p className={styles.title}>글 작성</p>
+            <label htmlFor="postWriteInput" className={styles.p}>
+              스타일에 대해 설명해 주세요.
+            </label>
+            <div className={styles.postWriteInputWrap}>
+              <textarea
+                className={styles.postWriteInput}
+                id="postWriteInput"
+                value={input.content}
+                onChange={onChangeTextArea}
+                name="content"
+              ></textarea>
+              <div className={styles.postWriteInputCount}>
+                {input.content.length} 자
               </div>
-            ))}
+            </div>
+          </div>
+          <div className={styles.hashtagInputArea}>
+            <label htmlFor="hashtagInput">해시태그를 달아 보세요.</label>
+            <div className={styles.hashtagInputWrap}>
+              <textarea
+                className={styles.hashtagInput}
+                id="hashtagInput"
+                maxLength={20}
+                value={input.hashtag}
+                onChange={onChangeTextArea}
+                name="hashtag"
+              ></textarea>
+              <div className={styles.hashtagInputCount}>
+                {input.hashtag.length}자/20자 이내
+              </div>
+            </div>
+          </div>
+          <div className={styles.searchItemArea}>
+            <p className={styles.title}>상품 정보</p>
+            <p className={styles.subtitle}>
+              코디한 아이템 중 무신사에서 구매한 상품을 공유해 주세요.
+            </p>
+            <div className={styles.searchItem}>
+              <select name="items" onChange={onChangeSelect} value={tempSelect}>
+                <option>브랜드명 / 상품명</option>
+                {purchases
+                  ?.filter(
+                    (purchase) =>
+                      input.itemIds.includes(purchase.item.id) === false
+                  )
+                  .map((purchase) => (
+                    <option value={purchase.item.id} key={purchase.item.id}>
+                      {purchase.item.brand}|{purchase.item.name}|
+                      {purchase.option}
+                    </option>
+                  ))}
+              </select>
+            </div>
+            <p className={styles.subtitle}>추가된 상품</p>
+            {purchases
+              ?.filter(
+                (purchase) => input.itemIds.includes(purchase.item.id) === true
+              )
+              .map((purchase) => (
+                <div className={styles.postItem} key={purchase.item.id}>
+                  <a href={`/goods/${purchase.item.id}`} key={purchase.item.id}>
+                    <img
+                      src={purchase.item.images[0]}
+                      alt={`${purchase.item.id}`}
+                      key={purchase.item.id}
+                    />
+                  </a>
+                  <ul key={purchase.item.id}>
+                    <li className={styles.brand} key={purchase.item.id}>
+                      {purchase.item.brand}
+                    </li>
+                    <li className={styles.name} key={purchase.item.id}>
+                      {purchase.item.name}
+                    </li>
+                    <li className={styles.option} key={purchase.item.id}>
+                      {purchase.option}
+                    </li>
+                  </ul>
+                  <img
+                    className={styles.closeBtn}
+                    src={close_button}
+                    alt="close_button"
+                    key={purchase.item.id}
+                    onClick={() => {
+                      onRemove(purchase.item.id);
+                    }}
+                  />
+                </div>
+              ))}
+          </div>
         </div>
         <div className={styles.postButtonArea}>
           <form onClick={handleSubmit}>

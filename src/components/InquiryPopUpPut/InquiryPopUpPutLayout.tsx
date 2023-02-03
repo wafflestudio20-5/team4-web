@@ -18,6 +18,7 @@ interface inquiryPopUpPutLayoutParams {
   handleClick: () => void;
   images: string[] | undefined;
   handleSubmit: (e: React.SyntheticEvent) => void;
+  close: () => void;
 }
 
 export default function InquiryPopUpPutLayout({
@@ -30,6 +31,7 @@ export default function InquiryPopUpPutLayout({
   handleClick,
   images,
   handleSubmit,
+  close,
 }: inquiryPopUpPutLayoutParams) {
   return (
     <div className={styles.inquiryPopUp}>
@@ -205,12 +207,7 @@ export default function InquiryPopUpPutLayout({
         </dd>
       </dl>
       <div className={styles.buttonArea}>
-        <span
-          className={styles.buttonQuit}
-          onClick={() => {
-            window.close();
-          }}
-        >
+        <span className={styles.buttonQuit} onClick={close}>
           취소
         </span>
         <form onClick={handleSubmit}>
