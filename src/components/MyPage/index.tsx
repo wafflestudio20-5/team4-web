@@ -83,10 +83,6 @@ function MyPage() {
             element={<MyPageInquiryList accessToken={accessToken} />}
           />
           <Route
-            path="personal_inquiry"
-            element={<div>/mypage/personal_inquiry</div>}
-          />
-          <Route
             path="viewed_goods"
             element={<MyPageViewed accessToken={accessToken} />}
           />

@@ -5,11 +5,9 @@ export default function ShopppingCartHeader() {
     <>
       <div className={styles.pagenation}>
         <div className={styles.nav_sub}>
-          <a href="/">무신사 스토어</a>
+          <span>무신사 스토어</span>
           <span className={styles.iconEntity}>{'>'}</span>
-          <a href="/mypage">마이페이지</a>
-          <span className={styles.iconEntity}>{'>'}</span>
-          <span>장바구니</span>
+          <span className={styles.navi}>장바구니</span>
         </div>
       </div>
       <div className={styles.rightContents}>

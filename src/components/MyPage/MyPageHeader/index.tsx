@@ -16,14 +16,6 @@ export default function MyPageHeader({ user, onLogout }: MyPageHeaderProps) {
       <Link className={styles.title} to="/mypage">
         My Page
       </Link>
-      <div className={styles.nav}>
-        <Link className={styles.nav_link} to="/cart">
-          장바구니
-        </Link>
-        <button className={styles.nav_link} onClick={onLogout}>
-          로그아웃
-        </button>
-      </div>
       <div className={styles.main}>
         <img className={styles.image} src={user.image} alt="이미지 없음" />
         <div className={styles.info}>

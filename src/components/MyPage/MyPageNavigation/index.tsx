@@ -16,9 +16,6 @@ export default function MyPageNavigation() {
         <Link className={styles.nav} to="/mypage/item_inquiry">
           상품문의
         </Link>
-        <Link className={styles.nav} to="/mypage/personal_inquiry">
-          1:1문의
-        </Link>
         <Link className={styles.nav} to="/mypage/viewed_goods">
           최근 본 상품
         </Link>

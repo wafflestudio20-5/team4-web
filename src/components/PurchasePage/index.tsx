@@ -1,7 +1,6 @@
 import styles from './index.module.scss';
 import OrderProductInfo from './OrderProductInfo';
 import PurchasePageHeader from './PurchasePageHeader';
-import OrderDelivery from './OrderDelivery';
 import { Purchase } from '../../lib/interface';
 import OrderPurchase from './OrderPurchase';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -60,6 +59,7 @@ export default function PurchasePage() {
 
   useEffect(() => {
     if (!purchaseList || purchaseList?.length === 0) {
+      toast('구매할 상품이 없습니다.');
       navigate(-1);
     }
   }, [purchaseList, navigate]);
@@ -146,7 +146,7 @@ export default function PurchasePage() {
     <div className={styles.wrap}>
       <PurchasePageHeader />
       <div className={styles.f1}>
-        <OrderDelivery />
+        {/* <OrderDelivery /> */}
         <OrderProductInfo purchaseList={purchaseList} />
         <OrderPurchase
           purchaseList={purchaseList}
