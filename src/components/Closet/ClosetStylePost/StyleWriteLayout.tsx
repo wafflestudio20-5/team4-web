@@ -43,7 +43,7 @@ export default function StyleWriteLayout({
           </p>
           <div className={styles.postImageInputWrap}>
             {images.map((img, idx) => (
-              <span>
+              <span key={idx}>
                 <img src={img} alt={`${idx}`} key={idx}></img>
               </span>
             ))}
@@ -99,7 +99,7 @@ export default function StyleWriteLayout({
                     input.itemIds.includes(purchase.item.id) === false
                 )
                 .map((purchase) => (
-                  <option value={purchase.item.id}>
+                  <option value={purchase.item.id} key={purchase.item.id}>
                     {purchase.item.brand}|{purchase.item.name}|{purchase.option}
                   </option>
                 ))}
@@ -111,22 +111,30 @@ export default function StyleWriteLayout({
               (purchase) => input.itemIds.includes(purchase.item.id) === true
             )
             .map((purchase) => (
-              <div className={styles.postItem}>
-                <a href={`/goods/${purchase.item.id}`}>
+              <div className={styles.postItem} key={purchase.item.id}>
+                <a href={`/goods/${purchase.item.id}`} key={purchase.item.id}>
                   <img
                     src={purchase.item.images[0]}
                     alt={`${purchase.item.id}`}
+                    key={purchase.item.id}
                   />
                 </a>
-                <ul>
-                  <li className={styles.brand}>{purchase.item.brand}</li>
-                  <li className={styles.name}>{purchase.item.name}</li>
-                  <li className={styles.option}>{purchase.option}</li>
+                <ul key={purchase.item.id}>
+                  <li className={styles.brand} key={purchase.item.id}>
+                    {purchase.item.brand}
+                  </li>
+                  <li className={styles.name} key={purchase.item.id}>
+                    {purchase.item.name}
+                  </li>
+                  <li className={styles.option} key={purchase.item.id}>
+                    {purchase.option}
+                  </li>
                 </ul>
                 <img
                   className={styles.closeBtn}
                   src={close_button}
                   alt="close_button"
+                  key={purchase.item.id}
                   onClick={() => {
                     onRemove(purchase.item.id);
                   }}
