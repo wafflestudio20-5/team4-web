@@ -50,19 +50,20 @@ function Header() {
     if (accessToken) await dispatch(postLogout(accessToken));
   };
 
-  return (
-    <>
-      <HeaderLayout
-        user={user}
-        query={query}
-        onChange={onChange}
-        onKeyPress={onKeyPress}
-        onSubmit={onSubmit}
-        onLogout={onLogout}
-      />
-      <Outlet />
-    </>
-  );
+  if (user !== undefined)
+    return (
+      <>
+        <HeaderLayout
+          user={user}
+          query={query}
+          onChange={onChange}
+          onKeyPress={onKeyPress}
+          onSubmit={onSubmit}
+          onLogout={onLogout}
+        />
+        <Outlet />
+      </>
+    );
 }
 
 export default Header;

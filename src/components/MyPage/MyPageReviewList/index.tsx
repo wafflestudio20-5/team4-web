@@ -1,5 +1,6 @@
 import MyPageReviewListLayout from './MyPageReviewListLayout';
 import { useNavigate } from 'react-router-dom';
+import { useState} from "react";
 import {
   apiDeleteReview,
   useApiData,
@@ -20,12 +21,14 @@ export default function MyPageReviewList({
   const { data: reviewData } = useApiData(
     useApiGetUserReviewListFetcher(accessToken)
   );
-  const reviews = reviewData?.reviews ?? null;
+  const reviews = reviewData?.reviews ?? undefined;
   const onEdit = (data: Review) => {
     navigate('/mypage/review/edit', { state: data });
   };
+  const [temp, setTemp] = useState<number[]>([]);
   const onRemove = (id: number) => {
     apiDeleteReview(id, accessToken);
+    setTemp([...temp, id]);
   };
 
   return (
@@ -34,6 +37,7 @@ export default function MyPageReviewList({
       data={reviews}
       onEdit={onEdit}
       onRemove={onRemove}
+      temp={temp}
     ></MyPageReviewListLayout>
   );
 }

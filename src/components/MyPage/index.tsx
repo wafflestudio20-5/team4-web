@@ -43,15 +43,21 @@ function MyPage() {
   };
 
   useEffect(() => {
-    if (!user) navigate('/login');
+    if (user === null) navigate(-1);
   }, [user, navigate]);
 
   if (user)
     return (
       <Routes>
         <Route element={<MyPageLayout user={user} onLogout={onLogout} />}>
-          <Route index element={<MyPageInfo user={user} />} />
-          <Route path="info" element={<MyPageInfo user={user} />} />
+          <Route
+            index
+            element={<MyPageInfo user={user} accessToken={accessToken} />}
+          />
+          <Route
+            path="info"
+            element={<MyPageInfo user={user} accessToken={accessToken} />}
+          />
           <Route
             path="review"
             element={<MyPageWriteReviewsList accessToken={accessToken} />}

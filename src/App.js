@@ -49,6 +49,7 @@ function AppRoutes() {
 
 export default function App() {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(postRefresh());
   });

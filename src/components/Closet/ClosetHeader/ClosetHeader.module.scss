@@ -1,0 +1,253 @@
+.wrapper {
+  background-color: black;
+  color: white;
+  padding: 0px 40px 80px 40px;
+  position: relative;
+}
+
+.title {
+  color: inherit;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Musinsa, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 24px;
+  line-height: 52px;
+  padding: 20px 0 24px;
+  text-decoration: none;
+}
+
+.nav {
+  padding-right: 40px;
+  position: absolute;
+  right: 0px;
+  top: 20px;
+  .nav_link {
+    color: inherit;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 22px;
+    margin-left: 32px;
+    padding: 4px 0px;
+  }
+  a {
+    text-decoration: none;
+  }
+  button {
+    background: none;
+    border: none;
+  }
+}
+
+.main {
+  overflow: hidden;
+  padding-left: 40px;
+}
+
+.image {
+  border-radius: 100%;
+  float: left;
+  height: 160px;
+  width: 160px;
+}
+
+.info {
+  float: left;
+  padding-left: 50px;
+  box-sizing: border-box;
+  min-width: calc(100% - 560px);
+}
+
+.name {
+  margin-bottom: 0px;
+  strong {
+    font-size: 58px;
+    line-height: 72px;
+  }
+  a {
+    color: rgb(145, 145, 145);
+    cursor: pointer;
+    margin: 38px 0 0 4px;
+    text-decoration: none;
+  }
+}
+
+// .flex {
+//   align-items: center;
+//   display: flex;
+// }
+
+.userprofile {
+  padding: 10px 0px;
+}
+
+.profiletext {
+  font-family: 'Apple SD Gothic Neo R';
+  font-size: 14px;
+  margin-bottom: 5px;
+  max-width: 600px;
+}
+
+.userrate {
+  // border: 1px solid red;
+  padding: 0px 50px;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin-top: 72px;
+  z-index: 10;
+
+  .modal {
+    border: 1px solid #e5e5e5;
+    position: absolute;
+    bottom: -180px;
+    width: 230px;
+    height: 300px;
+    background-color: rgb(250, 250, 250);
+    z-index: 999;
+    padding: 0px 10px;
+    overflow: auto;
+    .modalTitle {
+      padding: 10px 5px;
+      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      font-size: 15px;
+      color: black;
+      display: flex;
+      .modalCount {
+        flex: 1;
+      }
+      div {
+        display: flex;
+        align-items: center;
+      }
+      img {
+        width: 24px;
+        height: 24px;
+        filter: invert(60%);
+      }
+    }
+
+    .user {
+      font-family: 'musinsa', sans-serif;
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      height: auto;
+
+      .categoryshead {
+        font-family: 'musinsa', sans-serif;
+        font-size: 14px;
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        align-items: center;
+        padding: 3px 5px;
+      }
+      img {
+        width: 30px;
+        height: 30px;
+      }
+      .usernickname {
+        color: black;
+        padding: 0px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .user:hover {
+      cursor: pointer;
+      background-color: #e6e6e6;
+    }
+    .null {
+      margin: 15px 0px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #b2b2b2;
+    }
+  }
+}
+
+.num {
+  font-family: Musinsa, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 58px;
+  text-align: center;
+}
+
+.follow {
+  font-family: Musinsa, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 58px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.text {
+  font-size: 14px;
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+  gap: 20px;
+  padding-top: 15px;
+}
+
+.poststyle {
+  height: 50px;
+  width: 280px;
+  background-color: white;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+  line-height: 50px;
+  cursor: pointer;
+}
+
+.followstyle {
+  height: 50px;
+  width: 280px;
+  background-color: #0088ff;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  cursor: pointer;
+}
+
+.insta {
+  height: 50px;
+  cursor: pointer;
+}
+
+.bottom {
+  display: flex;
+  padding-top: 40px;
+  .bottom_block {
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+    text-decoration: none;
+    width: 180px;
+  }
+  img {
+    filter: invert(100%);
+    height: 38px;
+    width: 38px;
+  }
+  span {
+    font-size: 14px;
+    line-height: 21px;
+    margin: 8px 0px;
+  }
+  strong {
+    font-family: Musinsa, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    font-size: 30px;
+    line-height: 45px;
+  }
+}

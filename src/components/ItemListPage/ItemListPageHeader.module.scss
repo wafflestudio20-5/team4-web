@@ -68,7 +68,7 @@
   font-weight: bold;
   .sortingTitle {
     padding-left: 20px;
-    width: 200px;
+    width: 150px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -76,13 +76,16 @@
   }
   .sortingOption {
     flex: 1;
+    display: flex;
 
     .select {
       color: #000;
     }
 
     div {
-      width: 150px;
+      width: calc(10% - 15px);
+      min-width: 70px;
+      max-width: 150px;
       height: 100%;
       float: left;
       display: flex;
@@ -112,8 +115,10 @@
         outline: none;
       }
       button {
-        width: 500px;
+        font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+        width: 50px;
         height: 21px;
+        line-height: 19px;
         margin-left: 1px;
         text-align: center;
         border: 1px solid #ddd;
@@ -122,6 +127,9 @@
         font-weight: bold;
         cursor: pointer;
       }
+    }
+    .sortingInput {
+      width: 150px;
     }
   }
 }

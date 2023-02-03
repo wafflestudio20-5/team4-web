@@ -21,30 +21,14 @@ $slick-opacity-default: 0.75 !default;
 $slick-opacity-on-hover: 1 !default;
 $slick-opacity-not-active: 0.25 !default;
 
-@function slick-image-url($url) {
-  @if function-exists(image-url) {
-    @return image-url($url);
-  } @else {
-    @return url($slick-loader-path + $url);
-  }
-}
-
-@function slick-font-url($url) {
-  @if function-exists(font-url) {
-    @return font-url($url);
-  } @else {
-    @return url($slick-font-path + $url);
-  }
-}
-
 /* Arrows */
 
 .slick-prev,
 .slick-next {
   position: absolute;
   display: block;
-  height: 50px;
-  width: 40px;
+  height: 20px;
+  width: 20px;
   line-height: 0px;
   font-size: 0px;
   cursor: pointer;
@@ -83,7 +67,7 @@ $slick-opacity-not-active: 0.25 !default;
 }
 
 .slick-prev {
-  left: -30px;
+  left: -25px;
   [dir='rtl'] & {
     left: auto;
     right: -25px;
@@ -97,7 +81,7 @@ $slick-opacity-not-active: 0.25 !default;
 }
 
 .slick-next {
-  right: -33px;
+  right: -25px;
   [dir='rtl'] & {
     left: -25px;
     right: auto;

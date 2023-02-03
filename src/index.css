@@ -13,6 +13,12 @@
 }
 
 @font-face {
+  font-family: 'Apple SD Gothic Neo R';
+  src: url('./resources/font/AppleSDGothicNeo/AppleSDGothicNeoR.ttf')
+    format('truetype');
+}
+
+@font-face {
   font-family: 'NotoSansKR';
   src: url('./resources/font/NotoSansKR/NotoSansKR-Medium.otf')
     format('truetype');
@@ -51,4 +57,20 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* 스크롤바 커스터마이징 */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+
+::-webkit-scrollbar-thumb:vert ::-webkit-scrollbar-track {
+  display: none;
 }

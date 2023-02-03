@@ -9,8 +9,9 @@ import {
   Review,
   Style,
   Inquiry,
+  SimpleUser,
 } from './interface';
-import { PurchasePostDto } from './dto';
+import { PatchMyInfoRequestDto, PurchasePostDto } from './dto';
 
 axios.defaults.baseURL = process.env.REACT_APP_DB_HOST;
 axios.defaults.withCredentials = true;
@@ -44,8 +45,28 @@ export const apiCheckUsername = (username: string) =>
 export const apiCheckNickname = (nickname: string) =>
   axios.post<{ isUnique: boolean }>('/api/auth/nickname', { nickname });
 
+export const apiCheckPassword = (
+  currentPassword: string,
+  token: string | null
+) =>
+  axios.post(
+    '/api/auth/password',
+    { currentPassword },
+    {
+      headers: token ? auth(token) : undefined,
+    }
+  );
+
 export const apiGetMyInfo = (token: string) =>
   axios.get<{ user: User }>('/api/user/me', { headers: auth(token) });
+
+export const apiPatchMyInfo = (
+  patchMyInfoRequestDto: PatchMyInfoRequestDto,
+  token: string | null
+) =>
+  axios.patch('/api/user/me', patchMyInfoRequestDto, {
+    headers: token ? auth(token) : undefined,
+  });
 
 export function useApiData<T>(
   fetch: ((cancel: CancelToken) => Promise<AxiosResponse<T>>) | null
@@ -146,7 +167,7 @@ export const apiDeleteReview = (id: number, token: string | null) =>
   });
 
 export const apiPostImage = (formData: FormData, token: string | null) =>
-  axios.post('/api/image-upload', formData, {
+  axios.post<{ secureImages: string[] }>('/api/image-upload', formData, {
     headers: token ? auth(token) : undefined,
   });
 
@@ -348,7 +369,10 @@ export const apiPostStyle = (
     { headers: token ? auth(token) : undefined }
   );
 
-export const useApiStyleFetcher = (id: number | null, token: string | null) => {
+export const useApiStyleFetcher = (
+  id: number | undefined,
+  token: string | null
+) => {
   const f = useCallback(
     (cancelToken: CancelToken) => {
       return axios.get<{
@@ -363,7 +387,7 @@ export const useApiStyleFetcher = (id: number | null, token: string | null) => {
     },
     [id, token]
   );
-  return id === null ? null : f;
+  return id === undefined ? null : f;
 };
 
 export const useApiStyleListFetcher = (
@@ -383,6 +407,53 @@ export const useApiStyleListFetcher = (
   return f;
 };
 
+export const useApiUserFectcher = (id: number | null, token: string | null) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      return axios.get<{
+        user: User;
+        count: {
+          styleCount: number;
+          followerCount: number;
+          followingCount: number;
+        };
+        isFollow: boolean;
+      }>(`/api/user/${id}`, {
+        headers: token ? auth(token) : undefined,
+        cancelToken,
+      });
+    },
+    [id, token]
+  );
+  return id === null ? null : f;
+};
+
+export const apiGetUser = (id: number | null, token: string | null) =>
+  axios.get<{
+    user: User;
+    count: {
+      styleCount: number;
+      followerCount: number;
+      followingCount: number;
+    };
+    isFollow: boolean;
+  }>(`/api/user/${id}`, {
+    headers: token ? auth(token) : undefined,
+  });
+
+export const useApiUserStyleListFecther = (id: number | null) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      return axios.get<{
+        styles: { id: number; image: string }[];
+      }>(`/api/user/${id}/styles`, {
+        cancelToken,
+      });
+    },
+    [id]
+  );
+  return id === null ? null : f;
+};
 export const apiPostComment = (
   reviewId: number,
   content: string,
@@ -393,3 +464,75 @@ export const apiPostComment = (
     { reviewId, content },
     { headers: token ? auth(token) : undefined }
   );
+
+export const apiPostFollow = (userId: number, token: string | null) =>
+  axios.post<{}>(
+    `/api/user/${userId}/follow`,
+    {},
+    {
+      headers: token ? auth(token) : undefined,
+    }
+  );
+
+export const apiDeleteFollow = (userId: number, token: string | null) =>
+  axios.delete<{}>(`/api/user/${userId}/follow`, {
+    headers: token ? auth(token) : undefined,
+  });
+
+export const apiPostLike = (styleId: number, token: string | null) =>
+  axios.post<{}>(
+    `/api/style/${styleId}/like`,
+    {},
+    {
+      headers: token ? auth(token) : undefined,
+    }
+  );
+
+export const apiDeleteLike = (styleId: number, token: string | null) =>
+  axios.delete<{}>(`/api/style/${styleId}/like`, {
+    headers: token ? auth(token) : undefined,
+  });
+
+export const useApiGetSearchUserFetcher = (
+  query: string,
+  index?: number,
+  count?: number
+) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      return axios.get<{
+        users: SimpleUser[];
+      }>('/api/user/search', {
+        params: { query, index, count },
+        cancelToken,
+      });
+    },
+    [query, index, count]
+  );
+  return f;
+};
+
+export const useApiGetFollowListFetcher = (
+  id: number,
+  followOrFollowing: string
+) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) => {
+      if (followOrFollowing === 'follower') {
+        return axios.get<{
+          users: SimpleUser[];
+        }>(`/api/user/${id}/followers`, {
+          cancelToken,
+        });
+      } else {
+        return axios.get<{
+          users: SimpleUser[];
+        }>(`/api/user/${id}/followings`, {
+          cancelToken,
+        });
+      }
+    },
+    [id, followOrFollowing]
+  );
+  return f;
+};

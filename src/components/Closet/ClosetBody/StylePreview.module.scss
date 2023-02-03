@@ -1,0 +1,35 @@
+// .itemPreview {
+// }
+
+.CGoods {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.stylesWrap {
+  border: 1px solid #e5e5e5;
+  overflow: hidden;
+}
+
+.image {
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  padding-top: 115%;
+}
+
+.image:hover {
+  cursor: pointer;
+  box-shadow: inset 0px 0px 50px #e5e5e5;
+}
+.previewImage {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  height: auto;
+  transform: translateY(-50%);
+  mix-blend-mode: multiply;
+}
