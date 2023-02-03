@@ -1,7 +1,13 @@
 import MyPageInquiryListLayout from './MyPageInquiryListLayout';
-import { useApiData, useApiInquiryListFetcher } from '../../../lib/api';
+import {
+  apiDeleteInquiry,
+  useApiData,
+  useApiInquiryListFetcher,
+} from '../../../lib/api';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { Inquiry } from '../../../lib/interface';
 
 export const DEFAULT_INQUIRIES_COUNT = 5;
 
@@ -57,12 +63,12 @@ export default function MyPageInquiryList({
       toast('이동할 페이지가 없습니다');
     }
   };
-  const inquiryEditClick = (id: number) => {
-    window.open(
-      `/inquiry/edit/${id}/${index}`,
-      'inquiry',
-      'width=572,height=805,location=no,status=no,scrollbars=yes, resizable=yes'
-    );
+  const navigate = useNavigate();
+  const inquiryEditClick = (data: Inquiry) => {
+    navigate('/inquiry/edit', { state: data });
+  };
+  const inquiryDeleteClick = (id: number) => {
+    apiDeleteInquiry(id, accessToken);
   };
 
   return (

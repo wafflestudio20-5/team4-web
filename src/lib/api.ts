@@ -330,6 +330,11 @@ export const apiPutInquiry = (
     { id, type, title, content, option, isSecret, images },
     { headers: token ? auth(token) : undefined }
   );
+
+export const apiDeleteInquiry = (id: number, token: string | null) =>
+  axios.delete<{}>(`/api/user/me/item-inquiry/${id}`, {
+    headers: token ? auth(token) : undefined,
+  });
 export const apiPostStyle = (
   token: string | null,
   images: string[],

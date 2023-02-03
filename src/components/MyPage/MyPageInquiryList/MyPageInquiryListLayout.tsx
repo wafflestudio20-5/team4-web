@@ -5,7 +5,7 @@ import { formatTypeInquiry } from '../../../lib/formatters/inquiryFormatter';
 import { formatDate } from '../../../lib/formatters/dateTimeFormatter';
 interface InquiryItemParams {
   inquiry: Inquiry;
-  inquiryEditClick: (id: number) => void;
+  inquiryEditClick: (data: Inquiry) => void;
 }
 function InquiryItem({ inquiry, inquiryEditClick }: InquiryItemParams) {
   const [show, setShow] = useState<boolean>(false);
@@ -56,7 +56,7 @@ function InquiryItem({ inquiry, inquiryEditClick }: InquiryItemParams) {
                 <button
                   className={styles.edit}
                   onClick={() => {
-                    inquiryEditClick(inquiry.id);
+                    inquiryEditClick(inquiry);
                   }}
                 >
                   수정
@@ -97,7 +97,7 @@ interface MyPageInquiryListLayoutParams {
   onPageSelect: (idx: number) => void;
   onBigJumpBackwards: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onBigJumpForwards: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  inquiryEditClick: (id: number) => void;
+  inquiryEditClick: (data: Inquiry) => void;
 }
 
 export default function MyPageInquiryListLayout({

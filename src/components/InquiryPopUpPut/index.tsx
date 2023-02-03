@@ -1,17 +1,12 @@
 import InquiryPopUpPutLayout from './InquiryPopUpPutLayout';
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import {
-  apiPostImage,
-  apiPutInquiry,
-  useApiData,
-  useApiInquiryListFetcher,
-} from '../../lib/api';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { apiPostImage, apiPutInquiry } from '../../lib/api';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { toast } from 'react-toastify';
 import { FileUpload, useFileUpload } from 'use-file-upload';
-import { DEFAULT_INQUIRIES_COUNT } from '../MyPage/MyPageInquiryList';
+import { Inquiry } from '../../lib/interface';
 
 interface inputInterface {
   type: string;
@@ -22,28 +17,23 @@ interface inputInterface {
 }
 
 export default function InquiryPopUpPut() {
-  const { id, index } = useParams<{ id: string; index: string }>();
-  const parsedId = id ? parseInt(id) : null;
-  const parsedIndex = index ? parseInt(index) : undefined;
+  const location = useLocation();
+  const inquiry = location.state as Inquiry;
+  const navigate = useNavigate();
 
   const { accessToken } = useSelector((state: RootState) => {
     return state.session;
   });
-  const { data: inquiriesData } = useApiData(
-    useApiInquiryListFetcher(accessToken, parsedIndex, DEFAULT_INQUIRIES_COUNT)
-  );
-  const inquiry =
-    inquiriesData?.inquiries.filter((inquiry) => inquiry.id === parsedId) ?? [];
 
   const [input, setInput] = useState<inputInterface>({
-    type: inquiry[0]?.type,
-    option: inquiry[0]?.option,
-    isSecret: inquiry[0]?.isSecret,
-    title: inquiry[0]?.title,
-    content: inquiry[0]?.content,
+    type: inquiry?.type,
+    option: inquiry?.option,
+    isSecret: inquiry?.isSecret,
+    title: inquiry?.title,
+    content: inquiry?.content,
   });
 
-  console.log(inquiry[0]?.type);
+  console.log(inquiry?.type);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -118,7 +108,7 @@ export default function InquiryPopUpPut() {
       secureImages = response.data.secureImages;
 
       apiPutInquiry(
-        parsedId,
+        inquiry.id,
         input.type,
         accessToken,
         input.title,
@@ -129,7 +119,7 @@ export default function InquiryPopUpPut() {
       )
         .then((response) => {
           toast('상품문의가 수정되었습니다');
-          setTimeout(() => window.close(), 3000);
+          setTimeout(() => navigate(-1), 3000);
         })
         .catch((error) => {
           if (error.response.status === 404) {
@@ -138,7 +128,7 @@ export default function InquiryPopUpPut() {
         });
     } else {
       apiPutInquiry(
-        parsedId,
+        inquiry.id,
         input.type,
         accessToken,
         input.title,
@@ -149,7 +139,7 @@ export default function InquiryPopUpPut() {
       )
         .then((response) => {
           toast('상품문의가 수정되었습니다');
-          setTimeout(() => window.close(), 3000);
+          setTimeout(() => navigate(-1), 3000);
         })
         .catch((error) => {
           if (error.response.status === 404) {
@@ -163,7 +153,7 @@ export default function InquiryPopUpPut() {
 
   return (
     <InquiryPopUpPutLayout
-      data={inquiry[0]?.item}
+      data={inquiry?.item}
       input={input}
       onChange={onChange}
       onChangeCheckbox={onChangeCheckbox}

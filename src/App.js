@@ -42,7 +42,7 @@ function AppRoutes() {
         element={<SocialLoginPage />}
       />
       <Route path="/inquiry/:id" element={<InquiryPopUpPost />} />
-      <Route path="/inquiry/edit/:id/:index" element={<InquiryPopUpPut />} />
+      <Route path="/inquiry/edit" element={<InquiryPopUpPut />} />
     </Routes>
   );
 }
