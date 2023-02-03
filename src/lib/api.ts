@@ -440,7 +440,7 @@ export const apiPostComment = (
   token: string | null
 ) =>
   axios.post<{}>(
-    `/api/user/me/comment`,
+    `/api/comment`,
     { reviewId, content },
     { headers: token ? auth(token) : undefined }
   );
