@@ -1,6 +1,7 @@
 import styles from './MyPageWriteReviewsListLayout.module.scss';
 import { Purchase } from '../../../lib/interface';
 import { formatDate } from '../../../lib/formatters/dateTimeFormatter';
+import { useNavigate } from 'react-router-dom';
 
 interface ReviewItemParams {
   data: Purchase;
@@ -8,44 +9,59 @@ interface ReviewItemParams {
 }
 
 function ReviewItem({ data, onClick }: ReviewItemParams) {
+  const navigate = useNavigate();
+
   return (
-    <tr>
-      <td>
-        <div className={styles.reviewItemInfo}>
-          <a href={`/goods/${data?.item.id}`}>
-            <img src={data?.item.images[0]} alt="아이템 사진" />
-          </a>
-          <ul>
-            <li>{data?.item.brand}</li>
-            <li>
-              <b>{data?.item.name}</b>
-            </li>
-            <li>{data?.option}</li>
-          </ul>
-        </div>
-      </td>
-      <td className={styles.purchaseDate}>
-        {formatDate(data.createdDateTime)}
-        <br />
-        구매확정
-      </td>
-      {data?.isReviewed ? (
-        <td>
-          <div className={styles.reviewWriteDone}>후기 작성완료</div>
-        </td>
-      ) : (
-        <td>
-          <div
-            className={styles.reviewWriteButton}
-            onClick={() => {
-              onClick(data);
-            }}
-          >
-            후기 작성하러가기
+    <div className={styles.grid_order}>
+      <div className={styles.grid_items}>
+        <div className={styles.Item}>
+          <div className={styles.ImageDiv}>
+            <img
+              className={styles.previewImage}
+              src={data?.item.images[0]}
+              alt="상품 이미지"
+              onClick={() => {
+                navigate(`/goods/${data.item.id}`);
+              }}
+            />
           </div>
-        </td>
+          <div className={styles.ItemInfo}>
+            <div className={styles.InfoLine}>
+              <span className={styles.brand}>{data?.item.brand}</span>
+            </div>
+            <div className={styles.InfoLine}>
+              <span className={styles.name}>{data?.item.name}</span>
+            </div>
+            <div className={styles.InfoLine}>
+              <span className={styles.size}>{data?.option}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className={styles.grid_items}>
+        구매확정 / {formatDate(data.createdDateTime)}
+      </div>
+      {data?.isReviewed ? (
+        <div className={styles.grid_items}>
+          <div className={styles.buttonArea}>
+            <div className={styles.reviewWriteDone}>후기 작성완료</div>
+          </div>
+        </div>
+      ) : (
+        <div className={styles.grid_items}>
+          <div className={styles.buttonArea}>
+            <div
+              className={styles.reviewWriteButton}
+              onClick={() => {
+                onClick(data);
+              }}
+            >
+              후기 작성하러가기
+            </div>
+          </div>
+        </div>
       )}
-    </tr>
+    </div>
   );
 }
 interface MyPageWriteReviewsListLayoutParams {
@@ -65,7 +81,9 @@ export default function MyPageWriteReviewsListLayout({
         <h1>구매후기</h1>
         <div className={styles.tabGroup}>
           <span className={styles.tabWrite}>후기 작성&nbsp;</span>
-          <span className={styles.tabHistory} onClick={onClickReviewList}> / 후기 내역</span>
+          <span className={styles.tabHistory} onClick={onClickReviewList}>
+            {''}/ 후기 내역
+          </span>
         </div>
       </header>
       <ul className={styles.info}>
@@ -76,29 +94,20 @@ export default function MyPageWriteReviewsListLayout({
         <li>작성 시 관리자 확인 후 적립금이 지급됩니다.</li>
         <li>후기작성은 구매확정일로부터 90일까지 가능합니다.</li>
       </ul>
-      <table className={styles.reviewTable}>
-        <colgroup>
-          <col width="*"></col>
-          <col width="25%"></col>
-          <col width="25%"></col>
-        </colgroup>
-        <thead>
-          <tr>
-            <th scope="col">상품정보</th>
-            <th scope="col">구매 / 구매확정일</th>
-            <th scope="col">후기 작성</th>
-          </tr>
-        </thead>
-        {purchases && purchases?.length !== 0 ? (
-          <tbody>
-            {purchases.map((item) => (
-              <ReviewItem data={item} onClick={onClick} key={item.id} />
-            ))}
-          </tbody>
-        ) : (
-          <div>후기 작성할 목록이 없습니다.</div>
-        )}
-      </table>
+      <div className={styles.grid_order}>
+        <div className={styles.grid_header}>상품정보 </div>
+        <div className={styles.grid_header}>구매 / 구매확정일 </div>
+        <div className={styles.grid_header}>후기 작성 </div>
+      </div>
+      {purchases && purchases?.length !== 0 ? (
+        <>
+          {purchases.map((item) => (
+            <ReviewItem data={item} onClick={onClick} key={item.id} />
+          ))}
+        </>
+      ) : (
+        <div className={styles.none}>작성할 후기가 없습니다.</div>
+      )}
     </div>
   );
 }

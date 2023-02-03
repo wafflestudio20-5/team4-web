@@ -1,5 +1,6 @@
 import styles from './ItemOrdered.module.scss';
 import { Purchase } from '../../../lib/interface';
+import { useNavigate } from 'react-router-dom';
 
 interface ItemOrderedProps {
   purchase: Purchase;
@@ -10,6 +11,8 @@ export default function ItemOrdered({
   purchase,
   formatDate,
 }: ItemOrderedProps) {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.grid_order}>
       <div className={styles.grid_header}>
@@ -19,6 +22,9 @@ export default function ItemOrdered({
               className={styles.previewImage}
               src={purchase.item.images[0]}
               alt="상품 이미지"
+              onClick={() => {
+                navigate(`/goods/${purchase.item.id}`);
+              }}
             />
           </div>
           <div className={styles.ItemInfo}>
@@ -29,7 +35,7 @@ export default function ItemOrdered({
               <span className={styles.name}>{purchase.item.name}</span>
             </div>
             <div className={styles.InfoLine}>
-              <span className={styles.size}>M</span>
+              <span className={styles.size}>{purchase.option}</span>
             </div>
           </div>
         </div>
@@ -39,16 +45,11 @@ export default function ItemOrdered({
       </div>
       <div className={styles.grid_header}>{purchase.id}</div>
       <div className={styles.grid_header}>
-        {purchase.payment?.toLocaleString()} 원
+        {purchase.payment?.toLocaleString()}원 ({purchase.quantity}개)
       </div>
       <div className={styles.grid_header}>
         <div className={styles.orderState}>
-          <div className={styles.stateDiv}>입금확인</div>
-          <div className={styles.buttonDiv}>
-            <button>환불 요청</button>
-            <button>교환 요청</button>
-            <button>배송지 변경</button>
-          </div>
+          <div className={styles.stateDiv}>구매확정</div>
         </div>
       </div>
     </div>

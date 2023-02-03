@@ -18,20 +18,6 @@ export default function MyPageOrder({
       <section id="order">
         <header className={styles.title}>
           <h2>주문내역 조회</h2>
-          <ul>
-            <li>
-              <span>입금/결제 0</span>
-            </li>
-            <li>
-              <span>배송중/픽업대기 0</span>
-            </li>
-            <li>
-              <span>배송완료/픽업완료 0</span>
-            </li>
-            <li>
-              <span>구매확정 0</span>
-            </li>
-          </ul>
         </header>
         <div className={styles.grid_order}>
           <div className={styles.grid_header}>상품정보</div>

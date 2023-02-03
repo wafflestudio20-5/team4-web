@@ -5,7 +5,7 @@ export default function PurchasePageHeader() {
     <>
       <div className={styles.pagenation}>
         <div className={styles.nav_sub}>
-          <a href="/">무신사 스토어</a>
+          <span>무신사 스토어</span>
           <span className={styles.iconEntity}>{'>'}</span>
           <span>주문서</span>
         </div>
