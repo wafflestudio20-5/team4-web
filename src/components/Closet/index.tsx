@@ -12,18 +12,19 @@ export default function Closet() {
 
   const { user, accessToken } = session;
 
-  return (
-    <>
-      <Routes>
-        <Route
-          path=":id"
-          element={<ClosetOther user={user} accessToken={accessToken} />}
-        />
-        <Route
-          path="my"
-          element={<ClosetMy user={user} accessToken={accessToken} />}
-        />
-      </Routes>
-    </>
-  );
+  if (user !== undefined)
+    return (
+      <>
+        <Routes>
+          <Route
+            path=":id"
+            element={<ClosetOther user={user} accessToken={accessToken} />}
+          />
+          <Route
+            path="my"
+            element={<ClosetMy user={user} accessToken={accessToken} />}
+          />
+        </Routes>
+      </>
+    );
 }

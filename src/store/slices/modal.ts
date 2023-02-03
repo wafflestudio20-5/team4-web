@@ -27,8 +27,12 @@ export const modalSlice = createSlice({
       state.open = false;
       state.locationKey = action.payload;
     },
+    setReload: (state) => {
+      state.open = true;
+      state.locationKey = undefined;
+    },
   },
 });
 
-export const { setOpen, setClose, setSuspend } = modalSlice.actions;
+export const { setOpen, setClose, setSuspend, setReload } = modalSlice.actions;
 export default modalSlice;

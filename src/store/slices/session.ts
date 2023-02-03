@@ -5,7 +5,7 @@ import { LoginDto } from '../../lib/dto';
 import { Session } from '../../lib/interface';
 
 const initialState: Session = {
-  user: null,
+  user: undefined,
   accessToken: null,
 };
 
