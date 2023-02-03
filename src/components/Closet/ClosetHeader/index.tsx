@@ -144,9 +144,9 @@ export default function ClosetHeader({
               {isMe ? (
                 <div
                   className={styles.poststyle}
-                  // onClick={() => {
-                  //   navigate(스타일 작성 페이지);
-                  // }}
+                  onClick={() => {
+                    navigate('/closet/style/write');
+                  }}
                 >
                   게시물 작성
                 </div>
