@@ -11,7 +11,7 @@ import filled_heart from '../../resources/image/heart_full.png';
 
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import './dots.scss';
 import forward from '../../resources/image/forward.svg';
 import backward from '../../resources/image/back.svg';
 
@@ -43,6 +43,7 @@ interface StyleModalImagesProps {
 
 function StyleModalImages({ images }: StyleModalImagesProps) {
   const settings = {
+    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
