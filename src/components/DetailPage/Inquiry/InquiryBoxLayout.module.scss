@@ -24,8 +24,9 @@
   text-align: center;
 }
 
-.inquiry_content {
+.inquiry_title {
   text-align: left;
+  cursor: pointer;
 }
 
 .inquiry_writer {
@@ -42,4 +43,16 @@
   width: 16px;
   height: 16px;
   background: url('../../../resources/image/key.gif');
+}
+
+.inquiry_block {
+  font-size: 12px;
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  height: 42px;
+  border-bottom: 1px solid #ddd;
+  padding: 0 14px;
+  span {
+    line-height: 42px;
+    vertical-align: middle;
+  }
 }
