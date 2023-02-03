@@ -123,7 +123,19 @@ export default function ClosetHeader({
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.title}>My Closet</div>
+      {isMe ? (
+        <div
+          className={styles.title}
+          onClick={() => {
+            navigate('/closet/my');
+          }}
+        >
+          My Closet
+        </div>
+      ) : (
+        <div className={styles.titleNotMe}>Closet</div>
+      )}
+
       {user && (
         <div className={styles.main}>
           <img className={styles.image} src={user?.image} alt="이미지 없음" />

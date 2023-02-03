@@ -37,7 +37,7 @@ function GnbList({ user, onLogout }: GnbListProps) {
           </li>
           <li>
             <Link className={styles.gnb_element} to="/mypage/order">
-              주문배송조회
+              주문내역조회
             </Link>
           </li>
           <li>

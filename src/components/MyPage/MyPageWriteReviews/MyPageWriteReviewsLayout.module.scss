@@ -1,24 +1,36 @@
 .reviewWrapper {
-  width: calc(100% - 250px);
-  display: inline-block;
+  float: left;
+  margin-bottom: 120px;
+  margin-top: -32px;
+  padding-right: 40px;
+  width: calc(100% - 290px);
+  min-height: calc(100vh - 500px);
   .reviewHeader {
-    width: 100%;
-    height: 36px;
+    border-bottom: 3px solid #000000;
+    font-family: 'Musinsa', sans-serif !important;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-top: 80px;
     padding-bottom: 14px;
-    border-bottom: 3px solid black;
-    margin-top: 48px;
+    position: relative;
+  }
+  h1 {
+    display: inline-block;
+    font-family: 'Musinsa', sans-serif !important;
+    font-size: 24px;
+    font-weight: normal;
+    margin: 0;
   }
   ul {
     padding-left: 20px;
     li {
       margin-bottom: 5px;
       color: #777;
-
     }
   }
   .reviewWrite {
     width: 100%;
-    padding-top: 40px;
+    padding-top: 20px;
     .reviewItem {
       width: 100%;
       height: 96px;
@@ -137,9 +149,12 @@
         width: 100%;
         height: 228px;
         padding-bottom: 50px;
-        border: 1px solid black;
+        border: 1px solid #bbbbbb;
         font-size: 14px;
         position: relative;
+        :focus {
+          outline: none;
+        }
         .reviewWriteInput {
           width: calc(100% - 15px);
           height: 216px;
@@ -157,9 +172,12 @@
         width: 100%;
         height: 228px;
         padding-bottom: 50px;
-        border: 1px solid black;
+        border: 1px solid #bbbbbb;
         font-size: 14px;
         position: relative;
+        :focus {
+          outline: none;
+        }
         img {
           width: 64px;
           height: 64px;
@@ -184,23 +202,16 @@
         height: 40px;
         position: relative;
         bottom: 45px;
-        .textButton {
+        Button {
+          border: 1px solid #bbbbbb;
+          height: 25px;
+          line-height: 23px;
           width: 100px;
-          border-left: 0.1px solid #f3f3f3;
-          border-top: 0.1px solid #f3f3f3;
-          border-bottom: 0.1px solid #f3f3f3;
-          border-right: 0.5px solid black;
+          font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
           background-color: white;
-          margin-left: 5px;
-          cursor: pointer;
-        }
-        .imageButton {
-          width: 100px;
-          border-left: 0.5px solid black;
-          border-top: 0.1px solid #f3f3f3;
-          border-bottom: 0.1px solid #f3f3f3;
-          border-right: 0.1px solid #f3f3f3;
-          background-color: white;
+          border-radius: 5px;
+          color: black;
+          margin-left: 10px;
           cursor: pointer;
         }
       }
@@ -222,7 +233,8 @@
         background-color: black;
         color: white;
         box-sizing: border-box;
-        font-family: 'Musinsa', sans-serif !important;
+        font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+        cursor: pointer;
       }
     }
   }

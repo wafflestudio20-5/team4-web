@@ -16,11 +16,9 @@
     background: transparent;
   }
 
-  a {
-    text-decoration: none;
-  }
-  a:hover {
+  .navi:hover {
     text-decoration: underline;
+    cursor: pointer;
   }
 
   .iconEntity {
