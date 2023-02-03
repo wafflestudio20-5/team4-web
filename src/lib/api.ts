@@ -7,6 +7,7 @@ import {
   SubCategory,
   Purchase,
   Review,
+  Inquiry,
   Style,
   SimpleUser,
 } from './interface';
@@ -128,6 +129,25 @@ export const useApiGetUserReviewListFetcher = (token: string | null) => {
     [token]
   );
   return f;
+};
+
+export const useApiInquiryListFetcher = (
+  id: number | null,
+  index?: number,
+  count?: number
+) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) =>
+      axios.get<{ inquiries: Inquiry[]; totalPages: number }>(
+        `/api/item/${id}/inquiries`,
+        {
+          params: { index, count },
+          cancelToken,
+        }
+      ),
+    [id, index, count]
+  );
+  return id === null ? null : f;
 };
 
 export const apiPostReview = (

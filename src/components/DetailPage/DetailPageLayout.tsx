@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, createSearchParams } from 'react-router-dom';
 import { PurchaseDraft, AddToCartModalState } from '.';
 import Reviews from './Reviews';
+import Inquiries from './Inquiries';
 import {
   Item,
   Label,
@@ -397,6 +398,7 @@ export default function DetailPageLayout({
         </div>
       </div>
       <Reviews itemId={item.id} count={item.reviewCount} />
+      <Inquiries itemId={item.id} />
     </div>
   );
 }

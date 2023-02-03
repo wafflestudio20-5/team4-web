@@ -79,12 +79,13 @@ export interface Inquiry {
   user: User;
   isAnswered: boolean;
   type: InquiryType;
-  options: string[];
+  option?: string;
   title: string;
   content: string;
   images: string[];
   isSecret: boolean;
   createdDateTime: string;
+  modifiedDateTime?: string;
 }
 
 export interface Style {

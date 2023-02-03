@@ -1,13 +1,12 @@
 import React from 'react';
-import ReviewBox from '../Review';
-import { DEFAULT_REVIEWS_COUNT } from '.';
-import { Review } from '../../../lib/interface';
-import styles from './ReviewsLayout.module.scss';
+import InquiryBox from '../Inquiry';
+import { Inquiry } from '../../../lib/interface';
+import styles from './InquiriesLayout.module.scss';
 
-interface ReviewsLayoutProps {
-  count: number;
-  reviews: Review[] | null;
+interface InquiriesLayoutProps {
+  inquiries: Inquiry[] | null;
   pageIndex: number;
+  maxPageIndex: number;
   onPageSelect: (idx: number) => void;
   onSmallJumpBackwards: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onSmallJumpForwards: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -26,29 +25,42 @@ function generatePageArray(pageIndex: number, maxPageIndex: number): number[] {
   return array;
 }
 
-export default function ReviewsLayout({
-  count,
-  reviews,
+export default function InquiriesLayout({
+  inquiries,
   pageIndex,
+  maxPageIndex,
   onPageSelect,
   onSmallJumpBackwards,
   onSmallJumpForwards,
   onBigJumpBackwards,
   onBigJumpForwards,
-}: ReviewsLayoutProps) {
-  const maxPageIndex = Math.ceil(count / DEFAULT_REVIEWS_COUNT) - 1;
+}: InquiriesLayoutProps) {
+  const count = inquiries ? inquiries.length : 0;
   const pageArray = generatePageArray(pageIndex, maxPageIndex);
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.title}>{`구매후기(${count})`}</div>
+      <div className={styles.title}>
+        Q & A
+        <span className={styles.small_title}>
+          상품 문의 <strong>{`(총 ${count}건)`}</strong>
+        </span>
+      </div>
       {count > 0 ? (
         <div className={styles.body}>
-          <div className={styles.review_list_wrapper}>
-            <ul className={styles.review_list}>
-              {reviews?.map((review, idx) => (
+          <div className={styles.inquiry_list}>
+            <div className={`${styles.inquiry_grid} ${styles.inquiry_header}`}>
+              <span>번호</span>
+              <span>답변여부</span>
+              <span>구분</span>
+              <span>내용</span>
+              <span>작성자</span>
+              <span>등록일자</span>
+            </div>
+            <ul>
+              {inquiries?.map((inquiry, idx) => (
                 <li key={idx}>
-                  <ReviewBox review={review} />
+                  <InquiryBox inquiry={inquiry} />
                 </li>
               ))}
             </ul>
