@@ -273,8 +273,9 @@
   height: 32px;
   border: 1px solid #ddd;
   background: white;
+  overflow: hidden;
   input {
-    height: 30px;
+    height: 100%;
     width: 100%;
     border: none;
   }
