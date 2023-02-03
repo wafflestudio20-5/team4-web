@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useApiData, useApiReviewListFetcher } from '../../../lib/api';
 import ReviewsLayout from './ReviewsLayout';
 
@@ -53,11 +53,16 @@ export default function Reviews({ itemId, count }: ReviewsProps) {
   );
   const reviews = reviewsData?.reviews ?? null;
 
+  /* Needs Revision */
+  const [, setState] = useState();
+  const onUpdate = useCallback(() => setState(undefined), []);
+
   return (
     <ReviewsLayout
       count={count}
       reviews={reviews}
       pageIndex={index}
+      onUpdate={onUpdate}
       onPageSelect={onPageSelect}
       onSmallJumpBackwards={onSmallJumpBackwards}
       onSmallJumpForwards={onSmallJumpForwards}

@@ -9,9 +9,10 @@ import ReviewBoxLayout from './ReviewBoxLayout';
 
 interface ReviewBoxProps {
   review: Review;
+  onUpdate: () => void;
 }
 
-export default function ReviewBox({ review }: ReviewBoxProps) {
+export default function ReviewBox({ review, onUpdate }: ReviewBoxProps) {
   const [comment, setComment] = useState<string>('');
   const [displayCommentBox, setDisplayCommentBox] = useState<boolean>(true);
 
@@ -27,10 +28,10 @@ export default function ReviewBox({ review }: ReviewBoxProps) {
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (comment.length > 50) return;
-    setComment(comment);
+    setComment(e.target.value);
   };
 
-  const onSubmit = (
+  const onSubmit = async (
     e:
       | React.MouseEvent<HTMLButtonElement>
       | React.KeyboardEvent<HTMLInputElement>
@@ -40,8 +41,9 @@ export default function ReviewBox({ review }: ReviewBoxProps) {
       toast('댓글을 입력해주세요.');
       return;
     }
+    onUpdate();
     try {
-      apiPostComment(review.id, comment, accessToken);
+      await apiPostComment(review.id, comment, accessToken);
     } catch (error) {
       const e = error as AxiosError;
       if (e.response?.status === 404) {
