@@ -154,7 +154,9 @@ function ProductInfo({ brand, sex, rating, reviewCount }: ProductInfoProps) {
                 </span>
                 <span className={styles.rating}>{formatRating(rating)}</span>
                 <span className={styles.slash}>/</span>
-                <span className={styles.review_link}>후기 550개 보기</span>
+                <span
+                  className={styles.review_link}
+                >{`후기 ${reviewCount}개 보기`}</span>
               </>
             ) : (
               <span className={styles.review_none}>
