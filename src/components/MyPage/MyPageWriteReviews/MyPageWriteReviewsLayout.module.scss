@@ -202,6 +202,20 @@
         height: 40px;
         position: relative;
         bottom: 45px;
+
+        .select {
+          border: 1px solid #bbbbbb;
+          height: 25px;
+          line-height: 23px;
+          width: 100px;
+          font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+          background-color: black;
+          border-radius: 5px;
+          color: white;
+          margin-left: 10px;
+          cursor: pointer;
+        }
+
         Button {
           border: 1px solid #bbbbbb;
           height: 25px;

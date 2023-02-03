@@ -1,8 +1,9 @@
 import styles from './MyPageInquiryListLayout.module.scss';
-import React, { useState } from 'react';
+import React from 'react';
 import { Inquiry } from '../../../lib/interface';
 import { formatTypeInquiry } from '../../../lib/formatters/inquiryFormatter';
 import { formatDate } from '../../../lib/formatters/dateTimeFormatter';
+import { useNavigate } from 'react-router-dom';
 interface InquiryItemParams {
   inquiry: Inquiry;
   inquiryEditClick: (data: Inquiry) => void;
@@ -13,93 +14,82 @@ function InquiryItem({
   inquiryEditClick,
   inquiryDeleteClick,
 }: InquiryItemParams) {
-  const [show, setShow] = useState<boolean>(false);
+  const navigate = useNavigate();
   return (
-    <>
-      <tr>
-        <td>
-          <div className={styles.inquiryItemInfo}>
-            <a href={`/goods/${inquiry.item.id}`} className={styles.imageBlock}>
-              <img src={inquiry.item.images[0]} alt={inquiry.item.name} />
-            </a>
-            <ul className={styles.textInfo}>
-              <li className={styles.brand}>{inquiry.item.brand}</li>
-              <li className={styles.name}>
-                <a href={`/goods/${inquiry.item.id}`}>{inquiry.item.name}</a>
-              </li>
-              <li>{inquiry.option}</li>
-            </ul>
+    <div className={styles.grid_orderitem}>
+      <div className={styles.grid_items}>
+        <div className={styles.Item}>
+          <div className={styles.ImageDiv}>
+            <img
+              className={styles.previewImage}
+              src={inquiry.item.images[0]}
+              alt="상품 이미지"
+              onClick={() => {
+                navigate(`/goods/${inquiry.item.id}`);
+              }}
+            />
           </div>
-        </td>
-        <td>
-          <div
-            className={styles.inquiryItemTitle}
+          <div className={styles.ItemInfo}>
+            <div className={styles.InfoLine}>
+              <span className={styles.brand}>{inquiry.item.brand}</span>
+            </div>
+            <div className={styles.InfoLine}>
+              <span className={styles.name}>{inquiry.item.name}</span>
+            </div>
+            <div className={styles.InfoLine}>
+              <span className={styles.size}>{inquiry?.option}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className={styles.grid_items}>
+        <div className={styles.inquiryContentWrap}>
+          <div className={styles.inquiryItemTitle}>{inquiry.title}</div>
+          <div className={styles.overFlow}>
+            <div className={styles.inquiryContent}>{inquiry.content}</div>
+          </div>
+        </div>
+      </div>
+      <div className={styles.grid_items}>
+        <div className={styles.inquiryItemType}>
+          {formatTypeInquiry(inquiry.type)}
+        </div>
+      </div>
+      <div className={styles.grid_items}>
+        <div className={styles.inquiryItemDate}>
+          {formatDate(inquiry.createdDateTime)}
+        </div>
+      </div>
+      <div className={styles.grid_items}>
+        {inquiry.isAnswered ? (
+          <div className={styles.inquiryItemIsAnsweredTrue}>답변 완료</div>
+        ) : (
+          <div className={styles.inquiryItemIsAnsweredFalse}>
+            <div className={styles.falseText}>답변 대기</div>
+          </div>
+        )}
+      </div>
+      <div className={styles.grid_items}>
+        <div className={styles.falseButton}>
+          <button
+            className={styles.edit}
             onClick={() => {
-              setShow((prevState) => !prevState);
+              inquiryEditClick(inquiry);
             }}
           >
-            {inquiry.title}
-          </div>
-        </td>
-        <td>
-          <div className={styles.inquiryItemType}>
-            {formatTypeInquiry(inquiry.type)}
-          </div>
-        </td>
-        <td>
-          <div className={styles.inquiryItemDate}>
-            {formatDate(inquiry.createdDateTime)}
-          </div>
-        </td>
-        <td>
-          {inquiry.isAnswered ? (
-            <div className={styles.inquiryItemIsAnsweredTrue}>답변 완료</div>
-          ) : (
-            <div className={styles.inquiryItemIsAnsweredFalse}>
-              <span className={styles.falseText}>답변 대기</span>
-              <div className={styles.falseButton}>
-                <button
-                  className={styles.edit}
-                  onClick={() => {
-                    inquiryEditClick(inquiry);
-                  }}
-                >
-                  수정
-                </button>
-                <button
-                  className={styles.delete}
-                  onClick={() => {
-                    inquiryDeleteClick(inquiry.id);
-                  }}
-                >
-                  삭제
-                </button>
-              </div>
-            </div>
-          )}
-        </td>
-      </tr>
-      {show ? (
-        <>
-          <tr className={styles.inquiryItemContent}>
-            <td></td>
-            <td className={styles.contentText}>{inquiry.content}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          {inquiry.isAnswered ? (
-            <tr className={styles.inquiryItemComment}>
-              <td>{inquiry.item.brand} 담당자</td>
-              <td>{inquiry.comment}</td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          ) : null}
-        </>
-      ) : null}
-    </>
+            수정
+          </button>
+          <button
+            className={styles.delete}
+            onClick={() => {
+              inquiryDeleteClick(inquiry.id);
+            }}
+          >
+            삭제
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 interface MyPageInquiryListLayoutParams {
@@ -128,24 +118,16 @@ export default function MyPageInquiryListLayout({
       <header className={styles.header}>
         <h1>상품문의</h1>
       </header>
-      <table>
-        <colgroup>
-          <col width="26%" />
-          <col width="*" />
-          <col width="12.6%" />
-          <col width="12.6%" />
-          <col width="12.6%" />
-        </colgroup>
-        <thead>
-          <tr>
-            <th scope="col">상품정보</th>
-            <th scope="col">내용</th>
-            <th scope="col">문의 유형</th>
-            <th scope="col">작성일</th>
-            <th scope="col">처리 상태</th>
-          </tr>
-        </thead>
-        <tbody>
+      <div className={styles.grid_order}>
+        <span className={styles.grid_header}>상품정보</span>
+        <span className={styles.grid_header}>제목 / 내용</span>
+        <span className={styles.grid_header}>문의 유형</span>
+        <span className={styles.grid_header}>작성일</span>
+        <span className={styles.grid_header}>처리 상태</span>
+        <span className={styles.grid_header}>수정 / 삭제</span>
+      </div>
+      {inquiries && inquiries.length !== 0 ? (
+        <>
           {inquiries?.map((inquiry) => (
             <InquiryItem
               inquiry={inquiry}
@@ -153,8 +135,10 @@ export default function MyPageInquiryListLayout({
               inquiryDeleteClick={inquiryDeleteClick}
             />
           ))}
-        </tbody>
-      </table>
+        </>
+      ) : (
+        <div className={styles.none}>작성한 문의가 없습니다.</div>
+      )}
       <div className={styles.pagination}>
         <button onClick={onBigJumpBackwards}>{'<<'}</button>
         &nbsp;

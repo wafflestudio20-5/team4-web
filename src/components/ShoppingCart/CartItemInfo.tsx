@@ -3,6 +3,7 @@ import styles from './CartItemInfo.module.scss';
 import { Purchase } from '../../lib/interface';
 import { apiPatchCart } from '../../lib/api';
 import { DeleteCartModalState } from '.';
+import { useNavigate } from 'react-router-dom';
 
 interface CartItemInfoProps {
   cartList: Purchase[] | null;
@@ -45,7 +46,7 @@ export default function CartItemInfo({
               <th className={styles.th1}>상품 정보</th>
               <th className={styles.th6}>개당 판매가</th>
               <th className={styles.th2}>수량</th>
-              <th className={styles.th2}></th>
+              <th className={styles.th2}>삭제</th>
             </tr>
           </thead>
           <tbody>
@@ -151,6 +152,7 @@ function PurchaseItem({
     apiPatchCart(purchase.id, purchase.quantity + 1, accessToken);
     purchase.quantity += 1;
   };
+  const navigate = useNavigate();
 
   return (
     <tr>
@@ -162,6 +164,9 @@ function PurchaseItem({
               className={styles.previewImage}
               src={purchase.item.images[0]}
               alt="상품 이미지"
+              onClick={() => {
+                navigate(`/goods/${purchase.item.id}`);
+              }}
             />
           </div>
           <div className={styles.ItemInfo}>

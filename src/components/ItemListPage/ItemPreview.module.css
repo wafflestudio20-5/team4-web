@@ -91,3 +91,30 @@
   color: red;
   line-height: 100%;
 }
+
+.rate {
+  margin-top: 5px;
+}
+
+.star_background {
+  display: inline-block;
+  width: 60px;
+  height: 12px;
+  background: url('../../resources/image/stars.png') no-repeat;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.star_bar {
+  display: block;
+  height: 100%;
+  background: url('../../resources/image/stars.png') no-repeat 0 -120px;
+}
+
+.rating {
+  display: inline-block;
+  padding-left: 2px;
+  font-size: 10px;
+  font-weight: normal;
+  color: #aaa;
+}
