@@ -9,7 +9,6 @@ import {
   Review,
   Inquiry,
   Style,
-  Inquiry,
   SimpleUser,
 } from './interface';
 import { PatchMyInfoRequestDto, PurchasePostDto } from './dto';
