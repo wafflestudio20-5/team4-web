@@ -9,7 +9,10 @@ import {
   formatColorReview,
   formatSizeReview,
 } from '../../../lib/formatters/reviewFormatter';
-import { getBarWidth } from '../../../lib/formatters/ratingFormatter';
+import {
+  formatRating,
+  getBarWidth,
+} from '../../../lib/formatters/ratingFormatter';
 import { useNavigate } from 'react-router-dom';
 interface MyPageReviewListLayoutParams {
   onClickWrite: () => void;
@@ -147,7 +150,8 @@ function ReviewWrittenItem({
               삭제
             </span>
           </div>
-          <div className={styles.starWrap}>
+
+          <div className={styles.rate}>
             <span className={styles.star_background}>
               <span
                 className={styles.star_bar}
@@ -156,7 +160,9 @@ function ReviewWrittenItem({
                 }}
               />
             </span>
+            <span className={styles.rating}>{formatRating(data.rating)}</span>
           </div>
+
           <div className={styles.reviewContent}>
             <div className={styles.contentText}>{data.content}</div>
             <div className={styles.contentValue}>
@@ -224,17 +230,22 @@ export default function MyPageReviewListLayout({
         <span className={styles.grid_header}>내용</span>
         <span className={styles.grid_header}>작성 일자</span>
       </div>
-      <>
-        {data
-          ?.filter((review) => temp.includes(review.id) === false)
-          .map((review) => (
-            <ReviewWrittenItem
-              data={review}
-              onEdit={onEdit}
-              onRemove={onRemove}
-            />
-          ))}
-      </>
+
+      {data && data.length !== 0 ? (
+        <>
+          {data
+            ?.filter((review) => temp.includes(review.id) === false)
+            .map((review) => (
+              <ReviewWrittenItem
+                data={review}
+                onEdit={onEdit}
+                onRemove={onRemove}
+              />
+            ))}
+        </>
+      ) : (
+        <div className={styles.none}>작성한 후기가 없습니다.</div>
+      )}
     </div>
   );
 }

@@ -106,7 +106,7 @@ export default function MyPageWriteReviews({
         input.color,
         secureImages,
         accessToken
-      ).then((response) => navigate(-1));
+      ).then((response) => navigate('/mypage/review/list'));
     } else {
       apiPostReview(
         data.id,
@@ -116,7 +116,7 @@ export default function MyPageWriteReviews({
         input.color,
         [],
         accessToken
-      ).then((response) => navigate(-1));
+      ).then((response) => navigate('/mypage/review/list'));
     }
     // TODO: 이미지 업로드 후 return된 secureImages를 request body에 포함하여 게시글 POST
     // await axios.post('게시글 관련 API', {..., secureImages})

@@ -133,7 +133,7 @@ export default function MyPageWriteReviewsLayout({
                 onChange={onChange}
                 checked={input.color === 'bright'}
               ></input>
-              <label htmlFor="ch4">선명해요</label>
+              <label htmlFor="ch4">밝아요</label>
               <input
                 type="radio"
                 id="ch5"
@@ -187,10 +187,16 @@ export default function MyPageWriteReviewsLayout({
           )}
 
           <div className={styles.utilityArea}>
-            <button className={styles.textButton} onClick={onTextClick}>
+            <button
+              className={isText ? styles.select : ''}
+              onClick={onTextClick}
+            >
               글 작성
             </button>
-            <button className={styles.imageButton} onClick={onImageClick}>
+            <button
+              className={isText ? '' : styles.select}
+              onClick={onImageClick}
+            >
               이미지 업로드
             </button>
           </div>
