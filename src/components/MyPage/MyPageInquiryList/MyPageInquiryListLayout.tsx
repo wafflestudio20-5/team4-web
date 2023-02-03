@@ -52,7 +52,7 @@ function InquiryItem({
       </div>
       <div className={styles.grid_items}>
         <div className={styles.inquiryItemType}>
-          {formatTypeInquiry(inquiry.type)}
+          {formatInquiryType(inquiry.type)}
         </div>
       </div>
       <div className={styles.grid_items}>
