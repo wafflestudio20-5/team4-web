@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 import './slick.scss';
 import './slick-theme.scss';
-import forward from '../../resources/image/forwardArrow.svg';
-import backward from '../../resources/image/backwardArrow.svg';
+import forward from '../../resources/image/forward.svg';
+import backward from '../../resources/image/back.svg';
 
 interface StylePreviewListProps {
   styleList: Style[] | null;

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import StyleList from './StyleList';
 import StyleListPageHeader from './StylelistPageHeader';
 import { useApiData, useApiStyleListFetcher } from '../../lib/api';
@@ -39,6 +39,10 @@ export default function ItemListPage() {
     const maximumBigIndex = Math.floor(MAXIMUM_PAGE_INDEX / 5);
     if (bigIndex < maximumBigIndex) setIndex((bigIndex + 1) * 5);
   };
+
+  useEffect(() => {
+    setIndex(0);
+  }, [sort]);
 
   return (
     <div className={styles.wrap}>

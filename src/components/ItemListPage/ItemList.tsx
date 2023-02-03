@@ -153,9 +153,11 @@ function ItemListSort({
           <div className={styles.sortChoice}></div>
         )}
         <div className={styles.pageline}>
-          <div className={styles.page_index_box}>
-            {MAXIMUM_PAGE_INDEX + 1} 페이지 중 {pageIndex + 1} 페이지
-          </div>
+          {MAXIMUM_PAGE_INDEX !== -1 && (
+            <div className={styles.page_index_box}>
+              {MAXIMUM_PAGE_INDEX + 1} 페이지 중 {pageIndex + 1} 페이지
+            </div>
+          )}
           <div className={styles.pagenation_wrapper}>
             <div className={styles.pagenation}>
               <button onClick={onBigJumpBackwards}>{'<<'}</button>
