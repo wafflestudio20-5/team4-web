@@ -118,6 +118,8 @@
 .profile {
   margin-left: 16px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .profile_image {
@@ -126,9 +128,9 @@
 }
 
 .profile_text {
-  display: inline-block;
   margin-left: 16px;
-  vertical-align: top;
+  display: flex;
+  flex-direction: column;
 }
 
 .profile_nickname {
