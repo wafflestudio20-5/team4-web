@@ -1,32 +1,35 @@
-## MUSIN4 서비스 소개
+## MUSIN4 프로젝트 소개
 
-진짜 독서가들의 독서법, 북스테어즈 💡
-<br/>
-뇌 과학 기반의 차별화 된 독서법을 제안합니다.
-[랜딩페이지 바로가기](https://book-stairs.com)
-<br/>
-<br/>
+온라인 쇼핑몰 [무신사](https://www.musinsa.com/app/)를 클론코딩했습니다.
+<br />
+<br />
+회원 관리, 패션 아이템 구매, 후기 작성, 상품 문의 등의 기능을 모두 구현했으며,
+<br />
+추가 기능으로 회원이 직접 구매한 옷으로 피드를 꾸밀 수 있는 **옷장 페이지**와 **스타일 탭**을 구현했습니다.
 
 ## 개발자
 
-| [김소령(soryeongk)](https://github.com/soryeongk) | [이주함(joohaem)](https://github.com/joohaem) | [김규민(Gyuminn)](https://github.com/Gyuminn) | [석상언(sharpcoder312)](https://github.com/sharpcoder312)|
-| :----------------------------------------: | :---------------------------------: | :---------------------------------: | :---------------------------------: |
-| <a href="https://github.com/soryeongk"><img src="" width="300px"></a> | <a href="https://github.com/joohaem"><img src="" width="300px"></a> | <a href="https://github.com/Gyuminn"><img src="" width="300px"></a> | <a href="https://github.com/sharpcoder312"><img src="" width="300px"></a> |
+|         [이석찬(sukchan-0811)](https://github.com/sukchan-0811)          |                [김승진](https://github.com/)                 |                [이재운](https://github.com/)                 |          [유채원](https://github.com/sharpcoder312)          |
+| :----------------------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
+| <a href="https://github.com/sukchan-0811"><img src="" width="300px"></a> | <a href="https://github.com/"><img src="" width="300px"></a> | <a href="https://github.com/"><img src="" width="300px"></a> | <a href="https://github.com/"><img src="" width="300px"></a> |
 
 ## 기술스택
 
 ```json
-"axios": "^0.24.0",
-"framer-motion": "^6.2.3",
-"react-hook-form": "^7.28.1",
-"react-responsive": "^9.0.0-beta.6",
-"react-textarea-autosize": "^8.3.3",
-"recoil": "^0.6.1",
-"recoil-persist": "^4.0.0",
-"styled-components": "^5.3.3",
-"styled-reset": "^4.3.4",
-"swr": "^1.2.1",
-"typescript": "^4.5.4"
+"axios": "^1.2.1",
+"env-cmd": "^10.1.0",
+"eslint": "8.22.0",
+"prettier": "^2.8.1",
+"react": "^18.2.0",
+"react-redux": "^8.0.5",
+"react-router-dom": "^6.6.0",
+"react-slick": "^0.29.0",
+"react-toastify": "^9.1.1",
+"redux": "^4.2.0",
+"sass": "^1.57.1",
+"slick-carousel": "^1.8.1",
+"typescript": "^4.9.4",
+"use-file-upload": "^1.0.11",
 ```
 
 [노션](https://notion.io)에서 모델과 REST API를 확인할 수 있습니다!
