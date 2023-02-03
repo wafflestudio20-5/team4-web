@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link, createSearchParams } from 'react-router-dom';
 import { PurchaseDraft, AddToCartModalState } from '.';
 import Reviews from './Reviews';
@@ -122,9 +122,16 @@ interface ProductInfoProps {
   sex: string;
   rating: number;
   reviewCount: number;
+  onScrollToReview: (e: React.MouseEvent<HTMLSpanElement>) => void;
 }
 
-function ProductInfo({ brand, sex, rating, reviewCount }: ProductInfoProps) {
+function ProductInfo({
+  brand,
+  sex,
+  rating,
+  reviewCount,
+  onScrollToReview,
+}: ProductInfoProps) {
   return (
     <div className={styles.info_box}>
       <div className={styles.info_header}>
@@ -155,6 +162,7 @@ function ProductInfo({ brand, sex, rating, reviewCount }: ProductInfoProps) {
                 <span className={styles.rating}>{formatRating(rating)}</span>
                 <span className={styles.slash}>/</span>
                 <span
+                  onClick={onScrollToReview}
                   className={styles.review_link}
                 >{`후기 ${reviewCount}개 보기`}</span>
               </>
@@ -351,6 +359,11 @@ export default function DetailPageLayout({
   onPurchase,
   onAddToCart,
 }: DetailPageLayoutProps) {
+  const reviewRef = useRef<HTMLDivElement>(null);
+  const onScrollToReview = (e: React.MouseEvent<HTMLSpanElement>) => {
+    reviewRef?.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className={styles.wrapper}>
       <DetailPageHeader
@@ -374,6 +387,7 @@ export default function DetailPageLayout({
               sex={item.sex}
               rating={item.rating}
               reviewCount={item.reviewCount}
+              onScrollToReview={onScrollToReview}
             />
             <PriceInfo
               oldPrice={item.oldPrice}
@@ -396,6 +410,7 @@ export default function DetailPageLayout({
           </div>
         </div>
       </div>
+      <div ref={reviewRef} />
       <Reviews itemId={item.id} count={item.reviewCount} />
       <Inquiries itemId={item.id} />
     </div>
