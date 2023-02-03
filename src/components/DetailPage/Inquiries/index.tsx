@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { RootState } from '../../../store';
 import { useApiData, useApiInquiryListFetcher } from '../../../lib/api';
 import InquiriesLayout from './InquiriesLayout';
 
@@ -41,6 +44,30 @@ export default function Inquiries({ itemId }: InquiriesProps) {
     if (bigIndex < maximumBigIndex) setIndex((bigIndex + 1) * 5);
   };
 
+  /***
+   *
+   * 상품 문의 작성하기
+   *
+   */
+
+  const { accessToken } = useSelector((state: RootState) => {
+    return state.session;
+  });
+
+  const navigate = useNavigate();
+
+  const onInquiryWrite = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!accessToken) {
+      navigate('/login');
+      return;
+    }
+    window.open(
+      `/inquiry/${itemId}`,
+      'inquiry',
+      'width=572,height=805,location=no,status=no,scrollbars=yes,resizable=yes'
+    );
+  };
+
   return (
     <InquiriesLayout
       inquiries={inquiries}
@@ -51,6 +78,7 @@ export default function Inquiries({ itemId }: InquiriesProps) {
       onSmallJumpForwards={onSmallJumpForwards}
       onBigJumpBackwards={onBigJumpBackwards}
       onBigJumpForwards={onBigJumpForwards}
+      onInquiryWrite={onInquiryWrite}
     />
   );
 }
