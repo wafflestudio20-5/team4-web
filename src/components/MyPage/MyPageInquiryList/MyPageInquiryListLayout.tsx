@@ -6,8 +6,13 @@ import { formatDate } from '../../../lib/formatters/dateTimeFormatter';
 interface InquiryItemParams {
   inquiry: Inquiry;
   inquiryEditClick: (data: Inquiry) => void;
+  inquiryDeleteClick: (id: number) => void;
 }
-function InquiryItem({ inquiry, inquiryEditClick }: InquiryItemParams) {
+function InquiryItem({
+  inquiry,
+  inquiryEditClick,
+  inquiryDeleteClick,
+}: InquiryItemParams) {
   const [show, setShow] = useState<boolean>(false);
   return (
     <>
@@ -61,7 +66,14 @@ function InquiryItem({ inquiry, inquiryEditClick }: InquiryItemParams) {
                 >
                   수정
                 </button>
-                <button className={styles.delete}>삭제</button>
+                <button
+                  className={styles.delete}
+                  onClick={() => {
+                    inquiryDeleteClick(inquiry.id);
+                  }}
+                >
+                  삭제
+                </button>
               </div>
             </div>
           )}
@@ -98,6 +110,7 @@ interface MyPageInquiryListLayoutParams {
   onBigJumpBackwards: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onBigJumpForwards: (e: React.MouseEvent<HTMLButtonElement>) => void;
   inquiryEditClick: (data: Inquiry) => void;
+  inquiryDeleteClick: (id: number) => void;
 }
 
 export default function MyPageInquiryListLayout({
@@ -108,6 +121,7 @@ export default function MyPageInquiryListLayout({
   onBigJumpBackwards,
   onBigJumpForwards,
   inquiryEditClick,
+  inquiryDeleteClick,
 }: MyPageInquiryListLayoutParams) {
   return (
     <div className={styles.inquiryListWrap}>
@@ -136,6 +150,7 @@ export default function MyPageInquiryListLayout({
             <InquiryItem
               inquiry={inquiry}
               inquiryEditClick={inquiryEditClick}
+              inquiryDeleteClick={inquiryDeleteClick}
             />
           ))}
         </tbody>

@@ -80,6 +80,7 @@ export default function MyPageInquiryList({
       onBigJumpBackwards={onBigJumpBackwards}
       onBigJumpForwards={onBigJumpForwards}
       inquiryEditClick={inquiryEditClick}
+      inquiryDeleteClick={inquiryDeleteClick}
     ></MyPageInquiryListLayout>
   );
 }
