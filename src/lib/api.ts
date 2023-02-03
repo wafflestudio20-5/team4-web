@@ -336,6 +336,45 @@ export const apiPostInquiry = (
     { type, option, isSecret, title, content, images },
     { headers: token ? auth(token) : undefined }
   );
+export const useApiMyInquiryListFetcher = (
+  token: string | null,
+  index?: number,
+  count?: number
+) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) =>
+      axios.get<{ inquiries: Inquiry[]; totalPages: number }>(
+        `/api/user/me/item-inquiries/`,
+        {
+          params: { index, count },
+          cancelToken,
+          headers: token ? auth(token) : undefined,
+        }
+      ),
+    [index, count, token]
+  );
+  return f;
+};
+export const apiPutInquiry = (
+  id: number | null,
+  type: string,
+  token: string | null,
+  title: string,
+  content: string,
+  option: string | undefined,
+  isSecret: boolean,
+  images: string[] | undefined
+) =>
+  axios.put<{}>(
+    `/api/user/me/item-inquiries`,
+    { id, type, title, content, option, isSecret, images },
+    { headers: token ? auth(token) : undefined }
+  );
+
+export const apiDeleteInquiry = (id: number, token: string | null) =>
+  axios.delete<{}>(`/api/user/me/item-inquiry/${id}`, {
+    headers: token ? auth(token) : undefined,
+  });
 export const apiPostStyle = (
   token: string | null,
   images: string[],

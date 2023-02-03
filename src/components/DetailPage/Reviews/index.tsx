@@ -40,12 +40,14 @@ export default function Reviews({ itemId, count }: ReviewsProps) {
   const onBigJumpBackwards = (e: React.MouseEvent<HTMLButtonElement>) => {
     const bigIndex = Math.floor(index / 5);
     if (0 < bigIndex) setIndex(bigIndex * 5 - 1);
+    else setIndex(0);
   };
 
   const onBigJumpForwards = (e: React.MouseEvent<HTMLButtonElement>) => {
     const bigIndex = Math.floor(index / 5);
     const maximumBigIndex = Math.floor(MAXIMUM_PAGE_INDEX / 5);
     if (bigIndex < maximumBigIndex) setIndex((bigIndex + 1) * 5);
+    else setIndex(MAXIMUM_PAGE_INDEX);
   };
 
   const { data: reviewsData } = useApiData(

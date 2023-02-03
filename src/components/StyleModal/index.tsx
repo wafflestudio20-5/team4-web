@@ -56,7 +56,7 @@ export default function StyleModal() {
    * 스타일 데이터 불러오기
    *
    */
-  const { accessToken } = useSelector((state: RootState) => {
+  const { user, accessToken } = useSelector((state: RootState) => {
     return state.session;
   });
 
@@ -228,6 +228,7 @@ export default function StyleModal() {
         onOuterClick={onOuterClick}
         style={data.style}
         isLoggedIn={accessToken !== null}
+        isMyStyle={user?.id === data.style.user.id}
         likedCount={socials.likedCount}
         isLiked={socials.isLiked}
         isFollowed={socials.isFollowed}
