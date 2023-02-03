@@ -14,6 +14,7 @@ import MyPageReviewList from './MyPageReviewList';
 import MyPageEditReviews from './MyPageEditReviews';
 import Footer from '../Footer';
 import { Session } from '../../lib/interface';
+import MyPageInquiryList from './MyPageInquiryList';
 
 function MyPageLayout({ user, onLogout }: MyPageHeaderProps) {
   return (
@@ -79,7 +80,7 @@ function MyPage() {
           />
           <Route
             path="item_inquiry"
-            element={<div>/mypage/item_inquiry</div>}
+            element={<MyPageInquiryList accessToken={accessToken} />}
           />
           <Route
             path="viewed_goods"

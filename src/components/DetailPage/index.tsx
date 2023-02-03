@@ -262,7 +262,7 @@ export default function DetailPage() {
 
   const inquiryTestClick = () => {
     window.open(
-      `http://localhost:3000/inquiry/${id}`,
+      `/inquiry/${id}`,
       'inquiry',
       'width=572,height=805,location=no,status=no,scrollbars=yes, resizable=yes'
     );
