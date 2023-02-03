@@ -69,6 +69,7 @@ export default function MyPageInquiryList({
   };
   const inquiryDeleteClick = (id: number) => {
     apiDeleteInquiry(id, accessToken);
+    window.location.reload();
   };
 
   return (
