@@ -1,7 +1,7 @@
 import styles from './MyPageInquiryListLayout.module.scss';
 import React from 'react';
 import { Inquiry } from '../../../lib/interface';
-import { formatTypeInquiry } from '../../../lib/formatters/inquiryFormatter';
+import { formatInquiryType } from '../../../lib/formatters/inquiryFormatter';
 import { formatDate } from '../../../lib/formatters/dateTimeFormatter';
 import { useNavigate } from 'react-router-dom';
 interface InquiryItemParams {

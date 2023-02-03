@@ -45,14 +45,13 @@ export default function StyleList() {
 
 function StylePreviewList({ styleList }: StylePreviewListProps) {
   const settings = {
-    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 3,
     Arrow: true,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 5000,
     pauseOnHover: true,
     nextArrow: <NextArrow />,
     prevArrow: <BeforeArrow />,

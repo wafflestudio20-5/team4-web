@@ -87,6 +87,7 @@ export interface Inquiry {
   images: string[];
   isSecret: boolean;
   createdDateTime: string;
+  modifiedDateTime?: string;
 }
 
 export interface Style {
