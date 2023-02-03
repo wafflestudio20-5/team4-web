@@ -260,14 +260,6 @@ export default function DetailPage() {
     }
   }, [modal.open, modal.visible]);
 
-  const inquiryTestClick = () => {
-    window.open(
-      `/inquiry/${id}`,
-      'inquiry',
-      'width=572,height=805,location=no,status=no,scrollbars=yes, resizable=yes'
-    );
-  };
-
   if (data) {
     return (
       <DetailPageLayout
@@ -283,7 +275,6 @@ export default function DetailPage() {
         onDecrement={onDecrement}
         onPurchase={onPurchase}
         onAddToCart={onAddToCart}
-        inquiryTestClick={inquiryTestClick}
       />
     );
   }

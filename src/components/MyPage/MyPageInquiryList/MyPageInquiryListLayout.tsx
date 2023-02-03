@@ -1,7 +1,7 @@
 import styles from './MyPageInquiryListLayout.module.scss';
 import React, { useState } from 'react';
 import { Inquiry } from '../../../lib/interface';
-import { formatTypeInquiry } from '../../../lib/formatters/inquiryFormatter';
+import { formatInquiryType } from '../../../lib/formatters/inquiryFormatter';
 import { formatDate } from '../../../lib/formatters/dateTimeFormatter';
 interface InquiryItemParams {
   inquiry: Inquiry;
@@ -43,7 +43,7 @@ function InquiryItem({
         </td>
         <td>
           <div className={styles.inquiryItemType}>
-            {formatTypeInquiry(inquiry.type)}
+            {formatInquiryType(inquiry.type)}
           </div>
         </td>
         <td>

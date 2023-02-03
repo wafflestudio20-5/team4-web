@@ -8,6 +8,7 @@ interface ReviewsLayoutProps {
   count: number;
   reviews: Review[] | null;
   pageIndex: number;
+  onUpdate: () => void;
   onPageSelect: (idx: number) => void;
   onSmallJumpBackwards: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onSmallJumpForwards: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -30,6 +31,7 @@ export default function ReviewsLayout({
   count,
   reviews,
   pageIndex,
+  onUpdate,
   onPageSelect,
   onSmallJumpBackwards,
   onSmallJumpForwards,
@@ -48,7 +50,7 @@ export default function ReviewsLayout({
             <ul className={styles.review_list}>
               {reviews?.map((review, idx) => (
                 <li key={idx}>
-                  <ReviewBox review={review} />
+                  <ReviewBox review={review} onUpdate={onUpdate} />
                 </li>
               ))}
             </ul>
@@ -75,7 +77,7 @@ export default function ReviewsLayout({
           </div>
         </div>
       ) : (
-        <div className={styles.empty_body}></div>
+        <div className={styles.empty_body} />
       )}
     </div>
   );

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link, createSearchParams } from 'react-router-dom';
 import { PurchaseDraft, AddToCartModalState } from '.';
 import Reviews from './Reviews';
+import Inquiries from './Inquiries';
 import {
   Item,
   Label,
@@ -121,9 +122,16 @@ interface ProductInfoProps {
   sex: string;
   rating: number;
   reviewCount: number;
+  onScrollToReview: (e: React.MouseEvent<HTMLSpanElement>) => void;
 }
 
-function ProductInfo({ brand, sex, rating, reviewCount }: ProductInfoProps) {
+function ProductInfo({
+  brand,
+  sex,
+  rating,
+  reviewCount,
+  onScrollToReview,
+}: ProductInfoProps) {
   return (
     <div className={styles.info_box}>
       <div className={styles.info_header}>
@@ -153,7 +161,10 @@ function ProductInfo({ brand, sex, rating, reviewCount }: ProductInfoProps) {
                 </span>
                 <span className={styles.rating}>{formatRating(rating)}</span>
                 <span className={styles.slash}>/</span>
-                <span className={styles.review_link}>후기 550개 보기</span>
+                <span
+                  onClick={onScrollToReview}
+                  className={styles.review_link}
+                >{`후기 ${reviewCount}개 보기`}</span>
               </>
             ) : (
               <span className={styles.review_none}>
@@ -332,7 +343,6 @@ interface DetailPageLayoutProps {
   onDecrement: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onPurchase: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onAddToCart: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  inquiryTestClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function DetailPageLayout({
@@ -348,8 +358,12 @@ export default function DetailPageLayout({
   onDecrement,
   onPurchase,
   onAddToCart,
-  inquiryTestClick,
 }: DetailPageLayoutProps) {
+  const reviewRef = useRef<HTMLDivElement>(null);
+  const onScrollToReview = (e: React.MouseEvent<HTMLSpanElement>) => {
+    reviewRef?.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className={styles.wrapper}>
       <DetailPageHeader
@@ -373,6 +387,7 @@ export default function DetailPageLayout({
               sex={item.sex}
               rating={item.rating}
               reviewCount={item.reviewCount}
+              onScrollToReview={onScrollToReview}
             />
             <PriceInfo
               oldPrice={item.oldPrice}
@@ -392,11 +407,12 @@ export default function DetailPageLayout({
               onPurchase={onPurchase}
               onAddToCart={onAddToCart}
             />
-            <button onClick={inquiryTestClick}>InquiryPopUp Test</button>
           </div>
         </div>
       </div>
+      <div ref={reviewRef} />
       <Reviews itemId={item.id} count={item.reviewCount} />
+      <Inquiries itemId={item.id} />
     </div>
   );
 }

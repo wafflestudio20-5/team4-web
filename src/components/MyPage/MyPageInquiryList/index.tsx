@@ -2,7 +2,7 @@ import MyPageInquiryListLayout from './MyPageInquiryListLayout';
 import {
   apiDeleteInquiry,
   useApiData,
-  useApiInquiryListFetcher,
+  useApiMyInquiryListFetcher,
 } from '../../../lib/api';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -31,7 +31,7 @@ export default function MyPageInquiryList({
 }) {
   const [index, setIndex] = useState(0);
   const { data: inquiriesData } = useApiData(
-    useApiInquiryListFetcher(accessToken, index, DEFAULT_INQUIRIES_COUNT)
+    useApiMyInquiryListFetcher(accessToken, index, DEFAULT_INQUIRIES_COUNT)
   );
   const inquiries = inquiriesData?.inquiries ?? null;
   const totalPages = inquiriesData?.totalPages ?? 0;
