@@ -92,7 +92,6 @@ export default function StyleWrite({
       // 에시 POST (실제 호출 시 api.ts에 따로 함수를 정의하고 auth header 포함하여 요청)
       await apiPostImage(formData, accessToken)
         .then((response) => {
-          console.log(response);
           secureImages = response.data.secureImages;
         })
         .catch((error) => {

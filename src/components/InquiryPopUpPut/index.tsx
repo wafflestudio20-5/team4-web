@@ -101,9 +101,16 @@ export default function InquiryPopUpPut() {
         formData.append('images', singleFile.file)
       );
       // 에시 POST (실제 호출 시 api.ts에 따로 함수를 정의하고 auth header 포함하여 요청)
-      const response = await apiPostImage(formData, accessToken);
-      console.log(response.data.secureImages); // 업로드한 이미지들의 URL로 이루어진 string[]
-      secureImages = response.data.secureImages;
+      await apiPostImage(formData, accessToken)
+        .then((response) => {
+          secureImages = response.data.secureImages;
+        })
+        .catch((error) => {
+          if (error.response.status === 413) {
+            toast('업로드할 파일 크기가 초과되었습니다');
+          }
+          return null;
+        });
 
       apiPutInquiry(
         inquiry.id,
