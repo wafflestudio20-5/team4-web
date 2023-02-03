@@ -115,7 +115,7 @@ export default function ItemListPage() {
 
   useEffect(() => {
     setIndex(0);
-  }, [category, subCategory, searchKey]);
+  }, [category, subCategory, searchKey, sort]);
 
   useEffect(() => {
     if (searchKey) {

@@ -197,7 +197,17 @@ export default function ClosetHeader({
           </div>
           <div className={styles.userrate}>
             <div>
-              <div className={styles.num}>{socials?.count?.styleCount}</div>
+              <div className={styles.num}>
+                {socials?.count?.styleCount}
+                {modalStatus.open && (
+                  <FollowModal
+                    user={user}
+                    navigate={navigate}
+                    closeModal={closeModal}
+                    followerOrFollowing={modalStatus.followerOrFollowing}
+                  />
+                )}
+              </div>
               <div className={styles.text}>게시글</div>
             </div>
             <div>
@@ -222,14 +232,6 @@ export default function ClosetHeader({
               </div>
               <div className={styles.text}>팔로잉</div>
             </div>
-            {modalStatus.open && (
-              <FollowModal
-                user={user}
-                navigate={navigate}
-                closeModal={closeModal}
-                followerOrFollowing={modalStatus.followerOrFollowing}
-              />
-            )}
           </div>
         </div>
       )}
