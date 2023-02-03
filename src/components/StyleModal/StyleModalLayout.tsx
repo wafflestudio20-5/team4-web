@@ -67,6 +67,7 @@ interface StyleModalHeaderProps {
   user: User;
   isFollowed: boolean;
   isLoggedIn: boolean;
+  isMyStyle: boolean;
   onFollow: (e: React.MouseEvent<HTMLDivElement>) => void;
   onUnfollow: (e: React.MouseEvent<HTMLDivElement>) => void;
   onClose: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -77,6 +78,7 @@ function StyleModalHeader({
   user,
   isFollowed,
   isLoggedIn,
+  isMyStyle,
   onFollow,
   onUnfollow,
   onClose,
@@ -93,7 +95,7 @@ function StyleModalHeader({
           </div>
         </div>
       </div>
-      {isLoggedIn && (
+      {isLoggedIn && !isMyStyle && (
         <div
           className={`${styles.follow_box} ${
             isFollowed ? styles.followed : styles.not_followed
@@ -209,6 +211,7 @@ interface StyleModalLayoutProps {
   style: Style;
   likedCount: number;
   isLoggedIn: boolean;
+  isMyStyle: boolean;
   isLiked: boolean;
   isFollowed: boolean;
   onLike: (e: React.MouseEvent<HTMLDivElement>) => void;
@@ -228,6 +231,7 @@ export default function StyleModalLayout({
   style,
   likedCount,
   isLoggedIn,
+  isMyStyle,
   isLiked,
   isFollowed,
   onLike,
@@ -252,6 +256,7 @@ export default function StyleModalLayout({
                 user={style.user}
                 isFollowed={isFollowed}
                 isLoggedIn={isLoggedIn}
+                isMyStyle={isMyStyle}
                 onFollow={onFollow}
                 onUnfollow={onUnfollow}
                 onClose={onClose}
