@@ -4,13 +4,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 import { RootState } from '../../store';
-import { setClose, setSuspend } from '../../store/slices/modal';
+import { setClose, setSuspend, setReload } from '../../store/slices/modal';
 import {
   useApiData,
   useApiStyleFetcher,
   apiPostFollow,
   apiDeleteFollow,
+  apiPostLike,
+  apiDeleteLike,
 } from '../../lib/api';
+import ClickBlocker from './ClickBlocker';
 import StyleModalLayout from './StyleModalLayout';
 
 export default function StyleModal() {
@@ -23,7 +26,7 @@ export default function StyleModal() {
 
   const outside = useRef(null);
 
-  const { open, styleId } = useSelector((state: RootState) => {
+  const { open, styleId, locationKey } = useSelector((state: RootState) => {
     return state.modal;
   });
 
@@ -57,7 +60,9 @@ export default function StyleModal() {
     return state.session;
   });
 
-  const { data, error } = useApiData(useApiStyleFetcher(styleId, accessToken));
+  const { data, loading, error } = useApiData(
+    useApiStyleFetcher(styleId, accessToken)
+  );
 
   // error이 null이거나 undefined라면 아무런 효과도 일어나지 않습니다.
   useEffect(() => {
@@ -102,7 +107,7 @@ export default function StyleModal() {
   const onFollow = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     if (!userId) {
-      toast('요청에 실패했습니다. 다시 시도해주세요.');
+      toast('요청 처리 중 문제가 발생했습니다. 다시 시도해주세요.');
       return;
     }
     apiPostFollow(userId, accessToken)
@@ -114,14 +119,14 @@ export default function StyleModal() {
           });
       })
       .catch((error) => {
-        toast('요청에 실패했습니다. 다시 시도해주세요.');
+        toast('요청 처리 중 문제가 발생했습니다. 다시 시도해주세요.');
       });
   };
 
   const onUnfollow = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     if (!userId) {
-      toast('요청에 실패했습니다. 다시 시도해주세요.');
+      toast('요청 처리 중 문제가 발생했습니다. 다시 시도해주세요.');
       return;
     }
     apiDeleteFollow(userId, accessToken)
@@ -133,43 +138,67 @@ export default function StyleModal() {
           });
       })
       .catch((error) => {
-        toast('요청에 실패했습니다. 다시 시도해주세요.');
+        toast('요청 처리 중 문제가 발생했습니다. 다시 시도해주세요.');
       });
   };
-  
+
   const location = useLocation();
 
   const onLike = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
+    if (!styleId) {
+      toast('요청 처리 중 문제가 발생했습니다. 다시 시도해주세요.');
+      return;
+    }
     if (!accessToken) {
       toast('로그인 후 사용할 수 있는 기능입니다.');
       navigate('/login');
       dispatch(setSuspend(location.key));
       return;
     }
-    if (socials)
-      setSocials({
-        ...socials,
-        likedCount: socials.likedCount + 1,
-        isLiked: true,
+    apiPostLike(styleId, accessToken)
+      .then(() => {
+        if (socials)
+          setSocials({
+            ...socials,
+            likedCount: socials.likedCount + 1,
+            isLiked: true,
+          });
+      })
+      .catch((error) => {
+        toast('요청 처리 중 문제가 발생했습니다. 다시 시도해주세요.');
       });
   };
 
   const onUnlike = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
+    if (!styleId) {
+      toast('요청 처리 중 문제가 발생했습니다. 다시 시도해주세요.');
+      return;
+    }
     if (!accessToken) {
       toast('로그인 후 사용할 수 있는 기능입니다.');
       navigate('/login');
       dispatch(setSuspend(location.key));
       return;
     }
-    if (socials)
-      setSocials({
-        ...socials,
-        likedCount: socials.likedCount - 1,
-        isLiked: false,
+    apiDeleteLike(styleId, accessToken)
+      .then(() => {
+        if (socials)
+          setSocials({
+            ...socials,
+            likedCount: socials.likedCount - 1,
+            isLiked: false,
+          });
+      })
+      .catch((error) => {
+        toast('요청 처리 중 문제가 발생했습니다. 다시 시도해주세요.');
       });
   };
+
+  useEffect(() => {
+    if (!open && locationKey === location.key) dispatch(setReload());
+  }, [open, locationKey, location.key, dispatch]);
 
   /***
    *
@@ -177,17 +206,19 @@ export default function StyleModal() {
    *
    */
 
-  const onUserClick = (userId: number) => {
+  const onUserClick = async (userId: number) => {
     navigate(`/closet/${userId}`);
     dispatch(setSuspend(location.key));
   };
 
-  const onItemClick = (itemId: number) => {
+  const onItemClick = async (itemId: number) => {
     navigate(`/goods/${itemId}`);
     dispatch(setSuspend(location.key));
   };
 
-  if (data && socials !== undefined) {
+  if (loading) {
+    return <ClickBlocker />;
+  } else if (data && socials) {
     return (
       <StyleModalLayout
         open={open}

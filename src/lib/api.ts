@@ -439,6 +439,20 @@ export const apiDeleteFollow = (userId: number, token: string | null) =>
     headers: token ? auth(token) : undefined,
   });
 
+export const apiPostLike = (styleId: number, token: string | null) =>
+  axios.post<{}>(
+    `/api/style/${styleId}/like`,
+    {},
+    {
+      headers: token ? auth(token) : undefined,
+    }
+  );
+
+export const apiDeleteLike = (styleId: number, token: string | null) =>
+  axios.delete<{}>(`/api/style/${styleId}/like`, {
+    headers: token ? auth(token) : undefined,
+  });
+
 export const useApiGetSearchUserFetcher = (
   query: string,
   index?: number,
