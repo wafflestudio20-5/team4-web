@@ -182,19 +182,20 @@ function ReviewWrittenItem({
             <b onClick={onClick}>댓글</b>
             <span onClick={onClick}>{data.comments.length}</span>
           </div>
+          {showComment ? (
+            <div className={styles.reviewComment}>
+              <ReviewCommentList data={data.comments} />
+            </div>
+          ) : null}
         </div>
       </div>
+
       <div className={styles.grid_items}>
         <div className={styles.reviewType}>
           {formatDate(data.createdDateTime)}
           {data.modifiedDateTime ? '수정됨' : ''}
         </div>
       </div>
-      {showComment ? (
-        <div className={styles.reviewComment}>
-          <ReviewCommentList data={data.comments} />
-        </div>
-      ) : null}
     </div>
   );
 }
