@@ -43,7 +43,7 @@ function ReviewComment({ data }: ReviewCommentParams) {
         }}
       ></div>
       <strong className="name">{data.user.nickname}</strong>
-      <span className="time">{data.createdDateTime}</span>
+      <span className="time">{getRelativeDateTime(data.createdDateTime)}</span>
       <p className="comment">{data.content}</p>
     </li>
   );
