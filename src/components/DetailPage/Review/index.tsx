@@ -9,11 +9,10 @@ import ReviewBoxLayout from './ReviewBoxLayout';
 
 interface ReviewBoxProps {
   review: Review;
-  onUpdate: () => void;
 }
 
-export default function ReviewBox({ review, onUpdate }: ReviewBoxProps) {
-  const [comment, setComment] = useState<string>('');
+export default function ReviewBox({ review }: ReviewBoxProps) {
+  const [input, setInput] = useState<string>('');
   const [displayCommentBox, setDisplayCommentBox] = useState<boolean>(true);
 
   const { accessToken } = useSelector((state: RootState) => {
@@ -27,8 +26,8 @@ export default function ReviewBox({ review, onUpdate }: ReviewBoxProps) {
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (comment.length > 50) return;
-    setComment(e.target.value);
+    if (input.length > 50) return;
+    setInput(e.target.value);
   };
 
   const onSubmit = async (
@@ -37,13 +36,12 @@ export default function ReviewBox({ review, onUpdate }: ReviewBoxProps) {
       | React.KeyboardEvent<HTMLInputElement>
   ) => {
     e.preventDefault();
-    if (comment.length === 0) {
+    if (input.length === 0) {
       toast('댓글을 입력해주세요.');
       return;
     }
-    onUpdate();
     try {
-      await apiPostComment(review.id, comment, accessToken);
+      await apiPostComment(review.id, input, accessToken);
     } catch (error) {
       const e = error as AxiosError;
       if (e.response?.status === 404) {
@@ -60,7 +58,7 @@ export default function ReviewBox({ review, onUpdate }: ReviewBoxProps) {
     <ReviewBoxLayout
       review={review}
       displayCommentBox={displayCommentBox}
-      comment={comment}
+      input={input}
       onClick={onClick}
       onChange={onChange}
       onSubmit={onSubmit}

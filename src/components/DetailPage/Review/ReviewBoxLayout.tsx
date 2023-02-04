@@ -13,7 +13,7 @@ import styles from './ReviewBoxLayout.module.scss';
 interface ReviewBoxLayoutProps {
   review: Review;
   displayCommentBox: boolean;
-  comment: string;
+  input: string;
   onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (
@@ -27,7 +27,7 @@ interface ReviewBoxLayoutProps {
 export default function ReviewBoxLayout({
   review,
   displayCommentBox,
-  comment,
+  input,
   onClick,
   onChange,
   onSubmit,
@@ -133,14 +133,14 @@ export default function ReviewBoxLayout({
           <div className={styles.comment_input} onClick={onClick}>
             <div className={styles.comment_area}>
               <input
-                value={comment}
+                value={input}
                 onChange={onChange}
                 onKeyPress={onKeyPress}
               />
             </div>
             <button
               className={`${styles.submit_button} ${
-                comment.length > 0 && styles.button_on
+                input.length > 0 && styles.button_on
               }`}
               onClick={onSubmit}
             >
