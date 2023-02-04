@@ -77,6 +77,7 @@
   background-size: cover;
   border-radius: 100%;
   overflow: hidden;
+  object-fit: cover;
 }
 
 .image_text {
@@ -178,8 +179,8 @@
     border: none;
     background-color: #fff;
     font-size: 14px;
-    font-family: '-apple-system', HelveticaNeue, Roboto,
-      'Noto Sans KR', helvetica, Gulim, sans-serif;
+    font-family: '-apple-system', HelveticaNeue, Roboto, 'Noto Sans KR',
+      helvetica, Gulim, sans-serif;
     color: #000;
     box-shadow: 0 0 0 30px #fff inset !important;
     transition: border 0.2s ease-in-out;
@@ -255,7 +256,7 @@
 
 .constraint {
   padding-left: 18px;
-  color:#777777;
+  color: #777777;
   margin: 0;
 }
 
@@ -268,7 +269,7 @@
   }
   .input_helper_wrapper {
     padding-right: 20px;
-    width: 400px
+    width: 400px;
   }
 }
 
