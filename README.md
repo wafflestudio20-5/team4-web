@@ -71,6 +71,7 @@ API설계에 있어서, RESTful 하도록 노력을 기울였습니다. API와 �
 ### 3. 로그인 페이지
 
 <img width="1552" alt="Screenshot 2023-02-04 at 5 06 56 AM" src="https://user-images.githubusercontent.com/100818542/216706153-d18c9d6b-4d98-4b41-835e-7ea1a2d69a9b.png">
+
 회원가입/로그인 페이지 입니다. 일반 로그인과 카카오 소셜 로그인을 지원하고 있습니다. 
 
 ### 4. 아이템 리스트 페이지
@@ -79,16 +80,9 @@ API설계에 있어서, RESTful 하도록 노력을 기울였습니다. API와 �
 기존 무신사보다 깔끔하게 구현하였고, 무엇보다 sort 변경, pagenation 등 페이지 리렌더가 필요할 때마다 refresh를 해버리는 기존 무신사와 다르게 리렌더 최적화를 했습니다.
 <img width="1552" alt="Screenshot 2023-02-04 at 5 12 53 AM" src="https://user-images.githubusercontent.com/100818542/216706740-87ae2df0-8df1-44ac-b3a9-e9aa3dfed774.png">
 
-#### 사이드바
-
-사이드바의 카테고리탭을 통해서도 진입이 가능하고, 추가 기능의 일부인 스타일탭에서 유저 검색도 가능합니다!
-<br /><br />
-<img width="1552" alt="ScreenshotSideBar" src="https://user-images.githubusercontent.com/107466434/216745983-0c7fdddb-488e-4d9e-bb06-06bfd7afd179.png">
-
 #### 기존 무신사 리스트 페이지
 
-![image](https://user-images.githubusercontent.com/107466434/216745606-2a7026d6-365f-4b8b-a652-635d44f04607.png)
-
+<img width="1552" alt="Screenshot 2023-02-04 at 1 38 14 PM" src="https://user-images.githubusercontent.com/100818542/216748780-aba66de7-8db3-4399-a86e-2b9a67f9d14e.png">
 
 ### 5. 상세 페이지
 
