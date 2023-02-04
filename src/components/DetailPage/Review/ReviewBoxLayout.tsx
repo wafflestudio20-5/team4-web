@@ -134,7 +134,7 @@ export default function ReviewBoxLayout({
         )}
       </div>
       <div className={styles.reply_count}>
-        댓글 <span>{review.comments.length}개</span>
+        댓글 <span>{comments.length}개</span>
       </div>
       <div className={styles.comments_wrapper}>
         {displayCommentBox ? (
