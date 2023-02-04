@@ -21,7 +21,7 @@
 
 #### 디자이너
 
-- [유채원]()
+- 유채원
 
 ## 기술스택
 
@@ -62,9 +62,7 @@ API설계에 있어서, RESTful 하도록 노력을 기울였습니다. API와 �
 
 #### 기존 무신사 홈페이지
 
-![image](https://user-images.githubusercontent.com/107466434/216744069-553bbfa2-41a1-44f0-93c6-061c5190d70b.png)
-
-
+<img width="1552" alt="Screenshot 2023-02-04 at 1 34 16 PM" src="https://user-images.githubusercontent.com/100818542/216748662-846617ad-aacd-4851-bf0b-bba2952cd0d6.png">
 
 ### 2. 회원가입 페이지
 
@@ -127,6 +125,9 @@ API설계에 있어서, RESTful 하도록 노력을 기울였습니다. API와 �
 
 <img width="1552" alt="Screenshot 2023-02-04 at 5 17 11 AM" src="https://user-images.githubusercontent.com/100818542/216706391-51e64a0c-3005-43b8-a7bc-98487f334d67.png">
 
+<img width="1552" alt="Screenshot 2023-02-04 at 1 31 55 PM" src="https://user-images.githubusercontent.com/100818542/216748669-8beb5faa-0f54-4612-a02a-26811a850f5b.png">
+
+<img width="1552" alt="Screenshot 2023-02-04 at 1 31 46 PM" src="https://user-images.githubusercontent.com/100818542/216748672-3706e251-0f23-4e0e-8bbe-9f85632a678a.png">
 
 ### 9. 옷장 페이지[추가기능]
 
