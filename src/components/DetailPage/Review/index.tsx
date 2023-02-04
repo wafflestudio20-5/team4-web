@@ -42,6 +42,7 @@ export default function ReviewBox({ review }: ReviewBoxProps) {
       toast('댓글을 입력해주세요.');
       return;
     }
+    setInput('');
     try {
       const response = await apiPostComment(review.id, input, accessToken);
       setComments([...comments, response.data.comment]);
