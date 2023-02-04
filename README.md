@@ -7,11 +7,19 @@
 <br />
 추가 기능으로 회원이 직접 구매한 옷으로 피드를 꾸밀 수 있는 **옷장 페이지**와 **스타일 탭**을 구현했습니다.
 
+배포 주소: [https://dllflfuvssxc9.cloudfront.net/](https://dllflfuvssxc9.cloudfront.net/)
+
 ## 개발자
 
-|         [이석찬(sukchan-0811)](https://github.com/sukchan-0811)          |                [김승진](https://github.com/)                 |                [이재운](https://github.com/)                 |          [유채원](https://github.com/sharpcoder312)          |
-| :----------------------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| <a href="https://github.com/sukchan-0811"><img src="" width="300px"></a> | <a href="https://github.com/"><img src="" width="300px"></a> | <a href="https://github.com/"><img src="" width="300px"></a> | <a href="https://github.com/"><img src="" width="300px"></a> |
+#### 프론트엔드
+
+- [김승진]()
+- [이석찬(sukchan-0811)](https://github.com/sukchan-0811)
+- [이재운]()
+
+#### 디자이너
+
+- [유채원]()
 
 ## 기술스택
 
