@@ -1,7 +1,7 @@
 export function formatColorReview(color: string) {
   switch (color) {
     case 'bright':
-      return '밝아요';
+      return '선명해요';
     case 'mid':
       return '보통이에요';
     case 'dim':
