@@ -38,14 +38,20 @@ export default function ReviewBoxLayout({
   return (
     <div className={styles.wrapper}>
       <div className={styles.profile}>
-        <div className={styles.profile_image}>
+        <Link
+          to={`/closet/${review.purchase.user.id}`}
+          className={styles.profile_image}
+        >
           <img src={review.purchase.user.image} alt="" />
-        </div>
+        </Link>
         <div className={styles.profile_text_wrapper}>
           <div className={styles.profile_text}>
-            <p className={styles.profile_text_left}>
+            <Link
+              to={`/closet/${review.purchase.user.id}`}
+              className={styles.profile_text_left}
+            >
               {review.purchase.user.nickname}
-            </p>
+            </Link>
             <p className={styles.profile_text_right}>
               {getRelativeDateTime(review.createdDateTime)}
             </p>
@@ -157,9 +163,12 @@ export default function ReviewBoxLayout({
         <div className={styles.comments_list}>
           {comments.map((comment, idx) => (
             <div key={idx} className={styles.comment_wrapper}>
-              <div className={styles.comment_profile_image}>
+              <Link
+                to={`/closet/${comment.user.id}`}
+                className={styles.comment_profile_image}
+              >
                 <img src={comment.user.image} alt="" />
-              </div>
+              </Link>
               <div className={styles.comment_content}>
                 <p>{comment.content}</p>
               </div>
