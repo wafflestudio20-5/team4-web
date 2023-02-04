@@ -91,7 +91,7 @@ export default function MainHeader({
           type="text"
           maxLength={30}
           value={query}
-          placeholder="인기 상품 무료 체험단 모집!"
+          placeholder="오늘 날씨엔 뭐 입지? 코디 추천"
           onChange={onChange}
           onKeyPress={onKeyPress}
         />
