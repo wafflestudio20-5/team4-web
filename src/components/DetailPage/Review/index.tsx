@@ -58,6 +58,18 @@ export default function ReviewBox({ review }: ReviewBoxProps) {
     if (e.key === 'Enter') onSubmit(e);
   };
 
+  /***
+   *
+   * 댓글 더 보기
+   *
+   */
+
+  const [stretch, setStretch] = useState<boolean>(false);
+
+  const onSwitch = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setStretch(!stretch);
+  };
+
   return (
     <ReviewBoxLayout
       review={review}
@@ -68,6 +80,8 @@ export default function ReviewBox({ review }: ReviewBoxProps) {
       onChange={onChange}
       onSubmit={onSubmit}
       onKeyPress={onKeyPress}
+      stretch={stretch}
+      onSwitch={onSwitch}
     />
   );
 }

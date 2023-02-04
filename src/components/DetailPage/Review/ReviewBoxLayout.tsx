@@ -23,6 +23,8 @@ interface ReviewBoxLayoutProps {
       | React.KeyboardEvent<HTMLInputElement>
   ) => void;
   onKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  stretch: boolean;
+  onSwitch: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function ReviewBoxLayout({
@@ -34,6 +36,8 @@ export default function ReviewBoxLayout({
   onChange,
   onSubmit,
   onKeyPress,
+  stretch,
+  onSwitch,
 }: ReviewBoxLayoutProps) {
   return (
     <div className={styles.wrapper}>
@@ -161,27 +165,62 @@ export default function ReviewBoxLayout({
           </div>
         )}
         <div className={styles.comments_list}>
-          {comments.map((comment, idx) => (
-            <div key={idx} className={styles.comment_wrapper}>
-              <Link
-                to={`/closet/${comment.user.id}`}
-                className={styles.comment_profile_image}
-              >
-                <img src={comment.user.image} alt="" />
-              </Link>
-              <div className={styles.comment_content}>
-                <p>{comment.content}</p>
-              </div>
-              <div className={styles.comment_info}>
-                <p className={styles.comment_created_user}>
-                  {comment.user.nickname}
-                </p>
-                <p className={styles.comment_created_time}>
-                  {getRelativeDateTime(comment.createdDateTime)}
-                </p>
-              </div>
+          {stretch ? (
+            <>
+              {comments.map((comment, idx) => (
+                <div key={idx} className={styles.comment_wrapper}>
+                  <Link
+                    to={`/closet/${comment.user.id}`}
+                    className={styles.comment_profile_image}
+                  >
+                    <img src={comment.user.image} alt="" />
+                  </Link>
+                  <div className={styles.comment_content}>
+                    <p>{comment.content}</p>
+                  </div>
+                  <div className={styles.comment_info}>
+                    <p className={styles.comment_created_user}>
+                      {comment.user.nickname}
+                    </p>
+                    <p className={styles.comment_created_time}>
+                      {getRelativeDateTime(comment.createdDateTime)}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </>
+          ) : (
+            <>
+              {comments.slice(0, 2).map((comment, idx) => (
+                <div key={idx} className={styles.comment_wrapper}>
+                  <Link
+                    to={`/closet/${comment.user.id}`}
+                    className={styles.comment_profile_image}
+                  >
+                    <img src={comment.user.image} alt="" />
+                  </Link>
+                  <div className={styles.comment_content}>
+                    <p>{comment.content}</p>
+                  </div>
+                  <div className={styles.comment_info}>
+                    <p className={styles.comment_created_user}>
+                      {comment.user.nickname}
+                    </p>
+                    <p className={styles.comment_created_time}>
+                      {getRelativeDateTime(comment.createdDateTime)}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </>
+          )}
+          {comments.length > 2 && (
+            <div className={styles.comment_controller}>
+              <button onClick={onSwitch}>
+                {stretch ? '댓글 숨기기' : '댓글 더보기'}
+              </button>
             </div>
-          ))}
+          )}
         </div>
       </div>
     </div>
