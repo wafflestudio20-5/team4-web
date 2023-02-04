@@ -72,6 +72,7 @@ export interface Comment {
   user: User;
   content: string;
   createdDateTime: string;
+  modifiedDateTime: string;
 }
 
 export interface Inquiry {

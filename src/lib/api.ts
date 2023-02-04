@@ -10,6 +10,7 @@ import {
   Inquiry,
   Style,
   SimpleUser,
+  Comment,
 } from './interface';
 import { PatchMyInfoRequestDto, PurchasePostDto } from './dto';
 
@@ -336,7 +337,7 @@ export const apiPostInquiry = (
     { type, option, isSecret, title, content, images },
     { headers: token ? auth(token) : undefined }
   );
-  
+
 export const useApiMyInquiryListFetcher = (
   token: string | null,
   index?: number,
@@ -377,7 +378,7 @@ export const apiDeleteInquiry = (id: number, token: string | null) =>
   axios.delete<{}>(`/api/user/me/item-inquiry/${id}`, {
     headers: token ? auth(token) : undefined,
   });
-  
+
 export const apiPostStyle = (
   token: string | null,
   images: string[],
@@ -481,7 +482,7 @@ export const apiPostComment = (
   content: string,
   token: string | null
 ) =>
-  axios.post<{}>(
+  axios.post<{ comment: Comment }>(
     `/api/comment`,
     { reviewId, content },
     { headers: token ? auth(token) : undefined }

@@ -56,16 +56,23 @@ export default function Inquiries({ itemId }: InquiriesProps) {
 
   const navigate = useNavigate();
 
+  const onForceRefresh = (e: Event) => {
+    window.location.reload();
+  };
+
   const onInquiryWrite = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!accessToken) {
       navigate('/login');
       return;
     }
-    window.open(
+    const inquiryWindow = window.open(
       `/inquiry/${itemId}`,
       'inquiry',
       'width=572,height=805,location=no,status=no,scrollbars=yes,resizable=yes'
     );
+    if (inquiryWindow) {
+      inquiryWindow.addEventListener('beforeunload', onForceRefresh);
+    }
   };
 
   return (
