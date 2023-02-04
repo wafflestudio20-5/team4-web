@@ -146,8 +146,7 @@ export default function InquiryPopUpPost() {
         secureImages
       )
         .then((response) => {
-          toast('상품문의가 추가되었습니다');
-          setTimeout(() => window.close(), 3000);
+          window.close();
         })
         .catch((error) => {
           if (error.response.status === 404) {
@@ -168,8 +167,7 @@ export default function InquiryPopUpPost() {
         undefined
       )
         .then((response) => {
-          toast('상품문의가 추가되었습니다');
-          setTimeout(() => window.close(), 3000);
+          window.close();
         })
         .catch((error) => {
           if (error.response.status === 404) {
