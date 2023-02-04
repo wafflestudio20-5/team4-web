@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Review } from '../../../lib/interface';
+import { Review, Comment } from '../../../lib/interface';
 import { getRelativeDateTime } from '../../../lib/formatters/dateTimeFormatter';
 import { formatUserInfo } from '../../../lib/formatters/userFormatter';
 import { getBarWidth } from '../../../lib/formatters/ratingFormatter';
@@ -12,6 +12,7 @@ import styles from './ReviewBoxLayout.module.scss';
 
 interface ReviewBoxLayoutProps {
   review: Review;
+  comments: Comment[];
   displayCommentBox: boolean;
   input: string;
   onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
@@ -26,6 +27,7 @@ interface ReviewBoxLayoutProps {
 
 export default function ReviewBoxLayout({
   review,
+  comments,
   displayCommentBox,
   input,
   onClick,
@@ -153,7 +155,7 @@ export default function ReviewBoxLayout({
           </div>
         )}
         <div className={styles.comments_list}>
-          {review.comments.map((comment, idx) => (
+          {comments.map((comment, idx) => (
             <div key={idx} className={styles.comment_wrapper}>
               <div className={styles.comment_profile_image}>
                 <img src={comment.user.image} alt="" />

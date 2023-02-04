@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { useApiData, useApiReviewListFetcher } from '../../../lib/api';
 import ReviewsLayout from './ReviewsLayout';
 
