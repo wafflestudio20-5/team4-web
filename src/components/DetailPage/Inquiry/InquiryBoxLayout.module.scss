@@ -1,0 +1,58 @@
+.inquiry_grid {
+  font-size: 12px;
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  display: grid;
+  grid-template-columns: 7% 8% 10% auto 12% 13%;
+  height: 42px;
+  border-bottom: 1px solid #ddd;
+  span {
+    line-height: 42px;
+    vertical-align: middle;
+  }
+}
+
+.inquiry_number {
+  text-align: center;
+}
+
+.inquiry_status {
+  text-align: center;
+  font-weight: 700;
+}
+
+.inquiry_type {
+  text-align: center;
+}
+
+.inquiry_title {
+  text-align: left;
+  cursor: pointer;
+}
+
+.inquiry_writer {
+  text-align: center;
+}
+
+.inquiry_created_date {
+  text-align: center;
+  font-weight: 700;
+}
+
+.key {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url('../../../resources/image/key.gif');
+}
+
+.inquiry_block {
+  font-size: 12px;
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  height: 42px;
+  border-bottom: 1px solid #ddd;
+  padding: 0 14px;
+  span {
+    line-height: 42px;
+    vertical-align: middle;
+  }
+}

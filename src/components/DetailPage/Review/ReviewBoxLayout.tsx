@@ -138,7 +138,12 @@ export default function ReviewBoxLayout({
                 onKeyPress={onKeyPress}
               />
             </div>
-            <button className={styles.submit_button} onClick={onSubmit}>
+            <button
+              className={`${styles.submit_button} ${
+                comment.length > 0 && styles.button_on
+              }`}
+              onClick={onSubmit}
+            >
               댓글작성
             </button>
           </div>

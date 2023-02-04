@@ -4,7 +4,23 @@ export function formatDate(date: string | undefined): string {
     const year = dateObject.getFullYear();
     const month = dateObject.getMonth() + 1;
     const day = dateObject.getDate();
-    return `${year}.${month}.${day}`;
+    return `${year}.${month < 10 ? '0' + month : month}.${
+      day < 10 ? '0' + day : day
+    }`;
+  } else {
+    return '날짜가 없습니다.';
+  }
+}
+
+export function formatDate2(date: string | undefined): string {
+  if (date) {
+    const dateObject = new Date(date);
+    const year = dateObject.getFullYear();
+    const month = dateObject.getMonth() + 1;
+    const day = dateObject.getDate();
+    return `${year}-${month < 10 ? '0' + month : month}-${
+      day < 10 ? '0' + day : day
+    }`;
   } else {
     return '날짜가 없습니다.';
   }

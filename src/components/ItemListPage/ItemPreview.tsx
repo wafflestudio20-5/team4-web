@@ -1,4 +1,8 @@
 import { useNavigate } from 'react-router-dom';
+import {
+  formatRating,
+  getBarWidth,
+} from '../../lib/formatters/ratingFormatter';
 import { Item } from '../../lib/interface';
 import styles from './ItemPreview.module.css';
 
@@ -46,6 +50,19 @@ export default function ItemPreview({ item }: ItemPreviewProps) {
               </>
             )}
           </div>
+          {item.reviewCount !== 0 && (
+            <div className={styles.rate}>
+              <span className={styles.star_background}>
+                <span
+                  className={styles.star_bar}
+                  style={{
+                    width: `${getBarWidth(item.rating)}%`,
+                  }}
+                />
+              </span>
+              <span className={styles.rating}>{formatRating(item.rating)}</span>
+            </div>
+          )}
         </div>
       </div>
     </div>

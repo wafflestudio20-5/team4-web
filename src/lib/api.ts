@@ -7,8 +7,8 @@ import {
   SubCategory,
   Purchase,
   Review,
-  Style,
   Inquiry,
+  Style,
   SimpleUser,
 } from './interface';
 import { PatchMyInfoRequestDto, PurchasePostDto } from './dto';
@@ -129,6 +129,25 @@ export const useApiGetUserReviewListFetcher = (token: string | null) => {
     [token]
   );
   return f;
+};
+
+export const useApiInquiryListFetcher = (
+  id: number | null,
+  index?: number,
+  count?: number
+) => {
+  const f = useCallback(
+    (cancelToken: CancelToken) =>
+      axios.get<{ inquiries: Inquiry[]; totalPages: number }>(
+        `/api/item/${id}/inquiries`,
+        {
+          params: { index, count },
+          cancelToken,
+        }
+      ),
+    [id, index, count]
+  );
+  return id === null ? null : f;
 };
 
 export const apiPostReview = (
@@ -317,7 +336,8 @@ export const apiPostInquiry = (
     { type, option, isSecret, title, content, images },
     { headers: token ? auth(token) : undefined }
   );
-export const useApiInquiryListFetcher = (
+  
+export const useApiMyInquiryListFetcher = (
   token: string | null,
   index?: number,
   count?: number
@@ -336,6 +356,7 @@ export const useApiInquiryListFetcher = (
   );
   return f;
 };
+
 export const apiPutInquiry = (
   id: number | null,
   type: string,
@@ -356,6 +377,7 @@ export const apiDeleteInquiry = (id: number, token: string | null) =>
   axios.delete<{}>(`/api/user/me/item-inquiry/${id}`, {
     headers: token ? auth(token) : undefined,
   });
+  
 export const apiPostStyle = (
   token: string | null,
   images: string[],
@@ -460,7 +482,7 @@ export const apiPostComment = (
   token: string | null
 ) =>
   axios.post<{}>(
-    `/api/user/me/comment`,
+    `/api/comment`,
     { reviewId, content },
     { headers: token ? auth(token) : undefined }
   );
