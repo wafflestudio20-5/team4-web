@@ -41,6 +41,9 @@
 "typescript": "^4.9.4",
 "use-file-upload": "^1.0.11",
 ```
+![cloudinary](https://user-images.githubusercontent.com/96823216/216750090-26015a45-d814-49a8-82a8-28c11f65f83d.png)
+<br />
+image업로드는 모두 cloudinary서비스를 사용하고 있습니다. 백엔드 db에 사진을 직접 저장하기 보다는 cloudinary에 업로드 하고 사진 url만 저장하는 방식을 사용하고 있습니다.
 
 [노션](https://notion.io)에서 모델과 REST API를 확인할 수 있습니다!
 
@@ -126,7 +129,9 @@ API설계에 있어서, RESTful 하도록 노력을 기울였습니다. API와 �
 <img width="1552" alt="Screenshot 2023-02-04 at 1 31 55 PM" src="https://user-images.githubusercontent.com/100818542/216748669-8beb5faa-0f54-4612-a02a-26811a850f5b.png">
 마이 페이지 하단의 구매후기 작성 페이지입니다. 자신의 구매목록을 불러와서 그 구매목록 마다 구매후기를 작성할 수 있도록 하였습니다. 구매후기를 작성한 구매목록은 더이상 구매후기를 작성 할 수 없도록 막았습니다.
 <img width="1552" alt="Screenshot 2023-02-04 at 1 31 46 PM" src="https://user-images.githubusercontent.com/100818542/216748672-3706e251-0f23-4e0e-8bbe-9f85632a678a.png">
-마이 페이지 하단의 구매후기 내역 페이지입니다. 자신이 쓴 구매후기 목록을 불러와서 다 보여줍니다. 각 구매후기를 클릭하면 그 그매후기에 달린 댓글들도 렌더링됩니다.
+마이 페이지 하단의 구매후기 내역 페이지입니다. 자신이 쓴 구매후기 목록을 불러와서 다 보여줍니다. 각 구매후기를 클릭하면 그 구매후기에 달린 댓글들도 렌더링됩니다.
+<img width="1552" alt="Screenshot 2023-02-04 at 2 18 53 PM" src="https://user-images.githubusercontent.com/96823216/216750260-701d9fd2-fba4-4a1a-bb52-464f67d2eb88.png">
+마이 페이지 하단의 상품문의 페이지입니다. 자신이 쓴 상품문의 목록을 불러와서 보여줍니다. 페이지네이션이 적용되어 한 페이지에 5개의 문의를 보여주고 있습니다. 상품문의 답변 전에는 문의 수정과 삭제가 가능합니다. 상품 문의가 답변 후에는 상품 문의 클릭시 답변이 보여집니다.
 
 ### 9. 옷장 페이지 **(추가기능)**
 
