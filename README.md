@@ -55,6 +55,7 @@
 ### 2. 회원가입 페이지
 
 <img width="1552" alt="Screenshot 2023-02-04 at 5 06 17 AM" src="https://user-images.githubusercontent.com/100818542/216706127-87f25244-5b14-4d37-ae31-41d511bb01dd.png">
+일반 회원가입과 카카오 소셜 로그인을 지원합니다.
 
 ### 3. 로그인 페이지
 
@@ -77,7 +78,7 @@
 <img width="684" alt="Screenshot 2023-02-04 at 5 14 24 AM" src="https://user-images.githubusercontent.com/100818542/216707259-b4f70895-457e-4aae-b9f6-b57974f417b3.png">
 
 
-상품 문의 작성 기능도 있습니다!
+상품 문의 작성이 가능합니다. 문의 작성시 이미지 업로드가 가능합니다.
 
 ### 6. 장바구니 페이지
 
@@ -106,5 +107,9 @@
 ### 10. 스타일 페이지
 
 <img width="1552" alt="Screenshot 2023-02-04 at 5 04 53 AM" src="https://user-images.githubusercontent.com/100818542/216706443-77829f3e-a637-4bbe-9186-fa4f440d5e54.png">
+
+<img width="1552" alt="1" src="https://user-images.githubusercontent.com/96823216/216745404-df278bad-2113-4687-be18-0c9b4aad07b4.png">
+자신의 옷장 페이지에 뜰 스타일을 작성할 수 있는 페이지 입니다. 해시태그와 착용 아이템 등록이 가능합니다.
+
 
 추가 기능입니다!
