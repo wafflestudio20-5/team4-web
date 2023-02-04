@@ -133,7 +133,7 @@ export default function MyPageWriteReviewsLayout({
                 onChange={onChange}
                 checked={input.color === 'bright'}
               ></input>
-              <label htmlFor="ch4">밝아요</label>
+              <label htmlFor="ch4">선명해요</label>
               <input
                 type="radio"
                 id="ch5"
@@ -151,7 +151,7 @@ export default function MyPageWriteReviewsLayout({
                 onChange={onChange}
                 checked={input.color === 'dim'}
               ></input>
-              <label htmlFor="ch6">어두워요</label>
+              <label htmlFor="ch6">흐려요</label>
             </span>
           </li>
         </ul>

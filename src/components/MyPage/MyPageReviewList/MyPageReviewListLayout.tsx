@@ -39,10 +39,11 @@ function ReviewComment({ data }: ReviewCommentParams) {
         className={styles.commentUserPic}
         style={{
           background: `url(${data.user.image}) no-repeat 50% 50%`,
+          backgroundSize: '100%',
         }}
       ></div>
       <strong className="name">{data.user.nickname}</strong>
-      <span className="time">{data.createdDateTime}</span>
+      <span className="time">{getRelativeDateTime(data.createdDateTime)}</span>
       <p className="comment">{data.content}</p>
     </li>
   );
