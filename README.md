@@ -78,6 +78,7 @@ API설계에 있어서, RESTful 하도록 노력을 기울였습니다. API와 �
 
 상품을 카테고리/서브카테고리/검색어로 찾을 수 있는 아이템 리스트 페이지입니다.<br />
 기존 무신사보다 깔끔하게 구현하였고, 무엇보다 sort 변경, pagenation 등 페이지 리렌더가 필요할 때마다 refresh를 해버리는 기존 무신사와 다르게 리렌더 최적화를 했습니다.
+
 <img width="1552" alt="Screenshot 2023-02-04 at 5 12 53 AM" src="https://user-images.githubusercontent.com/100818542/216706740-87ae2df0-8df1-44ac-b3a9-e9aa3dfed774.png">
 
 #### 기존 무신사 리스트 페이지
@@ -87,11 +88,15 @@ API설계에 있어서, RESTful 하도록 노력을 기울였습니다. API와 �
 ### 5. 상세 페이지
 
 <img width="1552" alt="Screenshot 2023-02-04 at 5 01 34 AM" src="https://user-images.githubusercontent.com/100818542/216706246-6bd79e88-c744-4227-925f-344e3b86b107.png">
+
 상세 페이지 입니다. 기존 무신사는 정말 많은 데이터를 보여주느라 상당히 복잡한 디자인을 가지고 있었습니다. 그래서 MUSIN4는 정말 필요한 핵심 데이터만 추려서 간결하게 상품 상세 페이지를 만들었습니다.
+
 <img width="1552" alt="Screenshot 2023-02-04 at 5 01 41 AM" src="https://user-images.githubusercontent.com/100818542/216706364-9f4ae90e-c166-422a-9b79-b71313f20e65.png">
+
 상품 상세 페이지 하단에는 그 상품에 달린 리뷰들이 렌더링 됩니다. 리뷰는 페이지네이션 작업이 들어가 있어서 한 페이지에 5개씩 렌더링 되고 있습니다. 
 
 <img width="684" alt="Screenshot 2023-02-04 at 5 14 24 AM" src="https://user-images.githubusercontent.com/100818542/216707259-b4f70895-457e-4aae-b9f6-b57974f417b3.png">
+
 상품에 대한 문의 작성도 가능합니다. 문의 작성은 별도의 popup을 통해 하고 있습니다.
 
 ### 6. 장바구니 페이지
@@ -107,9 +112,8 @@ API설계에 있어서, RESTful 하도록 노력을 기울였습니다. API와 �
 <img width="1552" alt="Screenshot 2023-02-04 at 5 11 06 AM" src="https://user-images.githubusercontent.com/100818542/216707219-a3ff0564-7cf8-4fd1-89df-0b984156c182.png">
 
 결제 중 로딩까지 구현하였습니다. 실제 결제 기능을 구현한다면 필요하다고 생각되어 만들었지만 실제 결제 기능까지는 구현하지 않았습니다.
-<br /><br />
-![image](https://user-images.githubusercontent.com/107466434/216746323-813dc538-7ee0-4971-b110-bd504b5e24fa.png)
 
+<img width="1552" alt="Screenshot 2023-02-04 at 1 40 40 PM" src="https://user-images.githubusercontent.com/100818542/216748879-600b4296-9154-4d06-ab64-088459330290.png">
 
 ### 8. 마이 페이지
 
@@ -144,4 +148,3 @@ API설계에 있어서, RESTful 하도록 노력을 기울였습니다. API와 �
 스타일 모달에도 사진 슬라이드, 옷장 naviagate, 작성자 팔로우, 게시글 좋아요 기능 등 댓글을 제외한 커뮤니티 기능을 모두 구현했습니다.
 
 <img width="1552" alt="Screenshot 2023-02-04 at 5 04 53 AM" src="https://user-images.githubusercontent.com/100818542/216706443-77829f3e-a637-4bbe-9186-fa4f440d5e54.png">
-
