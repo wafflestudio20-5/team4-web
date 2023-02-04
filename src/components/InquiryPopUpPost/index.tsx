@@ -94,8 +94,13 @@ export default function InquiryPopUpPost() {
     setImages(localImages);
   };
 
+  const [handling, setHandling] = useState<boolean>(false);
+
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+
+    if (handling) return;
+
     let secureImages: string[] = [];
     if (input.type === '') {
       toast('문의유형을 선택해주세요');
@@ -110,6 +115,7 @@ export default function InquiryPopUpPost() {
 
     // 업로드할 이미지가 있는 경우
     if (imageFiles) {
+      setHandling(true);
       // 반드시 JSON 형태가 아닌 FormData 형태로 전송
       const formData = new FormData();
       const fileArray = imageFiles as FileUpload[];
@@ -129,7 +135,7 @@ export default function InquiryPopUpPost() {
           return null;
         });
 
-      apiPostInquiry(
+      await apiPostInquiry(
         parsedId,
         accessToken,
         input.type,
@@ -140,16 +146,17 @@ export default function InquiryPopUpPost() {
         secureImages
       )
         .then((response) => {
-          toast('상품문의가 추가되었습니다');
-          setTimeout(() => window.close(), 3000);
+          window.close();
         })
         .catch((error) => {
           if (error.response.status === 404) {
             toast('상품에 존재하지 않는 옵션입니다');
           }
         });
+
+      setHandling(false);
     } else {
-      apiPostInquiry(
+      await apiPostInquiry(
         parsedId,
         accessToken,
         input.type,
@@ -160,14 +167,14 @@ export default function InquiryPopUpPost() {
         undefined
       )
         .then((response) => {
-          toast('상품문의가 추가되었습니다');
-          setTimeout(() => window.close(), 3000);
+          window.close();
         })
         .catch((error) => {
           if (error.response.status === 404) {
             toast('상품에 존재하지 않는 옵션입니다');
           }
         });
+      setHandling(false);
     }
     // TODO: 이미지 업로드 후 return된 secureImages를 request body에 포함하여 게시글 POST
     // await axios.post('게시글 관련 API', {..., secureImages})
