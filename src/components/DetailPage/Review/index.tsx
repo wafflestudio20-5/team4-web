@@ -45,7 +45,7 @@ export default function ReviewBox({ review }: ReviewBoxProps) {
     setInput('');
     try {
       const response = await apiPostComment(review.id, input, accessToken);
-      setComments([...comments, response.data.comment]);
+      setComments([response.data.comment, ...comments]);
     } catch (error) {
       const e = error as AxiosError;
       if (e.response?.status === 404) {
