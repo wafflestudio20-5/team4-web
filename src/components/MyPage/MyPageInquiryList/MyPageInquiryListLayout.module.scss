@@ -25,13 +25,13 @@
 
 .grid_order {
   display: grid;
-  grid-template-columns: 4fr 4fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 4fr 3fr 1fr 1fr 1fr 1fr;
   max-width: 100%;
 }
 
 .grid_orderitem {
   display: grid;
-  grid-template-columns: 4fr 4fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 4fr 3fr 1fr 1fr 1fr 1fr;
   max-width: 100%;
   border-bottom: 1px solid #ccc;
   align-items: center;
