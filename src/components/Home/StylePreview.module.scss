@@ -121,7 +121,9 @@
     align-items: center;
     .styleItemImage {
       border-radius: 100%;
-      height: 80%;
+      height: 48px;
+      width: 48px;
+      object-fit: cover;
       cursor: pointer;
     }
     .stylesUserNickName {
