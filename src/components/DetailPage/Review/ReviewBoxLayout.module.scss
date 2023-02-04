@@ -356,3 +356,28 @@
     border-left: 1px solid #ddd;
   }
 }
+
+.comment_controller {
+  border-top: 1px solid #ddd;
+  height: 52px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  button {
+    color: #b2b2b2;
+    padding: 10px;
+    border: 1px solid #ddd;
+    font-weight: bold;
+    line-height: 12px;
+    font-size: inherit;
+    text-align: center;
+    background: white;
+    cursor: pointer;
+    height: 33px;
+    margin-right: 8px;
+  }
+  button:hover {
+    color: black;
+    border: 1px solid black;
+  }
+}
