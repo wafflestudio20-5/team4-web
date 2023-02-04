@@ -5,7 +5,7 @@ export function formatColorReview(color: string) {
     case 'mid':
       return '보통이에요';
     case 'dim':
-      return '어두워요';
+      return '흐려요';
     default:
       throw new Error('Unknown color: ' + color);
   }
